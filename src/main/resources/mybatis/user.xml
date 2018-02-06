@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.UserMapper">
+	<select id="validate" resultType="com.cbec.b2b.entity.response.LoginResponseEntity">
+		SELECT 
+			t1.ACCOUNT as userId,t2.ROLE_NAME as currentAuthority
+		FROM 
+			back_user t1,back_role t2,back_user_role t3 
+		WHERE 
+			t1.USER_ID=t3.USER_ID AND t2.ROLE_ID=t3.ROLE_ID AND
+			t1.ACCOUNT=#{account} AND t1.`PASSWORD`=#{password}
+	</select>
+	
+	<select id="isAuth" resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			back_user t1,back_menu t2,back_role t3,back_menu_role t4,back_user_role t5
+		WHERE 
+			t1.USER_ID=t5.USER_ID AND t2.MENU_ID=t4.MENU_ID AND t3.ROLE_ID=t5.ROLE_ID AND t3.ROLE_ID=t4.ROLE_ID
+			AND t1.ACCOUNT=#{account} AND t2.MENU_URL=#{url}
+	</select>
+	
+	<select id="getUser" resultType="com.cbec.b2b.entity.response.CurrentUser">
+		SELECT 
+			t1.USER_NAME AS `name`,t1.HEAD_IMG AS avatar
+		FROM 
+			back_user t1
+		WHERE 
+			t1.ACCOUNT=#{account}	
+	</select>
+</mapper>

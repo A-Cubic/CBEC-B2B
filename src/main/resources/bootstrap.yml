@@ -1,0 +1,7 @@
+spring:
+  main: 
+    banner-mode: "off"
+  application:
+    name: b2b-service
+    
+
