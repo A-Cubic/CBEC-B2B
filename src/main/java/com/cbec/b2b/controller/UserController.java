@@ -35,13 +35,13 @@ public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @RequestMapping(value = "/validate")
-    public Response<LoginResponseEntity> validate(@RequestBody LoginEntity loginEntity,HttpServletResponse res) {
-        Response<LoginResponseEntity> response = api.validate(loginEntity.getUserName(), loginEntity.getPassword());
+    public LoginResponseEntity validate(@RequestBody LoginEntity loginEntity,HttpServletResponse res) {
+        LoginResponseEntity response = api.validate(loginEntity.getUserName(), loginEntity.getPassword());
     	String userId = loginEntity.getUserName();
     	String token = TokenUtils.createToken(userId);
 //            List<String> stringList = Arrays.asList(loginEntity.getUserName(), loginEntity.getPassword(), loginEntity.getType());
         boolean setResult = redisUtil.set(userId, token);
-        response.getResults().setToken(token);
+        response.setToken(token);
         if(setResult) {
         	logger.info(String.format("保存token成功：[%s][%s]", userId,token));
         }

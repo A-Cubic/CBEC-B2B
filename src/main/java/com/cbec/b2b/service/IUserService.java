@@ -8,7 +8,7 @@ import com.cbec.b2b.response.Response;
 
 @Service
 public interface IUserService {
-	Response<LoginResponseEntity> validate(String account,String password);
+	LoginResponseEntity validate(String account,String password);
 	Response<UserResponseEntity> getUser(String account);
 	Boolean isAuth(String account,String url);
 }

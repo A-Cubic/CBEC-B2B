@@ -18,7 +18,7 @@ public class UserApi {
     
 
     @RequestMapping(value = "/validate")
-    public Response<LoginResponseEntity> validate(@RequestParam String userName,@RequestParam String password) {
+    public LoginResponseEntity validate(@RequestParam String userName,@RequestParam String password) {
         return service.validate(userName, password);
     }
     

@@ -18,17 +18,15 @@ public class UserServiceImpl implements IUserService {
 	UserMapper mapper;
 	
 	@Override
-	public Response<LoginResponseEntity> validate(String account,String password) {
-		Response<LoginResponseEntity> response = new Response<LoginResponseEntity>();
-		LoginResponseEntity loginResponseEntity = mapper.validate(account, password);
-		if(loginResponseEntity != null) {
-			response.setResults(loginResponseEntity);
+	public LoginResponseEntity validate(String account,String password) {
+		LoginResponseEntity response = mapper.validate(account, password);
+		if(response != null) {
+			return response;
 		}else {
-			response.setResults(new LoginResponseEntity());
 			ServiceException ex = new ServiceException("账号或密码不正确！");
 			throw ex;
 		}
-		return response;
+//		return response;
 	}
 	
 	@Override

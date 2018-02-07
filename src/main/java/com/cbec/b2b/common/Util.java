@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.cbec.b2b.response.Response;
+import com.cbec.b2b.response.ResponseHeader;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 
@@ -69,7 +69,7 @@ public class Util {
 //        response.setStatus(200);
         
         try {
-        	response.getWriter().write(new Response().toString());
+        	response.getWriter().write(new ResponseHeader(code,msg).toString());
         } catch (IOException ex) {
             logger.error(ex.getMessage());
         }
