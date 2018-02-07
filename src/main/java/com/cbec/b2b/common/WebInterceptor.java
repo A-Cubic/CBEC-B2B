@@ -3,16 +3,13 @@ package com.cbec.b2b.common;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.cbec.b2b.service.IUserService;
 
 public class WebInterceptor implements HandlerInterceptor{
@@ -26,9 +23,13 @@ public class WebInterceptor implements HandlerInterceptor{
     IUserService service;
 	 
 	@Override
-	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
+	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse response, Object arg2, Exception arg3)
 			throws Exception {
-		
+		response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "application/json;charset=UTF-8");
+        response.setHeader("code", "0");
+        response.setHeader("msg", "success");
+        response.setStatus(200);
 	}
 
 	@Override
@@ -61,21 +62,25 @@ public class WebInterceptor implements HandlerInterceptor{
             map.put(key, value);
         }
         
-        
         //1. token校验
         String userId = map.get("userid");
-        Boolean accessToken = redisUtil.isExistKey(userId);
-        if(!accessToken) {
-        	throw new TokenException(-1,"无效的身份，请重新登录");
+        String token = map.get("token");
+        
+        Boolean isUser = redisUtil.isExistKey(userId);
+        if(!isUser || !token.equals(redisUtil.get(userId))) {
+        	Util.responseResult(response,"1","无效的身份，请重新登录");
+        	return false;
         }
         
         //2. 权限校验
         if(!service.isAuth(userId, uri)) {
-        	throw new AuthException(-2,"非法的访问请求，无此权限！");
+        	Util.responseResult(response,"2","非法的访问请求，无此权限！");
+        	return false;
         }
         
 		return true;
 	}
+	
 	
 	
 

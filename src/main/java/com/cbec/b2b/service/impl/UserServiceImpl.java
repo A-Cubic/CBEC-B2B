@@ -3,6 +3,7 @@ package com.cbec.b2b.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.entity.response.UserResponseEntity;
@@ -24,7 +25,8 @@ public class UserServiceImpl implements IUserService {
 			response.setResults(loginResponseEntity);
 		}else {
 			response.setResults(new LoginResponseEntity());
-			response.setError("账号或密码不正确！");
+			ServiceException ex = new ServiceException("账号或密码不正确！");
+			throw ex;
 		}
 		return response;
 	}

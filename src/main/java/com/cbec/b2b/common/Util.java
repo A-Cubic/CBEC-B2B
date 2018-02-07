@@ -1,14 +1,23 @@
 package com.cbec.b2b.common;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.cbec.b2b.response.Response;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 
 public class Util {
+	private static final Logger logger = LogManager.getLogger(Util.class);
+	
 	public static String createUuid() {
 		String uuid = UUID.randomUUID().toString().replaceAll("\\-", "");
 		return uuid;
@@ -50,4 +59,20 @@ public class Util {
 		}
     	return reDate;
     }
+    
+    public static void responseResult(HttpServletResponse response,String code,String msg) {
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "application/json;charset=UTF-8");
+        response.setHeader("code", code);
+        response.setHeader("msg", msg);
+        response.setStatus(200);
+        
+        try {
+            response.getWriter().write(new Response().toString());
+        } catch (IOException ex) {
+            logger.error(ex.getMessage());
+        }
+    }
+    
+    
 }

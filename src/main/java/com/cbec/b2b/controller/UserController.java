@@ -18,7 +18,7 @@ import com.cbec.b2b.response.Response;
 import com.cbec.b2b.service.IUserService;
 
 @RestController
-@RequestMapping(value = "/qzback/user")
+@RequestMapping(value = "/llback/user")
 public class UserController {
     @Autowired
     IUserService service;
@@ -34,15 +34,13 @@ public class UserController {
     @RequestMapping(value = "/validate")
     public Response<LoginResponseEntity> validate(@RequestBody LoginEntity loginEntity) {
         Response<LoginResponseEntity> response = api.validate(loginEntity.getUserName(), loginEntity.getPassword());
-        if(response.isSuccess()) {
-        	String userId = loginEntity.getUserName();
-        	String token = TokenUtils.createToken(userId);
+    	String userId = loginEntity.getUserName();
+    	String token = TokenUtils.createToken(userId);
 //            List<String> stringList = Arrays.asList(loginEntity.getUserName(), loginEntity.getPassword(), loginEntity.getType());
-            boolean setResult = redisUtil.set(userId, token);
-            response.getResults().setToken(token);
-            if(setResult) {
-            	logger.info(String.format("保存token成功：[%s][%s]", userId,token));
-            }
+        boolean setResult = redisUtil.set(userId, token);
+        response.getResults().setToken(token);
+        if(setResult) {
+        	logger.info(String.format("保存token成功：[%s][%s]", userId,token));
         }
         
         return response;
