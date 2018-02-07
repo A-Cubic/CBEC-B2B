@@ -25,11 +25,15 @@ public class WebInterceptor implements HandlerInterceptor{
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse response, Object arg2, Exception arg3)
 			throws Exception {
-		response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "application/json;charset=UTF-8");
-        response.setHeader("code", "0");
-        response.setHeader("msg", "success");
-        response.setStatus(200);
+//		Map<String, String> map = new HashMap<String, String>();
+//		if(response.getHeader("code") == null) {
+//			response.setCharacterEncoding("UTF-8");
+//	        response.setHeader("Content-type", "application/json;charset=UTF-8");
+//	        response.setHeader("code", "0");
+//	        response.setHeader("msg", "success");
+//	        response.setStatus(200);
+//		}
+		
 	}
 
 	@Override

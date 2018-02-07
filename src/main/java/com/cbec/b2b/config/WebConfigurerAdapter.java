@@ -46,7 +46,13 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
         exceptionResolvers.add(new HandlerExceptionResolver() {
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 if (e instanceof ServiceException) {
-                    Util.responseResult(response, "3",e.getMessage());
+                	String msg = ((ServiceException)e).getMsg();
+                	if(msg !=null && !"".equals(msg)) {
+                		Util.responseResult(response, "3", msg);
+                	}else {
+                		Util.responseResult(response, "3",e.getMessage());
+                	}
+                    
                 } else if (e instanceof NoHandlerFoundException) {
                     Util.responseResult(response, "4","接口 [" + request.getRequestURI() + "] 不存在");
                 } else if (e instanceof ServletException) {

@@ -61,18 +61,22 @@ public class Util {
     }
     
     public static void responseResult(HttpServletResponse response,String code,String msg) {
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "application/json;charset=UTF-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        response.setHeader("Content-type", "text/html;charset=utf-8");
         response.setHeader("code", code);
         response.setHeader("msg", msg);
-        response.setStatus(200);
+//        response.setStatus(200);
         
         try {
-            response.getWriter().write(new Response().toString());
+        	response.getWriter().write(new Response().toString());
         } catch (IOException ex) {
             logger.error(ex.getMessage());
         }
     }
-    
+    public static void responseResultSuccess(HttpServletResponse response) {
+    	   response.setHeader("code", "0");
+           response.setHeader("msg", "success");
+    }
     
 }
