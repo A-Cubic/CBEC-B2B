@@ -85,8 +85,8 @@ public class DataSourceConfig {
         registration.setUrlMappings(Lists.newArrayList("/druid/*"));
         //自定义添加初始化参数
         Map<String, String> intParams = new HashMap<>();
-        intParams.put("loginUsername","xiaoman");
-        intParams.put("loginPassword","xiaoman@druid");
+        intParams.put("loginUsername","admin");
+        intParams.put("loginPassword","llwell@druid");
         registration.setName("DruidWebStatFilter");
         registration.setInitParameters(intParams);
         return registration;

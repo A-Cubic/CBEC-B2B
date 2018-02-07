@@ -22,7 +22,7 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(webInterceptor()).addPathPatterns("/xmback/**");
+		registry.addInterceptor(webInterceptor()).addPathPatterns("/qzback/**");
 		registry.addInterceptor(apiInterceptor()).addPathPatterns("/api/**");
 	}
 }
