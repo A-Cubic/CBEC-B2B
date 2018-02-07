@@ -61,9 +61,9 @@ public class Util {
     }
     
     public static void responseResult(HttpServletResponse response,String code,String msg) {
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
-        response.setHeader("Content-type", "text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
         response.setHeader("code", code);
         response.setHeader("msg", msg);
 //        response.setStatus(200);

@@ -3,12 +3,12 @@
 <mapper namespace="com.cbec.b2b.mapper.UserMapper">
 	<select id="validate" resultType="com.cbec.b2b.entity.response.LoginResponseEntity">
 		SELECT 
-			t1.ACCOUNT as userId,t2.ROLE_NAME as currentAuthority
+			t1.usercode as userId,t2.role_name as currentAuthority
 		FROM 
-			back_user t1,back_role t2,back_user_role t3 
+			t_user_list t1,t_role t2,t_user_role t3 
 		WHERE 
-			t1.USER_ID=t3.USER_ID AND t2.ROLE_ID=t3.ROLE_ID AND
-			t1.ACCOUNT=#{account} AND t1.`PASSWORD`=#{password}
+			t1.id=t3.user_id AND t2.role_id=t3.role_id AND
+			t1.usercode=#{account} AND t1.pwd=#{password}
 	</select>
 	
 	<select id="isAuth" resultType="java.lang.Integer">

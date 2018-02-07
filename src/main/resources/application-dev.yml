@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://172.16.10.51:13306/xmec?useUnicode=true&characterEncoding=utf8
-      username: xmec
-      password: test
+      url: jdbc:mysql://59.110.143.35:13306/llwell?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: 13161111
       filters: stat,slf4j
       initialSize: 10
       maxActive: 100
@@ -21,7 +21,7 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
   redis: 
     database: 0
-    host: 172.16.10.53
+    host: 127.0.0.1
     port: 6379
     password: 
     timeout: 0

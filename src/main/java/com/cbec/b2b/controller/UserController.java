@@ -35,7 +35,7 @@ public class UserController {
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @RequestMapping(value = "/validate")
-    public LoginResponseEntity validate(@RequestBody LoginEntity loginEntity,HttpServletResponse res) {
+    public String validate(@RequestBody LoginEntity loginEntity,HttpServletResponse res) {
         LoginResponseEntity response = api.validate(loginEntity.getUserName(), loginEntity.getPassword());
     	String userId = loginEntity.getUserName();
     	String token = TokenUtils.createToken(userId);
@@ -46,7 +46,7 @@ public class UserController {
         	logger.info(String.format("保存token成功：[%s][%s]", userId,token));
         }
         Util.responseResultSuccess(res);
-        return response;
+        return response.toString();
     }
     
     @RequestMapping(value = "/currentUser")
