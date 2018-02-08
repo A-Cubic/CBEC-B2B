@@ -1,19 +1,28 @@
 package com.cbec.b2b.config;
 
+import java.nio.charset.Charset;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.cbec.b2b.common.ApiInterceptor;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
@@ -76,5 +85,23 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
             }
         });
     }
+    
+    //解决跨域问题
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
+    
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+//        FastJsonConfig config = new FastJsonConfig();
+//        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,//保留空的字段
+//                SerializerFeature.WriteNullStringAsEmpty,//String null -> ""
+//                SerializerFeature.WriteNullNumberAsZero);//Number null -> 0
+//        converter.setFastJsonConfig(config);
+//        converter.setDefaultCharset(Charset.forName("UTF-8"));
+//        converters.add(converter);
+//    }
         
 }
