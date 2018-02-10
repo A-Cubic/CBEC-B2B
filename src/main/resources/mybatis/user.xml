@@ -15,10 +15,10 @@
 		SELECT 
 			COUNT(*)
 		FROM 
-			back_user t1,back_menu t2,back_role t3,back_menu_role t4,back_user_role t5
+			t_user_list t1,t_menu t2,t_role t3,t_menu_role t4,t_user_role t5
 		WHERE 
-			t1.USER_ID=t5.USER_ID AND t2.MENU_ID=t4.MENU_ID AND t3.ROLE_ID=t5.ROLE_ID AND t3.ROLE_ID=t4.ROLE_ID
-			AND t1.ACCOUNT=#{account} AND t2.MENU_URL=#{url}
+			t1.id=t5.user_id AND t2.menu_id=t4.menu_id AND t3.role_id=t5.role_id AND t3.role_id=t4.role_id
+			AND t1.usercode=#{account} AND t2.menu_url=#{url}
 	</select>
 	
 	<select id="getUser" resultType="com.cbec.b2b.entity.response.CurrentUser">

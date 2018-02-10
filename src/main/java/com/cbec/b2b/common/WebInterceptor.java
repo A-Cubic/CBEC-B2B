@@ -76,15 +76,20 @@ public class WebInterceptor implements HandlerInterceptor{
         String userId = map.get("userid");
         String token = map.get("token");
         
+        if(userId==null || token==null) {
+        	Util.responseResult(response,"7",ContentErrorMsg.ERROR_7);
+        	return false;
+        }
+        
         Boolean isUser = redisUtil.isExistKey(userId);
         if(!isUser || !token.equals(redisUtil.get(userId))) {
-        	Util.responseResult(response,"1","无效的身份，请重新登录");
+        	Util.responseResult(response,"1",ContentErrorMsg.ERROR_1);
         	return false;
         }
         
         //2. 权限校验
         if(!service.isAuth(userId, uri)) {
-        	Util.responseResult(response,"2","非法的访问请求，无此权限！");
+        	Util.responseResult(response,"2",ContentErrorMsg.ERROR_2);
         	return false;
         }
         
