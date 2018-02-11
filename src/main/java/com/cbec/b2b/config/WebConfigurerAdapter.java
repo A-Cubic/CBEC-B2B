@@ -24,9 +24,11 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.cbec.b2b.common.ApiInterceptor;
+import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.common.WebInterceptor;
+import com.github.pagehelper.PageHelper;
 
 @Configuration
 public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
@@ -63,11 +65,11 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
                 	}
                     
                 } else if (e instanceof NoHandlerFoundException) {
-                    Util.responseResult(response, "4","接口 [" + request.getRequestURI() + "] 不存在");
+                    Util.responseResult(response, "4",ContentErrorMsg.ERROR_4);
                 } else if (e instanceof ServletException) {
                     Util.responseResult(response, "5",e.getMessage());
                 } else {
-                	Util.responseResult(response, "6","服务器异常");
+                	Util.responseResult(response, "6",ContentErrorMsg.ERROR_6);
                     String message;
                     if (handler instanceof HandlerMethod) {
                         HandlerMethod handlerMethod = (HandlerMethod) handler;
