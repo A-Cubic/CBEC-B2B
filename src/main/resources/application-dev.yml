@@ -21,7 +21,7 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
   redis: 
     database: 0
-    host: 127.0.0.1
+    host: 59.110.143.35
     port: 6379
     password: 
     timeout: 0
