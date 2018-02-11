@@ -3,3 +3,6 @@ spring:
     active: dev
   session: 
     store-type: none
+jasypt:
+  encryptor:
+    password: llwell
