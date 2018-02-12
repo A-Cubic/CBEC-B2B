@@ -23,10 +23,10 @@
 	
 	<select id="getUser" resultType="com.cbec.b2b.entity.response.CurrentUser">
 		SELECT 
-			t1.USER_NAME AS `name`,t1.HEAD_IMG AS avatar
+			t1.username AS `name`,t1.avatar AS avatar,t1.usercode AS userid,'12' AS notifyCount
 		FROM 
-			back_user t1
+			t_user_list t1
 		WHERE 
-			t1.ACCOUNT=#{account}	
+			t1.usercode=#{account}
 	</select>
 </mapper>

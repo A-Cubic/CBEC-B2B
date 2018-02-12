@@ -2,14 +2,11 @@ package com.cbec.b2b.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
-import com.cbec.b2b.entity.response.UserResponseEntity;
 import com.cbec.b2b.mapper.UserMapper;
-import com.cbec.b2b.response.Response;
 import com.cbec.b2b.service.IUserService;
 
 @Service
@@ -40,13 +37,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Response<UserResponseEntity> getUser(String account) {
-		Response<UserResponseEntity> response = new Response<UserResponseEntity>();
-		UserResponseEntity UserResponseEntity = new UserResponseEntity();
-		CurrentUser currentUser = mapper.getUser(account);
-		UserResponseEntity.setCurrentUser(currentUser);
-		response.setResults(UserResponseEntity);
-		return response;
+	public CurrentUser getUser(String account) {
+		return mapper.getUser(account);
 	}
 
 

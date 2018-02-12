@@ -6,4 +6,6 @@ import lombok.Data;
 public class CurrentUser {
 	private String name;
 	private String avatar;
+	private String userid;
+	private Integer notifyCount;
 }

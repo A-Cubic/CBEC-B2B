@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cbec.b2b.api.DemoApi;
 import com.cbec.b2b.entity.Demo;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 /**

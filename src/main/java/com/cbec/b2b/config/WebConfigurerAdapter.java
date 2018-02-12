@@ -1,17 +1,13 @@
 package com.cbec.b2b.config;
 
-import java.nio.charset.Charset;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,16 +15,11 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.cbec.b2b.common.ApiInterceptor;
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.common.WebInterceptor;
-import com.github.pagehelper.PageHelper;
 
 @Configuration
 public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
@@ -47,7 +38,7 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**");
+		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate");
 		registry.addInterceptor(apiInterceptor()).addPathPatterns("/api/**");
 	}
 	

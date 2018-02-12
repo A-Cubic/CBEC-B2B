@@ -2,12 +2,9 @@ package com.cbec.b2b.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cbec.b2b.entity.Catelog.Brands;
 import com.cbec.b2b.entity.Catelog.CateOne;
 import com.cbec.b2b.entity.Catelog.CateTWO;
@@ -15,11 +12,7 @@ import com.cbec.b2b.entity.Catelog.CateThree;
 import com.cbec.b2b.entity.Catelog.CateType;
 import com.cbec.b2b.entity.Catelog.CateType2;
 import com.cbec.b2b.entity.Catelog.Catelog;
-import com.cbec.b2b.entity.page.PageEntity;
-import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.service.IDemoService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/web")

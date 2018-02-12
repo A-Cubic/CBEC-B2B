@@ -15,9 +15,8 @@ import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.request.LoginEntity;
+import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
-import com.cbec.b2b.entity.response.UserResponseEntity;
-import com.cbec.b2b.response.Response;
 import com.cbec.b2b.service.IUserService;
 
 @RestController
@@ -50,9 +49,10 @@ public class UserController {
     }
     
     @RequestMapping(value = "/currentUser")
-    public Response<UserResponseEntity> getUser(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
-    	 Util.responseResultSuccess(res);
-    	return api.getUser(userid);
+    public CurrentUser getUser(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    	CurrentUser response = api.getUser(userid);
+    	Util.responseResultSuccess(res);
+    	return response;
     }
 }
 

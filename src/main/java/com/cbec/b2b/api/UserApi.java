@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
-import com.cbec.b2b.entity.response.UserResponseEntity;
-import com.cbec.b2b.response.Response;
 import com.cbec.b2b.service.IUserService;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/currentUser")
-    public Response<UserResponseEntity> getUser(@RequestParam String userName) {
+    public CurrentUser getUser(@RequestParam String userName) {
         return service.getUser(userName);
     }
 }
