@@ -15,13 +15,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/web")
 public class HomePageApi {
     @Autowired
     IDemoService service;
     
     @RequestMapping(value = "/catalog")
     public String catalog() {
+    	
         return "{\"state\":0,\"results\":{\"美容护肤\":[{\"id\":0,\"value\":\"面膜\"},{\"id\":1,\"value\":\"1\"}],\"level2\":[{\"catelog\":[{\"id\":0,\"value\":\"0\",\"childCate\":[{\"id\":0,\"value\":\"0\"}]}],\"brands\":[{\"id\":0,\"value\":\"0\"}]}]}}";
     }
     
