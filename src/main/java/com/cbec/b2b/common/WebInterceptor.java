@@ -51,7 +51,7 @@ public class WebInterceptor implements HandlerInterceptor{
 //        String queryString = request.getQueryString();
         logger.info(String.format("请求参数：url: %s, method: %s, uri: %s", url, method, uri));
         if(request.getHeader("Origin") != null || !"".equals(request.getHeader("Origin"))) {
-        	response.setHeader("Access-Control-Allow-Origin", "http://console.llwell.net");
+        	response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         }else {
         	response.setHeader("Access-Control-Allow-Origin", "http://console.llwell.net");  
         }
