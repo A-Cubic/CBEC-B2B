@@ -22,7 +22,7 @@ public class HomePageApi {
     
     @RequestMapping(value = "/catalog")
     public String catalog() {
-    	
+    	 
         return "{\"state\":0,\"results\":{\"美容护肤\":[{\"id\":0,\"value\":\"面膜\"},{\"id\":1,\"value\":\"1\"}],\"level2\":[{\"catelog\":[{\"id\":0,\"value\":\"0\",\"childCate\":[{\"id\":0,\"value\":\"0\"}]}],\"brands\":[{\"id\":0,\"value\":\"0\"}]}]}}";
     }
     
