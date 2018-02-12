@@ -21,7 +21,7 @@ public class MenuController {
     IDemoService service;
     
     @RequestMapping(value = "/menu")
-    public List<Menu> catalog(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    public List<Menu> menu(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
     	MenuChildren mc1 = new MenuChildren();
     	mc1.setName("分析页");
     	mc1.setPath("fenxi");
