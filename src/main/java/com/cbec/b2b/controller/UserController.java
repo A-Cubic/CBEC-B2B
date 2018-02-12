@@ -35,10 +35,14 @@ public class UserController {
 
     @RequestMapping(value = "/validate")
     public String validate(@RequestBody LoginEntity loginEntity,HttpServletResponse res) {
-        LoginResponseEntity response = api.validate(loginEntity.getUserName(), loginEntity.getPassword());
+    	String pwd = loginEntity.getPassword();
+    	String pwdMd5 = "";
+    	if(pwd!=null) {
+    		pwdMd5 = Util.getMD5(loginEntity.getPassword());
+    	}
+        LoginResponseEntity response = api.validate(loginEntity.getUserName(), pwdMd5);
     	String userId = loginEntity.getUserName();
     	String token = TokenUtils.createToken(userId);
-//            List<String> stringList = Arrays.asList(loginEntity.getUserName(), loginEntity.getPassword(), loginEntity.getType());
         boolean setResult = redisUtil.set(userId, token);
         response.setToken(token);
         if(setResult) {
