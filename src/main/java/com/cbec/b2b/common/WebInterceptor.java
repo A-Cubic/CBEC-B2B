@@ -50,13 +50,13 @@ public class WebInterceptor implements HandlerInterceptor{
         String uri = request.getRequestURI();
 //        String queryString = request.getQueryString();
         logger.info(String.format("请求参数：url: %s, method: %s, uri: %s", url, method, uri));
-        response.setHeader("Access-Control-Allow-Origin", "*");  
+//        response.setHeader("Access-Control-Allow-Origin", "*");  
 //        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Credentials","true");
-        response.setHeader("Access-Control-Allow-Methods", "*");  
-        response.setHeader("Access-Control-Max-Age", "3600");  
-        response.setHeader("Access-Control-Allow-Headers",  
-                "Origin, X-Requested-With, Content-Type, Accept"); 
+//        response.setHeader("Access-Control-Allow-Credentials","true");
+//        response.setHeader("Access-Control-Allow-Methods", "*");  
+//        response.setHeader("Access-Control-Max-Age", "3600");  
+//        response.setHeader("Access-Control-Allow-Headers",  
+//                "Origin, X-Requested-With, Content-Type, Accept"); 
        
         
         if("GET".equals(method)) {
