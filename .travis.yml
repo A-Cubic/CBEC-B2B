@@ -11,6 +11,9 @@ cache:
   directories:
     - $HOME/.m2/
 
+notifications:
+  webhooks: https://hook.bearychat.com/=bwCGO/travis/42614e695afefe41ff5437de242de91c
+  
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     docker build -t "$REGISTRY_URL"/"$REGISTRY_IMAGE" .;
