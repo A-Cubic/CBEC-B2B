@@ -1,6 +1,6 @@
 spring:
   profiles: 
-    active: pord
+    active: prod
   session: 
     store-type: none
 jasypt:
