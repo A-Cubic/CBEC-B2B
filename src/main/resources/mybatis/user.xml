@@ -5,7 +5,7 @@
 		SELECT 
 			t1.usercode as userId,t2.role_name as currentAuthority
 		FROM 
-			t_user_list t1,t_role t2,t_user_role t3 
+			t_user_list t1,t_api_role t2,t_user_api_role t3 
 		WHERE 
 			t1.id=t3.user_id AND t2.role_id=t3.role_id AND
 			t1.usercode=#{account} AND t1.pwd=#{password}
@@ -15,7 +15,7 @@
 		SELECT 
 			COUNT(*)
 		FROM 
-			t_user_list t1,t_menu t2,t_role t3,t_menu_role t4,t_user_role t5
+			t_user_list t1,t_api_menu t2,t_api_role t3,t_api_menu_role t4,t_user_api_role t5
 		WHERE 
 			t1.id=t5.user_id AND t2.menu_id=t4.menu_id AND t3.role_id=t5.role_id AND t3.role_id=t4.role_id
 			AND t1.usercode=#{account} AND t2.menu_url=#{url}
