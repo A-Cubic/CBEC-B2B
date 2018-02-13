@@ -5,7 +5,7 @@
 		SELECT 
 			t1.usercode as userId,t2.role_name as currentAuthority
 		FROM 
-			t_user_list t1,t_api_role t2,t_user_api_role t3 
+			t_user_list t1,t_sys_role t2,t_user_role t3 
 		WHERE 
 			t1.id=t3.user_id AND t2.role_id=t3.role_id AND
 			t1.usercode=#{account} AND t1.pwd=#{password}
@@ -15,7 +15,7 @@
 		SELECT 
 			COUNT(*)
 		FROM 
-			t_user_list t1,t_api_menu t2,t_api_role t3,t_api_menu_role t4,t_user_api_role t5
+			t_user_list t1,t_api_menu t2,t_sys_role t3,t_api_menu_role t4,t_user_role t5
 		WHERE 
 			t1.id=t5.user_id AND t2.menu_id=t4.menu_id AND t3.role_id=t5.role_id AND t3.role_id=t4.role_id
 			AND t1.usercode=#{account} AND t2.menu_url=#{url}
@@ -28,5 +28,25 @@
 			t_user_list t1
 		WHERE 
 			t1.usercode=#{account}
+	</select>
+	<select id="getMenuTop" resultType="com.cbec.b2b.entity.menu.Menu">
+		SELECT 
+			t1.id,t1.menuName AS `name`,t1.icon,t1.menuUrl AS path
+		FROM 
+			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5
+		WHERE 
+			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id 
+            AND t1.menuPid=0 and t2.usercode = #{account}
+   		ORDER BY t1.sort asc
+	</select>
+	<select id="getMenuChildren" resultType="com.cbec.b2b.entity.menu.MenuChildren">
+		SELECT 
+			t1.menuName AS `name` ,t1.menuUrl AS path
+		FROM 
+			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5
+		WHERE 
+			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id 
+            AND t1.menuPid=1  and t2.usercode = #{account} and t1.parent=#{menuid}
+   		ORDER BY t1.sort asc
 	</select>
 </mapper>

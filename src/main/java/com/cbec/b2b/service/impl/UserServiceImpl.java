@@ -1,9 +1,13 @@
 package com.cbec.b2b.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.ServiceException;
+import com.cbec.b2b.entity.menu.Menu;
+import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.mapper.UserMapper;
@@ -39,6 +43,15 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public CurrentUser getUser(String account) {
 		return mapper.getUser(account);
+	}
+	@Override
+	public List<Menu> getMenuTop(String account) {
+		return mapper.getMenuTop(account);
+	}
+	@Override
+	
+	public List<MenuChildren> getMenuChildren(String account,String menuid) {
+		return mapper.getMenuChildren(account,menuid);
 	}
 
 
