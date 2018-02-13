@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,13 +16,13 @@ import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.service.IDemoService;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/llback/system")
 public class MenuController {
     @Autowired
     IDemoService service;
     
     @RequestMapping(value = "/menu")
-    public List<Menu> menu(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    public List<Menu> menu() {
     	MenuChildren mc1 = new MenuChildren();
     	mc1.setName("分析页");
     	mc1.setPath("fenxi");
