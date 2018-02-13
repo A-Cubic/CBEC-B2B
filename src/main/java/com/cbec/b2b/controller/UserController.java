@@ -17,11 +17,11 @@ import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.menu.Menu;
-import com.cbec.b2b.entity.menu.MenuChildren;
+import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.request.LoginEntity;
+import com.cbec.b2b.entity.request.MessageRequest;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
-import com.cbec.b2b.service.IUserService;
 
 @RestController
 @RequestMapping(value = "/llback/user")
@@ -66,6 +66,20 @@ public class UserController {
     	List<Menu> menuList = api.getMenu(userid);
     	Util.responseResultSuccess(res);
         return menuList;
+    }
+    
+    @RequestMapping(value = "/message/list")
+    public List<MessageEntity> getMessage(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    	List<MessageEntity> response = api.getMessage(userid);
+    	Util.responseResultSuccess(res);
+        return response;
+    }
+    
+    @RequestMapping(value = "/message/empty")
+    public String updateMessage(@RequestHeader(value = "userid") String userid,@RequestBody MessageRequest requestBean, HttpServletResponse res) {
+    	String response = api.updateMessage(userid,requestBean.getType());
+    	Util.responseResultSuccess(res);
+        return response;
     }
 }
 

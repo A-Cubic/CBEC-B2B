@@ -23,11 +23,17 @@
 	
 	<select id="getUser" resultType="com.cbec.b2b.entity.response.CurrentUser">
 		SELECT 
-			t1.username AS `name`,t1.avatar AS avatar,t1.usercode AS userid,'12' AS notifyCount
+			l.username AS `name`,l.avatar AS avatar,l.usercode AS userid,s.notifyCount AS notifyCount
 		FROM 
-			t_user_list t1
+			t_user_list l,
+			(SELECT 
+				COUNT(*) AS notifyCount
+			FROM 
+				t_user_list t1,t_user_message t2
+			WHERE 
+				t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0') s
 		WHERE 
-			t1.usercode=#{account}
+			l.usercode=#{account}
 	</select>
 	
 	<resultMap type="com.cbec.b2b.entity.menu.Menu" id="MenuMap">
@@ -49,6 +55,7 @@
             AND t1.menuPid=0 and t2.usercode = #{account}
    		ORDER BY t1.sort asc
 	</select>
+	
 	<select id="getMenuChildren" resultType="com.cbec.b2b.entity.menu.MenuChildren">
 		SELECT 
 			t1.menuName AS `name` ,t1.menuUrl AS path
@@ -59,4 +66,30 @@
             AND t1.menuPid=1 and t1.parent=#{id}
    		ORDER BY t1.sort asc
 	</select>
+	
+	<select id="getMessageByUserCode" resultType="com.cbec.b2b.entity.message.MessageEntity">
+		SELECT 
+			t2.id,t2.sendimg AS avatar,t2.title,t2.sendTime AS datetime,t2.messagetype AS `type`
+		FROM 
+			t_user_list t1,t_user_message t2
+		WHERE 
+			t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0'
+		ORDER BY t2.sendTime DESC
+	</select>
+	
+	<update id="updateMessageByUserCodeType"  parameterType="java.lang.String">  
+        UPDATE 
+			t_user_message m,
+			(SELECT 
+					t2.id
+				FROM 
+					t_user_list t1,t_user_message t2
+				WHERE 
+					t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0' AND t2.messagetype=#{type}
+				ORDER BY t2.sendTime DESC) t
+		SET 
+			m.status='1'
+		WHERE
+			m.id=t.id
+</update>
 </mapper>

@@ -1,18 +1,12 @@
 package com.cbec.b2b.api;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.menu.Menu;
-import com.cbec.b2b.entity.menu.MenuChildren;
+import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.service.IUserService;
@@ -42,6 +36,16 @@ public class UserApi {
 //    		m.setChildren(mcList);
 //    	}
         return lm;
+    }
+    
+    @RequestMapping(value = "/message/list")
+    public List<MessageEntity> getMessage(@RequestParam String userName) {
+        return service.getMessage(userName);
+    }
+    
+    @RequestMapping(value = "/message/empty")
+    public String updateMessage(@RequestParam String userName,@RequestParam String type) {
+    	return service.updateMessage(userName,type);
     }
 }
 
