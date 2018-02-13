@@ -10,5 +10,5 @@ public class Menu {
 	private String name;
 	private String icon;
 	private String path;
-	private List<MenuChildren> children;
+	private List<Menu> children;
 }

@@ -29,7 +29,17 @@
 		WHERE 
 			t1.usercode=#{account}
 	</select>
-	<select id="getMenuTop" resultType="com.cbec.b2b.entity.menu.Menu">
+	
+	<resultMap type="com.cbec.b2b.entity.menu.Menu" id="MenuMap">
+        <id column="id" property="id"/>
+        <collection property="children" ofType="com.cbec.b2b.entity.menu.MenuChildren" column="id" select="getMenuChildren">
+        	<result column="menuName" property="name"/>
+	        <result column="menuUrl" property="path"/>
+	    </collection>  
+        
+    </resultMap>
+    
+	<select id="getMenuTop" resultMap="MenuMap">
 		SELECT 
 			t1.id,t1.menuName AS `name`,t1.icon,t1.menuUrl AS path
 		FROM 
@@ -46,7 +56,7 @@
 			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5
 		WHERE 
 			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id 
-            AND t1.menuPid=1  and t2.usercode = #{account} and t1.parent=#{menuid}
+            AND t1.menuPid=1 and t1.parent=#{id}
    		ORDER BY t1.sort asc
 	</select>
 </mapper>

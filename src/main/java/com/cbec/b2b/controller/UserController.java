@@ -1,5 +1,7 @@
 package com.cbec.b2b.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +16,8 @@ import com.cbec.b2b.api.UserApi;
 import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.menu.Menu;
+import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.request.LoginEntity;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
@@ -22,8 +26,6 @@ import com.cbec.b2b.service.IUserService;
 @RestController
 @RequestMapping(value = "/llback/user")
 public class UserController {
-    @Autowired
-    IUserService service;
     
     @Autowired
     UserApi api;
@@ -57,6 +59,13 @@ public class UserController {
     	CurrentUser response = api.getUser(userid);
     	Util.responseResultSuccess(res);
     	return response;
+    }
+    
+    @RequestMapping(value = "/menu")
+    public List<Menu> getMenu(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    	List<Menu> menuList = api.getMenu(userid);
+    	Util.responseResultSuccess(res);
+        return menuList;
     }
 }
 
