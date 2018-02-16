@@ -1,9 +1,11 @@
 package com.cbec.b2b.config;
 
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +17,10 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import com.cbec.b2b.common.ApiInterceptor;
 import com.cbec.b2b.common.ContentErrorMsg;
+import com.cbec.b2b.common.GlobalInterceptor;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.common.WebInterceptor;
@@ -36,8 +40,14 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
 		return new WebInterceptor();
 	}
 	
+	@Bean
+	public GlobalInterceptor globalInterceptor() {
+		return new GlobalInterceptor();
+	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(globalInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate");
 		registry.addInterceptor(apiInterceptor()).addPathPatterns("/api/**");
 	}
