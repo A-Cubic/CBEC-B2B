@@ -23,15 +23,9 @@
 	
 	<select id="getUser" resultType="com.cbec.b2b.entity.response.CurrentUser">
 		SELECT 
-			l.username AS `name`,l.avatar AS avatar,l.usercode AS userid,s.notifyCount AS notifyCount
+			l.username AS `name`,l.avatar AS avatar,l.usercode AS userid
 		FROM 
-			t_user_list l,
-			(SELECT 
-				COUNT(*) AS notifyCount
-			FROM 
-				t_user_list t1,t_user_message t2
-			WHERE 
-				t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0') s
+			t_user_list l	
 		WHERE 
 			l.usercode=#{account}
 	</select>
@@ -75,6 +69,15 @@
 		WHERE 
 			t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0'
 		ORDER BY t2.sendTime DESC
+	</select>
+	
+	<select id="getMessageCountByUserCode" resultType="com.cbec.b2b.entity.message.MessageCountEntity">
+		SELECT 
+			COUNT(*) AS notifyCount
+		FROM 
+			t_user_list t1,t_user_message t2
+		WHERE 
+			t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0'
 	</select>
 	
 	<update id="updateMessageByUserCodeType"  parameterType="java.lang.String">  

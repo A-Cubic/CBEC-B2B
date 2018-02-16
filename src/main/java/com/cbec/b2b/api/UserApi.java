@@ -1,11 +1,14 @@
 package com.cbec.b2b.api;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.cbec.b2b.entity.menu.Menu;
+import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
@@ -41,6 +44,11 @@ public class UserApi {
     @RequestMapping(value = "/message/list")
     public List<MessageEntity> getMessage(@RequestParam String userName) {
         return service.getMessage(userName);
+    }
+    
+    @RequestMapping(value = "/message/count")
+    public MessageCountEntity getMessageCount(@RequestParam String userName) {
+        return service.getMessageCount(userName);
     }
     
     @RequestMapping(value = "/message/empty")

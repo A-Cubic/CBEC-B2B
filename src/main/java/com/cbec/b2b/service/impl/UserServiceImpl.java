@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
+import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
@@ -69,6 +71,11 @@ public class UserServiceImpl implements IUserService {
 			response = "没有新的消息.";
 		}
 		return response;
+	}
+
+	@Override
+	public MessageCountEntity getMessageCount(String account) {
+		return mapper.getMessageCountByUserCode(account);
 	}
 
 

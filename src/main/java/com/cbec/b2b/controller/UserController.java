@@ -17,6 +17,7 @@ import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.menu.Menu;
+import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.request.LoginEntity;
 import com.cbec.b2b.entity.request.MessageRequest;
@@ -71,6 +72,13 @@ public class UserController {
     @RequestMapping(value = "/message/list")
     public List<MessageEntity> getMessage(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
     	List<MessageEntity> response = api.getMessage(userid);
+    	Util.responseResultSuccess(res);
+        return response;
+    }
+    
+    @RequestMapping(value = "/message/count")
+    public MessageCountEntity getMessageCount(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    	MessageCountEntity response = api.getMessageCount(userid);
     	Util.responseResultSuccess(res);
         return response;
     }
