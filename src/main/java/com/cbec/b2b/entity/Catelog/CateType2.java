@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class CateType2 {
 	private List<CateTWO> catelog;
-	private List<Brands> brands;
+	private List<Brand> brands;
 }

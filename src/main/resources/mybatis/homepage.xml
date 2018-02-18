@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.HomePageMapper">
+	<select id="getBanner" resultType="com.cbec.b2b.entity.HomePage.Banner">
+		SELECT imgurl,advurl
+		  FROM t_base_adv
+		 WHERE flag='1' and advtype='banner' 
+		 ORDER BY sort asc
+	</select>
+	<select id="getBrands" resultType="com.cbec.b2b.entity.HomePage.Brands">
+		SELECT advname,advurl
+		  FROM t_base_adv
+		 WHERE flag='1' and advtype='brands' 
+		 ORDER BY sort asc
+	</select>
+	<select id="getGoods" resultType="com.cbec.b2b.entity.HomePage.Goods">
+		SELECT 1 as id ,'' as goodsname,'' as price ,'' as slt
+		  FROM t_base_adv
+		 WHERE flag='1' and advtype='brands' 
+		 ORDER BY sort asc
+	</select>
+	<select id="getCountry" resultType="com.cbec.b2b.entity.HomePage.Country">
+		SELECT id as countryid,originname as countryname
+		  FROM t_base_origin
+		 WHERE flag='1'  
+		 ORDER BY id asc
+	</select>
+	<select id="getSendType" resultType="com.cbec.b2b.entity.HomePage.SendType">
+		SELECT id as typeid,typename
+		  FROM t_base_sendtype
+		 ORDER BY id asc
+	</select>
+	
+</mapper>
