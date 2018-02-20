@@ -7,5 +7,4 @@ import lombok.Data;
 @Data
 public class CateType {
 	private List<CateOne> level1;
-	private List<CateType2> level2;
 }

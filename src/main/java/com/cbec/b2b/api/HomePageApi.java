@@ -103,17 +103,20 @@ public class HomePageApi {
     	CateType2 gt1= new CateType2();
     	gt1.setCatelog(lc21);
     	gt1.setBrands(lb);
-    	
+
     	List<CateType2> lc = new ArrayList<CateType2>();
     	lc.add(gt);
-    	lc.add(gt1);
+    	List<CateType2> lc1 = new ArrayList<CateType2>();
+    	lc1.add(gt1);
 
     	CateOne co = new CateOne();
-    	co.setId(1);
+    	co.setId(4);
     	co.setValue("美用没装");
+    	co.setLevel2(lc);
     	CateOne co1 = new CateOne();
     	co1.setId(2);
     	co1.setValue("其他销售");
+    	co1.setLevel2(lc1);
     	
 
     	List<CateOne> lco = new ArrayList<CateOne>();
@@ -122,7 +125,6 @@ public class HomePageApi {
     	
     	CateType cateType =new CateType();
     	cateType.setLevel1(lco);
-    	cateType.setLevel2(lc);
     	
     	Catelog catelog = new Catelog();
     	catelog.setState(0);
