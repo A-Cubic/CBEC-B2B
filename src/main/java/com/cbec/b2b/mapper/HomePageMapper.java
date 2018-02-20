@@ -13,6 +13,7 @@ public interface HomePageMapper {
 	List<Banner> getBanner();
 	List<Brands> getBrands();
 	List<Goods> getGoods();
-	 List<Country> getCountry();
-	 List<SendType> getSendType();
+	List<Country> getCountry();
+	List<SendType> getSendType();
+	List<Goods> getGoodsByGoodsId(String goodsId);
 }

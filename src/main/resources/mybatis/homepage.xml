@@ -14,10 +14,8 @@
 		 ORDER BY sort asc
 	</select>
 	<select id="getGoods" resultType="com.cbec.b2b.entity.HomePage.Goods">
-		SELECT 1 as id ,'' as goodsname,'' as price ,'' as slt
-		  FROM t_base_adv
-		 WHERE flag='1' and advtype='brands' 
-		 ORDER BY sort asc
+		SELECT *
+		  FROM t_goods_list
 	</select>
 	<select id="getCountry" resultType="com.cbec.b2b.entity.HomePage.Country">
 		SELECT id as countryid,originname as countryname
@@ -28,6 +26,12 @@
 	<select id="getSendType" resultType="com.cbec.b2b.entity.HomePage.SendType">
 		SELECT id as typeid,typename
 		  FROM t_base_sendtype
+		 ORDER BY id asc
+	</select>
+	<select id="getGoodsByGoodsId" resultType="com.cbec.b2b.entity.HomePage.Goods">
+		SELECT *
+		  FROM t_goods_list
+		 WHERE id=#{goodsId}
 		 ORDER BY id asc
 	</select>
 	

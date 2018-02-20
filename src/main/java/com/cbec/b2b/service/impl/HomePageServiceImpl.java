@@ -45,5 +45,9 @@ public class HomePageServiceImpl implements IHomePageService {
 	public List<SendType> getSendType() {
 		return mapper.getSendType();
 	}
+	@Override
+	public List<Goods> getGoodsByGoodsId(String goodsId) {
+		return mapper.getGoodsByGoodsId(goodsId);
+	}
 	
 }

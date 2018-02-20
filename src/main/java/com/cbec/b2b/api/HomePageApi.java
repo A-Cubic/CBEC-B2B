@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,11 @@ import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.GoodsInfo;
+import com.cbec.b2b.entity.HomePage.GoodsType;
 import com.cbec.b2b.entity.HomePage.Screen;
 import com.cbec.b2b.entity.HomePage.ScreenType;
+import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.response.CurrentUser;
@@ -158,9 +162,8 @@ public class HomePageApi {
     	return a;
     }
     @RequestMapping(value = "/goodslist")
-    public PageInfo<Goods> getGoodsList(@RequestParam(value = "pageNumber",defaultValue = "1")int currentPage,
-            @RequestParam(value = "pageSize",defaultValue = "15")int pageSize) {
-    	PageHelper.startPage(currentPage,pageSize);
+    public PageInfo<Goods> getGoodsList(@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
     	List<Goods> LGoods = new ArrayList<Goods>();
     	for(int i=0;i<100;i++) {
     		Goods g1 = new Goods();
@@ -188,6 +191,17 @@ public class HomePageApi {
     	s.setResults(st);
     	
     	return s;
+    }
+    @RequestMapping(value = "/goods")
+    public GoodsInfo getGoods(@RequestBody String GoodsId ) {
+    	List<Goods> LGoods= service.getGoodsByGoodsId(GoodsId);
+        GoodsType gt = new GoodsType();
+        gt.setGoods(LGoods);
+    	GoodsInfo g = new GoodsInfo();
+    	g.setState(0);
+    	g.setResults(gt);
+    	
+    	return g;
     }
 }
 

@@ -23,4 +23,5 @@ public interface IHomePageService {
 	List<Goods> getGoods();
 	List<Country> getCountry();
 	List<SendType> getSendType();
+	List<Goods> getGoodsByGoodsId(String goodsId);
 }
