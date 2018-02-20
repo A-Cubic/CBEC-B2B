@@ -12,4 +12,21 @@
         insert into t_goods_upload(usercode,createTime,fileUrl,remark,flag,remark2) 
         values (#{usercode},#{createTime},#{fileUrl},#{remark},'1',#{remark2})
 	</insert>
+	<delete id="deleteUploadInfo"  parameterType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">  
+        delete from t_goods_upload where id =#{id}
+	</delete>
+	<select id="getOfferInfo" resultType="com.cbec.b2b.entity.GoodsUpload.Offer">
+		SELECT *
+		  FROM t_goods_offer
+		 WHERE usercode=#{userCode} and flag='1'
+		 ORDER BY id asc
+	</select>
+	<update id="updateOffer" parameterType="com.cbec.b2b.entity.GoodsUpload.Offer">
+		UPDATE t_goods_offer SET flag = #{flag}
+		 WHERE id=#{id}
+	</update>
+	<insert id="writeOffer"  parameterType="com.cbec.b2b.entity.GoodsUpload.Offer">  
+        insert into t_goods_offer(usercode,goodsid,barcode,goodsName,slt,offer,remark) 
+        values (#{usercode},#{goodsid},#{barcode},#{goodsName},#{slt},#{offer},#{remark})
+	</insert>
 </mapper>

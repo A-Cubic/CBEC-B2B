@@ -20,6 +20,7 @@ import com.cbec.b2b.entity.Catelog.CateThree;
 import com.cbec.b2b.entity.Catelog.CateType;
 import com.cbec.b2b.entity.Catelog.CateType2;
 import com.cbec.b2b.entity.Catelog.Catelog;
+import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.AdverType;
@@ -50,11 +51,52 @@ public class GoodsUploadPageApi {
 
     @RequestMapping(value = "/uploadinfo")
     public List<UploadInfo> uploadinfo(@RequestHeader(value = "userid") String userid) {
-    	return service.readUploadInfo(userid);
+    	return service.getUploadInfo(userid);
     }
     @RequestMapping(value = "/upload")
     public String writeUploadInfo(@RequestBody UploadInfo uploadInfo) {
     	int c = service.writeUploadInfo(uploadInfo);
+    	String result="0";
+    	if(c>0) result="1";
+    	return result;
+    }
+    @RequestMapping(value = "/delupload")
+    public String deleteUploadInfo(@RequestBody UploadInfo uploadInfo) {
+    	int c = service.deleteUploadInfo(uploadInfo);
+    	String result="0";
+    	if(c>0) result="1";
+    	return result;
+    }
+    @RequestMapping(value = "/goodslist1")
+    public PageInfo<Goods> getGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
+    	List<Goods> LGoods = new ArrayList<Goods>();
+    	for(int i=0;i<100;i++) {
+    		Goods g1 = new Goods();
+        	g1.setId(1000+i);
+        	g1.setPrice("500"+i);
+        	g1.setGoodsname("测试商品"+i);
+        	g1.setSlt("http://ecc-product.oss-cn-beijing.aliyuncs.com/goodsuploads/201707070941382750.jpg");
+        	LGoods.add(g1);
+    	}
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+//    	PageEntity<Demo> pageData = new PageEntity<Demo>(currentPage, pageSize, demo.size());
+        return pageData;
+    }
+    @RequestMapping(value = "/offerinfo")
+    public List<Offer> offerinfo(@RequestHeader(value = "userid") String userid) {
+    	return service.getOfferInfo(userid);
+    }
+    @RequestMapping(value = "/updateoffer")
+    public String updateOffer(@RequestBody Offer offer) {
+    	int c = service.updateOffer(offer);
+    	String result="0";
+    	if(c>0) result="1";
+    	return result;
+    }
+    @RequestMapping(value = "/offer")
+    public String writeOffer(@RequestBody Offer offer) {
+    	int c = service.writeOffer(offer);
     	String result="0";
     	if(c>0) result="1";
     	return result;
