@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.GoodsUploadMapper">
+	
+	<select id="readUploadInfo" resultType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">
+		SELECT *
+		  FROM t_goods_upload
+		 WHERE userCode=#{userCode}
+		 ORDER BY id asc
+	</select>
+	<insert id="writeUploadInfo"  parameterType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">  
+        insert into t_goods_upload(usercode,createTime,fileUrl,remark,flag,remark2) 
+        values (#{usercode},#{createTime},#{fileUrl},#{remark},'1',#{remark2})
+	</insert>
+</mapper>

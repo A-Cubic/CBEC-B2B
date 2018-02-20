@@ -19,6 +19,7 @@ public class Goods {
 	private int catelog2;
 	private int catelog3;
 	private String barcode;
+	private String thumb;
 	private String content;
 	private String country;
 	private String source;
@@ -54,4 +55,8 @@ public class Goods {
 	private String ifMY;
 	private String ifB2B;
 	private String ifBBC;
+	
+
+	private String[] thumbs;
+	private String[] contents;
 }
