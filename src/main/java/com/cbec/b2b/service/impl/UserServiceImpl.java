@@ -1,5 +1,6 @@
 package com.cbec.b2b.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,35 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public List<Menu> getMenuTop(String account) {
-		return mapper.getMenuTop(account);
+		List<Menu> menuList = mapper.getMenuTop(account);
+		
+		for(Menu bean : menuList) {
+			String auth = bean.getAuthoritys();
+			if(auth!=null && !"".equals(auth)) {
+				List<String> menuAuth = new ArrayList<String>();
+				String[] strs = auth.split(",");
+				for(String s : strs) {
+					menuAuth.add(s);
+				}
+				bean.setAuthority(menuAuth);
+			}
+			
+			List<MenuChildren> clildList = bean.getChildren();
+			if(clildList!=null && clildList.size()>0) {
+				for(MenuChildren clild : clildList) {
+					String auth_clild = clild.getAuthoritys();
+					if(auth_clild!=null && !"".equals(auth_clild)) {
+						List<String> menuChildAuth = new ArrayList<String>();
+						String[] strs_child = auth_clild.split(",");
+						for(String s : strs_child) {
+							menuChildAuth.add(s);
+						}
+						clild.setAuthority(menuChildAuth);
+					}
+				}
+			}
+		}
+		return menuList;
 	}
 	
 	@Override

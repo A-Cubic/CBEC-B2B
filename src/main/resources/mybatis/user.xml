@@ -44,34 +44,57 @@
 	</select>
 	
 	<resultMap type="com.cbec.b2b.entity.menu.Menu" id="MenuMap">
-        <id column="id" property="id"/>
+<!--         <id column="id" property="id"/> -->
         <collection property="children" ofType="com.cbec.b2b.entity.menu.MenuChildren" column="id" select="getMenuChildren">
         	<result column="menuName" property="name"/>
+        	<result column="authoritys" property="authoritys"/>
 	        <result column="menuUrl" property="path"/>
 	    </collection>  
         
     </resultMap>
     
+<!-- 	<select id="getMenuTop" resultMap="MenuMap"> -->
+<!-- 		SELECT  -->
+<!-- 			t1.id,t1.menuName AS `name`,t1.icon,t1.menuUrl AS path -->
+<!-- 		FROM  -->
+<!-- 			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5 -->
+<!-- 		WHERE  -->
+<!-- 			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id  -->
+<!--             AND t1.menuPid=0 and t2.usercode = #{account} -->
+<!--    		ORDER BY t1.sort asc -->
+<!-- 	</select> -->
+
 	<select id="getMenuTop" resultMap="MenuMap">
 		SELECT 
-			t1.id,t1.menuName AS `name`,t1.icon,t1.menuUrl AS path
+			t1.id,t1.menuName AS `name`,t1.icon,t1.menuUrl AS path, authority as authoritys
 		FROM 
-			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5
-		WHERE 
-			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id 
-            AND t1.menuPid=0 and t2.usercode = #{account}
-   		ORDER BY t1.sort asc
+			t_sys_menu t1
+	    WHERE 
+	    	t1.menuPid=0
+	   	ORDER BY 
+	   		t1.sort asc
 	</select>
+	
+<!-- 	<select id="getMenuChildren" resultType="com.cbec.b2b.entity.menu.MenuChildren"> -->
+<!-- 		SELECT  -->
+<!-- 			t1.menuName AS `name` ,t1.menuUrl AS path -->
+<!-- 		FROM  -->
+<!-- 			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5 -->
+<!-- 		WHERE  -->
+<!-- 			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id  -->
+<!--             AND t1.menuPid=1 and t1.parent=#{id} -->
+<!--    		ORDER BY t1.sort asc -->
+<!-- 	</select> -->
 	
 	<select id="getMenuChildren" resultType="com.cbec.b2b.entity.menu.MenuChildren">
 		SELECT 
-			t1.menuName AS `name` ,t1.menuUrl AS path
+			t1.menuName AS `name` ,t1.menuUrl AS path, authority as authoritys
 		FROM 
-			t_sys_menu t1,t_user_list t2,t_sys_role t3,t_user_role t4,t_sys_menu_role t5
+			t_sys_menu t1
 		WHERE 
-			t2.id= t4.user_id and t1.id = t5.menu_id and t3.role_id = t4.role_id and t3.role_id = t5.role_id 
-            AND t1.menuPid=1 and t1.parent=#{id}
-   		ORDER BY t1.sort asc
+			t1.menuPid=1 and t1.parent=#{id}
+   		ORDER BY 
+   			t1.sort asc
 	</select>
 	
 	<select id="getMessageByUserCode" resultType="com.cbec.b2b.entity.message.MessageEntity">
