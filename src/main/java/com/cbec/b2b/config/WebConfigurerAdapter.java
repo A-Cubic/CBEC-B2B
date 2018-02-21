@@ -48,7 +48,7 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(globalInterceptor()).addPathPatterns("/**");
-		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate");
+		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate","/llback/user/register");
 		registry.addInterceptor(apiInterceptor()).addPathPatterns("/api/**");
 	}
 	

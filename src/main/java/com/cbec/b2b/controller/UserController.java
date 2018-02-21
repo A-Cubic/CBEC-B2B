@@ -21,6 +21,7 @@ import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.request.LoginEntity;
 import com.cbec.b2b.entity.request.MessageRequest;
+import com.cbec.b2b.entity.request.register.RegisterStepOneRequest;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 
@@ -88,6 +89,23 @@ public class UserController {
     	String response = api.updateMessage(userid,requestBean.getType());
     	Util.responseResultSuccess(res);
         return response;
+    }
+    
+    @RequestMapping(value = "/register/submit")
+    public String registerSubmit(@RequestBody RegisterStepOneRequest request, HttpServletResponse res) {
+//    	String response = api.updateMessage(userid,requestBean.getType());
+//    	Util.responseResultSuccess(res);
+        return "";
+    }
+    
+    @RequestMapping(value = "/register/validate")
+    public String register(@RequestBody LoginEntity loginEntity, HttpServletResponse res) {
+//    	if() {
+//    		
+//    	}
+//    	String response = api.updateMessage(userid,requestBean.getType());
+//    	Util.responseResultSuccess(res);
+        return "";
     }
 }
 
