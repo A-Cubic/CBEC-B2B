@@ -49,8 +49,8 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/register/submit")
-    public String registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String captcha) {
-        return "";
+    public String registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String type) {
+        return service.registerSubmit(mail,password,type);
     }
     
     @RequestMapping(value = "/register/code")

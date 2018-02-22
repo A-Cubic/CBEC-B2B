@@ -8,6 +8,7 @@ import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
+import com.cbec.b2b.entity.register.RegisterStepOne;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 
@@ -20,4 +21,7 @@ public interface UserMapper {
 	List<MessageEntity> getMessageByUserCode(@Param("account") String account);
 	MessageCountEntity getMessageCountByUserCode(@Param("account") String account);
 	int updateMessageByUserCodeType(@Param("account") String account,@Param("type") String type);
+	int insertUser(RegisterStepOne registerStepOne);
+	Integer isUser(@Param("account") String account);
+	Integer insertUserRole(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
 }
