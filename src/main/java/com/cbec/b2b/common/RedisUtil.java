@@ -58,6 +58,16 @@ public class RedisUtil {
         ValueOperations valueOperations = redisTemplate.opsForValue();
         return valueOperations.get(key);
     }
+    
+    /**
+     * 根据key获取过期时间
+     * @param key
+     * @return
+     */
+	@SuppressWarnings("unchecked")
+	public Object getExpire(String key){
+        return redisTemplate.getExpire(key);
+    }
 
     /**
      * 写入缓存(配置文件默认过期时间)

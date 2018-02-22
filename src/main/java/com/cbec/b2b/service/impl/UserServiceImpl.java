@@ -2,12 +2,12 @@ package com.cbec.b2b.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cbec.b2b.common.ContentErrorMsg;
+import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.ServiceException;
+import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
@@ -22,6 +22,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	UserMapper mapper;
+	
+	@Autowired
+	EmailUtils emailUtils;
 	
 	@Override
 	public LoginResponseEntity validate(String account,String password) {
@@ -105,6 +108,18 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public MessageCountEntity getMessageCount(String account) {
 		return mapper.getMessageCountByUserCode(account);
+	}
+
+	@Override
+	public String registerSubmit(String mail, String password) {
+		return null;
+	}
+
+	@Override
+	public String registerCode(String mail) {
+		String code = Util.randomCode();
+		emailUtils.sendRegisterCode(mail,code);
+		return code;
 	}
 
 

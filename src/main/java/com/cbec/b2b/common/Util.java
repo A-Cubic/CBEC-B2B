@@ -39,6 +39,11 @@ public class Util {
     	return sd.format(date);
     }
     
+    public static String curDate(String pattern) {  
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);  
+        return sdf.format(new Date());  
+    }  
+    
     public final static String formatDateToDay(){
     	Date date = new Date();
     	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
@@ -120,9 +125,15 @@ public class Util {
        return flag;
    }
    
+     
+   /** 随机6位数 */  
+   public static String randomCode() {  
+       Integer res = (int)((Math.random()*9+1)*100000);  
+       return res+"";  
+   }  
+   
    public static void main(String[] args) {
-	   System.out.println(checkMobileNumber(""));
-	   System.out.println(checkEmail(""));
+	   System.out.println(randomCode());
    }
     
 }

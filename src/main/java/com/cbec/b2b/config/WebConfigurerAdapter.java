@@ -48,7 +48,7 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(globalInterceptor()).addPathPatterns("/**");
-		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate","/llback/user/register");
+		registry.addInterceptor(webInterceptor()).addPathPatterns("/llback/**").excludePathPatterns("/llback/user/validate","/llback/user/register/submit","/llback/user/register/code");
 		registry.addInterceptor(apiInterceptor()).addPathPatterns("/api/**");
 	}
 	
@@ -62,13 +62,13 @@ public class WebConfigurerAdapter extends WebMvcConfigurerAdapter {
                 	if(msg !=null && !"".equals(msg)) {
                 		Util.responseResult(response, "3", msg);
                 	}else {
-                		Util.responseResult(response, "3",e.getMessage());
+                		Util.responseResult(response, "3",ContentErrorMsg.ERROR_8);
                 	}
                     
                 } else if (e instanceof NoHandlerFoundException) {
                     Util.responseResult(response, "4",ContentErrorMsg.ERROR_4);
                 } else if (e instanceof ServletException) {
-                    Util.responseResult(response, "5",e.getMessage());
+                    Util.responseResult(response, "5",ContentErrorMsg.ERROR_8);
                 } else {
                 	Util.responseResult(response, "6",ContentErrorMsg.ERROR_6);
                     String message;

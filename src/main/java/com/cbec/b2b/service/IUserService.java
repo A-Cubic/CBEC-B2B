@@ -1,9 +1,7 @@
 package com.cbec.b2b.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
@@ -21,5 +19,7 @@ public interface IUserService {
 	List<MessageEntity> getMessage(String account);
 	MessageCountEntity getMessageCount(String account);
 	String updateMessage(String account,String type);
+	String registerSubmit(String mail,String password);
+    String registerCode(String mail);
 	
 }

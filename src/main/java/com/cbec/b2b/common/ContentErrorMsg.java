@@ -8,4 +8,5 @@ public class ContentErrorMsg {
 	public static final String ERROR_5 = "account or password is incorrect.";
 	public static final String ERROR_6 = "Server exception!";
 	public static final String ERROR_7 = "Error of parameters";
+	public static final String ERROR_8 = "server is busy now";
 }

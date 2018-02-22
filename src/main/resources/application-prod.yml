@@ -31,5 +31,20 @@ spring:
       max-idle: 10
       min-idle: 0
     expireTime: 7200
+  mail:  
+    host: smtp.llwell.net  
+    username: app@llwell.net     
+    password: ENC(cYOumtVNlPAct4guNSVMZ+NYyNP+X+CI) 
+    port: 25  
+    default-encoding: UTF-8  
+    protocol: smtp  
+    properties:  
+      mail:  
+        smth:  
+          auth: true  
+          starttls:  
+            enable: true  
+            required: true
+          timeout: 10000
 logging: 
   config: classpath:log4j2-prod.xml
