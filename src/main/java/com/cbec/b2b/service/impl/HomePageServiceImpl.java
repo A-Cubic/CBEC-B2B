@@ -1,6 +1,5 @@
 package com.cbec.b2b.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SendType;
-import com.cbec.b2b.mapper.DemoMapper;
 import com.cbec.b2b.mapper.HomePageMapper;
 import com.cbec.b2b.service.IHomePageService;
 

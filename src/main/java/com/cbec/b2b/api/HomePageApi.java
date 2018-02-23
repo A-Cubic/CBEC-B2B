@@ -3,14 +3,11 @@ package com.cbec.b2b.api;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cbec.b2b.entity.Demo;
 import com.cbec.b2b.entity.Catelog.Brand;
 import com.cbec.b2b.entity.Catelog.CateOne;
 import com.cbec.b2b.entity.Catelog.CateTWO;
@@ -30,11 +27,7 @@ import com.cbec.b2b.entity.HomePage.Screen;
 import com.cbec.b2b.entity.HomePage.ScreenType;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
-import com.cbec.b2b.entity.menu.Menu;
-import com.cbec.b2b.entity.response.CurrentUser;
-import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.service.IHomePageService;
-import com.cbec.b2b.service.IUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 

@@ -151,4 +151,32 @@
 		VALUES (#{userid}, #{roleid})
 	</insert>
 	
+	<select id="isUserRegister" resultType="java.util.Map">
+		SELECT 
+			t1.id,t1.usertype
+		FROM 
+			t_user_list t1
+		WHERE 
+			t1.usercode=#{account}
+	</select>
+	
+	<update id="updateUserRegister" parameterType="com.cbec.b2b.entity.register.RegisterStepTwo">  
+        UPDATE 
+			t_user_list t
+		SET 
+			t.company=#{companyName},t.contact=#{linkman},t.tel=#{linkmanphone},
+			t.email=#{email},t.img1=#{img1},t.img2=#{img2},t.img3=#{img3},t.three=#{img4},t.verifycode=#{verifycode}
+		WHERE
+			t.id=#{id}
+	</update>
+	
+	<update id="updatetUserRoleRegister"  parameterType="java.lang.Integer">  
+        UPDATE 
+			t_user_role t
+		SET 
+			t.role_id=#{roleid}
+		WHERE
+			t.user_id=#{userid}
+	</update>
+	
 </mapper>

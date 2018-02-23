@@ -1,14 +1,11 @@
 package com.cbec.b2b.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.HomePageApi;
-import com.cbec.b2b.entity.Demo;
 import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.Goods;

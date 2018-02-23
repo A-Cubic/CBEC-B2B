@@ -2,6 +2,7 @@ package com.cbec.b2b.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.EmailUtils;
+import com.cbec.b2b.common.OSSUtils;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.menu.Menu;
@@ -17,6 +19,7 @@ import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepOne;
+import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.mapper.UserMapper;
@@ -154,6 +157,55 @@ public class UserServiceImpl implements IUserService {
 		String code = Util.randomCode();
 		emailUtils.sendRegisterCode(mail,code);
 		return code;
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public String registerInfoUpload(RegisterStepTwo bean) {
+		Map<String,Object> userMap = mapper.isUserRegister(bean.getUserName());
+		if(userMap==null || userMap.size()<1) {
+			return "用户不存在";
+		}
+		
+		Integer userId = (Integer)userMap.get("id");
+		String type  = (String)userMap.get("usertype");
+		bean.setId(userId);
+		
+		String img_1 = bean.getImg1();
+		String img_2 = bean.getImg2();
+		String img_3 = bean.getImg3();
+		String img_4 = bean.getImg4();
+		String head = "http://ecc-product.oss-cn-beijing.aliyuncs.com/upload/";
+		if(!"".equals(img_1)) {
+			String img1_name =  Util.createUuid()+".jpeg";
+			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_1), img1_name);
+			bean.setImg1(head+img1_name);
+		}
+		if(!"".equals(img_2)) {
+			String img2_name =  Util.createUuid()+".jpeg";
+			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_2), img2_name);
+			bean.setImg2(head+img2_name);
+		}
+		if(!"".equals(img_3)) {
+			String img3_name =  Util.createUuid()+".jpeg";
+			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_3), img3_name);
+			bean.setImg3(head+img3_name);
+		}
+		if(!"".equals(img_4)) {
+			String img4_name =  Util.createUuid()+".jpeg";
+			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_4), img4_name);
+			bean.setImg4(head+img4_name);
+		}
+		
+		mapper.updateUserRegister(bean);
+		
+		Integer role_id = 2;
+		
+		if("2".equals(type) || "4".equals(type)) {
+			role_id = 3;
+		}
+		mapper.updatetUserRoleRegister(userId, role_id);
+		return "上传成功.";
 	}
 
 

@@ -1,6 +1,7 @@
 package com.cbec.b2b.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -9,6 +10,7 @@ import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepOne;
+import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 
@@ -24,4 +26,7 @@ public interface UserMapper {
 	int insertUser(RegisterStepOne registerStepOne);
 	Integer isUser(@Param("account") String account);
 	Integer insertUserRole(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
+	Map<String,Object> isUserRegister(@Param("account") String account);
+	int updateUserRegister(RegisterStepTwo tegisterStepTwo);
+	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
 }

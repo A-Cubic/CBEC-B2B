@@ -1,16 +1,20 @@
 package com.cbec.b2b.common;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +29,7 @@ public class Util {
 		String uuid = UUID.randomUUID().toString().replaceAll("\\-", "");
 		return uuid;
 	}
-
+	
 	public static String getMD5(String str) {
 		return Hashing.md5().newHasher().putString(str, Charsets.UTF_8).hash().toString();
 	}
@@ -195,6 +199,26 @@ public class Util {
            }
        }
        return false;
+   }
+   
+   public static byte[] decryptBASE64(String strBase64) throws Exception {
+	   Base64 base64 = new Base64();  
+	   byte[] debytes = base64.decode(new String(strBase64).getBytes());  
+	   return debytes;  
+//       Decoder decoder = Base64.getDecoder();
+//       byte[] buffer = decoder.decode(strBase64);
+//       return buffer;
+       
+   }
+   
+   public static InputStream base64ToIo(String strBase64) {
+	   InputStream in = null;
+        try {
+			in = new ByteArrayInputStream(decryptBASE64(strBase64));
+		} catch (Exception e) {
+			logger.error("base64转化失败，原因："+e.getMessage());
+		}
+        return in;
    }
    
    public static void main(String[] args) {

@@ -1,13 +1,16 @@
 package com.cbec.b2b.api;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
+import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.service.IUserService;
@@ -56,6 +59,10 @@ public class UserApi {
     @RequestMapping(value = "/register/code")
     public String registerCode(@RequestParam String mail) {
         return service.registerCode(mail);
+    }
+    
+    public String registerInfoUpload(@RequestParam RegisterStepTwo request) {
+    	return service.registerInfoUpload(request);
     }
 }
 

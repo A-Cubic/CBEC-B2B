@@ -2,7 +2,6 @@ package com.cbec.b2b.mapper;
 
 import java.util.List;
 
-import com.cbec.b2b.entity.Demo;
 import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
