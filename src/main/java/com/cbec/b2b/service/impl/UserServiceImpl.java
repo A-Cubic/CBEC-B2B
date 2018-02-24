@@ -20,6 +20,7 @@ import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepOne;
 import com.cbec.b2b.entity.register.RegisterStepTwo;
+import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.mapper.UserMapper;
@@ -206,6 +207,11 @@ public class UserServiceImpl implements IUserService {
 		}
 		mapper.updatetUserRoleRegister(userId, role_id);
 		return "上传成功.";
+	}
+
+	@Override
+	public UserStatus registerStatus(String account) {
+		return mapper.getUserStatus(account);
 	}
 
 

@@ -11,6 +11,7 @@ import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepOne;
 import com.cbec.b2b.entity.register.RegisterStepTwo;
+import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 
@@ -29,4 +30,5 @@ public interface UserMapper {
 	Map<String,Object> isUserRegister(@Param("account") String account);
 	int updateUserRegister(RegisterStepTwo tegisterStepTwo);
 	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
+	UserStatus getUserStatus(@Param("account") String account);
 }

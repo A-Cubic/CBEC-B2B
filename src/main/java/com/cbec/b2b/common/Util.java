@@ -203,10 +203,11 @@ public class Util {
    
    public static byte[] decryptBASE64(String strBase64) throws Exception {
 	   Base64 base64 = new Base64();  
-	   byte[] debytes = base64.decode(new String(strBase64).getBytes());  
+	   String newStr = strBase64.replaceAll("^(data:\\s*image\\/(\\w+);base64,)", "");
+	   byte[] debytes = base64.decode(newStr);  
 	   return debytes;  
 //       Decoder decoder = Base64.getDecoder();
-//       byte[] buffer = decoder.decode(strBase64);
+//       byte[] buffer = decoder.decode(newStr);
 //       return buffer;
        
    }
@@ -222,7 +223,7 @@ public class Util {
    }
    
    public static void main(String[] args) {
-	   System.out.println(randomCode());
+       
    }
     
 }

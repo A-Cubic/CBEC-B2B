@@ -9,6 +9,7 @@ import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepTwo;
+import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 
@@ -25,5 +26,6 @@ public interface IUserService {
 	String registerSubmit(String mail,String password,String type);
     String registerCode(String mail);
     String registerInfoUpload(RegisterStepTwo bean);
-	
+    UserStatus registerStatus(String account);
+    
 }
