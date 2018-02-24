@@ -21,6 +21,7 @@ import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
 import com.cbec.b2b.entity.register.RegisterStepTwo;
+import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.request.LoginEntity;
 import com.cbec.b2b.entity.request.MessageRequest;
 import com.cbec.b2b.entity.response.CurrentUser;
@@ -106,7 +107,7 @@ public class UserController {
 		String type = request.get("type");
 		
 		if (mail == null || code == null || pwd == null || type == null || "".equals(mail) || "".equals(code)
-				|| "".equals(pwd) || "".equals(type) || (!"2".equals(type) && !"3".equals(type) && !"4".equals(type)) ) {
+				|| "".equals(pwd) || "".equals(type) || (!"1".equals(type) && !"2".equals(type) && !"3".equals(type) && !"4".equals(type)) ) {
 			return "非法请求，参数有误.";
 		}
 		if (!Util.checkEmail(mail)) {
@@ -163,8 +164,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register/status")
-	public String registerStatus(@RequestHeader(value = "userid") String userid, HttpServletResponse res) {
+	public UserStatus registerStatus(@RequestHeader(value = "userid") String userid, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-		return "";
+		return api.registerStatus(userid);
 	}
+	
+	@RequestMapping(value = "/register/check")
+	public String registerCheck(@RequestBody Map<String,String> request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		String account = request.get("account");
+		String check = request.get("check");
+		return api.registerCheck(account,check);
+	}
+	 
 }

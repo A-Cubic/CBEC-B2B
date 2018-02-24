@@ -27,8 +27,9 @@ public interface UserMapper {
 	int insertUser(RegisterStepOne registerStepOne);
 	Integer isUser(@Param("account") String account);
 	Integer insertUserRole(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
-	Map<String,Object> isUserRegister(@Param("account") String account);
 	int updateUserRegister(RegisterStepTwo tegisterStepTwo);
-	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
 	UserStatus getUserStatus(@Param("account") String account);
+	Map<String,Object> getUserType(@Param("account") String account);
+	Integer updatetUserStatusById(@Param("verifycode") String verifycode,@Param("id") String id);
+	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
 }

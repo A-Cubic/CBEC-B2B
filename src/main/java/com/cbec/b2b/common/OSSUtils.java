@@ -18,6 +18,8 @@ public class OSSUtils {
 	private static String accessKeySecret = "NAII5ZJIYFSPQ4ioZAqjIrgw49yCaP";
 	private static String bucketName = "ecc-product";
 	private static String key = "upload";
+	public static String head = "http://ecc-product.oss-cn-beijing.aliyuncs.com/upload/";
+	public static String img_suffix = ".jpeg";
 	
 	public static void uploadOSSToInputStream(InputStream in,String filename) {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);

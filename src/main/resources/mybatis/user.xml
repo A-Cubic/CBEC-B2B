@@ -142,8 +142,8 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="com.cbec.b2b.entity.register.RegisterStepOne" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_user_list(usercode,pwd,usertype,username,verifycode,flag) 
-		VALUES (#{mail}, #{password}, #{type}, #{mail}, #{verifycode}, #{flag})
+		INSERT INTO t_user_list(usercode,pwd,usertype,verifycode,flag) 
+		VALUES (#{mail}, #{password}, #{type}, #{verifycode}, #{flag})
 	</insert>
 	
 	<insert id="insertUserRole" parameterType="java.lang.Integer">
@@ -151,23 +151,14 @@
 		VALUES (#{userid}, #{roleid})
 	</insert>
 	
-	<select id="isUserRegister" resultType="java.util.Map">
-		SELECT 
-			t1.id,t1.usertype
-		FROM 
-			t_user_list t1
-		WHERE 
-			t1.usercode=#{account}
-	</select>
-	
 	<update id="updateUserRegister" parameterType="com.cbec.b2b.entity.register.RegisterStepTwo">  
         UPDATE 
 			t_user_list t
 		SET 
-			t.company=#{companyName},t.contact=#{linkman},t.tel=#{linkmanphone},
+			t.company=#{companyName},t.contact=#{linkman},t.tel=#{linkmanphone},t.username=#{companyName},
 			t.email=#{email},t.img1=#{img1},t.img2=#{img2},t.img3=#{img3},t.three=#{img4},t.verifycode=#{verifycode}
 		WHERE
-			t.id=#{id}
+			t.usercode=#{userName}
 	</update>
 	
 	<update id="updatetUserRoleRegister"  parameterType="java.lang.Integer">  
@@ -179,4 +170,31 @@
 			t.user_id=#{userid}
 	</update>
 	
+	<select id="getUserStatus" resultType="com.cbec.b2b.entity.register.UserStatus">
+		SELECT 
+			t.usertype,t.company,t.contact,t.email,t.tel,
+			t.img1,t.img2,t.img3,t.three,t.verifycode
+		FROM 
+			t_user_list t
+		WHERE 
+			t.usercode=#{account}
+	</select>
+	
+	<select id="getUserType" resultType="java.util.Map">
+		SELECT 
+			t1.id,t1.usertype
+		FROM 
+			t_user_list t1
+		WHERE 
+			t1.usercode=#{account}
+	</select>
+	
+	<update id="updatetUserStatusById" parameterType="java.lang.String">  
+        UPDATE 
+			t_user_list t
+		SET 
+			t.verifycode=#{verifycode}
+		WHERE
+			t.id=#{id}
+	</update>
 </mapper>

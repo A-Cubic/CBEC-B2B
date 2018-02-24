@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class RegisterStepTwo {
-	private Integer id;
 	private String userName;
 	private String companyName;
 	private String linkman;

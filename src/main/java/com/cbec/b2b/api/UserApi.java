@@ -70,6 +70,9 @@ public class UserApi {
     	return service.registerStatus(userName);
     }
     
+    public String registerCheck(@RequestParam String userName,@RequestParam String check) {
+    	return service.registerCheck(userName,check);
+    }
     
 }
 

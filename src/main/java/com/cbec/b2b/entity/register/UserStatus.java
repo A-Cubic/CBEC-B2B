@@ -4,5 +4,14 @@ import lombok.Data;
 
 @Data
 public class UserStatus {
-	private String status;
+	private String usertype;
+	private String company;
+	private String contact;
+	private String email;
+	private String tel;
+	private String img1;
+	private String img2;
+	private String img3;
+	private String three;
+	private String verifycode;
 }
