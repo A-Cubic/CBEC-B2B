@@ -178,6 +178,7 @@ public class UserController {
 		request.setUserName(userid);
 		MsgResponse response = new MsgResponse();
 		response.setMsg(api.registerInfoUpload(request));
+		response.setType("1");
 		return response;
 	}
 	
