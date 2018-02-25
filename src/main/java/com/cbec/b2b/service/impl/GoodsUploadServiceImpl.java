@@ -5,15 +5,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.mapper.GoodsMapper;
 import com.cbec.b2b.mapper.GoodsUploadMapper;
+import com.cbec.b2b.mapper.PublicMapper;
 import com.cbec.b2b.mapper.UserMapper;
 import com.cbec.b2b.service.IGoodsUploadService;
 
@@ -26,6 +27,8 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	UserMapper usermapper;
 	@Autowired
 	GoodsMapper goodsmapper;
+	@Autowired
+	PublicMapper publicmapper;
 	@Override
 	public List<UploadInfo> getUploadInfo(String userCode) {
 		Map<String,Object> userMap = usermapper.getUserType(userCode);
@@ -67,5 +70,11 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	public List<Goods> getGoodsList(SearchGoods searchGoods) {
 		// TODO Auto-generated method stub
 		return goodsmapper.getGoodsList(searchGoods);
+	}
+
+	@Override
+	public List<SendType> getSendType() {
+		// TODO Auto-generated method stub
+		return publicmapper.getSendType();
 	}
 }

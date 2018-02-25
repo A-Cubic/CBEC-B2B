@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
@@ -19,7 +20,7 @@ import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/api")
-public class GoodsUploadPageApi {
+public class GoodsUploadApi {
     @Autowired
     IGoodsUploadService service;
 
@@ -75,6 +76,11 @@ public class GoodsUploadPageApi {
     	String result="0";
     	if(c>0) result="1";
     	return result;
+    }
+    @RequestMapping(value = "/sendtype")
+    public List<SendType> sendType() {
+    	
+    	return service.getSendType();
     }
 }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
@@ -19,4 +20,5 @@ public interface IGoodsUploadService {
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
+	List<SendType> getSendType();
 }
