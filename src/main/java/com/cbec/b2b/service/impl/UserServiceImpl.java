@@ -14,6 +14,7 @@ import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.OSSUtils;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
 import com.cbec.b2b.entity.message.MessageCountEntity;
@@ -121,22 +122,26 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
-	public String registerSubmit(String mail,String password,String type) {
+	public MsgResponse registerSubmit(String mail,String password,String type) {
 		RegisterStepOne registerStepOne = new RegisterStepOne();
 		registerStepOne.setMail(mail);
 		registerStepOne.setPassword(Util.getMD5(password));
 		registerStepOne.setType(type);
 		
+		MsgResponse response = new MsgResponse();
+		
 		int userNum = mapper.isUser(mail);
 		
 		if(userNum>0) {
-			return "账号已存在.";
+			response.setMsg("账号已存在");
+			return response;
 		}
 		
 		int insertUserNum = mapper.insertUser(registerStepOne);
 		
 		if(insertUserNum<1) {
-			return "注册失败，请检查格式.";
+			response.setMsg("注册失败，请检查格式");
+			return response;
 		}
 		
 		Integer role_id = 5;
@@ -148,9 +153,13 @@ public class UserServiceImpl implements IUserService {
 		int insertUserRoleNum = mapper.insertUserRole(registerStepOne.getId(),role_id);
 		
 		if(insertUserRoleNum>0) {
-			return "注册成功";
+			response.setMsg("注册成功，请重新登录，完善资料.");
+			response.setType("1");
+			return response;
 		}
-		return "注册失败";
+		
+		response.setMsg("注册失败");
+		return response;
 	}
 
 	@Override

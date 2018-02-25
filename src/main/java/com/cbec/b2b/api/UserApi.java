@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
@@ -53,7 +54,7 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/register/submit")
-    public String registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String type) {
+    public MsgResponse registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String type) {
         return service.registerSubmit(mail,password,type);
     }
     

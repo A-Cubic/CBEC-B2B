@@ -136,8 +136,7 @@ public class UserController {
 			return response;
 		}
 
-		response.setMsg(api.registerSubmit(mail, pwd, type));
-		return response;
+		return api.registerSubmit(mail, pwd, type);
 	}
 
 	@RequestMapping(value = "/register/code")
@@ -158,7 +157,7 @@ public class UserController {
 			if (redisUtil.isExistKey(redis_temp_code)) {
 				Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
 				response.setMsg(leaveTime+"");
-				response.setType("0");
+				response.setType("-1");
 				return response;
 			}
 			redisUtil.set(redis_temp_code, mail, 60l);
@@ -169,6 +168,7 @@ public class UserController {
 			return response;
 		}
 		response.setMsg("邮件已发送");
+		response.setType("1");
 		return response;
 	}
 	
