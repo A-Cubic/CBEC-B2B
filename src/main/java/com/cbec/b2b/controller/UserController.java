@@ -157,7 +157,7 @@ public class UserController {
 			String redis_temp_code = mail + "_code_temp";
 			if (redisUtil.isExistKey(redis_temp_code)) {
 				Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
-				response.setMsg(leaveTime + "s");
+				response.setMsg(leaveTime+"");
 				response.setType("0");
 				return response;
 			}

@@ -35,13 +35,14 @@ spring:
     host: smtp.mxhichina.com  
     username: app@llwell.net     
     password: ENC(cYOumtVNlPAct4guNSVMZ+NYyNP+X+CI) 
-    port: 25  
+    port: 465  
     default-encoding: UTF-8  
     protocol: smtp  
     properties:  
       mail:  
-        smth:  
-          auth: true  
+        smtp:  
+          auth: true 
+          ssl: true 
           starttls:  
             enable: true  
             required: true
