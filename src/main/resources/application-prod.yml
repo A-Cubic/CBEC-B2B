@@ -41,10 +41,12 @@ spring:
     properties:  
       mail:  
         smtp:  
-          auth: true 
-          ssl: true 
-          starttls:  
-            enable: true  
+          auth: true
+          ssl: true
+          socketFactory: 
+            class: javax.net.ssl.SSLSocketFactory 
+          starttls: 
+            enable: true
             required: true
           timeout: 10000
 logging: 
