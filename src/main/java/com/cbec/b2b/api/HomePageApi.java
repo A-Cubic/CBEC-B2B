@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -159,15 +160,16 @@ public class HomePageApi {
     @RequestMapping(value = "/goodslist")
     public PageInfo<Goods> getGoodsList(@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
-    	List<Goods> LGoods = new ArrayList<Goods>();
-    	for(int i=0;i<100;i++) {
-    		Goods g1 = new Goods();
-        	g1.setId(1000+i);
-        	g1.setPrice("500"+i);
-        	g1.setGoodsname("测试商品"+i);
-        	g1.setSlt("http://ecc-product.oss-cn-beijing.aliyuncs.com/goodsuploads/201707070941382750.jpg");
-        	LGoods.add(g1);
-    	}
+//    	List<Goods> LGoods = new ArrayList<Goods>();
+//    	for(int i=0;i<100;i++) {
+//    		Goods g1 = new Goods();
+//        	g1.setId(1000+i);
+//        	g1.setPrice("500"+i);
+//        	g1.setGoodsname("测试商品"+i);
+//        	g1.setSlt("http://ecc-product.oss-cn-beijing.aliyuncs.com/goodsuploads/201707070941382750.jpg");
+//        	LGoods.add(g1);
+//    	}
+    	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
 //    	PageEntity<Demo> pageData = new PageEntity<Demo>(currentPage, pageSize, demo.size());
         return pageData;

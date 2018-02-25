@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.GoodsMapper">
+	
+	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods">
+		SELECT *
+		  FROM t_goods_list
+		  <where> 
+		    1=1 
+            <if test="userCode !=null and userCode !=''">  
+                and supplierId=#{userCode} 
+            </if> 
+            <if test="ifXG!=null and ifXG !=''">  
+                and ifXG= #{ifXG}  
+            </if>    
+            <if test="ifHW !=null and ifHW !=''">  
+                and ifHW= #{ifHW}  
+            </if>    
+            <if test="ifBS !=null and ifBS !=''">  
+                and ifBS= #{ifBS}  
+            </if>    
+            <if test="ifMY !=null and ifMY !=''">  
+                and ifMY= #{ifMY}  
+            </if>  
+            <if test="country!=null and country !=''">  
+                and country= #{country}  
+            </if>  
+            <if test="catelog3!=null and catelog3 !=''">  
+                and catelog3= #{catelog3}  
+            </if>  
+            <if test="brands!=null and brands !=''">  
+                and brand= #{brands}  
+            </if>  
+            <if test="search!=null and search !=''">  
+                and (goodsName like concat('%',#{search},'%')  
+                	 or goodsName like concat('%',#{search},'%')   
+                	 or goodsNameE like concat('%',#{search},'%')      
+                	 or brand like concat('%',#{search},'%')      
+                	 or brandE like concat('%',#{search},'%')      
+                	 or barcode like concat('%',#{search},'%')      
+                	 or supplierName like concat('%',#{search},'%')  )
+            </if>  
+        </where>  
+		 ORDER BY id asc
+	</select>
+</mapper>

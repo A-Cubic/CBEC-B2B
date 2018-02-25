@@ -1,12 +1,12 @@
 package com.cbec.b2b.entity.GoodsUpload;
 
-
 import lombok.Data;
 
 @Data
 public class Offer {
-	private int id;
-	private String usercode;
+	private int id; // 序号
+	private String usercode; // 发布账号
+	private String company;
 	private int goodsid;
 	private String barcode;
 	private String goodsName;

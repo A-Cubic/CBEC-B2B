@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.GoodsUploadPageApi;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
+import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
@@ -40,8 +41,8 @@ public class GoodsUploadController {
     	return api.getGoodsList(userid,searchGoods);
     } 
     @RequestMapping(value = "/offerinfo")
-    public List<Offer> offerinfo(@RequestHeader(value = "userid") String userid,HttpServletResponse res ) {
-    	return api.offerinfo(userid);
+    public List<Offer> offerinfo(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
+    	return api.offerinfo(userid,searchOffer);
     }
     @RequestMapping(value = "/updateoffer")
     public String updateOffer(@RequestBody Offer offer,HttpServletResponse res ) {

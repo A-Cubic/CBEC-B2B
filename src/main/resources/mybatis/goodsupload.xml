@@ -8,6 +8,11 @@
 		 WHERE userCode=#{userCode}
 		 ORDER BY id asc
 	</select>
+	<select id="getUploadInfoAll" resultType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">
+		SELECT *
+		  FROM t_goods_upload
+		 ORDER BY id asc
+	</select>
 	<insert id="writeUploadInfo"  parameterType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">  
         insert into t_goods_upload(usercode,createTime,fileUrl,remark,flag,remark2) 
         values (#{usercode},#{createTime},#{fileUrl},#{remark},'1',#{remark2})
@@ -15,11 +20,26 @@
 	<delete id="deleteUploadInfo"  parameterType="com.cbec.b2b.entity.GoodsUpload.UploadInfo">  
         delete from t_goods_upload where id =#{id}
 	</delete>
-	<select id="getOfferInfo" resultType="com.cbec.b2b.entity.GoodsUpload.Offer">
-		SELECT *
-		  FROM t_goods_offer
-		 WHERE usercode=#{userCode} and flag='1'
-		 ORDER BY id asc
+	<select id="getOfferInfo"  parameterType="com.cbec.b2b.entity.GoodsUpload.SearchOffer" resultType="com.cbec.b2b.entity.GoodsUpload.Offer">
+		SELECT t1.*,t2.company 
+		  FROM t_goods_offer t1,t_user_list t2
+		  <where> 
+		    t1.usercode = t2.usercode and  t1.flag='1'
+            <if test="userCode !=null and userCode !=''">  
+                and t1.usercode=#{userCode} 
+            </if> 
+            <if test="userName !=null and userName !=''">  
+                 and (t2.company like concat('%',#{userName},'%') or t2.userName like concat('%',#{userName},'%'))
+            </if> 
+            <if test="goodsName !=null and goodsName !=''">  
+                 and t1.goodsName like concat('%',#{goodsName},'%')
+            </if> 
+            <if test="barcode !=null and barcode !=''">  
+                 and t1.barcode like concat('%',#{barcode},'%')
+            </if>    
+		  
+        </where>
+		 ORDER BY t1.id asc
 	</select>
 	<update id="updateOffer" parameterType="com.cbec.b2b.entity.GoodsUpload.Offer">
 		UPDATE t_goods_offer SET flag = #{flag}

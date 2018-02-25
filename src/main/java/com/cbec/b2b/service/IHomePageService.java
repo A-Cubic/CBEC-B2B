@@ -8,6 +8,7 @@ import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 
 @Service
@@ -18,4 +19,5 @@ public interface IHomePageService {
 	List<Country> getCountry();
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
+	List<Goods> getGoodsList(SearchGoods searchGoods);
 }
