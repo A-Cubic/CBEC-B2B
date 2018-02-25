@@ -17,6 +17,7 @@ import com.cbec.b2b.api.UserApi;
 import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.message.MessageCountEntity;
 import com.cbec.b2b.entity.message.MessageEntity;
@@ -95,10 +96,12 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register/submit")
-	public String registerSubmit(@RequestBody Map<String, String> request, HttpServletResponse res) {
+	public MsgResponse registerSubmit(@RequestBody Map<String, String> request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
 		if (request == null || request.isEmpty()) {
-			return "无效请求";
+			response.setMsg("无效请求");
+			return response;
 		}
 
 		String mail = request.get("mail");
@@ -108,59 +111,74 @@ public class UserController {
 		
 		if (mail == null || code == null || pwd == null || type == null || "".equals(mail) || "".equals(code)
 				|| "".equals(pwd) || "".equals(type) || (!"1".equals(type) && !"2".equals(type) && !"3".equals(type) && !"4".equals(type)) ) {
-			return "非法请求，参数有误.";
+			response.setMsg("非法请求，参数有误.");
+			return response;
 		}
 		if (!Util.checkEmail(mail)) {
-			return "邮件格式不正确.";
+			response.setMsg("邮件格式不正确.");
+			return response;
 		}
 		
 		if(pwd.length()<6) {
-			return "密码格式有误.";
+			response.setMsg("密码格式有误.");
+			return response;
 		}
 		
 		String key = mail + "_code";
 
 		if (!redisUtil.isExistKey(key)) {
-			return "无效的验证码.";
+			response.setMsg("无效的验证码.");
+			return response;
 		}
 		String redis_code = (String)redisUtil.get(key);
 		if(!redis_code.equals(code)) {
-			return "验证码不正确.";
+			response.setMsg("验证码不正确.");
+			return response;
 		}
 
-		return api.registerSubmit(mail, pwd, type);
+		response.setMsg(api.registerSubmit(mail, pwd, type));
+		return response;
 	}
 
 	@RequestMapping(value = "/register/code")
-	public String registerCode(@RequestBody Map<String, String> request, HttpServletResponse res) {
+	public MsgResponse registerCode(@RequestBody Map<String, String> request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
 		if (request == null || request.isEmpty()) {
-			return "无效请求";
+			response.setMsg("无效请求");
+			return response;
 		}
 		String mail = request.get("mail");
 		if (mail != null && !"".equals(mail)) {
 			if (!Util.checkEmail(mail)) {
-				return "邮件格式不正确.";
+				response.setMsg("邮件格式不正确.");
+				return response;
 			}
 			String redis_temp_code = mail + "_code_temp";
 			if (redisUtil.isExistKey(redis_temp_code)) {
 				Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
-				return leaveTime + "s";
+				response.setMsg(leaveTime + "s");
+				response.setType("0");
+				return response;
 			}
 			redisUtil.set(redis_temp_code, mail, 60l);
 			String code = api.registerCode(mail);
 			redisUtil.set(mail + "_code", code, 10800l);
 		} else {
-			return "非法的调用,账号为空.";
+			response.setMsg("非法的调用,账号为空.");
+			return response;
 		}
-		return "邮件已发送";
+		response.setMsg("邮件已发送");
+		return response;
 	}
 	
 	@RequestMapping(value = "/register/upload")
-	public String registerInfoUpload(@RequestBody RegisterStepTwo request,@RequestHeader(value = "userid") String userid, HttpServletResponse res) {
+	public MsgResponse registerInfoUpload(@RequestBody RegisterStepTwo request,@RequestHeader(value = "userid") String userid, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
 		request.setUserName(userid);
-		return api.registerInfoUpload(request);
+		MsgResponse response = new MsgResponse();
+		response.setMsg(api.registerInfoUpload(request));
+		return response;
 	}
 	
 	@RequestMapping(value = "/register/status")
@@ -170,11 +188,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/register/check")
-	public String registerCheck(@RequestBody Map<String,String> request, HttpServletResponse res) {
+	public MsgResponse registerCheck(@RequestBody Map<String,String> request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
 		String account = request.get("account");
 		String check = request.get("check");
-		return api.registerCheck(account,check);
+		MsgResponse response = new MsgResponse();
+		response.setMsg(api.registerCheck(account,check));
+		return response;
 	}
 	 
 }
