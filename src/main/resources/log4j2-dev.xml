@@ -6,7 +6,7 @@
 	<Properties>
 		<!-- 缺省配置（用于开发环境），配置日志文件输出目录和动态参数。其他环境需要在VM参数中指定； “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值 -->
 		<Property name="instance">xm-manager-server</Property>
-		<Property name="log.dir">E:/logs</Property>
+		<Property name="log.dir">D:/logs</Property>
 	</Properties>
 	<!-- 定义所有的appender -->
 	<Appenders>
