@@ -32,7 +32,7 @@ spring:
       min-idle: 0
     expireTime: 7200
   mail:  
-    host: smtp.llwell.net  
+    host: smtp.mxhichina.com  
     username: app@llwell.net     
     password: ENC(cYOumtVNlPAct4guNSVMZ+NYyNP+X+CI) 
     port: 25  
