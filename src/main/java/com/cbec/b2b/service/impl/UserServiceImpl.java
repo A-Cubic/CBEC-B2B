@@ -1,9 +1,14 @@
 package com.cbec.b2b.service.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +19,7 @@ import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.OSSUtils;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.controller.UserController;
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
@@ -35,6 +41,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	EmailUtils emailUtils;
+	
+	private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
+
 	
 	@Override
 	public LoginResponseEntity validate(String account,String password) {
@@ -177,30 +186,58 @@ public class UserServiceImpl implements IUserService {
 		String img_3 = bean.getImg3();
 		String img_4 = bean.getImg4();
 		
-		if(!"".equals(img_1)) {
-			String img1_name =  Util.createUuid()+OSSUtils.img_suffix;
-			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_1), img1_name);
-			bean.setImg1(OSSUtils.head+img1_name);
-		}
-		if(!"".equals(img_2)) {
-			String img2_name =  Util.createUuid()+OSSUtils.img_suffix;
-			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_2), img2_name);
-			bean.setImg2(OSSUtils.head+img2_name);
-		}
-		if(!"".equals(img_3)) {
-			String img3_name =  Util.createUuid()+OSSUtils.img_suffix;
-			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_3), img3_name);
-			bean.setImg3(OSSUtils.head+img3_name);
-		}
-		if(!"".equals(img_4)) {
-			String img4_name =  Util.createUuid()+OSSUtils.img_suffix;
-			OSSUtils.uploadOSSToInputStream(Util.base64ToIo(img_4), img4_name);
-			bean.setImg4(OSSUtils.head+img4_name);
+		InputStream in1 = null;
+		InputStream in2 = null;
+		InputStream in3 = null;
+		InputStream in4 = null;
+        try {
+			if(!"".equals(img_1)) {
+				String img1_name =  Util.createUuid()+OSSUtils.img_suffix;
+				in1 = new ByteArrayInputStream(Util.decryptBASE64(img_1));
+				OSSUtils.uploadOSSToInputStream(in1, img1_name);
+				bean.setImg1(OSSUtils.head+img1_name);
+			}
+			if(!"".equals(img_2)) {
+				String img2_name =  Util.createUuid()+OSSUtils.img_suffix;
+				in2 = new ByteArrayInputStream(Util.decryptBASE64(img_2));
+				OSSUtils.uploadOSSToInputStream(in2, img2_name);
+				bean.setImg2(OSSUtils.head+img2_name);
+			}
+			if(!"".equals(img_3)) {
+				String img3_name =  Util.createUuid()+OSSUtils.img_suffix;
+				in3 = new ByteArrayInputStream(Util.decryptBASE64(img_3));
+				OSSUtils.uploadOSSToInputStream(in3, img3_name);
+				bean.setImg3(OSSUtils.head+img3_name);
+			}
+			if(!"".equals(img_4)) {
+				String img4_name =  Util.createUuid()+OSSUtils.img_suffix;
+				in4 = new ByteArrayInputStream(Util.decryptBASE64(img_4));
+				OSSUtils.uploadOSSToInputStream(in4, img4_name);
+				bean.setImg4(OSSUtils.head+img4_name);
+			}
+			mapper.updateUserRegister(bean);
+        } catch (Exception e) {
+			logger.error("base64转化失败，原因："+e.getMessage());
+		}finally{
+			try {
+				if(in1!=null){
+					in1.close();
+				}
+				if(in2!=null){
+					in2.close();
+				}
+				if(in3!=null){
+					in3.close();
+				}
+				if(in4!=null){
+					in4.close();
+				}
+			} catch (IOException e) {
+				logger.error("输入流失败，原因："+e.getMessage());
+			}
 		}
 		
-		mapper.updateUserRegister(bean);
-		
-		return "上传成功.";
+		return "上传成功";
 	}
 
 	@Override
