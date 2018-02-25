@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.PurchaseMapper">
+	
+	<select id="getPurchaseList" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseList">
+		SELECT t1.*,t2.typename as sendtypename
+		  FROM t_purchase_list t1 ,t_base_sendtype t2
+		 <where> 
+		    t1.sendtype = t2.id
+            <if test="userCode !=null and userCode !=''">  
+                and t1.userCode=#{userCode} 
+            </if> 
+            <if test="purchasesn !=null and purchasesn !=''">  
+                 and t1.purchasesn like concat('%',#{purchasesn},'%')
+            </if> 
+            <if test="createtime !=null and createtime !=''">  
+                 and date_format(t1.createtime,'%Y%m%d') = #{createtime}
+            </if> 
+            <if test="stage !=null and stage !=''">  
+                 and t1.stage = #{stage} 
+            </if>    
+		  
+        </where>
+		 ORDER BY id asc
+	</select>
+	
+	<select id="getPurchaseGoods"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseGoods">
+		SELECT t2.*
+		  FROM t_purchase_list t1 ,t_purchase_goods t2
+		 WHERE t1.purchasesn = t2.purchasesn and t1.userCode=#{userCode} and t1.purchasesn =#{purchasesn}  
+		 ORDER BY id desc
+	</select>
+	<insert id="addPurchase"  parameterType="com.cbec.b2b.entity.purchase.Purchase">  
+        insert into t_purchase_list(purchasesn,usercode,stage,status,goodsnames,sendtype,address,deliverytime,currency,createtime,remark) 
+        values (#{purchasesn},#{userCode},#{stage},#{status},#{goodsnames},#{sendtype},#{address},#{deliverytime},#{currency},now(),#{remark})
+	</insert>
+	<update id="updatePurchase" parameterType="com.cbec.b2b.entity.purchase.Purchase">
+		UPDATE t_purchase_list 
+		<set >  
+		     <if test="stage !=null and stage !=''" >  
+		       		stage=#{stage},
+		     </if>
+		     <if test="status !=null and status !=''" >  
+		       		status=#{status},
+		     </if> 
+		     <if test="goodsnames !=null and goodsnames !=''" >  
+		       		goodsnames=#{goodsnames},
+		     </if> 
+		     <if test="sendtype !=null and sendtype !=''" >  
+		       		sendtype=#{sendtype},
+		     </if> 
+		     <if test="address !=null and address !=''" >  
+		       		address=#{address},
+		     </if> 
+		     <if test="deliverytime !=null and deliverytime !=''" >  
+		       		deliverytime=#{deliverytime},
+		     </if> 
+		     <if test="currency !=null and currency !=''" >  
+		       		currency=#{currency},
+		     </if> 
+		     <if test="remark !=null and remark !=''" >  
+		       		remark=#{remark},
+		     </if> 
+	   </set>  
+		 WHERE purchasesn=#{purchasesn}
+	</update>
+</mapper>
