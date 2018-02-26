@@ -56,7 +56,6 @@ public class GoodsUploadApi {
 //    	}
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
-//    	PageEntity<Demo> pageData = new PageEntity<Demo>(currentPage, pageSize, demo.size());
         return pageData;
     }
     @RequestMapping(value = "/offerinfo")

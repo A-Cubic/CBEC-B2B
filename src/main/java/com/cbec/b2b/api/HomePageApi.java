@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.Catelog.Brand;
 import com.cbec.b2b.entity.Catelog.CateOne;
 import com.cbec.b2b.entity.Catelog.CateTWO;
@@ -30,7 +30,6 @@ import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 import com.cbec.b2b.service.IHomePageService;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -171,7 +170,6 @@ public class HomePageApi {
 //    	}
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
-//    	PageEntity<Demo> pageData = new PageEntity<Demo>(currentPage, pageSize, demo.size());
         return pageData;
     }
 
