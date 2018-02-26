@@ -136,7 +136,11 @@ public class UserServiceImpl implements IUserService {
 		registerStepOne.setMail(mail);
 		registerStepOne.setPassword(Util.getMD5(password));
 		registerStepOne.setType(type);
-		
+		if("1".equals(type)) {
+			registerStepOne.setAvatar("http://ecc-product.oss-cn-beijing.aliyuncs.com/upload/head_s.png");
+		}else {
+			registerStepOne.setAvatar("http://ecc-product.oss-cn-beijing.aliyuncs.com/upload/head_p.png");
+		}
 		MsgResponse response = new MsgResponse();
 		
 		int userNum = mapper.isUser(mail);

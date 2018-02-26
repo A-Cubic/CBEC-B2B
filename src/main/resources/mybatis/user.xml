@@ -142,8 +142,8 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="com.cbec.b2b.entity.register.RegisterStepOne" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_user_list(usercode,pwd,usertype,verifycode,flag) 
-		VALUES (#{mail}, #{password}, #{type}, #{verifycode}, #{flag})
+		INSERT INTO t_user_list(usercode,pwd,usertype,verifycode,flag,avatar) 
+		VALUES (#{mail}, #{password}, #{type}, #{verifycode}, #{flag}, #{avatar})
 	</insert>
 	
 	<insert id="insertUserRole" parameterType="java.lang.Integer">
