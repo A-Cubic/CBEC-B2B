@@ -14,6 +14,7 @@ import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
+import com.cbec.b2b.entity.user.User;
 
 public interface UserMapper {
 	LoginResponseEntity validate(@Param("account") String account,@Param("password") String password);
@@ -32,4 +33,5 @@ public interface UserMapper {
 	Map<String,Object> getUserType(@Param("account") String account);
 	Integer updatetUserStatusById(@Param("verifycode") String verifycode,@Param("id") String id);
 	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
+	List<User> getPageUserForCheck(User user);
 }

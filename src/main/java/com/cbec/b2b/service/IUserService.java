@@ -13,6 +13,7 @@ import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
+import com.cbec.b2b.entity.user.User;
 
 @Service
 public interface IUserService {
@@ -29,5 +30,5 @@ public interface IUserService {
     String registerInfoUpload(RegisterStepTwo bean);
     UserStatus registerStatus(String account);
     String registerCheck(String account,String check);
-    
+    List<User> getPageUser(User user);
 }

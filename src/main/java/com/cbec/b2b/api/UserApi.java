@@ -15,7 +15,10 @@ import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
+import com.cbec.b2b.entity.user.User;
 import com.cbec.b2b.service.IUserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -63,16 +66,27 @@ public class UserApi {
         return service.registerCode(mail);
     }
     
+    @RequestMapping(value = "/register/upload")
     public String registerInfoUpload(@RequestParam RegisterStepTwo request) {
     	return service.registerInfoUpload(request);
     }
     
+    @RequestMapping(value = "/register/status")
     public UserStatus registerStatus(@RequestParam String userName) {
     	return service.registerStatus(userName);
     }
     
+    @RequestMapping(value = "/register/check")
     public String registerCheck(@RequestParam String userName,@RequestParam String check) {
     	return service.registerCheck(userName,check);
+    }
+    
+    @RequestMapping(value = "user/pagelist")
+    public PageInfo<User> getPageUser(@RequestParam User user) {
+    	PageHelper.startPage(user.getPageNumber(),user.getPageSize());
+    	List<User> userList = service.getPageUser(user);
+    	PageInfo<User> pageData = new PageInfo<User>(userList);
+    	return pageData;
     }
     
 }

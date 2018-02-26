@@ -19,7 +19,6 @@ import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.OSSUtils;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.Util;
-import com.cbec.b2b.controller.UserController;
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.menu.MenuChildren;
@@ -30,6 +29,7 @@ import com.cbec.b2b.entity.register.RegisterStepTwo;
 import com.cbec.b2b.entity.register.UserStatus;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
+import com.cbec.b2b.entity.user.User;
 import com.cbec.b2b.mapper.UserMapper;
 import com.cbec.b2b.service.IUserService;
 
@@ -265,6 +265,11 @@ public class UserServiceImpl implements IUserService {
 		mapper.updatetUserStatusById(verifycode, id+"");
 		
 		return "审核成功";
+	}
+
+	@Override
+	public List<User> getPageUser(User user) {
+		return mapper.getPageUserForCheck(user);
 	}
 
 

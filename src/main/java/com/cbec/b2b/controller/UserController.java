@@ -27,6 +27,8 @@ import com.cbec.b2b.entity.request.LoginEntity;
 import com.cbec.b2b.entity.request.MessageRequest;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
+import com.cbec.b2b.entity.user.User;
+import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/llback/user")
@@ -196,6 +198,12 @@ public class UserController {
 		MsgResponse response = new MsgResponse();
 		response.setMsg(api.registerCheck(account,check));
 		return response;
+	}
+	
+	@RequestMapping(value = "/pagelist")
+	public PageInfo<User> getPageUser(@RequestBody User request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		return api.getPageUser(request);
 	}
 	 
 }

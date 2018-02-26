@@ -197,4 +197,19 @@
 		WHERE
 			t.id=#{id}
 	</update>
+	
+	<select id="getPageUserForCheck" resultType="com.cbec.b2b.entity.user.User">
+		SELECT 
+			t.*
+		FROM 
+			t_user_list t
+		WHERE
+			t.verifycode='3'
+            <if test="usertype !=null and usertype !=''">  
+                and usertype=#{usertype} 
+            </if> 
+            <if test="usercode !=null and usercode !=''">  
+                and usercode like "%"#{usercode}"%"
+            </if>    
+	</select>
 </mapper>
