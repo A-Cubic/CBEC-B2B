@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
 import com.cbec.b2b.entity.message.MessageCountEntity;
@@ -18,7 +19,6 @@ import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.entity.user.User;
 import com.cbec.b2b.service.IUserService;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -83,7 +83,7 @@ public class UserApi {
     
     @RequestMapping(value = "user/pagelist")
     public PageInfo<User> getPageUser(@RequestParam User user) {
-    	PageHelper.startPage(user.getPageNumber(),user.getPageSize());
+    	PageHelper.startPage(user.getCurrent(),user.getPageSize());
     	List<User> userList = service.getPageUser(user);
     	PageInfo<User> pageData = new PageInfo<User>(userList);
     	return pageData;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.UserApi;
+import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.TokenUtils;
 import com.cbec.b2b.common.Util;
@@ -28,7 +29,6 @@ import com.cbec.b2b.entity.request.MessageRequest;
 import com.cbec.b2b.entity.response.CurrentUser;
 import com.cbec.b2b.entity.response.LoginResponseEntity;
 import com.cbec.b2b.entity.user.User;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping(value = "/llback/user")

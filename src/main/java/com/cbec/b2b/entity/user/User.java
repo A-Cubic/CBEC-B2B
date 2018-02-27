@@ -19,6 +19,6 @@ public class User {
 	private String img3;
 	private String createtime;
 	private String verifycode;
-	Integer pageNumber;
+	Integer current;
 	Integer pageSize;
 }

@@ -20,22 +20,22 @@ public class PageInfo<T> implements Serializable {
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public PageInfo(List<T> list) {
-        boolean isFirstPage = false;
-        boolean isLastPage = false;
+//        boolean isFirstPage = false;
+//        boolean isLastPage = false;
         Page page = (Page) list;
-        int pageNum = page.getPageNum();
+        int current = page.getPageNum();
         int pageSize = page.getPageSize();
-        int pages = page.getPages();
+//        int pages = page.getPages();
         long total = page.getTotal();
-        isFirstPage = pageNum == 1;
-        isLastPage = pageNum == pages;
+//        isFirstPage = pageNum == 1;
+//        isLastPage = pageNum == pages;
         this.list = page;
-        pagination.setPageNum(pageNum);
+        pagination.setCurrent(current);
         pagination.setPageSize(pageSize);
-        pagination.setPages(pages);
+//        pagination.setPages(pages);
         pagination.setTotal(total);
-        pagination.setFirstPage(isFirstPage);
-        pagination.setLastPage(isLastPage);
+//        pagination.setFirstPage(isFirstPage);
+//        pagination.setLastPage(isLastPage);
     }
 
 	public List<T> getList() {
