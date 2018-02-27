@@ -8,7 +8,7 @@ public class Goods {
 	private String goodsname;
 	private String price;
 	private String slt;
-	private int supplierId;
+	private String supplierCode;
 	private String supplierName;
 	private String OfficialWebsite;
 	private String brand;
