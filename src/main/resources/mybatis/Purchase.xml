@@ -13,8 +13,11 @@
             <if test="purchasesn !=null and purchasesn !=''">  
                  and t1.purchasesn like concat('%',#{purchasesn},'%')
             </if> 
-            <if test="createtime !=null and createtime !=''">  
-                 and date_format(t1.createtime,'%Y%m%d') = #{createtime}
+            <if test="timeBegin !=null and timeBegin !=''">  
+                 and date_format(t1.createtime,'%Y%m%d') &gt; #{timeBegin}
+            </if> 
+            <if test="timeEnd !=null and timeEnd !=''">  
+                 and date_format(t1.createtime,'%Y%m%d') &lt; #{timeEnd}
             </if> 
             <if test="stage !=null and stage !=''">  
                  and t1.stage = #{stage} 

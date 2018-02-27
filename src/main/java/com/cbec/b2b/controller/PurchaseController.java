@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.PurchaseApi;
+import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -22,7 +23,7 @@ public class PurchaseController {
     PurchaseApi api;
 
     @RequestMapping(value = "/list")
-    public List<Purchase> PurchaseList(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+    public PageInfo<Purchase> PurchaseList(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
         return api.PurchaseList(searchPurchaseList);
     }
     @RequestMapping(value = "/goods")
