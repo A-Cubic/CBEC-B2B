@@ -44,7 +44,7 @@ public class GoodsUploadApi {
     }
     @RequestMapping(value = "/goodslist1")
     public PageInfo<Goods> getGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
 //    	List<Goods> LGoods = new ArrayList<Goods>();
 //    	for(int i=0;i<100;i++) {
 //    		Goods g1 = new Goods();

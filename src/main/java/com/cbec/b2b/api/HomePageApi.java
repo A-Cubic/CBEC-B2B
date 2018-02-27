@@ -158,7 +158,7 @@ public class HomePageApi {
     }
     @RequestMapping(value = "/goodslist")
     public PageInfo<Goods> getGoodsList(@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
