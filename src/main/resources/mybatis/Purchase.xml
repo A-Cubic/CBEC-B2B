@@ -67,4 +67,8 @@
 	   </set>  
 		 WHERE purchasesn=#{purchasesn}
 	</update>
+	<insert id="addPurchaseGoods"  parameterType="com.cbec.b2b.entity.purchase.PurchaseGoods">  
+        insert into t_purchase_goods(purchasesn,goodsid,goodsname,price,deliverytype,expectprice,total,barcode) 
+        values (#{purchasesn},#{goodsid},#{goodsname},#{price},#{deliverytype},#{expectprice},#{total},#{barcode})
+	</insert>
 </mapper>

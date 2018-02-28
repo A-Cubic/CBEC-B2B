@@ -39,6 +39,10 @@ public class PurchaseController {
     public String updatePurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
     	return api.updatePurchase(purchase);
     }
+    @RequestMapping(value = "/goods/add")
+    public String addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+    	return api.addPurchaseGoods(purchaseGoodsList);
+    }
 }
 
 

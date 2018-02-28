@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -34,8 +36,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public String  addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
 		purchase.setPurchasesn(id);
-		// TODO Auto-generated method stub
-		return String.valueOf(mapper.addPurchase(purchase));
+		if(mapper.addPurchase(purchase)>0) {
+			return id;
+		}else {
+			return "ERROR:发生错误";
+		}
 	}
 	private String getDate() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
@@ -45,5 +50,14 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public String updatePurchase(Purchase purchase) {
 		// TODO Auto-generated method stub
 		return String.valueOf(mapper.updatePurchase(purchase));
+	}
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public String addPurchaseGoods(List<com.cbec.b2b.entity.purchase.PurchaseGoods> purchaseGoodsList) {
+		int c = 0;
+		for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
+			c+= mapper.addPurchaseGoods(purchaseGoods);
+		}
+		return String.valueOf(c);
 	}
 }
