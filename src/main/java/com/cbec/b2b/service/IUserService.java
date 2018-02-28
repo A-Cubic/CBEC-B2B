@@ -29,6 +29,6 @@ public interface IUserService {
     String registerCode(String mail);
     String registerInfoUpload(RegisterStepTwo bean);
     UserStatus registerStatus(String account);
-    String registerCheck(String userId,String check);
+    String registerCheck(String userId,String usercode,String check,String usertype,String failmark);
     List<User> getPageUser(User user);
 }

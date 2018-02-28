@@ -70,48 +70,28 @@ public class EmailUtils {
 	}
 
 	/**
-	 * 注册成功时的提示邮件
+	 * 审核通过时的提示邮件
 	 * 
-	 * @param email
-	 *            接收的邮箱地址 【注册人】
-	 * @param pwd
-	 *            初始密码
-	 * @param url
-	 *            登陆地址
+	 * @param email 接收的邮箱地址 【注册人】
+	 *
 	 */
-	public void sendRegisterSuc(final String email, String pwd, String url) {
+	public void sendRegisterSuccess(String email) {
 		final StringBuffer sb = new StringBuffer();
-		sb.append("<h3>恭喜您，注册成功！</h3>").append("<h2>初始化密码是：<b style='color:#F00'>").append(pwd)
-				.append("</b>，请不要告诉任何人！</h2>").append("请及时<a href='").append(url).append("'>登陆网站</a>修改密码。");
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				sendNormalEmail("【注册成功】", true, sb.toString(), true, email);
-			}
-		}).start();
+		sb.append("<h3>恭喜您，您的账号已通过审核！</h3>").append("<h2>更多操作，请登录<a href='http://console.llwell.net/#/user/login'>流连优选后台</a>查看</h2>");
+		sendNormalEmail("【审核通过】", true, sb.toString(), true, email);
 	}
 
 	/**
-	 * 注册成功时的提示邮件
+	 * 审核失败时的提示邮件
 	 * 
-	 * @param email
-	 *            接收的邮箱地址 【注册人】
-	 * @param pwd
-	 *            初始密码
-	 * @param url
-	 *            登陆地址
+	 * @param email 接收的邮箱地址 【注册人】
+	 * @param content 失败信息
 	 */
-	public void sendFindPwdSuc(final String email, String pwd, String url) {
+	public void sendRegisterFail(String email, String content) {
 		final StringBuffer sb = new StringBuffer();
-		sb.append("<h3>恭喜您，密码找回成功！</h3>").append("<h2>系统随机密码是：<b style='color:#F00'>").append(pwd)
-				.append("</b>，请不要告诉任何人！</h2>").append("请及时<a href='").append(url).append("'>登陆网站</a>修改密码。");
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				sendNormalEmail("成功找回密码", true, sb.toString(), true, email);
-			}
-		}).start();
+		sb.append("<h3>很遗憾，您的账号未通过审核！</h3>").append("<p><h2>原因为：").append(content)
+				.append("</h2></p><p><h2>您可以登录<a href='http://console.llwell.net/#/user/login'>流连优选后台</a>重新提交审核资料，感谢您对流连优选的信任和支持。</h2></p>");
+		sendNormalEmail("【审核未通过】", true, sb.toString(), true, email);
 	}
 
 	/**
