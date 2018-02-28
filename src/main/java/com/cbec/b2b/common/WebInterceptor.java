@@ -51,9 +51,9 @@ public class WebInterceptor implements HandlerInterceptor{
         response.setHeader("Access-Control-Allow-Credentials","true");
         response.setHeader("Access-Control-Allow-Methods", "*");  
         response.setHeader("Access-Control-Max-Age", "3600");  
+        //增加userId, token, code, msg
         response.setHeader("Access-Control-Allow-Headers",  
                 "Origin, X-Requested-With, Content-Type, Accept, userId, token, code, msg"); 
-       
         
         if("GET".equals(method)) {
         	return false;
