@@ -53,8 +53,8 @@ public class WebInterceptor implements HandlerInterceptor{
         response.setHeader("Access-Control-Max-Age", "3600");  
         //增加userId, token, code, msg
         response.setHeader("Access-Control-Allow-Headers",  
-                "Origin, X-Requested-With, Content-Type, Accept, userId, token, code, msg"); 
-        
+                "Origin, X-Requested-With, Content-Type, Accept,Expires,No-Cache, X-Requested-With, Pragma, Last-Modified, Cache-Control, If-Modified-Since, X-E4M-With,userId, token"); 
+        response.setHeader("Access-Control-Expose-Headers", "code, msg");
         if("GET".equals(method)) {
         	return false;
         }
