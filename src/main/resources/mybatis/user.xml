@@ -7,8 +7,8 @@
 		FROM 
 			t_user_list t1,t_sys_role t2,t_user_role t3 
 		WHERE 
-			t1.id=t3.user_id AND t2.role_id=t3.role_id AND
-			t1.usercode=#{account} AND t1.pwd=#{password}
+			t1.id=t3.user_id AND t2.role_id=t3.role_id AND t1.flag='1' 
+			AND t1.usercode=#{account} AND t1.pwd=#{password}
 	</select>
 	
 	<select id="isAuth" resultType="java.lang.Integer">
@@ -17,7 +17,7 @@
 		FROM 
 			t_user_list t1,t_api_menu t2,t_sys_role t3,t_api_menu_role t4,t_user_role t5
 		WHERE 
-			t1.id=t5.user_id AND t2.menu_id=t4.menu_id AND t3.role_id=t5.role_id AND t3.role_id=t4.role_id
+			t1.id=t5.user_id AND t2.menu_id=t4.menu_id AND t3.role_id=t5.role_id AND t3.role_id=t4.role_id AND t1.flag='1' 
 			AND t1.usercode=#{account} AND t2.menu_url=#{url}
 	</select>
 	
@@ -40,7 +40,7 @@
 			WHERE 
 				t1.id=t2.userid AND t1.usercode=#{account} AND t2.`status`='0') s
  		WHERE 
-			l.usercode=#{account}
+			l.usercode=#{account} AND l.flag='1' 
 	</select>
 	
 	<resultMap type="com.cbec.b2b.entity.menu.Menu" id="MenuMap">
@@ -204,12 +204,51 @@
 		FROM 
 			t_user_list t
 		WHERE
-			t.verifycode='3'
+			t.verifycode='3' AND t.flag='1' 
             <if test="usertype !=null and usertype !=''">  
                 and usertype=#{usertype} 
             </if> 
             <if test="usercode !=null and usercode !=''">  
                 and usercode like "%"#{usercode}"%"
-            </if>    
+            </if>   
+        ORDER BY t.createtime desc 
 	</select>
+	
+	<select id="getUserList" resultType="com.cbec.b2b.entity.user.User">
+		SELECT 
+			t.*
+		FROM 
+			t_user_list t
+		WHERE
+			usertype<![CDATA[ <> ]]> '0' 
+            <if test="company !=null and company !=''">  
+                and company like "%"#{company}"%"
+            </if> 
+            <if test="usercode !=null and usercode !=''">  
+                and usercode like "%"#{usercode}"%"
+            </if>
+            <if test="verifycode !=null and verifycode !=''">  
+                and verifycode=#{verifycode} 
+            </if>
+        ORDER BY t.createtime desc      
+	</select>
+	
+	<select id="getUserByUserId" resultType="com.cbec.b2b.entity.user.User">
+		SELECT 
+			t.*
+		FROM 
+			t_user_list t
+		WHERE
+			t.id=#{id}
+	</select>
+	
+	<update id="updateUserStatusByUserId" parameterType="java.lang.String">  
+        UPDATE 
+			t_user_list t
+		SET 
+			t.flag=#{flag}
+		WHERE
+			t.id=#{id}
+	</update>
+
 </mapper>

@@ -81,13 +81,33 @@ public class UserApi {
     	return service.registerCheck(userId,usercode,check,usertype,failmark);
     }
     
-    @RequestMapping(value = "user/pagelist")
+    @RequestMapping(value = "/member/pagelist")
     public PageInfo<User> getPageUser(@RequestParam User user) {
     	PageHelper.startPage(user.getCurrent(),user.getPageSize());
     	List<User> userList = service.getPageUser(user);
     	PageInfo<User> pageData = new PageInfo<User>(userList);
     	return pageData;
     }
+    
+    @RequestMapping(value = "/member/info/list")
+    public PageInfo<User> getUserInfoList(@RequestParam User user) {
+    	PageHelper.startPage(user.getCurrent(),user.getPageSize());
+    	List<User> userList = service.getUserInfoList(user);
+    	PageInfo<User> pageData = new PageInfo<User>(userList);
+    	return pageData;
+    }
+    
+    @RequestMapping(value = "/member/info/details")
+    public User getUserDetails(@RequestParam String userid) {
+    	return service.getUserDetails(userid);
+    }
+    
+    @RequestMapping(value = "/member/update/status")
+    public MsgResponse updateUserStatus(@RequestParam String userId,@RequestParam String flag) {
+    	return service.updateUserStatus(userId,flag);
+    }
+    
+    
     
 }
 

@@ -205,10 +205,31 @@ public class UserController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/pagelist")
+	@RequestMapping(value = "/member/pagelist")
 	public PageInfo<User> getPageUser(@RequestBody User request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
 		return api.getPageUser(request);
+	}
+	
+	@RequestMapping(value = "/member/info/list")
+	public PageInfo<User> getUserInfoList(@RequestBody User request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		return api.getUserInfoList(request);
+	}
+	
+	@RequestMapping(value = "/member/info/details")
+	public User getUserDetails(@RequestBody Map<String,String> request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		String userid = request.get("userid");
+		return api.getUserDetails(userid);
+	}
+	
+	@RequestMapping(value = "/member/update/status")
+	public MsgResponse updateUserStatus(@RequestBody Map<String,String> request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		String userid = request.get("userid");
+		String flag = request.get("flag");
+		return api.updateUserStatus(userid,flag);
 	}
 	 
 }

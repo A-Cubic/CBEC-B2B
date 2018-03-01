@@ -31,4 +31,8 @@ public interface IUserService {
     UserStatus registerStatus(String account);
     String registerCheck(String userId,String usercode,String check,String usertype,String failmark);
     List<User> getPageUser(User user);
+    List<User> getUserInfoList(User user);
+    User getUserDetails(String userid);
+    MsgResponse updateUserStatus(String userId,String flag);
+    
 }

@@ -34,4 +34,7 @@ public interface UserMapper {
 	Integer updatetUserStatusById(@Param("verifycode") String verifycode,@Param("id") String id,@Param("failmark") String failmark);
 	int updatetUserRoleRegister(@Param("userid") Integer userid,@Param("roleid") Integer roleid);
 	List<User> getPageUserForCheck(User user);
+	List<User> getUserList(User user);
+	User getUserByUserId(@Param("id") String id);
+	int updateUserStatusByUserId(@Param("id") String id,@Param("flag") String flag);
 }

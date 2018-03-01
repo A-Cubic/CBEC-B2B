@@ -278,5 +278,38 @@ public class UserServiceImpl implements IUserService {
 		return mapper.getPageUserForCheck(user);
 	}
 
+	@Override
+	public List<User> getUserInfoList(User user) {
+		return mapper.getUserList(user);
+	}
+
+	@Override
+	public User getUserDetails(String userid) {
+		return mapper.getUserByUserId(userid);
+	}
+
+	@Override
+	public MsgResponse updateUserStatus(String userId, String flag) {
+		int num = mapper.updateUserStatusByUserId(userId,flag);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num>0) {
+			if("0".equals(flag)) {
+				result="冻结成功";
+			}else {
+				result="解冻成功";
+			}
+			response.setType("1");
+		}else {
+			if("0".equals(flag)) {
+				result="冻结失败";
+			}else {
+				result="解冻失败";
+			}
+		}
+		response.setMsg(result);
+		return response;
+	}
+
 
 }
