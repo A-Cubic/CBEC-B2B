@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
@@ -20,4 +21,5 @@ public interface IHomePageService {
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
+	Catelog getCatalogAndBrands();
 }

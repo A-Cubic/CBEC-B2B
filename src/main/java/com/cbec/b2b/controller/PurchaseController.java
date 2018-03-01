@@ -43,6 +43,14 @@ public class PurchaseController {
     public String addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
     	return api.addPurchaseGoods(purchaseGoodsList);
     }
+    @RequestMapping(value = "/goods/update")
+    public String updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+    	return api.updatePurchaseGoods(purchaseGoodsList);
+    }
+    @RequestMapping(value = "/goods/del")
+    public String delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+    	return api.delPurchaseGoods(purchaseGoodsList);
+    }
 }
 
 

@@ -40,90 +40,104 @@ public class HomePageApi {
 
     @RequestMapping(value = "/catalog")
     public Catelog getCatalogAndBrands() {
-    	CateThree ct = new CateThree();
-    	ct.setId(10001);
-    	ct.setValue("面膜");
-    	CateThree ct1 = new CateThree();
-    	ct1.setId(10002);
-    	ct1.setValue("脸霜");
-    	List<CateThree> lc3= new ArrayList<CateThree>();
-    	lc3.add(ct);
-    	lc3.add(ct1);
-
-    	CateTWO ct2 = new CateTWO();
-    	ct2.setId(101);
-    	ct2.setValue("护肤品");
-    	ct2.setChildCate(lc3);
-    	CateTWO ct21 = new CateTWO();
-    	ct21.setId(102);
-    	ct21.setValue("护肤品2");
-    	ct21.setChildCate(lc3);
-
-    	CateTWO ct3 = new CateTWO();
-    	ct3.setId(201);
-    	ct3.setValue("游戏");
-    	ct3.setChildCate(lc3);
-    	CateTWO ct31 = new CateTWO();
-    	ct31.setId(102);
-    	ct31.setValue("3C");
-    	ct31.setChildCate(lc3);
-
-    	List<CateTWO> lc2= new ArrayList<CateTWO>();
-    	lc2.add(ct2);
-    	lc2.add(ct21);
-    	List<CateTWO> lc21= new ArrayList<CateTWO>();
-    	lc21.add(ct3);
-    	lc21.add(ct31);
-
-    	Brand br = new Brand();
-    	br.setId(1);
-    	br.setValue("B+29");
-    	Brand br1 = new Brand();
-    	br1.setId(2);
-    	br1.setValue("CON");
-    	Brand br2 = new Brand();
-    	br2.setId(3);
-    	br2.setValue("FEyy");
-
-    	List<Brand> lb= new ArrayList<Brand>();
-    	lb.add(br);
-    	lb.add(br1);
-    	lb.add(br2);
-
-    	CateType2 gt= new CateType2();
-    	gt.setCatelog(lc2);
-    	gt.setBrands(lb);
-    	CateType2 gt1= new CateType2();
-    	gt1.setCatelog(lc21);
-    	gt1.setBrands(lb);
-
-    	List<CateType2> lc = new ArrayList<CateType2>();
-    	lc.add(gt);
-    	List<CateType2> lc1 = new ArrayList<CateType2>();
-    	lc1.add(gt1);
-
-    	CateOne co = new CateOne();
-    	co.setId(4);
-    	co.setValue("美用没装");
-    	co.setLevel2(lc);
-    	CateOne co1 = new CateOne();
-    	co1.setId(2);
-    	co1.setValue("其他销售");
-    	co1.setLevel2(lc1);
-    	
-
-    	List<CateOne> lco = new ArrayList<CateOne>();
-    	lco.add(co);
-    	lco.add(co1);
-    	
-    	CateType cateType =new CateType();
-    	cateType.setLevel1(lco);
-    	
-    	Catelog catelog = new Catelog();
-    	catelog.setState(0);
-    	catelog.setResults(cateType);
-    	
-        return catelog;
+    	return service.getCatalogAndBrands();
+//    	List<CateOne> lco = new ArrayList<CateOne>();
+//    	
+//    	CateType cateType =new CateType();
+//    	cateType.setLevel1(lco);
+//    	
+//    	Catelog catelog = new Catelog();
+//    	catelog.setState(0);
+//    	catelog.setResults(cateType);
+//    	
+//        return catelog;
+//    	
+//    	
+//    	
+//    	CateThree ct = new CateThree();
+//    	ct.setId(10001);
+//    	ct.setValue("面膜");
+//    	CateThree ct1 = new CateThree();
+//    	ct1.setId(10002);
+//    	ct1.setValue("脸霜");
+//    	List<CateThree> lc3= new ArrayList<CateThree>();
+//    	lc3.add(ct);
+//    	lc3.add(ct1);
+//
+//    	CateTWO ct2 = new CateTWO();
+//    	ct2.setId(101);
+//    	ct2.setValue("护肤品");
+//    	ct2.setChildCate(lc3);
+//    	CateTWO ct21 = new CateTWO();
+//    	ct21.setId(102);
+//    	ct21.setValue("护肤品2");
+//    	ct21.setChildCate(lc3);
+//
+//    	CateTWO ct3 = new CateTWO();
+//    	ct3.setId(201);
+//    	ct3.setValue("游戏");
+//    	ct3.setChildCate(lc3);
+//    	CateTWO ct31 = new CateTWO();
+//    	ct31.setId(102);
+//    	ct31.setValue("3C");
+//    	ct31.setChildCate(lc3);
+//
+//    	List<CateTWO> lc2= new ArrayList<CateTWO>();
+//    	lc2.add(ct2);
+//    	lc2.add(ct21);
+//    	List<CateTWO> lc21= new ArrayList<CateTWO>();
+//    	lc21.add(ct3);
+//    	lc21.add(ct31);
+//
+//    	Brand br = new Brand();
+//    	br.setId(1);
+//    	br.setValue("B+29");
+//    	Brand br1 = new Brand();
+//    	br1.setId(2);
+//    	br1.setValue("CON");
+//    	Brand br2 = new Brand();
+//    	br2.setId(3);
+//    	br2.setValue("FEyy");
+//
+//    	List<Brand> lb= new ArrayList<Brand>();
+//    	lb.add(br);
+//    	lb.add(br1);
+//    	lb.add(br2);
+//
+//    	CateType2 gt= new CateType2();
+//    	gt.setCatelog(lc2);
+//    	gt.setBrands(lb);
+//    	CateType2 gt1= new CateType2();
+//    	gt1.setCatelog(lc21);
+//    	gt1.setBrands(lb);
+//
+//    	List<CateType2> lc = new ArrayList<CateType2>();
+//    	lc.add(gt);
+//    	List<CateType2> lc1 = new ArrayList<CateType2>();
+//    	lc1.add(gt1);
+//
+//    	CateOne co = new CateOne();
+//    	co.setId(4);
+//    	co.setValue("美用没装");
+//    	co.setLevel2(lc);
+//    	CateOne co1 = new CateOne();
+//    	co1.setId(2);
+//    	co1.setValue("其他销售");
+//    	co1.setLevel2(lc1);
+//    	
+//
+//    	List<CateOne> lco = new ArrayList<CateOne>();
+//    	lco.add(co);
+//    	lco.add(co1);
+//    	
+//    	CateType cateType =new CateType();
+//    	cateType.setLevel1(lco);
+//    	
+//    	Catelog catelog = new Catelog();
+//    	catelog.setState(0);
+//    	catelog.setResults(cateType);
+//    	
+//        return catelog;
     }
     @RequestMapping(value = "/adver")
     public Adver getAdver() {

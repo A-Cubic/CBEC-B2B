@@ -67,8 +67,56 @@
 	   </set>  
 		 WHERE purchasesn=#{purchasesn}
 	</update>
-	<insert id="addPurchaseGoods"  parameterType="com.cbec.b2b.entity.purchase.PurchaseGoods">  
+	
+	<insert id="addPurchaseGoods"  parameterType="java.util.List">  
         insert into t_purchase_goods(purchasesn,goodsid,goodsname,price,deliverytype,expectprice,total,barcode) 
-        values (#{purchasesn},#{goodsid},#{goodsname},#{price},#{deliverytype},#{expectprice},#{total},#{barcode})
+        values 
+        <foreach collection="list" item="item" index="index" separator="," > 
+       		(#{item.purchasesn},#{item.goodsid},#{item.goodsname},#{item.price},#{item.deliverytype},#{item.expectprice},#{item.total},#{item.barcode})
+        </foreach>
 	</insert>
+	<update id="updatePurchaseGoods"  parameterType="com.cbec.b2b.entity.purchase.PurchaseGoods">  
+	        update t_purchase_goods
+	        <set>
+	            <if test="expectprice !=null and expectprice !=''" >  
+		       		expectprice=#{expectprice},
+		     	</if>
+	            <if test="realprice !=null and realprice !=''" >  
+		       		realprice=#{realprice},
+		     	</if>
+	            <if test="total !=null and total !=''" >  
+		       		total=#{total},
+		     	</if>
+	            <if test="costprice !=null and costprice !=''" >  
+		       		costprice=#{costprice},
+		     	</if>
+	            <if test="otherprice !=null and otherprice !=''" >  
+		       		otherprice=#{otherprice},
+		     	</if>
+	            <if test="supplierid !=null and supplierid !=''" >  
+		       		supplierid=#{supplierid},
+		     	</if>
+	            <if test="barcode !=null and barcode !=''" >  
+		       		barcode=#{barcode},
+		     	</if>
+	            <if test="deliverytype !=null and deliverytype !=''" >  
+		       		deliverytype=#{deliverytype},
+		     	</if>
+	            <if test="goodsname !=null and goodsname !=''" >  
+		       		goodsname=#{goodsname},
+		     	</if>
+	            <if test="goodsid !=null and goodsid !=''" >  
+		       		goodsid=#{goodsid},
+		     	</if>
+	        </set>
+	        where id = #{id}
+	</update>
+	
+	<delete id="delPurchaseGoods"  parameterType="java.util.List">  
+        delete from t_purchase_goods where id in (
+	        <foreach collection="list" item="item" index="index" separator="," > 
+	       		#{item.id}
+	        </foreach>
+        )
+	</delete>
 </mapper>

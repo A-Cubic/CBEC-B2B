@@ -16,4 +16,6 @@ public interface IPurchaseService {
 	String addPurchase(Purchase purchase);
 	String updatePurchase(Purchase purchase);
 	String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
+	String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
+	String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 }

@@ -75,6 +75,14 @@ public class PurchaseApi {
     		return error;
     	}
     }
+    @RequestMapping(value = "/goods/update")
+    public String updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
+    	return service.updatePurchaseGoods(purchaseGoodsList); 
+    }
+    @RequestMapping(value = "/goods/del")
+    public String delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
+    	return service.delPurchaseGoods(purchaseGoodsList); 
+    }
 }
 
 

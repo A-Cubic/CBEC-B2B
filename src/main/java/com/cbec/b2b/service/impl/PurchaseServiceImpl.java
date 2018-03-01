@@ -52,12 +52,23 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return String.valueOf(mapper.updatePurchase(purchase));
 	}
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
-	public String addPurchaseGoods(List<com.cbec.b2b.entity.purchase.PurchaseGoods> purchaseGoodsList) {
+	public String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
+//		int c = 0;
+//		for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
+//			c+= mapper.addPurchaseGoods(purchaseGoods);
+//		}
+		return String.valueOf(mapper.addPurchaseGoods(purchaseGoodsList));
+	}
+	@Override
+	public String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
 		int c = 0;
 		for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
-			c+= mapper.addPurchaseGoods(purchaseGoods);
+			c+= mapper.updatePurchaseGoods(purchaseGoods);
 		}
 		return String.valueOf(c);
+	}
+	@Override
+	public String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
+		return String.valueOf(mapper.delPurchaseGoods(purchaseGoodsList));
 	}
 }

@@ -12,5 +12,7 @@ public interface PurchaseMapper {
 	List<PurchaseGoods> getPurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
 	int addPurchase(Purchase purchase);
 	int updatePurchase(Purchase purchase);
-	int addPurchaseGoods(PurchaseGoods purchaseGoods);
+	int addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
+	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
+	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 }
