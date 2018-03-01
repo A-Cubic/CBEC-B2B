@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -251,22 +250,25 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
-	public String registerCheck(String account, String check) {
-		Map<String,Object> map = mapper.getUserType(account);
-		Integer id = (Integer)map.get("id");
-		String type = (String)map.get("usertype");
+	public String registerCheck(String id, String usercode, String check, String usertype, String failmark) {
+//		Map<String,Object> map = mapper.getUserType(account);
+//		Integer id = (Integer)map.get("id");
+//		String type = (String)map.get("usertype");
 		Integer role_id = 2;
 		String verifycode = "4";
 		
 		if("1".equals(check)) {
-			if("2".equals(type) || "3".equals(type) || "4".equals(type)) {
+			if("2".equals(usertype) || "3".equals(usertype) || "4".equals(usertype)) {
 				role_id = 3;
 			}
-			mapper.updatetUserRoleRegister(id, role_id);
+			mapper.updatetUserRoleRegister(Integer.valueOf(id), role_id);
+			failmark="";
+			emailUtils.sendRegisterSuccess(usercode);
 		}else {
 			verifycode = "-1";
+			emailUtils.sendRegisterFail(usercode,failmark);
 		}
-		mapper.updatetUserStatusById(verifycode, id+"");
+		mapper.updatetUserStatusById(verifycode, id, failmark);
 		
 		return "审核成功";
 	}

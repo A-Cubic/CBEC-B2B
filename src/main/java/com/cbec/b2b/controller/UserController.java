@@ -193,10 +193,15 @@ public class UserController {
 	@RequestMapping(value = "/register/check")
 	public MsgResponse registerCheck(@RequestBody Map<String,String> request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-		String account = request.get("account");
+		String userid = request.get("userid");
+		String usercode = request.get("usercode");
 		String check = request.get("check");
+		String failmark = request.get("failmark");
+		String usertype = request.get("usertype");
+		
 		MsgResponse response = new MsgResponse();
-		response.setMsg(api.registerCheck(account,check));
+		response.setMsg(api.registerCheck(userid,usercode,check,usertype,failmark));
+		response.setType("1");
 		return response;
 	}
 	

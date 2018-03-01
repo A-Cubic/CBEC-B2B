@@ -193,7 +193,7 @@
         UPDATE 
 			t_user_list t
 		SET 
-			t.verifycode=#{verifycode}
+			t.verifycode=#{verifycode},t.failmark=#{failmark}
 		WHERE
 			t.id=#{id}
 	</update>

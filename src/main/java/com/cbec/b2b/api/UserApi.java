@@ -77,8 +77,8 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/register/check")
-    public String registerCheck(@RequestParam String userName,@RequestParam String check) {
-    	return service.registerCheck(userName,check);
+    public String registerCheck(@RequestParam String userId,@RequestParam String usercode,@RequestParam String check,@RequestParam String usertype,@RequestParam String failmark) {
+    	return service.registerCheck(userId,usercode,check,usertype,failmark);
     }
     
     @RequestMapping(value = "user/pagelist")
