@@ -48,6 +48,7 @@ public class UserServiceImpl implements IUserService {
 	public LoginResponseEntity validate(String account,String password) {
 		LoginResponseEntity response = mapper.validate(account, password);
 		if(response != null) {
+			mapper.updateLoginLastTime(account);
 			return response;
 		}else {
 			ServiceException ex = new ServiceException(ContentErrorMsg.ERROR_3);

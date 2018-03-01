@@ -229,6 +229,11 @@ public class UserController {
 		Util.responseResultSuccess(res);
 		String userid = request.get("userid");
 		String flag = request.get("flag");
+		if("0".equals(flag)) {
+			flag="1";
+		}else {
+			flag="0";
+		}
 		return api.updateUserStatus(userid,flag);
 	}
 	 

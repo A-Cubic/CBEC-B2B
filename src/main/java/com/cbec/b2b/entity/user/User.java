@@ -20,6 +20,7 @@ public class User {
 	private String createtime;
 	private String verifycode;
 	private String flag;
+	private String lasttime;
 	Integer current;
 	Integer pageSize;
 }

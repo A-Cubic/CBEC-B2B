@@ -251,4 +251,12 @@
 			t.id=#{id}
 	</update>
 
+	<update id="updateLoginLastTime" parameterType="java.lang.String">  
+        UPDATE
+			t_user_list t 
+		SET 
+			t.lasttime=NOW()
+		WHERE
+			t.usercode=#{account}
+	</update>
 </mapper>
