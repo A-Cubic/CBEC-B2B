@@ -22,6 +22,12 @@
             <if test="stage !=null and stage !=''">  
                  and t1.stage = #{stage} 
             </if>    
+            <if test="status !=null and status !=''">  
+                 and t1.status = #{status} 
+            </if>    
+            <if test="sendtype !=null and sendtype !=''">  
+                 and t1.sendtype = #{sendtype} 
+            </if>    
 		  
         </where>
 		 ORDER BY id asc

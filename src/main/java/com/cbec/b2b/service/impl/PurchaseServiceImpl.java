@@ -71,4 +71,9 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
 		return String.valueOf(mapper.delPurchaseGoods(purchaseGoodsList));
 	}
+	@Override
+	public String splitPurchase(String purchaseId) {
+		
+		return null;
+	}
 }

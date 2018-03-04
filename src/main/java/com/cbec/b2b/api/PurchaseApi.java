@@ -49,31 +49,7 @@ public class PurchaseApi {
     }
     @RequestMapping(value = "/goods/add")
     public String addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
-    	String error="";
-    	for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
-    		if(purchaseGoods.getPurchasesn()==null ||"".equals(purchaseGoods.getPurchasesn())){
-    			error= "ERROR:没有采购单号！";
-        	}else if(purchaseGoods.getDeliverytype()==null ||"".equals(purchaseGoods.getDeliverytype())){
-        		error= "ERROR:没有提货方式！";
-        	}else if(purchaseGoods.getGoodsid()==null ||"".equals(purchaseGoods.getGoodsid())){
-        		error= "ERROR:没有商品ID！";
-        	}else if(purchaseGoods.getGoodsname()==null ||"".equals(purchaseGoods.getGoodsname())){
-        		error= "ERROR:没有商品名称！";
-        	}else if(purchaseGoods.getPrice()==null ||"".equals(purchaseGoods.getPrice())){
-        		error= "ERROR:没有商品价格！";
-        	}else if(purchaseGoods.getExpectprice()==null ||"".equals(purchaseGoods.getExpectprice())){
-        		error= "ERROR:没有期望价格！";
-        	}else if(purchaseGoods.getTotal()==null ||"".equals(purchaseGoods.getTotal())){
-        		error= "ERROR:没有商品数量！";
-        	}else if(purchaseGoods.getBarcode()==null ||"".equals(purchaseGoods.getBarcode())){
-        		error= "ERROR:没有产品条码！";
-        	}
-    	}
-    	if("".equals(error)) {
-    		return service.addPurchaseGoods(purchaseGoodsList); 
-    	}else {
-    		return error;
-    	}
+		return service.addPurchaseGoods(purchaseGoodsList); 
     }
     @RequestMapping(value = "/goods/update")
     public String updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
@@ -82,6 +58,10 @@ public class PurchaseApi {
     @RequestMapping(value = "/goods/del")
     public String delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
     	return service.delPurchaseGoods(purchaseGoodsList); 
+    }
+    @RequestMapping(value = "/split")
+    public String splitPurchase(@RequestBody String purchaseId) {
+    	return service.splitPurchase(purchaseId);
     }
 }
 

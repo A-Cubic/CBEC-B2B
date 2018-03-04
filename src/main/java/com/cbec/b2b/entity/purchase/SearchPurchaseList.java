@@ -12,4 +12,6 @@ public class SearchPurchaseList {
 	private String stage;//采购单阶段
 	int current;//多少页
 	int pageSize;//页面显示多少个商品
+	private String status; //询价状态
+	private String sendtype; //取货方式
 }
