@@ -27,6 +27,16 @@ public class PurchaseController {
     @RequestMapping(value = "/list")
     public PageInfo<Purchase> PurchaseList(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
+		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
+			String[] times = searchPurchaseList.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
         return api.PurchaseList(searchPurchaseList);
     }
     @RequestMapping(value = "/goods")
