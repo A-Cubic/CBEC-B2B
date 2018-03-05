@@ -66,16 +66,11 @@ public class HomePageServiceImpl implements IHomePageService {
 
 	@Override
 	public List<Goods> getGoodsList(SearchGoods searchGoods) {
-//		if(searchGoods.getUserCode()!=null&&!"".equals(searchGoods.getUserCode())) {
-//			Map<String,Object> userMap = usermapper.getUserType(searchGoods.getUserCode());
-//			if(userMap==null || userMap.size()<1) {
-//				searchGoods.setUserCode("");
-//			}else {
-//				String id  = (String)userMap.get("id");
-//				searchGoods.setUserCode(id);
-//			}
-//		}
 		return goodsmapper.getGoodsList(searchGoods);
+	}
+	@Override
+	public List<Goods> getB2BGoodsList(SearchGoods searchGoods) {
+		return goodsmapper.getB2BGoodsList(searchGoods);
 	}
 
 	@Override

@@ -80,6 +80,13 @@ public class HomePageApi {
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
+    @RequestMapping(value = "/b2bgoodslist")
+    public PageInfo<Goods> getB2BGoodsList(@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<Goods> LGoods = service.getB2BGoodsList(searchGoods);
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+        return pageData;
+    }
 
     @RequestMapping(value = "/screen")
     public Screen getScreen() {

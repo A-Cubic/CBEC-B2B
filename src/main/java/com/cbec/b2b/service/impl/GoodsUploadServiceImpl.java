@@ -71,6 +71,11 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		// TODO Auto-generated method stub
 		return goodsmapper.getGoodsList(searchGoods);
 	}
+	@Override
+	public List<Goods> getB2BGoodsList(SearchGoods searchGoods) {
+		// TODO Auto-generated method stub
+		return goodsmapper.getB2BGoodsList(searchGoods);
+	}
 
 	@Override
 	public List<SendType> getSendType() {

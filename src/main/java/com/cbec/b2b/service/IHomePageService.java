@@ -21,5 +21,6 @@ public interface IHomePageService {
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
+	List<Goods> getB2BGoodsList(SearchGoods searchGoods);
 	Catelog getCatalogAndBrands();
 }

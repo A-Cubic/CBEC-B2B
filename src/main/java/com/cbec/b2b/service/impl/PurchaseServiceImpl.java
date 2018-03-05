@@ -1,18 +1,20 @@
 package com.cbec.b2b.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.cbec.b2b.entity.GoodsUpload.Offer;
+import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseList;
+import com.cbec.b2b.mapper.GoodsUploadMapper;
 import com.cbec.b2b.mapper.PublicMapper;
 import com.cbec.b2b.mapper.PurchaseMapper;
 import com.cbec.b2b.service.IPurchaseService;
@@ -24,6 +26,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	PurchaseMapper mapper;
 	@Autowired
 	PublicMapper publicmapper;
+	@Autowired 
+	GoodsUploadMapper goodsUploadMapper;
 	@Override
 	public List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList) {
 		return mapper.getPurchaseList(searchPurchaseList);
@@ -72,8 +76,44 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return String.valueOf(mapper.delPurchaseGoods(purchaseGoodsList));
 	}
 	@Override
-	public String splitPurchase(String purchaseId) {
-		
-		return null;
+	public String splitPurchase(SearchPurchaseGoods searchPurchaseGoods) {
+		List<PurchaseGoods> pGoodsList = mapper.getPurchaseGoodsToInquiry(searchPurchaseGoods.getPurchasesn());
+		List<Inquiry> inquiryList = new ArrayList<Inquiry>();
+		if(pGoodsList.size()==0) {
+			return "未查到采购单对应的采购商品信息！";
+		}else {
+			for(PurchaseGoods pGoods:pGoodsList) {
+				List<Offer> offerList = goodsUploadMapper.getOfferInfoByGoodsId(pGoods.getGoodsid());
+				for(Offer offer : offerList) {
+					Inquiry inquiry = new Inquiry();
+					inquiry.setPurchasesn(pGoods.getPurchasesn());
+					inquiry.setUsercode(offer.getUsercode());
+					inquiry.setGoodsid(offer.getGoodsid());
+					inquiry.setGoodsname(offer.getGoodsName());
+					inquiry.setBarcode(offer.getBarcode());
+					inquiry.setPrice(offer.getOffer());
+					inquiry.setFlag("1");
+					inquiry.setRemark("");
+					
+					inquiryList.add(inquiry);
+				}
+			}
+		}
+		if(inquiryList.size()>0) {
+			if(mapper.addInquiry(inquiryList)>0) {
+				Purchase purchase = new Purchase();
+				purchase.setPurchasesn(searchPurchaseGoods.getPurchasesn());
+				purchase.setStage("1");
+				purchase.setStatus("1");
+				
+				updatePurchase(purchase);
+				return "提交完成";
+			}else {
+				return "询价单创建失败！";
+			}
+			
+		}else {
+			return "无对应的报价信息！";
+		}
 	}
 }

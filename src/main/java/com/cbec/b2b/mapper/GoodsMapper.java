@@ -7,4 +7,5 @@ import com.cbec.b2b.entity.HomePage.SearchGoods;
 
 public interface GoodsMapper {
 	List<Goods> getGoodsList(SearchGoods searchGoods);
+	List<Goods> getB2BGoodsList(SearchGoods searchGoods);
 }

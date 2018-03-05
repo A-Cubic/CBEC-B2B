@@ -49,6 +49,13 @@ public class GoodsUploadApi {
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
+    @RequestMapping(value = "/b2bgoodslist1")
+    public PageInfo<Goods> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<Goods> LGoods = service.getB2BGoodsList(searchGoods);
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+        return pageData;
+    }
     @RequestMapping(value = "/offerinfo")
     public List<Offer> offerinfo(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
     	return service.getOfferInfo(userid,searchOffer);

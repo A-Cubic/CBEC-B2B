@@ -60,8 +60,8 @@ public class PurchaseApi {
     	return service.delPurchaseGoods(purchaseGoodsList); 
     }
     @RequestMapping(value = "/split")
-    public String splitPurchase(@RequestBody String purchaseId) {
-    	return service.splitPurchase(purchaseId);
+    public String splitPurchase(@RequestBody SearchPurchaseGoods searchPurchaseGoods) {
+    	return service.splitPurchase(searchPurchaseGoods);
     }
 }
 
