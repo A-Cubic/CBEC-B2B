@@ -1,5 +1,6 @@
 package com.cbec.b2b.common;
 
+import java.beans.PropertyDescriptor;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,6 +72,34 @@ public class Util {
 		}
     	return reDate;
     }
+    
+    //针对antd日期组件切分
+    public static void antdDatePress(Object obj) { 
+    	try {
+    		Class<?> clazz= obj.getClass();
+        	Field fieldTimes = clazz.getDeclaredField("times");
+        	Field fieldTimeBegin = clazz.getDeclaredField("timeBegin");
+        	Field fieldTimeEnd = clazz.getDeclaredField("timeEnd");
+        	PropertyDescriptor pd1 = new PropertyDescriptor(fieldTimes.getName(),clazz);
+        	Method getMethod = pd1.getReadMethod();
+        	String[] o = (String[])getMethod.invoke(new Object[] {});
+            if(o != null && o.length>0) {
+            	for(int i=0;i<o.length;i++) {
+    				if(i==0) {
+    					PropertyDescriptor pd2 = new PropertyDescriptor(fieldTimeBegin.getName(),clazz);
+    					Method setMethod = pd2.getWriteMethod();
+    					setMethod.invoke(obj, new Object[] { o[i] });
+    				}else {
+    					PropertyDescriptor pd3 = new PropertyDescriptor(fieldTimeEnd.getName(),clazz);
+    					Method setMethod = pd3.getWriteMethod();
+    					setMethod.invoke(obj, new Object[] { o[i] });
+    				}
+    			}
+            }
+    	}catch(Exception e) {
+    		 e.printStackTrace();
+    	}
+    }  
     
     public static void responseResult(HttpServletResponse response,String code,String msg) {
         response.setCharacterEncoding("UTF-8");
