@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
@@ -62,6 +63,23 @@ public class PurchaseApi {
     @RequestMapping(value = "/split")
     public String splitPurchase(@RequestBody SearchPurchaseGoods searchPurchaseGoods) {
     	return service.splitPurchase(searchPurchaseGoods);
+    }
+    
+    /****************************************** 客服部分 ***************************************/
+    @RequestMapping(value = "/operate/list")
+    public PageInfo<Purchase> listOfOperate(@RequestParam SearchPurchaseList search) {
+    	PageHelper.startPage(search.getCurrent(),search.getPageSize());
+    	List<Purchase> LPurchase = service.getPurchaseList(search);
+    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+        return pageData;
+    }
+    
+    @RequestMapping(value = "/operate/goods")
+    public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
+    	PageHelper.startPage(current,pageSize);
+    	List<PurchaseGoods> list = service.goodsListOfOperate(purchasesn);
+    	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
+        return pageData;
     }
 }
 

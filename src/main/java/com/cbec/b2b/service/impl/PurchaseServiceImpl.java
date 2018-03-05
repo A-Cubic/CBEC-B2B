@@ -116,4 +116,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			return "无对应的报价信息！";
 		}
 	}
+	
+	
+	
+	/****************************************** 客服部分 ***************************************/
+	@Override
+	public List<PurchaseGoods> goodsListOfOperate(String purchasesn) {
+		return mapper.listGoodsOfOperate(purchasesn);
+	}
 }

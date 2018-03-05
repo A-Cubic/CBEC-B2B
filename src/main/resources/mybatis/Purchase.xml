@@ -139,4 +139,16 @@
        		(#{item.purchasesn},#{item.usercode},#{item.goodsid},#{item.goodsname},#{item.barcode},#{item.price},#{item.flag},now(),#{item.remark})
         </foreach>
 	</insert>
+	
+	
+	<select id="listGoodsOfOperate" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
+		SELECT 
+			t.*
+		FROM 
+			t_purchase_goods t
+		WHERE 
+			t.purchasesn=#{purchasesn}  
+		ORDER BY 
+			t.goodsname desc
+	</select>
 </mapper>

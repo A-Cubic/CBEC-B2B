@@ -1,6 +1,7 @@
 package com.cbec.b2b.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -132,6 +133,29 @@ public class PurchaseController {
 			
 		}
     	
+    }
+    
+    /****************************************** 客服部分 ***************************************/
+    @RequestMapping(value = "/operate/list")
+    public PageInfo<Purchase> listOfOperate(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
+			String[] times = searchPurchaseList.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
+        return api.listOfOperate(searchPurchaseList);
+    }
+    
+    @RequestMapping(value = "/operate/goods")
+    public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.goodsListOfOperate((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
     }
 }
 

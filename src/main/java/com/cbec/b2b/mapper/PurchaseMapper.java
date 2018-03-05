@@ -2,6 +2,8 @@ package com.cbec.b2b.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -18,4 +20,7 @@ public interface PurchaseMapper {
 	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	int addInquiry(List<Inquiry> inquiryList);
+	
+	/****************************************** 客服部分 ***************************************/
+	List<PurchaseGoods> listGoodsOfOperate(@Param("purchasesn") String purchasesn);
 }
