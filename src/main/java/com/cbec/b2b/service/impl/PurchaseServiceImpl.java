@@ -124,4 +124,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<PurchaseGoods> goodsListOfOperate(String purchasesn) {
 		return mapper.listGoodsOfOperate(purchasesn);
 	}
+	@Override
+	public Purchase getPurchaseOfOperate(String purchasesn) {
+		return mapper.getPurchaseBySnOfOperate(purchasesn);
+	}
 }

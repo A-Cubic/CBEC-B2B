@@ -22,4 +22,5 @@ public interface IPurchaseService {
 	
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> goodsListOfOperate(String purchasesn);
+	Purchase getPurchaseOfOperate(String purchasesn);
 }

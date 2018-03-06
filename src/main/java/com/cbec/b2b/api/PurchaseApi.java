@@ -2,19 +2,13 @@ package com.cbec.b2b.api;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
-import com.cbec.b2b.entity.HomePage.Goods;
-import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -69,10 +63,16 @@ public class PurchaseApi {
     @RequestMapping(value = "/operate/list")
     public PageInfo<Purchase> listOfOperate(@RequestParam SearchPurchaseList search) {
     	PageHelper.startPage(search.getCurrent(),search.getPageSize());
-    	List<Purchase> LPurchase = service.getPurchaseList(search);
-    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+    	List<Purchase> list = service.getPurchaseList(search);
+    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(list);
         return pageData;
     }
+    
+    @RequestMapping(value = "/operate/info/details")
+    public Purchase getPurchaseOfOperate(@RequestParam String purchasesn) {
+        return service.getPurchaseOfOperate(purchasesn);
+    }
+    
     
     @RequestMapping(value = "/operate/goods")
     public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {

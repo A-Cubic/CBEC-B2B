@@ -152,6 +152,12 @@ public class PurchaseController {
         return api.listOfOperate(searchPurchaseList);
     }
     
+    @RequestMapping(value = "/operate/info/details")
+    public Purchase getPurchaseOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getPurchaseOfOperate((String)request.get("purchasesn"));
+    }
+    
     @RequestMapping(value = "/operate/goods")
     public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);

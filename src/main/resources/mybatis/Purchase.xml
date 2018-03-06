@@ -160,4 +160,13 @@
 		ORDER BY 
 			t.goodsname desc
 	</select>
+	
+	<select id="getPurchaseBySnOfOperate" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="java.lang.String">
+		SELECT 
+			t1.*,t2.typename as sendtypename
+		FROM 
+			t_purchase_list t1 ,t_base_sendtype t2
+		WHERE
+			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
+	</select>
 </mapper>
