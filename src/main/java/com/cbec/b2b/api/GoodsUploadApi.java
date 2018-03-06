@@ -19,55 +19,84 @@ import com.cbec.b2b.service.IGoodsUploadService;
 import com.github.pagehelper.PageHelper;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/goods")
 public class GoodsUploadApi {
     @Autowired
     IGoodsUploadService service;
 
-    @RequestMapping(value = "/uploadinfo")
-    public List<UploadInfo> uploadinfo(@RequestHeader(value = "userid") String userid) {
+    @RequestMapping(value = "/supplier/uploadinfo")
+    public List<UploadInfo> uploadinfoForSupplier(@RequestHeader(value = "userid") String userid) {
     	return service.getUploadInfo(userid);
     }
-    @RequestMapping(value = "/upload")
+    @RequestMapping(value = "/operate/uploadinfo")
+    public List<UploadInfo> uploadinfoForOperate(@RequestHeader(value = "userid") String userid) {
+    	return service.getUploadInfo(userid);
+    }
+    @RequestMapping(value = "/supplier/upload")
     public String writeUploadInfo(@RequestBody UploadInfo uploadInfo) {
     	int c = service.writeUploadInfo(uploadInfo);
     	String result="0";
     	if(c>0) result="1";
     	return result;
     }
-    @RequestMapping(value = "/delupload")
-    public String deleteUploadInfo(@RequestBody UploadInfo uploadInfo) {
+    @RequestMapping(value = "/supplier/delupload")
+    public String deleteUploadInfoForSupplier(@RequestBody UploadInfo uploadInfo) {
     	int c = service.deleteUploadInfo(uploadInfo);
     	String result="0";
     	if(c>0) result="1";
     	return result;
     }
-    @RequestMapping(value = "/goodslist1")
-    public PageInfo<Goods> getGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    @RequestMapping(value = "/operate/delupload")
+    public String deleteUploadInfoForOperate(@RequestBody UploadInfo uploadInfo) {
+    	int c = service.deleteUploadInfo(uploadInfo);
+    	String result="0";
+    	if(c>0) result="1";
+    	return result;
+    }
+    @RequestMapping(value = "/supplier/goodslist")
+    public PageInfo<Goods> getGoodsListForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
-    @RequestMapping(value = "/b2bgoodslist1")
+    @RequestMapping(value = "/operate/goodslist")
+    public PageInfo<Goods> getGoodsListForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<Goods> LGoods = service.getGoodsList(searchGoods);
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+        return pageData;
+    }
+    @RequestMapping(value = "/purchasers/goodslist")
+    public PageInfo<Goods> getGoodsListForPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<Goods> LGoods = service.getGoodsList(searchGoods);
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+        return pageData;
+    }
+    @RequestMapping(value = "/supplier/b2bgoodslist")
     public PageInfo<Goods> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getB2BGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
-    @RequestMapping(value = "/offerinfo")
-    public List<Offer> offerinfo(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    @RequestMapping(value = "/supplier/offerinfo")
+    public List<Offer> offerinfoForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
     	return service.getOfferInfo(userid,searchOffer);
     }
-    @RequestMapping(value = "/updateoffer")
+    @RequestMapping(value = "/operate/offerinfo")
+    public List<Offer> offerinfoForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    	return service.getOfferInfo(userid,searchOffer);
+    }
+    @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer) {
     	int c = service.updateOffer(offer);
     	String result="0";
     	if(c>0) result="1";
     	return result;
     }
-    @RequestMapping(value = "/offer")
+    @RequestMapping(value = "/supplier/offer")
     public String writeOffer(@RequestBody Offer offer) {
     	int c = service.writeOffer(offer);
     	String result="0";
