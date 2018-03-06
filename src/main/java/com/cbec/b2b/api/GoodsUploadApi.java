@@ -25,11 +25,11 @@ public class GoodsUploadApi {
     IGoodsUploadService service;
 
     @RequestMapping(value = "/supplier/uploadinfo")
-    public List<UploadInfo> uploadinfoForSupplier(@RequestHeader(value = "userid") String userid) {
+    public List<UploadInfo> uploadinfoOfSupplier(@RequestHeader(value = "userid") String userid) {
     	return service.getUploadInfo(userid);
     }
     @RequestMapping(value = "/operate/uploadinfo")
-    public List<UploadInfo> uploadinfoForOperate(@RequestHeader(value = "userid") String userid) {
+    public List<UploadInfo> uploadinfoOfOperate(@RequestHeader(value = "userid") String userid) {
     	return service.getUploadInfo(userid);
     }
     @RequestMapping(value = "/supplier/upload")
@@ -40,35 +40,35 @@ public class GoodsUploadApi {
     	return result;
     }
     @RequestMapping(value = "/supplier/delupload")
-    public String deleteUploadInfoForSupplier(@RequestBody UploadInfo uploadInfo) {
+    public String deleteUploadInfoOfSupplier(@RequestBody UploadInfo uploadInfo) {
     	int c = service.deleteUploadInfo(uploadInfo);
     	String result="0";
     	if(c>0) result="1";
     	return result;
     }
     @RequestMapping(value = "/operate/delupload")
-    public String deleteUploadInfoForOperate(@RequestBody UploadInfo uploadInfo) {
+    public String deleteUploadInfoOfOperate(@RequestBody UploadInfo uploadInfo) {
     	int c = service.deleteUploadInfo(uploadInfo);
     	String result="0";
     	if(c>0) result="1";
     	return result;
     }
     @RequestMapping(value = "/supplier/goodslist")
-    public PageInfo<Goods> getGoodsListForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<Goods> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/operate/goodslist")
-    public PageInfo<Goods> getGoodsListForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<Goods> getGoodsListOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/purchasers/goodslist")
-    public PageInfo<Goods> getGoodsListForPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<Goods> getGoodsListOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
@@ -82,11 +82,11 @@ public class GoodsUploadApi {
         return pageData;
     }
     @RequestMapping(value = "/supplier/offerinfo")
-    public List<Offer> offerinfoForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    public List<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
     	return service.getOfferInfo(userid,searchOffer);
     }
     @RequestMapping(value = "/operate/offerinfo")
-    public List<Offer> offerinfoForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    public List<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
     	return service.getOfferInfo(userid,searchOffer);
     }
     @RequestMapping(value = "/supplier/updateoffer")

@@ -19,8 +19,14 @@ public interface IPurchaseService {
 	String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String splitPurchase(SearchPurchaseGoods searchPurchaseGoods);
-	
+
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> goodsListOfOperate(String purchasesn);
 	Purchase getPurchaseOfOperate(String purchasesn);
+	/****************************************** 供应商部分 ***************************************/
+	List<PurchaseGoods> goodsListOfSupplier(String purchasesn);
+	Purchase getPurchaseOfSupplier(String purchasesn);
+	/****************************************** 采购商部分 ***************************************/
+	List<PurchaseGoods> goodsListOfPurchasers(String purchasesn);
+	Purchase getPurchaseOfPurchasers(String purchasesn);
 }

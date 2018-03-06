@@ -25,21 +25,7 @@ public class PurchaseController {
     @Autowired
     PurchaseApi api;
 
-    @RequestMapping(value = "/list")
-    public PageInfo<Purchase> PurchaseList(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
-		Util.responseResultSuccess(res);
-		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
-			String[] times = searchPurchaseList.getTimes() ;
-			for(int i=0;i<times.length;i++) {
-				if(i==0) {
-					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
-				}else {
-					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
-				}
-			}
-		}
-        return api.PurchaseList(searchPurchaseList);
-    }
+   
     @RequestMapping(value = "/goods")
     public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
@@ -162,6 +148,43 @@ public class PurchaseController {
     public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.goodsListOfOperate((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
+    }
+    
+    
+    
+    /****************************************** 供应商部分 ***************************************/
+    @RequestMapping(value = "/supplier/list")
+    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
+			String[] times = searchPurchaseList.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
+        return api.PurchaseListOfSupplier(searchPurchaseList);
+    }
+    
+    
+    /****************************************** 采购商部分 ***************************************/
+    @RequestMapping(value = "/purchasers/list")
+    public PageInfo<Purchase> PurchaseListOfPurchasers(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
+			String[] times = searchPurchaseList.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
+        return api.PurchaseListOfPurchasers(searchPurchaseList);
     }
 }
 

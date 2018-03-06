@@ -20,8 +20,14 @@ public interface PurchaseMapper {
 	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	int addInquiry(List<Inquiry> inquiryList);
-	
+
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfOperate(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfOperate(@Param("purchasesn") String purchasesn);
+	/****************************************** 供应商部分 ***************************************/
+	List<PurchaseGoods> listGoodsOfSupplier(@Param("purchasesn") String purchasesn);
+	Purchase getPurchaseBySnOfSupplier(@Param("purchasesn") String purchasesn);
+	/****************************************** 采购商部分 ***************************************/
+	List<PurchaseGoods> listGoodsOfPurchasers(@Param("purchasesn") String purchasesn);
+	Purchase getPurchaseBySnOfPurchasers(@Param("purchasesn") String purchasesn);
 }

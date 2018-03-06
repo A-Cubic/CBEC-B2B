@@ -117,7 +117,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 	}
 	
-	
+
 	
 	/****************************************** 客服部分 ***************************************/
 	@Override
@@ -127,5 +127,25 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	@Override
 	public Purchase getPurchaseOfOperate(String purchasesn) {
 		return mapper.getPurchaseBySnOfOperate(purchasesn);
+	}
+	
+	/****************************************** 供应商部分 ***************************************/
+	@Override
+	public List<PurchaseGoods> goodsListOfSupplier(String purchasesn) {
+		return mapper.listGoodsOfSupplier(purchasesn);
+	}
+	@Override
+	public Purchase getPurchaseOfSupplier(String purchasesn) {
+		return mapper.getPurchaseBySnOfSupplier(purchasesn);
+	}
+	
+	/****************************************** 采购商部分 ***************************************/
+	@Override
+	public List<PurchaseGoods> goodsListOfPurchasers(String purchasesn) {
+		return mapper.listGoodsOfPurchasers(purchasesn);
+	}
+	@Override
+	public Purchase getPurchaseOfPurchasers(String purchasesn) {
+		return mapper.getPurchaseBySnOfPurchasers(purchasesn);
 	}
 }

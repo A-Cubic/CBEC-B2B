@@ -2,6 +2,8 @@ package com.cbec.b2b.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
+import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -22,13 +25,6 @@ public class PurchaseApi {
     @Autowired
     IPurchaseService service;
 
-    @RequestMapping(value = "/purchaselist")
-    public PageInfo<Purchase> PurchaseList(@RequestBody SearchPurchaseList searchPurchaseList) {
-    	PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
-    	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
-    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
-        return pageData;
-    }
     @RequestMapping(value = "/purchasegoods")
     public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods) {
     	return service.PurchaseGoods(searchPurchaseGoods);
@@ -60,6 +56,7 @@ public class PurchaseApi {
     }
     
     /****************************************** 客服部分 ***************************************/
+    //获取采购单信息
     @RequestMapping(value = "/operate/list")
     public PageInfo<Purchase> listOfOperate(@RequestParam SearchPurchaseList search) {
     	PageHelper.startPage(search.getCurrent(),search.getPageSize());
@@ -67,13 +64,13 @@ public class PurchaseApi {
     	PageInfo<Purchase> pageData = new PageInfo<Purchase>(list);
         return pageData;
     }
-    
+    //获取采购单信息 从采购单号
     @RequestMapping(value = "/operate/info/details")
     public Purchase getPurchaseOfOperate(@RequestParam String purchasesn) {
         return service.getPurchaseOfOperate(purchasesn);
     }
     
-    
+    //获取采购单商品信息 从采购单号
     @RequestMapping(value = "/operate/goods")
     public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
     	PageHelper.startPage(current,pageSize);
@@ -81,6 +78,28 @@ public class PurchaseApi {
     	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
         return pageData;
     }
+
+    /****************************************** 供应商部分 ***************************************/
+    //获取采购单信息
+    @RequestMapping(value = "/supplier/list")
+    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestBody SearchPurchaseList searchPurchaseList) {
+    	PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
+    	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
+    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+        return pageData;
+    }
+    
+    
+    /****************************************** 采购商部分 ***************************************/
+    //获取采购单信息
+    @RequestMapping(value = "/purchasers/list")
+    public PageInfo<Purchase> PurchaseListOfPurchasers(@RequestBody SearchPurchaseList searchPurchaseList) {
+    	PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
+    	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
+    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+        return pageData;
+    }
+    
 }
 
 

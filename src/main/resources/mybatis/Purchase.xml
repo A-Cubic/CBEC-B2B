@@ -169,4 +169,44 @@
 		WHERE
 			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
 	</select>
+	
+	<select id="listGoodsOfSupplier" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
+		SELECT 
+			t.*
+		FROM 
+			t_purchase_goods t
+		WHERE 
+			t.purchasesn=#{purchasesn}  
+		ORDER BY 
+			t.goodsname desc
+	</select>
+	
+	<select id="getPurchaseBySnOfSupplier" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="java.lang.String">
+		SELECT 
+			t1.*,t2.typename as sendtypename
+		FROM 
+			t_purchase_list t1 ,t_base_sendtype t2
+		WHERE
+			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
+	</select>
+	
+	<select id="listGoodsOfPurchasers" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
+		SELECT 
+			t.*
+		FROM 
+			t_purchase_goods t
+		WHERE 
+			t.purchasesn=#{purchasesn}  
+		ORDER BY 
+			t.goodsname desc
+	</select>
+	
+	<select id="getPurchaseBySnOfPurchasers" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="java.lang.String">
+		SELECT 
+			t1.*,t2.typename as sendtypename
+		FROM 
+			t_purchase_list t1 ,t_base_sendtype t2
+		WHERE
+			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
+	</select>
 </mapper>

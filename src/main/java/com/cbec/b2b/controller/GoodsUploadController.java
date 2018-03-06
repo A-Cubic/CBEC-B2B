@@ -27,14 +27,14 @@ public class GoodsUploadController {
     GoodsUploadApi api;
 
     @RequestMapping(value = "/supplier/uploadinfo")
-    public List<UploadInfo> uploadinfoForSupplier(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+    public List<UploadInfo> uploadinfoOfSupplier(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.uploadinfoForSupplier(userid);
+        return api.uploadinfoOfSupplier(userid);
     }
     @RequestMapping(value = "/operate/uploadinfo")
     public List<UploadInfo> uploadinfo(@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.uploadinfoForOperate(userid);
+        return api.uploadinfoOfOperate(userid);
     }
     @RequestMapping(value = "/supplier/upload")
     public String writeUploadInfo(@RequestBody UploadInfo uploadInfo,HttpServletResponse res) {
@@ -42,29 +42,29 @@ public class GoodsUploadController {
         return api.writeUploadInfo(uploadInfo);
     }
     @RequestMapping(value = "/supplier/delupload")
-    public String deleteUploadInfoForSupplier(@RequestBody UploadInfo uploadInfo,HttpServletResponse res) {
+    public String deleteUploadInfoOfSupplier(@RequestBody UploadInfo uploadInfo,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.deleteUploadInfoForSupplier(uploadInfo);
+        return api.deleteUploadInfoOfSupplier(uploadInfo);
     } 
     @RequestMapping(value = "/operate/delupload")
-    public String deleteUploadInfoForOperate(@RequestBody UploadInfo uploadInfo,HttpServletResponse res) {
+    public String deleteUploadInfoOfOperate(@RequestBody UploadInfo uploadInfo,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.deleteUploadInfoForOperate(uploadInfo);
+        return api.deleteUploadInfoOfOperate(uploadInfo);
     } 
     @RequestMapping(value = "/supplier/list")
-    public PageInfo<Goods> goodslistForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<Goods> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.getGoodsListForSupplier(userid,searchGoods);
+    	return api.getGoodsListOfSupplier(userid,searchGoods);
     } 
     @RequestMapping(value = "/operate/list")
-    public PageInfo<Goods> goodslistForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<Goods> goodslistOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.getGoodsListForOperate(userid,searchGoods);
+    	return api.getGoodsListOfOperate(userid,searchGoods);
     } 
     @RequestMapping(value = "/purchasers/list")
-    public PageInfo<Goods> goodslistForPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<Goods> goodslistOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.getGoodsListForPurchasers(userid,searchGoods);
+    	return api.getGoodsListOfPurchasers(userid,searchGoods);
     } 
     @RequestMapping(value = "/supplier/b2blist")
     public PageInfo<Goods> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
@@ -72,14 +72,14 @@ public class GoodsUploadController {
     	return api.getB2BGoodsList(userid,searchGoods);
     } 
     @RequestMapping(value = "/supplier/offerinfo")
-    public List<Offer> offerinfoForSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
+    public List<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.offerinfoForSupplier(userid,searchOffer);
+    	return api.offerinfoOfSupplier(userid,searchOffer);
     }
     @RequestMapping(value = "/operate/offerinfo")
-    public List<Offer> offerinfoForOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
+    public List<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.offerinfoForOperate(userid,searchOffer);
+    	return api.offerinfoOfOperate(userid,searchOffer);
     }
     @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer,HttpServletResponse res ) {
