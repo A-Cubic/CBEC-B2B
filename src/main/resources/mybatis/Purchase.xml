@@ -76,6 +76,15 @@
 		     <if test="remark !=null and remark !=''" >  
 		       		remark=#{remark},
 		     </if> 
+		     <if test="waybillno !=null and waybillno !=''" >  
+		       		waybillno=#{waybillno},
+		     </if> 
+		     <if test="waybillremark !=null and waybillremark !=''" >  
+		       		waybillremark=#{waybillremark},
+		     </if> 
+		     <if test="waybillfee !=null and waybillfee !=''" >  
+		       		waybillfee=#{waybillfee},
+		     </if> 
 	   </set>  
 		 WHERE purchasesn=#{purchasesn}
 	</update>
