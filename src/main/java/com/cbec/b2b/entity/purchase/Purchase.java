@@ -18,6 +18,9 @@ public class Purchase {
 	private String address;   //目的地
 	private String deliverytime;   //纳期
 	private String currency;   //币种
+	private String waybillno;   //关联运单号
+	private String waybillremark;   //运单备注
+	private String waybillfee;   //运费
 	private String createtime;   //建立时间
 	private String remark;   //备注
 }

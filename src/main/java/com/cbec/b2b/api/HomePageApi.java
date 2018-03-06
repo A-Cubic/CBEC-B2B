@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
-import com.cbec.b2b.entity.Catelog.Brand;
-import com.cbec.b2b.entity.Catelog.CateOne;
-import com.cbec.b2b.entity.Catelog.CateTWO;
-import com.cbec.b2b.entity.Catelog.CateThree;
-import com.cbec.b2b.entity.Catelog.CateType;
-import com.cbec.b2b.entity.Catelog.CateType2;
 import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.AdverType;
