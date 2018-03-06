@@ -96,7 +96,7 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
     	return api.sendType();
     }
-    
+     
 }
 
 
