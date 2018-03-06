@@ -20,5 +20,6 @@ public interface IGoodsUploadService {
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
+	List<Goods> getB2BGoodsList(SearchGoods searchGoods);
 	List<SendType> getSendType();
 }

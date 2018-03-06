@@ -12,6 +12,7 @@ public interface GoodsUploadMapper {
 	int writeUploadInfo(UploadInfo uploadInfo);
 	int deleteUploadInfo(UploadInfo uploadInfo);
 	List<Offer> getOfferInfo(SearchOffer searchOffer);
+	List<Offer> getOfferInfoByGoodsId(String goodsid);
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 }

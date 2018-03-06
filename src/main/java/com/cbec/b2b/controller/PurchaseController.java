@@ -1,6 +1,7 @@
 package com.cbec.b2b.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,15 +46,21 @@ public class PurchaseController {
         return api.PurchaseGoods(searchPurchaseGoods);
     }
     @RequestMapping(value = "/add")
-    public String addPurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
+    public MsgResponse addPurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.addPurchase(purchase);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.addPurchase(purchase));
+    	response.setType("1");
+        return response;
     }
 
     @RequestMapping(value = "/update")
-    public String updatePurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
+    public MsgResponse updatePurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-    	return api.updatePurchase(purchase);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.updatePurchase(purchase));
+    	response.setType("1");
+    	return response;
     }
     @RequestMapping(value = "/goods/add")
     public MsgResponse addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
@@ -91,16 +98,64 @@ public class PurchaseController {
 		return response;
     }
     @RequestMapping(value = "/goods/update")
-    public String updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
-    	return api.updatePurchaseGoods(purchaseGoodsList);
+    public MsgResponse updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.updatePurchaseGoods(purchaseGoodsList));
+    	response.setType("1");
+    	return response;
     }
     @RequestMapping(value = "/goods/del")
-    public String delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
-    	return api.delPurchaseGoods(purchaseGoodsList);
+    public MsgResponse delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.delPurchaseGoods(purchaseGoodsList));
+    	response.setType("1");
+    	return response;
     }
     @RequestMapping(value = "/split")
-    public String splitPurchase(@RequestBody String purchaseId,HttpServletResponse res) {
-    	return api.splitPurchase(purchaseId);
+    public MsgResponse splitPurchase(@RequestBody SearchPurchaseGoods searchPurchaseGoods,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
+		if(searchPurchaseGoods.getPurchasesn()=="") {
+			response.setMsg("没有采购单号！");
+			return response;
+		}else {
+			String st = api.splitPurchase(searchPurchaseGoods);
+			if(st != "提交完成") {
+				response.setMsg(st);
+				return response;
+			}else {
+				response.setMsg(st);
+		    	response.setType("1");
+		    	return response;
+			}
+			
+		}
+    	
+    }
+    
+    /****************************************** 客服部分 ***************************************/
+    @RequestMapping(value = "/operate/list")
+    public PageInfo<Purchase> listOfOperate(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
+			String[] times = searchPurchaseList.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchPurchaseList.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchPurchaseList.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
+        return api.listOfOperate(searchPurchaseList);
+    }
+    
+    @RequestMapping(value = "/operate/goods")
+    public PageInfo<PurchaseGoods> goodsListOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.goodsListOfOperate((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
     }
 }
 

@@ -39,6 +39,12 @@
 		 WHERE t1.purchasesn = t2.purchasesn and t1.userCode=#{userCode} and t1.purchasesn =#{purchasesn}  
 		 ORDER BY id desc
 	</select>
+	<select id="getPurchaseGoodsToInquiry"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods">
+		SELECT t2.*
+		  FROM t_purchase_list t1 ,t_purchase_goods t2
+		 WHERE t1.purchasesn = t2.purchasesn and stage='9'  and t1.purchasesn =#{purchasesn}  
+		 ORDER BY id desc
+	</select>
 	<insert id="addPurchase"  parameterType="com.cbec.b2b.entity.purchase.Purchase">  
         insert into t_purchase_list(purchasesn,usercode,stage,status,goodsnames,sendtype,address,deliverytime,currency,createtime,remark) 
         values (#{purchasesn},#{userCode},#{stage},#{status},#{goodsnames},#{sendtype},#{address},#{deliverytime},#{currency},now(),#{remark})
@@ -125,4 +131,24 @@
 	        </foreach>
         )
 	</delete>
+
+	<insert id="addInquiry"  parameterType="java.util.List">  
+        insert into t_purchase_inquiry(purchasesn,usercode,goodsid,goodsname,barcode,price,flag,createtime,remark) 
+        values 
+        <foreach collection="list" item="item" index="index" separator="," > 
+       		(#{item.purchasesn},#{item.usercode},#{item.goodsid},#{item.goodsname},#{item.barcode},#{item.price},#{item.flag},now(),#{item.remark})
+        </foreach>
+	</insert>
+	
+	
+	<select id="listGoodsOfOperate" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
+		SELECT 
+			t.*
+		FROM 
+			t_purchase_goods t
+		WHERE 
+			t.purchasesn=#{purchasesn}  
+		ORDER BY 
+			t.goodsname desc
+	</select>
 </mapper>

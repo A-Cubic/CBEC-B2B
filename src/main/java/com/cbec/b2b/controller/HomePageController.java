@@ -37,6 +37,10 @@ public class HomePageController {
     public PageInfo<Goods> goodslist(@RequestBody SearchGoods searchGoods ) {
     	return api.getGoodsList(searchGoods);
     }
+    @RequestMapping(value = "/B2BGoodsList")
+    public PageInfo<Goods> b2bGoodslist(@RequestBody SearchGoods searchGoods ) {
+    	return api.getB2BGoodsList(searchGoods);
+    }
     @RequestMapping(value = "/Goods")
     public GoodsInfo goods(@RequestBody SearchGoods2 searchGoods) {
     	return api.getGoods(searchGoods.getGoodsId());
