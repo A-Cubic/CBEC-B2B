@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
-import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.MsgResponse;
+
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -78,6 +79,12 @@ public class PurchaseApi {
     	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
         return pageData;
     }
+    
+    @RequestMapping(value = "/operate/update/fee")
+    public MsgResponse updateFeeOfOperate(@RequestParam String purchasesn,@RequestParam String fee) {
+        return service.updateFeeOfOperate(purchasesn,fee);
+    }
+
 
     /****************************************** 供应商部分 ***************************************/
     //获取采购单信息

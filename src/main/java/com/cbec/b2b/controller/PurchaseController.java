@@ -150,7 +150,12 @@ public class PurchaseController {
         return api.goodsListOfOperate((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
     }
     
-    
+    @RequestMapping(value = "/operate/update/fee")
+    public MsgResponse updateFeeOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.updateFeeOfOperate((String)request.get("purchasesn"),(String)request.get("waybillfeeValue"));
+    }
+
     
     /****************************************** 供应商部分 ***************************************/
     @RequestMapping(value = "/supplier/list")

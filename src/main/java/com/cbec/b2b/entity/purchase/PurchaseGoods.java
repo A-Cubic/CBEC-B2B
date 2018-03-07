@@ -18,5 +18,6 @@ public class PurchaseGoods {
 	private String costprice;   //成本价
 	private String otherprice;   //其他费用
 	private String supplierid;   //供货商ID
+	private String sum;
 
 }

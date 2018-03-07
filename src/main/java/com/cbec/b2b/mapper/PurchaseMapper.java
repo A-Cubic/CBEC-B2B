@@ -24,6 +24,9 @@ public interface PurchaseMapper {
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfOperate(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfOperate(@Param("purchasesn") String purchasesn);
+
+	int updateFeeOfOperate(@Param("purchasesn") String purchasesn,@Param("fee") String fee);
+
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfSupplier(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfSupplier(@Param("purchasesn") String purchasesn);

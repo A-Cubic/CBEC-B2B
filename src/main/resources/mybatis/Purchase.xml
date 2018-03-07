@@ -152,13 +152,22 @@
 	
 	<select id="listGoodsOfOperate" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
 		SELECT 
-			t.*
+			t1.*,t2.sum
 		FROM 
-			t_purchase_goods t
+			t_purchase_goods t1
+		LEFT JOIN
+			( SELECT t.purchasesn,
+					SUM(t.realprice) sum
+				FROM 
+					t_purchase_goods t
+				WHERE 
+					t.purchasesn=#{purchasesn}) t2
+		ON
+		t1.purchasesn=t2.purchasesn
 		WHERE 
-			t.purchasesn=#{purchasesn}  
+			t1.purchasesn=#{purchasesn}  
 		ORDER BY 
-			t.goodsname desc
+			t1.goodsname desc
 	</select>
 	
 	<select id="getPurchaseBySnOfOperate" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="java.lang.String">
@@ -169,6 +178,15 @@
 		WHERE
 			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
 	</select>
+	
+	<update id="updateFeeOfOperate" parameterType="java.lang.String">  
+        UPDATE 
+			t_purchase_list t
+		SET 
+			t.waybillfee=#{fee}
+		WHERE
+			t.purchasesn=#{purchasesn}
+	</update>
 	
 	<select id="listGoodsOfSupplier" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
 		SELECT 
@@ -209,4 +227,5 @@
 		WHERE
 			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
 	</select>
+	
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -23,6 +24,9 @@ public interface IPurchaseService {
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> goodsListOfOperate(String purchasesn);
 	Purchase getPurchaseOfOperate(String purchasesn);
+
+	MsgResponse updateFeeOfOperate(String purchasesn,String fee);
+
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> goodsListOfSupplier(String purchasesn);
 	Purchase getPurchaseOfSupplier(String purchasesn);

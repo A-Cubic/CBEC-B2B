@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
@@ -127,6 +128,21 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	@Override
 	public Purchase getPurchaseOfOperate(String purchasesn) {
 		return mapper.getPurchaseBySnOfOperate(purchasesn);
+	}
+
+	@Override
+	public MsgResponse updateFeeOfOperate(String purchasesn,String fee) {
+		int num = mapper.updateFeeOfOperate(purchasesn,fee);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num>0) {
+			response.setType("1");
+			result="保存运费成功";
+		}else {
+			result="保存运费失败";
+		}
+		response.setMsg(result);
+		return response;
 	}
 	
 	/****************************************** 供应商部分 ***************************************/
