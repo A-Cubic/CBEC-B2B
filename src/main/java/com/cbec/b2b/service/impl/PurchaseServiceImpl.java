@@ -145,6 +145,21 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return response;
 	}
 	
+	@Override
+	public MsgResponse updatePriceOfOperate(String id, String price) {
+		int num = mapper.updatePriceOfOperate(id,price);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num>0) {
+			response.setType("1");
+			result="改价成功";
+		}else {
+			result="改价失败";
+		}
+		response.setMsg(result);
+		return response;
+	}
+	
 	/****************************************** 供应商部分 ***************************************/
 	@Override
 	public List<PurchaseGoods> goodsListOfSupplier(String purchasesn) {
@@ -164,4 +179,5 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Purchase getPurchaseOfPurchasers(String purchasesn) {
 		return mapper.getPurchaseBySnOfPurchasers(purchasesn);
 	}
+	
 }

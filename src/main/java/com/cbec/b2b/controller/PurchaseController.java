@@ -155,6 +155,12 @@ public class PurchaseController {
 		Util.responseResultSuccess(res);
         return api.updateFeeOfOperate((String)request.get("purchasesn"),(String)request.get("waybillfeeValue"));
     }
+    
+    @RequestMapping(value = "/operate/update/price")
+    public MsgResponse updatePriceOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.updatePriceOfOperate((String)request.get("id"),(String)request.get("realprice"));
+    }
 
     
     /****************************************** 供应商部分 ***************************************/

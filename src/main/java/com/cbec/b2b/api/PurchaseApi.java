@@ -2,8 +2,6 @@ package com.cbec.b2b.api;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.MsgResponse;
-
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -84,6 +81,13 @@ public class PurchaseApi {
     public MsgResponse updateFeeOfOperate(@RequestParam String purchasesn,@RequestParam String fee) {
         return service.updateFeeOfOperate(purchasesn,fee);
     }
+    
+    @RequestMapping(value = "/operate/update/price")
+    public MsgResponse updatePriceOfOperate(@RequestParam String id,@RequestParam String price) {
+        return service.updatePriceOfOperate(id,price);
+    }
+    
+    
 
 
     /****************************************** 供应商部分 ***************************************/

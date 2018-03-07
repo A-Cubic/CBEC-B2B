@@ -188,6 +188,15 @@
 			t.purchasesn=#{purchasesn}
 	</update>
 	
+	<update id="updatePriceOfOperate" parameterType="java.lang.String">  
+        UPDATE 
+			t_purchase_goods t
+		SET 
+			t.realprice=#{price}
+		WHERE
+			t.id=#{id}
+	</update>
+	
 	<select id="listGoodsOfSupplier" resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="java.lang.String">
 		SELECT 
 			t.*
