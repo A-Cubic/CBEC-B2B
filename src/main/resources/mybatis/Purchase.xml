@@ -252,7 +252,7 @@
 			CONCAT(t.flag,t.createtime) DESC
 	</select>
 	
-	<update id="updateSupplyOfOperate" parameterType="java.lang.String">  
+	<update id="updateSupplyFlagOfOperate" parameterType="java.lang.String">  
         UPDATE 
 			t_purchase_inquiry t
 		SET 
