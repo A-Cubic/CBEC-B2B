@@ -9,5 +9,7 @@ public class SearchOffer {
 	private String userName;
 	private String barcode;
 	private String goodsName;
+	int current;//多少页
+	int pageSize;//页面显示多少个商品
 
 }

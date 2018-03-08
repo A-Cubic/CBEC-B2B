@@ -82,12 +82,18 @@ public class GoodsUploadApi {
         return pageData;
     }
     @RequestMapping(value = "/supplier/offerinfo")
-    public List<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
-    	return service.getOfferInfo(userid,searchOffer);
+    public PageInfo<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    	PageHelper.startPage(searchOffer.getCurrent(),searchOffer.getPageSize());
+    	List<Offer> LOffer = service.getOfferInfo(userid,searchOffer);
+    	PageInfo<Offer> pageData = new PageInfo<Offer>(LOffer);
+        return pageData;
     }
     @RequestMapping(value = "/operate/offerinfo")
-    public List<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
-    	return service.getOfferInfo(userid,searchOffer);
+    public PageInfo<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    	PageHelper.startPage(searchOffer.getCurrent(),searchOffer.getPageSize());
+    	List<Offer> LOffer = service.getOfferInfo(userid,searchOffer);
+    	PageInfo<Offer> pageData = new PageInfo<Offer>(LOffer);
+        return pageData;
     }
     @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer) {
