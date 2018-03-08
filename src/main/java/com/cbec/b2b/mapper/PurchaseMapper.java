@@ -26,10 +26,13 @@ public interface PurchaseMapper {
 	Purchase getPurchaseBySnOfOperate(@Param("purchasesn") String purchasesn);
 	int updateFeeOfOperate(@Param("purchasesn") String purchasesn,@Param("fee") String fee);
 	int updatePriceOfOperate(@Param("id") String id,@Param("price") String price);
+	List<Inquiry> supplyListOfOperate(@Param("purchasesn") String purchasesn,@Param("goodsid") String goodsid);
+	int updateSupplyFlagOfOperate(@Param("id") String id,@Param("flag") String flag);
 
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfSupplier(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfSupplier(@Param("purchasesn") String purchasesn);
+	
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfPurchasers(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfPurchasers(@Param("purchasesn") String purchasesn);

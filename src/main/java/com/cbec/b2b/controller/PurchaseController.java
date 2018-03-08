@@ -14,6 +14,7 @@ import com.cbec.b2b.api.PurchaseApi;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -160,6 +161,18 @@ public class PurchaseController {
     public MsgResponse updatePriceOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.updatePriceOfOperate((String)request.get("id"),(String)request.get("realprice"));
+    }
+    
+    @RequestMapping(value = "/operate/supply/list")
+    public List<Inquiry> supplyListOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.supplyListOfOperate((String)request.get("purchasesn"),(String)request.get("goodsid"));
+    }
+    
+    @RequestMapping(value = "/operate/supply/flag")
+    public MsgResponse updateSupplyFlagOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.updateSupplyFlagOfOperate((String)request.get("id"),(String)request.get("flag"));
     }
 
     

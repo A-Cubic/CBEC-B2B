@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -87,7 +88,15 @@ public class PurchaseApi {
         return service.updatePriceOfOperate(id,price);
     }
     
+    @RequestMapping(value = "/operate/supply/list")
+    public List<Inquiry> supplyListOfOperate(@RequestParam String purchasesn,@RequestParam String goodsid) {
+    	return service.supplyListOfOperate(purchasesn,goodsid);
+    }
     
+    @RequestMapping(value = "/operate/supply/flag")
+    public MsgResponse updateSupplyFlagOfOperate(@RequestParam String id,@RequestParam String flag) {
+        return service.updateSupplyFlagOfOperate(id,flag);
+    }
 
 
     /****************************************** 供应商部分 ***************************************/

@@ -14,10 +14,12 @@
                  and t1.purchasesn like concat('%',#{purchasesn},'%')
             </if> 
             <if test="timeBegin !=null and timeBegin !=''">  
-                 and date_format(t1.createtime,'%Y%m%d') &gt; #{timeBegin}
+<!--                  and date_format(t1.createtime,'%Y%m%d') &gt; #{timeBegin} -->
+                 and t1.createtime <![CDATA[ > ]]> #{timeBegin}
             </if> 
             <if test="timeEnd !=null and timeEnd !=''">  
-                 and date_format(t1.createtime,'%Y%m%d') &lt; #{timeEnd}
+<!--                  and date_format(t1.createtime,'%Y%m%d') &lt; #{timeEnd} -->
+                  and t1.createtime <![CDATA[ < ]]> #{timeEnd}
             </if> 
             <if test="stage !=null and stage !=''">  
                  and t1.stage = #{stage} 
@@ -237,4 +239,25 @@
 			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
 	</select>
 	
+	<select id="supplyListOfOperate" resultType="com.cbec.b2b.entity.purchase.Inquiry" parameterType="java.lang.String">
+		SELECT 
+			* 
+		FROM 
+			t_purchase_inquiry t 
+		WHERE 
+			t.flag in ('1','2') 
+			AND t.goodsid=#{goodsid} 
+			AND t.purchasesn=#{purchasesn} 
+		ORDER BY 
+			CONCAT(t.flag,t.createtime) DESC
+	</select>
+	
+	<update id="updateSupplyOfOperate" parameterType="java.lang.String">  
+        UPDATE 
+			t_purchase_inquiry t
+		SET 
+			t.flag=#{flag}
+		WHERE
+			t.id=#{id}
+	</update>
 </mapper>

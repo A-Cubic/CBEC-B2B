@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
@@ -26,6 +27,8 @@ public interface IPurchaseService {
 	Purchase getPurchaseOfOperate(String purchasesn);
 	MsgResponse updateFeeOfOperate(String purchasesn,String fee);
 	MsgResponse updatePriceOfOperate(String id,String price);
+	List<Inquiry> supplyListOfOperate(String purchasesn,String goodsid);
+	MsgResponse updateSupplyFlagOfOperate(String id,String flag);
 	
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> goodsListOfSupplier(String purchasesn);

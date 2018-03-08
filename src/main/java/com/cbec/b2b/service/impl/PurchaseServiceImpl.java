@@ -33,10 +33,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList) {
 		return mapper.getPurchaseList(searchPurchaseList);
 	}
+	
 	@Override
 	public List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods) {
 		return mapper.getPurchaseGoods(searchPurchaseGoods);
 	}
+	
 	@Override
 	public String  addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
@@ -47,15 +49,18 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			return "ERROR:发生错误";
 		}
 	}
+	
 	private String getDate() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");//设置日期格式
 		return df.format(new Date());// new Date()为获取当前系统时间
 	}
+	
 	@Override
 	public String updatePurchase(Purchase purchase) {
 		// TODO Auto-generated method stub
 		return String.valueOf(mapper.updatePurchase(purchase));
 	}
+	
 	@Override
 	public String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
 //		int c = 0;
@@ -64,6 +69,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 //		}
 		return String.valueOf(mapper.addPurchaseGoods(purchaseGoodsList));
 	}
+	
 	@Override
 	public String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
 		int c = 0;
@@ -72,10 +78,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 		return String.valueOf(c);
 	}
+	
 	@Override
 	public String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
 		return String.valueOf(mapper.delPurchaseGoods(purchaseGoodsList));
 	}
+	
 	@Override
 	public String splitPurchase(SearchPurchaseGoods searchPurchaseGoods) {
 		List<PurchaseGoods> pGoodsList = mapper.getPurchaseGoodsToInquiry(searchPurchaseGoods.getPurchasesn());
@@ -119,12 +127,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	}
 	
 
-	
 	/****************************************** 客服部分 ***************************************/
 	@Override
 	public List<PurchaseGoods> goodsListOfOperate(String purchasesn) {
 		return mapper.listGoodsOfOperate(purchasesn);
 	}
+	
 	@Override
 	public Purchase getPurchaseOfOperate(String purchasesn) {
 		return mapper.getPurchaseBySnOfOperate(purchasesn);
@@ -135,7 +143,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		int num = mapper.updateFeeOfOperate(purchasesn,fee);
 		MsgResponse response = new MsgResponse();
 		String result = "";
-		if(num>0) {
+		if(num > 0) {
 			response.setType("1");
 			result="保存运费成功";
 		}else {
@@ -150,11 +158,31 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		int num = mapper.updatePriceOfOperate(id,price);
 		MsgResponse response = new MsgResponse();
 		String result = "";
-		if(num>0) {
+		if(num > 0) {
 			response.setType("1");
 			result="改价成功";
 		}else {
 			result="改价失败";
+		}
+		response.setMsg(result);
+		return response;
+	}
+	
+	@Override
+	public List<Inquiry> supplyListOfOperate(String purchasesn,String goodsid) {
+		return mapper.supplyListOfOperate(purchasesn,goodsid);
+	}
+	
+	@Override
+	public MsgResponse updateSupplyFlagOfOperate(String id, String flag) {
+		int num = mapper.updateSupplyFlagOfOperate(id,flag);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num > 0) {
+			response.setType("1");
+			result="选定供应商成功";
+		}else {
+			result="选定供应商失败";
 		}
 		response.setMsg(result);
 		return response;
@@ -165,6 +193,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<PurchaseGoods> goodsListOfSupplier(String purchasesn) {
 		return mapper.listGoodsOfSupplier(purchasesn);
 	}
+	
 	@Override
 	public Purchase getPurchaseOfSupplier(String purchasesn) {
 		return mapper.getPurchaseBySnOfSupplier(purchasesn);
@@ -175,9 +204,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<PurchaseGoods> goodsListOfPurchasers(String purchasesn) {
 		return mapper.listGoodsOfPurchasers(purchasesn);
 	}
+	
 	@Override
 	public Purchase getPurchaseOfPurchasers(String purchasesn) {
 		return mapper.getPurchaseBySnOfPurchasers(purchasesn);
 	}
+
 	
 }
