@@ -210,6 +210,12 @@ public class PurchaseController {
 		}
         return api.PurchaseListOfPurchasers(searchPurchaseList);
     }
+    
+    @RequestMapping(value = "/purchasers/goods")
+    public PageInfo<PurchaseGoods> goodsListOfPurchasers(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.goodsListOfPurchasers((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
+    }
 }
 
 

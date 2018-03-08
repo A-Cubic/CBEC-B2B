@@ -120,6 +120,15 @@ public class PurchaseApi {
         return pageData;
     }
     
+    //获取采购单商品信息 从采购单号
+    @RequestMapping(value = "/operate/goods")
+    public PageInfo<PurchaseGoods> goodsListOfPurchasers(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
+    	PageHelper.startPage(current,pageSize);
+    	List<PurchaseGoods> list = service.goodsListOfOperate(purchasesn);
+    	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
+        return pageData;
+    }
+    
 }
 
 
