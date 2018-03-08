@@ -72,12 +72,12 @@ public class GoodsUploadController {
     	return api.getB2BGoodsList(userid,searchGoods);
     } 
     @RequestMapping(value = "/supplier/offerinfo")
-    public List<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
+    public PageInfo<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.offerinfoOfSupplier(userid,searchOffer);
     }
     @RequestMapping(value = "/operate/offerinfo")
-    public List<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
+    public PageInfo<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.offerinfoOfOperate(userid,searchOffer);
     }
