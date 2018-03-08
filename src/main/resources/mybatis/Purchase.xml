@@ -239,17 +239,18 @@
 			t1.sendtype = t2.id AND t1.purchasesn=#{purchasesn}
 	</select>
 	
-	<select id="supplyListOfOperate" resultType="com.cbec.b2b.entity.purchase.Inquiry" parameterType="java.lang.String">
+	<select id="supplyListOfOperate" resultType="com.cbec.b2b.entity.purchase.Inquiry" parameterType="java.lang.String">		
 		SELECT 
-			* 
+			t1.*,t2.company
 		FROM 
-			t_purchase_inquiry t 
+			t_purchase_inquiry t1,t_user_list t2 
 		WHERE 
-			t.flag in ('1','2') 
-			AND t.goodsid=#{goodsid} 
-			AND t.purchasesn=#{purchasesn} 
+			t1.usercode=t2.usercode
+			AND t1.flag in ('1','2') 
+			AND t1.goodsid=#{goodsid} 
+			AND t1.purchasesn=#{purchasesn}  
 		ORDER BY 
-			CONCAT(t.flag,t.createtime) DESC
+			CONCAT(t1.flag,t1.createtime) DESC
 	</select>
 	
 	<update id="updateSupplyFlagOfOperate" parameterType="java.lang.String">  

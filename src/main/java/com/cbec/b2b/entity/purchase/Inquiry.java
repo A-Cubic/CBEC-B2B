@@ -16,5 +16,6 @@ public class Inquiry {
 	private String flag;//状态
 	private String remark;//备注
 	private String createtime;//建立时间
+	private String company;
 
 }
