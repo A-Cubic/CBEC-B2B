@@ -50,8 +50,7 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	}
 
 	@Override
-	public List<Offer> getOfferInfo(String userCode, SearchOffer searchOffer) {
-		
+	public List<Offer> getOfferInfo(SearchOffer searchOffer) {
 		return mapper.getOfferInfo(searchOffer);
 	}
 
@@ -81,5 +80,17 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	public List<SendType> getSendType() {
 		// TODO Auto-generated method stub
 		return publicmapper.getSendType();
+	}
+
+	@Override
+	public SearchOffer getSearchOffer(String userCode, SearchOffer searchOffer) {
+		Map<String,Object> userMap = usermapper.getUserType(userCode);
+		String type  = (String)userMap.get("usertype");
+		if("0".equals(type)) {
+			searchOffer.setUserCode("");
+		}else {
+			searchOffer.setUserCode(userCode);
+		}
+		return searchOffer;
 	}
 }

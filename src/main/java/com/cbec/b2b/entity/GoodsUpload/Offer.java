@@ -14,5 +14,4 @@ public class Offer {
 	private double offer;
 	private String remark;
 	private String flag;
-
 }

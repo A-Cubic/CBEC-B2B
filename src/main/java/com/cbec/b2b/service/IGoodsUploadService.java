@@ -16,10 +16,11 @@ public interface IGoodsUploadService {
 	List<UploadInfo> getUploadInfo(String userCode);
 	int writeUploadInfo(UploadInfo uploadInfo);
 	int deleteUploadInfo(UploadInfo uploadInfo);
-	List<Offer> getOfferInfo(String userCode, SearchOffer searchOffer);
+	List<Offer> getOfferInfo(SearchOffer searchOffer);
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
 	List<Goods> getB2BGoodsList(SearchGoods searchGoods);
 	List<SendType> getSendType();
+	SearchOffer getSearchOffer(String userCode, SearchOffer searchOffer);
 }

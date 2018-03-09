@@ -16,6 +16,7 @@ import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.service.IGoodsUploadService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 @RestController
@@ -83,15 +84,17 @@ public class GoodsUploadApi {
     }
     @RequestMapping(value = "/supplier/offerinfo")
     public PageInfo<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    	searchOffer = service.getSearchOffer(userid, searchOffer);
     	PageHelper.startPage(searchOffer.getCurrent(),searchOffer.getPageSize());
-    	List<Offer> LOffer = service.getOfferInfo(userid,searchOffer);
+    	List<Offer> LOffer = service.getOfferInfo(searchOffer);
     	PageInfo<Offer> pageData = new PageInfo<Offer>(LOffer);
         return pageData;
     }
     @RequestMapping(value = "/operate/offerinfo")
     public PageInfo<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
+    	searchOffer = service.getSearchOffer(userid, searchOffer);
     	PageHelper.startPage(searchOffer.getCurrent(),searchOffer.getPageSize());
-    	List<Offer> LOffer = service.getOfferInfo(userid,searchOffer);
+    	List<Offer> LOffer = service.getOfferInfo(searchOffer);
     	PageInfo<Offer> pageData = new PageInfo<Offer>(LOffer);
         return pageData;
     }
