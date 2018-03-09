@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,8 @@ import com.cbec.b2b.api.PurchaseApi;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.ChatRequest;
+import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -23,10 +26,25 @@ import com.cbec.b2b.entity.purchase.SearchPurchaseList;
 @RestController
 @RequestMapping(value = "/llback/purchase")
 public class PurchaseController {
+	
     @Autowired
     PurchaseApi api;
 
-   
+    @RequestMapping(value = "/chat/list")
+    public List<ChatResponse> listChat(@RequestBody ChatRequest request,@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		request.setSender(userid);
+        return api.listChat(request);
+    }
+    
+    @RequestMapping(value = "/chat/send")
+    public MsgResponse sendChat(@RequestBody ChatRequest request,@RequestHeader(value = "userid") String userid,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		request.setSender(userid);
+		request.setId(Util.createUuid());;
+        return api.sendChat(request);
+    }
+    
     @RequestMapping(value = "/goods")
     public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods,HttpServletResponse res) {
 		Util.responseResultSuccess(res);

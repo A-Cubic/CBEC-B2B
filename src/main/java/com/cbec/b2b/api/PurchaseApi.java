@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.ChatRequest;
+import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -24,6 +26,16 @@ public class PurchaseApi {
     @Autowired
     IPurchaseService service;
 
+    @RequestMapping(value = "/chat/list")
+    public List<ChatResponse> listChat(@RequestParam ChatRequest request) {
+        return service.listChat(request);
+    }
+    
+    @RequestMapping(value = "/chat/send")
+    public MsgResponse sendChat(@RequestParam ChatRequest request) {
+        return service.sendChat(request);
+    }
+    
     @RequestMapping(value = "/purchasegoods")
     public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods) {
     	return service.PurchaseGoods(searchPurchaseGoods);

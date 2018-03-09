@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.MsgResponse;
+import com.cbec.b2b.entity.purchase.ChatRequest;
+import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -13,6 +15,9 @@ import com.cbec.b2b.entity.purchase.SearchPurchaseList;
 
 @Service
 public interface IPurchaseService {
+	List<ChatResponse> listChat(ChatRequest request);
+	MsgResponse sendChat(ChatRequest request);
+	
 	List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList);
 	List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
 	String addPurchase(Purchase purchase);

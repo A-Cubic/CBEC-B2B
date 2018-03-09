@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.cbec.b2b.entity.purchase.ChatRequest;
+import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -11,6 +13,9 @@ import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseList;
 
 public interface PurchaseMapper {
+	int insertChat(ChatRequest bean);
+	List<ChatResponse> getChatList(ChatRequest bean);
+	
 	List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList);
 	List<PurchaseGoods> getPurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
 	List<PurchaseGoods> getPurchaseGoodsToInquiry(String purchasesn);

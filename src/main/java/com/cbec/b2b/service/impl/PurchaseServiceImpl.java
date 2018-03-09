@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
+import com.cbec.b2b.entity.purchase.ChatRequest;
+import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
@@ -29,6 +31,27 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	PublicMapper publicmapper;
 	@Autowired 
 	GoodsUploadMapper goodsUploadMapper;
+	
+	@Override
+	public List<ChatResponse> listChat(ChatRequest request) {
+		return mapper.getChatList(request);
+	}
+
+	@Override
+	public MsgResponse sendChat(ChatRequest request) {
+		int num = mapper.insertChat(request);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num > 0) {
+			response.setType("1");
+			result="消息发送成功";
+		}else {
+			result="消息发送失败";
+		}
+		response.setMsg(result);
+		return response;
+	}
+	
 	@Override
 	public List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList) {
 		return mapper.getPurchaseList(searchPurchaseList);
@@ -179,10 +202,18 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		MsgResponse response = new MsgResponse();
 		String result = "";
 		if(num > 0) {
+			if("1".equals(flag)) {
+				result="解除成功";
+			}else {
+				result="敲定成功";
+			}
 			response.setType("1");
-			result="选定供应商成功";
 		}else {
-			result="选定供应商失败";
+			if("1".equals(flag)) {
+				result="解除失败";
+			}else {
+				result="敲定失败";
+			}
 		}
 		response.setMsg(result);
 		return response;

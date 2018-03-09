@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cbec.b2b.mapper.PurchaseMapper">
+
+	<insert id="insertChat" parameterType="com.cbec.b2b.entity.purchase.ChatRequest">  
+        INSERT INTO t_purchase_inquiry_chat (id,sender,purchasesn,inquiry_id,content) 
+        VALUES (#{id},#{sender},#{purchasesn},#{inquiry_id},#{content}) 
+	</insert>
+	
+	<select id="getChatList" resultType="com.cbec.b2b.entity.purchase.ChatResponse" parameterType="com.cbec.b2b.entity.purchase.ChatRequest">
+		SELECT
+			t1.*,t2.avatar
+		FROM
+			t_purchase_inquiry_chat t1,t_user_list t2
+		WHERE
+			t1.sender=t2.usercode
+			and t1.purchasesn=#{purchasesn}
+			<if test="inquiry_id !=null and inquiry_id !=''">  
+                and t1.inquiry_id=#{inquiry_id}
+            </if> 
+            <if test="inquiry_id ==null or inquiry_id ==''">  
+                and t1.inquiry_id is null 
+            </if> 
+		ORDER BY
+			t1.createtime DESC
+	</select>
 	
 	<select id="getPurchaseList" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseList">
 		SELECT t1.*,t2.typename as sendtypename
