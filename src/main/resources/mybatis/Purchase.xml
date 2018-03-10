@@ -22,7 +22,7 @@
                 and t1.inquiry_id is null 
             </if> 
 		ORDER BY
-			t1.createtime DESC
+			t1.createtime asc
 	</select>
 	
 	<select id="getPurchaseList" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseList">
