@@ -86,6 +86,11 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
     	return api.updateOffer(offer);
     }
+    @RequestMapping(value = "/supplier/updateofferflag")
+    public String updateOfferFlag(@RequestBody Offer offer,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.updateOfferFlag(offer);
+    }
     @RequestMapping(value = "/supplier/offer")
     public String offer(@RequestBody Offer offer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);

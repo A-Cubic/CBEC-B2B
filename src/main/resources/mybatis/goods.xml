@@ -3,7 +3,7 @@
 <mapper namespace="com.cbec.b2b.mapper.GoodsMapper">
 	
 	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods">
-		SELECT *
+		SELECT * ,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    1=1 
@@ -44,7 +44,7 @@
 		 ORDER BY id asc
 	</select>
 	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods">
-		SELECT *
+		SELECT *,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    ifB2B='1' and ifBBC ='0' 

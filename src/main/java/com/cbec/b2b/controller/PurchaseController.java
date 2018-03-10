@@ -19,6 +19,7 @@ import com.cbec.b2b.entity.purchase.ChatRequest;
 import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
+import com.cbec.b2b.entity.purchase.PurchaseAndGood;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseList;
@@ -51,12 +52,9 @@ public class PurchaseController {
         return api.PurchaseGoods(searchPurchaseGoods);
     }
     @RequestMapping(value = "/add")
-    public MsgResponse addPurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
+    public Purchase addPurchase(@RequestBody Purchase purchase,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-		MsgResponse response = new MsgResponse();
-    	response.setMsg(api.addPurchase(purchase));
-    	response.setType("1");
-        return response;
+        return api.addPurchase(purchase);
     }
 
     @RequestMapping(value = "/update")
@@ -68,10 +66,14 @@ public class PurchaseController {
     	return response;
     }
     @RequestMapping(value = "/goods/add")
-    public MsgResponse addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList,HttpServletResponse res) {
+    public MsgResponse addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
+		String purchasesn=purchaseAndGood.getPurchasesn();
+		List<PurchaseGoods> purchaseGoodsList =purchaseAndGood.getList();
 		MsgResponse response = new MsgResponse();
     	for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
+    		purchaseGoods.setPurchasesn(purchasesn);
+    		
     		if(purchaseGoods.getPurchasesn()==null ||"".equals(purchaseGoods.getPurchasesn())){
     			response.setMsg("没有采购单号！");
     			return response;
@@ -97,6 +99,7 @@ public class PurchaseController {
     			response.setMsg("没有产品条码！");
     			return response;
         	}
+    		
     	}
     	response.setMsg(api.addPurchaseGoods(purchaseGoodsList));
     	response.setType("1");

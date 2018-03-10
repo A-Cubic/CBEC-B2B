@@ -59,13 +59,13 @@
 	</select>
 	
 	<select id="getPurchaseGoods"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseGoods">
-		SELECT t2.*
+		SELECT t2.*,t2.id as 'key'
 		  FROM t_purchase_list t1 ,t_purchase_goods t2
 		 WHERE t1.purchasesn = t2.purchasesn and t1.userCode=#{userCode} and t1.purchasesn =#{purchasesn}  
 		 ORDER BY id desc
 	</select>
 	<select id="getPurchaseGoodsToInquiry"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods">
-		SELECT t2.*
+		SELECT t2.*,t2.id as 'key'
 		  FROM t_purchase_list t1 ,t_purchase_goods t2
 		 WHERE t1.purchasesn = t2.purchasesn and stage='9'  and t1.purchasesn =#{purchasesn}  
 		 ORDER BY id desc

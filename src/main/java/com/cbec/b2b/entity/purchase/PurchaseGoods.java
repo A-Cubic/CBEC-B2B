@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class PurchaseGoods {
+	private String key;   //主键
 	private String id;   //主键
 	private String purchasesn;   //采购单号
 	private String goodsid;   //商品ID

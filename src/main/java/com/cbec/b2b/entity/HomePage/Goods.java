@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Goods {
+	private int key;
 	private int id;
 	private String goodsname;
 	private String price;

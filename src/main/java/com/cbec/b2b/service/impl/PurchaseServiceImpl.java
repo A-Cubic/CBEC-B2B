@@ -63,13 +63,13 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	}
 	
 	@Override
-	public String  addPurchase(Purchase purchase) {
+	public Purchase  addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
 		purchase.setPurchasesn(id);
 		if(mapper.addPurchase(purchase)>0) {
-			return id;
+			return purchase;
 		}else {
-			return "ERROR:发生错误";
+			return null;
 		}
 	}
 	

@@ -42,7 +42,7 @@ public class PurchaseApi {
     }
 
     @RequestMapping(value = "/addpurchase")
-    public String addPurchase(@RequestBody Purchase purchases) {
+    public Purchase addPurchase(@RequestBody Purchase purchases) {
     	return service.addPurchase(purchases);
     }
     @RequestMapping(value = "/updatepurchase")

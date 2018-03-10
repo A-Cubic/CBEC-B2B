@@ -24,7 +24,7 @@
 		SELECT t1.*,t2.company 
 		  FROM t_goods_offer t1,t_user_list t2
 		  <where> 
-		    t1.usercode = t2.usercode and  t1.flag='1'
+		    t1.usercode = t2.usercode 
             <if test="userCode !=null and userCode !=''">  
                 and t1.usercode=#{userCode} 
             </if> 

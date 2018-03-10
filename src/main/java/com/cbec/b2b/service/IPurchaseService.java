@@ -20,7 +20,7 @@ public interface IPurchaseService {
 	
 	List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList);
 	List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
-	String addPurchase(Purchase purchase);
+	Purchase addPurchase(Purchase purchase);
 	String updatePurchase(Purchase purchase);
 	String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList);

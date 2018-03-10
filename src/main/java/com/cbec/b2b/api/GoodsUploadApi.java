@@ -105,6 +105,15 @@ public class GoodsUploadApi {
     	if(c>0) result="1";
     	return result;
     }
+    @RequestMapping(value = "/supplier/updateofferflag")
+    public String updateOfferFlag(@RequestBody Offer offer) {
+    	if("1".equals(offer.getFlag())) {
+    		offer.setFlag("0");
+    	}else {
+    		offer.setFlag("1");
+    	}
+    	return String.valueOf(service.updateOffer(offer));
+    }
     @RequestMapping(value = "/supplier/offer")
     public String writeOffer(@RequestBody Offer offer) {
     	int c = service.writeOffer(offer);
