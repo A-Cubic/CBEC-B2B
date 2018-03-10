@@ -16,7 +16,6 @@ import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.service.IGoodsUploadService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 @RestController

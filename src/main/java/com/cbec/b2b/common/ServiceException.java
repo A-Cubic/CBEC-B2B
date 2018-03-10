@@ -1,12 +1,21 @@
 package com.cbec.b2b.common;
 
-import lombok.Data;
 
-@Data
 public class ServiceException extends RuntimeException {
+
+	private static final long serialVersionUID = 6506514051998143354L;
 	private String msg;
 	
-    public ServiceException() {
+	
+    public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public ServiceException() {
     }
 
     public ServiceException(String message) {
