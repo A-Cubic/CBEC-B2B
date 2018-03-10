@@ -55,7 +55,7 @@
             </if>    
 		  
         </where>
-		 ORDER BY id asc
+		 ORDER CONCAT(t1.status,t1.createtime) DESC
 	</select>
 	
 	<select id="getPurchaseGoods"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseGoods">
