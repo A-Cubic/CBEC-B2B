@@ -24,6 +24,7 @@ public interface PurchaseMapper {
 	int addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
+	int delPurchaseGoodsByPurchasesn(String purchasesn);
 	int addInquiry(List<Inquiry> inquiryList);
 
 	/****************************************** 客服部分 ***************************************/

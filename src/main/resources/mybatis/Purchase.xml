@@ -165,6 +165,10 @@
 	        </foreach>
         )
 	</delete>
+	
+	<delete id="delPurchaseGoodsByPurchasesn"  parameterType="String">  
+        delete from t_purchase_goods where purchasesn=#{purchasesn}
+	</delete>
 
 	<insert id="addInquiry"  parameterType="java.util.List">  
         insert into t_purchase_inquiry(purchasesn,usercode,goodsid,goodsname,barcode,price,flag,createtime,remark) 

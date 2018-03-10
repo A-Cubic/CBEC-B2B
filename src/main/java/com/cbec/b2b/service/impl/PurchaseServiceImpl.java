@@ -86,10 +86,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	
 	@Override
 	public String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
-//		int c = 0;
-//		for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
-//			c+= mapper.addPurchaseGoods(purchaseGoods);
-//		}
+		mapper.delPurchaseGoodsByPurchasesn(purchaseGoodsList.get(0).getPurchasesn());
 		return String.valueOf(mapper.addPurchaseGoods(purchaseGoodsList));
 	}
 	
