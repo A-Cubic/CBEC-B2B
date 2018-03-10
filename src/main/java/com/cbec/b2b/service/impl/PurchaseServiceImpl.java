@@ -133,7 +133,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 				Purchase purchase = new Purchase();
 				purchase.setPurchasesn(searchPurchaseGoods.getPurchasesn());
 				purchase.setStage("1");
-				purchase.setStatus("1");
+				purchase.setStatus("2");
 				
 				updatePurchase(purchase);
 				return "提交完成";

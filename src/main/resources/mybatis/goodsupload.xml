@@ -47,6 +47,11 @@
 		 where t1.flag='1' and t1.goodsid = #{goodsid}
 		 ORDER BY t1.id asc
 	</select>
+	<select id="getOfferById"  resultType="com.cbec.b2b.entity.GoodsUpload.Offer">
+		SELECT *
+		  FROM t_goods_offer
+		 where id = #{id}
+	</select>
 	<update id="updateOffer" parameterType="com.cbec.b2b.entity.GoodsUpload.Offer">
 		UPDATE t_goods_offer 
 		<set >  

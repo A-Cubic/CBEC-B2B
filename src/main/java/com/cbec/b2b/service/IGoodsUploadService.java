@@ -17,6 +17,7 @@ public interface IGoodsUploadService {
 	int writeUploadInfo(UploadInfo uploadInfo);
 	int deleteUploadInfo(UploadInfo uploadInfo);
 	List<Offer> getOfferInfo(SearchOffer searchOffer);
+	Offer getOfferById(String id);
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 	List<Goods> getGoodsList(SearchGoods searchGoods);

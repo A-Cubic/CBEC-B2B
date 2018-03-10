@@ -93,4 +93,10 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		}
 		return searchOffer;
 	}
+
+	@Override
+	public Offer getOfferById(String id) {
+		// TODO Auto-generated method stub
+		return mapper.getOfferById(id);
+	}
 }

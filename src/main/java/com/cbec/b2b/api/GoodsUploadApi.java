@@ -98,6 +98,10 @@ public class GoodsUploadApi {
     	PageInfo<Offer> pageData = new PageInfo<Offer>(LOffer);
         return pageData;
     }
+    @RequestMapping(value = "/supplier/offerbyid")
+    public Offer offerByIdOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody String id) {
+        return service.getOfferById(id);
+    }
     @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer) {
     	int c = service.updateOffer(offer);

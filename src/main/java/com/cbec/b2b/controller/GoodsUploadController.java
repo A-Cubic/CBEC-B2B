@@ -1,6 +1,7 @@
 package com.cbec.b2b.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -80,6 +81,12 @@ public class GoodsUploadController {
     public PageInfo<Offer> offerinfoOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.offerinfoOfOperate(userid,searchOffer);
+    }
+    @RequestMapping(value = "/supplier/offerbyid")
+    public Offer offerByIdOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+		String id = request.get("id");
+    	return api.offerByIdOfOperate(userid,id);
     }
     @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer,HttpServletResponse res ) {
