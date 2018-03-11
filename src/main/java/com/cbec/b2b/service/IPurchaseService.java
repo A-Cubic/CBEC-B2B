@@ -40,6 +40,7 @@ public interface IPurchaseService {
 	List<PurchaseGoods> goodsListOfSupplier(String purchasesn);
 	List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList);
 	Purchase getPurchaseOfSupplier(String purchasesn);
+	List<Inquiry> getInquiryOfSupplier(String userCode,String purchasesn);
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> goodsListOfPurchasers(String purchasesn);
 	Purchase getPurchaseOfPurchasers(String purchasesn);

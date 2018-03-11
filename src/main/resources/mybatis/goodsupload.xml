@@ -58,6 +58,9 @@
 		     <if test="offer !=null and offer !=''" >  
 		       		offer=#{offer},
 		     </if>
+		     <if test="remark !=null and remark !=''" >  
+		       		remark=#{remark},
+		     </if> 
 		     <if test="flag !=null and flag !=''" >  
 		       		flag=#{flag},
 		     </if> 

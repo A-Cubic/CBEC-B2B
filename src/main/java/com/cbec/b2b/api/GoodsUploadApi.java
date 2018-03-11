@@ -99,14 +99,12 @@ public class GoodsUploadApi {
     }
     @RequestMapping(value = "/supplier/offerbyid")
     public Offer offerByIdOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody String id) {
-        return service.getOfferById(id);
+    	Offer offer = service.getOfferById(id);
+        return offer;
     }
     @RequestMapping(value = "/supplier/updateoffer")
     public String updateOffer(@RequestBody Offer offer) {
-    	int c = service.updateOffer(offer);
-    	String result="0";
-    	if(c>0) result="1";
-    	return result;
+    	return String.valueOf(service.updateOffer(offer));
     }
     @RequestMapping(value = "/supplier/updateofferflag")
     public String updateOfferFlag(@RequestBody Offer offer) {

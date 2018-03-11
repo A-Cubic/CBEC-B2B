@@ -220,6 +220,12 @@ public class PurchaseController {
         return api.getPurchaseBySnOfSupplier((String)request.get("purchasesn"));
     }
     
+    @RequestMapping(value = "/supplier/inquiry")
+    public PageInfo<Inquiry> getInquiryBySnOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getInquiryBySnOfSupplier(userid,(String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
+    }
+    
     
     /****************************************** 采购商部分 ***************************************/
     @RequestMapping(value = "/purchasers/list")

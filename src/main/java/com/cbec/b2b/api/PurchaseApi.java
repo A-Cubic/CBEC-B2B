@@ -122,11 +122,19 @@ public class PurchaseApi {
     	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
         return pageData;
     }
-    
+
     //获取采购单信息 从采购单号
     @RequestMapping(value = "/supplier/info/details")
     public Purchase getPurchaseBySnOfSupplier(@RequestParam String purchasesn) {
         return service.getPurchaseOfSupplier(purchasesn);
+    }
+    //获取采购单与供货商相关的商品列表 从采购单号
+    @RequestMapping(value = "/supplier/inquiry")
+    public PageInfo<Inquiry> getInquiryBySnOfSupplier(@RequestHeader(value = "userid") String userid,@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
+    	PageHelper.startPage(current,pageSize);
+    	List<Inquiry> list = service.getInquiryOfSupplier(userid,purchasesn);
+    	PageInfo<Inquiry> pageData = new PageInfo<Inquiry>(list);
+        return pageData;
     }
     
     

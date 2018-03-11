@@ -249,6 +249,12 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList) {
 			return mapper.getPurchaseListOfSupplier(searchPurchaseList);
 	}
+
+	@Override
+	public List<Inquiry> getInquiryOfSupplier(String userCode, String purchasesn) {
+		// TODO Auto-generated method stub
+		return mapper.getInquiryOfSupplier(userCode,purchasesn);
+	}
 	
 	/****************************************** 采购商部分 ***************************************/
 	@Override

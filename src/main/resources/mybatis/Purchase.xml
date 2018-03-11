@@ -321,4 +321,17 @@
 		 ORDER BY  
 		 	CONCAT(t1.status,t1.createtime) DESC
 	</select>
+	
+	<select id="getInquiryOfSupplier" resultType="com.cbec.b2b.entity.purchase.Inquiry" parameterType="java.lang.String">		
+		SELECT 
+			t1.*,t2.company
+		FROM 
+			t_purchase_inquiry t1,t_user_list t2 
+		WHERE 
+			t1.usercode=t2.usercode
+			AND t1.usercode=#{usercode} 
+			AND t1.purchasesn=#{purchasesn}  
+		ORDER BY 
+			CONCAT(t1.flag,t1.createtime) DESC
+	</select>
 </mapper>

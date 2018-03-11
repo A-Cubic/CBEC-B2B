@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cbec.b2b.api.GoodsUploadApi;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
@@ -89,9 +90,12 @@ public class GoodsUploadController {
     	return api.offerByIdOfOperate(userid,id);
     }
     @RequestMapping(value = "/supplier/updateoffer")
-    public String updateOffer(@RequestBody Offer offer,HttpServletResponse res ) {
+    public MsgResponse updateOffer(@RequestBody Offer offer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.updateOffer(offer);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.updateOffer(offer));
+    	response.setType("1");
+		return response;
     }
     @RequestMapping(value = "/supplier/updateofferflag")
     public String updateOfferFlag(@RequestBody Offer offer,HttpServletResponse res ) {
