@@ -31,7 +31,7 @@
 		 <where> 
 		    t1.sendtype = t2.id
             <if test="userCode !=null and userCode !=''">  
-                and t1.userCode=#{userCode} 
+                and t1.userCode like concat('%',#{userCode},'%') 
             </if> 
             <if test="purchasesn !=null and purchasesn !=''">  
                  and t1.purchasesn like concat('%',#{purchasesn},'%')
