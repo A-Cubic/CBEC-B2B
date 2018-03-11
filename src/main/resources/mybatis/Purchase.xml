@@ -291,11 +291,11 @@
 	</update>
 	
 	<select id="getPurchaseListOfSupplier" resultType="com.cbec.b2b.entity.purchase.Purchase" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseList">
-		SELECT t1.purchasesn,t1.stage,t1.status,t1.sendtype,t1.address,t1.deliverytime,t1.currency,t1.createtime,t2.typename as sendtypename
+		SELECT t1.id,t1.purchasesn,t1.stage,t1.status,t1.sendtype,t1.address,t1.deliverytime,t1.currency,t1.createtime,t2.typename as sendtypename
 		  FROM t_purchase_list t1 ,t_base_sendtype t2
 		 <where> 
 		    t1.sendtype = t2.id  
-		    and t1.purchasesn in  (select t3.purchasesn from t_purchase_inquiry t3 where t3.usercode = #{userCode})
+		    and t1.purchasesn in  (select t3.purchasesn from t_purchase_inquiry t3 where t3.usercode = #{userCode} group by t3.purchasesn)
             <if test="purchasesn !=null and purchasesn !=''">  
                  and t1.purchasesn like concat('%',#{purchasesn},'%')
             </if> 
@@ -328,8 +328,8 @@
 								t_purchase_inquiry t1,t_user_list t2 
 							WHERE 
 								t1.usercode=t2.usercode
-								AND t1.usercode='test1'
-								AND t1.purchasesn='2018031010037'  ) sum
+								AND t1.usercode=#{usercode} 
+								AND t1.purchasesn=#{purchasesn}  ) sum
 		FROM 
 			t_purchase_inquiry t1,t_user_list t2 
 		WHERE 

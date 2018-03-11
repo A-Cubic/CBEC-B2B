@@ -23,7 +23,6 @@ import com.cbec.b2b.mapper.PublicMapper;
 import com.cbec.b2b.mapper.PurchaseMapper;
 import com.cbec.b2b.mapper.UserMapper;
 import com.cbec.b2b.service.IPurchaseService;
-import com.github.pagehelper.Page;
 
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
