@@ -166,7 +166,7 @@ public class PurchaseApi {
         return pageData;
     }
     
-    @RequestMapping(value = "/operate/update/price")
+    @RequestMapping(value = "/purchasers/update/price")
     public MsgResponse updatePriceOfPurchasers(@RequestParam String id,@RequestParam String expectprice,@RequestParam String total) {
         return service.updatePriceOfPurchasers(id,expectprice,total);
     }
