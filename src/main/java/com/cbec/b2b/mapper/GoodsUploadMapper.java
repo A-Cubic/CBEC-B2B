@@ -5,6 +5,7 @@ import java.util.List;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
+import com.cbec.b2b.entity.HomePage.Goods;
 
 public interface GoodsUploadMapper {
 	List<UploadInfo> getUploadInfo(String userCode);
@@ -16,4 +17,5 @@ public interface GoodsUploadMapper {
 	Offer getOfferById(String id);
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
+	int writeOfferFromGoodsList(List<Offer> offerList);
 }

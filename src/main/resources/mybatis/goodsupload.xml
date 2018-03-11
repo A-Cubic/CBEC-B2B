@@ -71,4 +71,14 @@
         insert into t_goods_offer(usercode,goodsid,barcode,goodsName,slt,offer,remark) 
         values (#{usercode},#{goodsid},#{barcode},#{goodsName},#{slt},#{offer},#{remark})
 	</insert>
+	<insert id="writeOfferFromGoodsList"  parameterType="java.util.List">  
+        INSERT INTO t_goods_offer (usercode, goodsid,goodsName, barcode,slt,offer)
+
+        <foreach collection="list" item="item" index="index" separator="," > 
+       		SELECT #{usercode}, #{id}, #{goodsName}, #{barcode},#{slt},,#{offer}
+			FROM dual
+			WHERE not exists (select * from t_goods_offer
+												where t_goods_offer.usercode = #{usercode} and goodsid= #{id}); 
+        </foreach>
+	</insert>
 </mapper>

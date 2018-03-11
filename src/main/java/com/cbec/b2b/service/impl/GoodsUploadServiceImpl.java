@@ -1,5 +1,6 @@
 package com.cbec.b2b.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,15 +61,31 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	}
 
 	@Override
-	public int writeOffer(Offer offer) {
+	public int writeOffer(String userCode,List<Map<String,Object>> request) {
 		// TODO Auto-generated method stub
-		return mapper.writeOffer(offer);
+		List<Offer> offerList = new ArrayList<Offer>();
+		for(Map<String,Object> map :request) {
+			Offer offer = new Offer();
+			offer.setUsercode(userCode);
+			offer.setBarcode((String)map.get("barcode"));
+			offer.setGoodsid((Integer)map.get("id"));
+			offer.setGoodsName((String)map.get("goodsname"));
+			offer.setSlt((String)map.get("slt"));
+			offer.setOffer(0);
+			offerList.add(offer);
+		}
+		return mapper.writeOfferFromGoodsList(offerList);
 	}
 
 	@Override
 	public List<Goods> getGoodsList(SearchGoods searchGoods) {
 		// TODO Auto-generated method stub
 		return goodsmapper.getGoodsList(searchGoods);
+	}
+	@Override
+	public List<Goods> getB2BGoodsListToOffer(SearchGoods searchGoods) {
+		// TODO Auto-generated method stub
+		return goodsmapper.getB2BGoodsListToOffer(searchGoods);
 	}
 	@Override
 	public List<Goods> getB2BGoodsList(SearchGoods searchGoods) {

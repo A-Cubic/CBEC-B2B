@@ -103,9 +103,12 @@ public class GoodsUploadController {
     	return api.updateOfferFlag(offer);
     }
     @RequestMapping(value = "/supplier/offer")
-    public String offer(@RequestBody Offer offer,HttpServletResponse res ) {
+    public MsgResponse offer(@RequestHeader(value = "userid") String userid,@RequestBody List<Map<String,Object>> request,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-    	return api.writeOffer(offer);
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(api.writeOffer(userid,request));
+    	response.setType("1");
+		return response;
     }
     @RequestMapping(value = "/sendtype")
     public List<SendType> sendType(HttpServletResponse res ) {

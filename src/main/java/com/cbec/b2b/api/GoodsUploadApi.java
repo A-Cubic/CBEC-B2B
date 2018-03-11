@@ -1,6 +1,7 @@
 package com.cbec.b2b.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +57,7 @@ public class GoodsUploadApi {
     @RequestMapping(value = "/supplier/goodslist")
     public PageInfo<Goods> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getGoodsList(searchGoods);
+    	List<Goods> LGoods = service.getB2BGoodsListToOffer(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
@@ -116,11 +117,8 @@ public class GoodsUploadApi {
     	return String.valueOf(service.updateOffer(offer));
     }
     @RequestMapping(value = "/supplier/offer")
-    public String writeOffer(@RequestBody Offer offer) {
-    	int c = service.writeOffer(offer);
-    	String result="0";
-    	if(c>0) result="1";
-    	return result;
+    public String writeOffer(@RequestHeader(value = "userid") String userid,@RequestBody List<Map<String,Object>> request) {
+    	return String.valueOf(service.writeOffer(userid,request));
     }
     @RequestMapping(value = "/sendtype")
     public List<SendType> sendType() {
