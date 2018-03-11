@@ -267,6 +267,20 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		return mapper.getPurchaseBySnOfPurchasers(purchasesn);
 	}
 
+	@Override
+	public MsgResponse updatePriceOfPurchasers(String id, String price, String total) {
+		int num = mapper.updatePriceOfPurchasers(id,price,total);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num > 0) {
+			response.setType("1");
+			result="保存成功";
+		}else {
+			result="保存失败";
+		}
+		response.setMsg(result);
+		return response;
+	}
 
 	
 }
