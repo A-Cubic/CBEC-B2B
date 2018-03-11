@@ -43,4 +43,6 @@ public interface PurchaseMapper {
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfPurchasers(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfPurchasers(@Param("purchasesn") String purchasesn);
+	int updatePriceOfPurchasers(@Param("id") String id,@Param("expectprice") String expectprice,@Param("total") String total);
+	
 }

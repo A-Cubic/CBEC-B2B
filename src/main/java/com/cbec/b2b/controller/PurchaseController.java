@@ -47,7 +47,7 @@ public class PurchaseController {
     }
     
     @RequestMapping(value = "/goods")
-    public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods,HttpServletResponse res) {
+    public PageInfo<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.PurchaseGoods(searchPurchaseGoods);
     }
@@ -254,6 +254,12 @@ public class PurchaseController {
     public PageInfo<PurchaseGoods> goodsListOfPurchasers(@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.goodsListOfPurchasers((String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
+    }
+    
+    @RequestMapping(value = "/purchasers/update/price")
+    public MsgResponse updatePriceOfPurchasers(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.updatePriceOfPurchasers((String)request.get("id"),(String)request.get("expectprice"),(String)request.get("total"));
     }
 }
 

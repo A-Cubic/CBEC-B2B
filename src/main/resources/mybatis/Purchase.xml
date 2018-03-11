@@ -339,4 +339,13 @@
 		ORDER BY 
 			CONCAT(t1.flag,t1.createtime) DESC
 	</select>
+	
+	<update id="updatePriceOfPurchasers" parameterType="java.lang.String">  
+        UPDATE 
+			t_purchase_goods t
+		SET 
+			t.expectprice=#{expectprice},t.total=#{total}
+		WHERE
+			t.id=#{id}
+	</update>
 </mapper>

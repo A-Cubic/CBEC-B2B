@@ -37,16 +37,19 @@ public class PurchaseApi {
         return service.sendChat(request);
     }
     
-    @RequestMapping(value = "/purchasegoods")
-    public List<PurchaseGoods> PurchaseGoods(@RequestBody SearchPurchaseGoods searchPurchaseGoods) {
-    	return service.PurchaseGoods(searchPurchaseGoods);
+    @RequestMapping(value = "/purchase/goods")
+    public PageInfo<PurchaseGoods> PurchaseGoods(@RequestParam SearchPurchaseGoods searchPurchaseGoods) {
+    	PageHelper.startPage(searchPurchaseGoods.getCurrent(),searchPurchaseGoods.getPageSize());
+    	List<PurchaseGoods> list = service.PurchaseGoods(searchPurchaseGoods);
+    	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
+        return pageData;
     }
 
-    @RequestMapping(value = "/addpurchase")
+    @RequestMapping(value = "/add/purchase")
     public Purchase addPurchase(@RequestBody Purchase purchases) {
     	return service.addPurchase(purchases);
     }
-    @RequestMapping(value = "/updatepurchase")
+    @RequestMapping(value = "/update/purchase")
     public String updatePurchase(@RequestBody Purchase purchases) {
     	return service.updatePurchase(purchases);
     }
@@ -162,6 +165,12 @@ public class PurchaseApi {
     	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
         return pageData;
     }
+    
+    @RequestMapping(value = "/operate/update/price")
+    public MsgResponse updatePriceOfPurchasers(@RequestParam String id,@RequestParam String expectprice,@RequestParam String total) {
+        return service.updatePriceOfPurchasers(id,expectprice,total);
+    }
+    
     
     
 }
