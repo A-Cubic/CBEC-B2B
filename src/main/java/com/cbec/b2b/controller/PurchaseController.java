@@ -214,6 +214,12 @@ public class PurchaseController {
         return api.PurchaseListOfSupplier(userid,searchPurchaseList);
     }
     
+    @RequestMapping(value = "/supplier/info/details")
+    public Purchase getPurchaseBySnOfSupplier(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getPurchaseBySnOfSupplier((String)request.get("purchasesn"));
+    }
+    
     
     /****************************************** 采购商部分 ***************************************/
     @RequestMapping(value = "/purchasers/list")
@@ -230,6 +236,12 @@ public class PurchaseController {
 			}
 		}
         return api.PurchaseListOfPurchasers(searchPurchaseList);
+    }
+    
+    @RequestMapping(value = "/purchasers/info/details")
+    public Purchase getPurchaseBySnOfPurchasers(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getPurchaseBySnOfPurchasers((String)request.get("purchasesn"));
     }
     
     @RequestMapping(value = "/purchasers/goods")

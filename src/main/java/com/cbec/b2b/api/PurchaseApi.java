@@ -116,18 +116,17 @@ public class PurchaseApi {
     //获取采购单信息
     @RequestMapping(value = "/supplier/list")
     public PageInfo<Purchase> PurchaseListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchPurchaseList searchPurchaseList) {
-    	searchPurchaseList = service.getSearchPurchase(userid, searchPurchaseList);
-    	if("".equals(searchPurchaseList.getUserCode())) {
-    		PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
-        	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
-        	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
-            return pageData;
-		}else {
-			PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
-	    	List<Purchase> LPurchase = service.getPurchaseListOfSupplier(searchPurchaseList);
-	    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
-	        return pageData;
-		}
+    	searchPurchaseList.setUserCode(userid);
+		PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
+    	List<Purchase> LPurchase = service.getPurchaseListOfSupplier(searchPurchaseList);
+    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+        return pageData;
+    }
+    
+    //获取采购单信息 从采购单号
+    @RequestMapping(value = "/supplier/info/details")
+    public Purchase getPurchaseBySnOfSupplier(@RequestParam String purchasesn) {
+        return service.getPurchaseOfSupplier(purchasesn);
     }
     
     
@@ -141,6 +140,12 @@ public class PurchaseApi {
         return pageData;
     }
     
+    //获取采购单信息 从采购单号
+    @RequestMapping(value = "/purchasers/info/details")
+    public Purchase getPurchaseBySnOfPurchasers(@RequestParam String purchasesn) {
+        return service.getPurchaseOfPurchasers(purchasesn);
+    }
+    
     //获取采购单商品信息 从采购单号
     @RequestMapping(value = "/purchasers/goods")
     public PageInfo<PurchaseGoods> goodsListOfPurchasers(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
@@ -149,6 +154,7 @@ public class PurchaseApi {
     	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
         return pageData;
     }
+    
     
 }
 
