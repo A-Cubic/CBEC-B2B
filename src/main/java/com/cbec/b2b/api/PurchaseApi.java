@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,11 +115,19 @@ public class PurchaseApi {
     /****************************************** 供应商部分 ***************************************/
     //获取采购单信息
     @RequestMapping(value = "/supplier/list")
-    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestBody SearchPurchaseList searchPurchaseList) {
-    	PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
-    	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
-    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
-        return pageData;
+    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchPurchaseList searchPurchaseList) {
+    	searchPurchaseList = service.getSearchPurchase(userid, searchPurchaseList);
+    	if("".equals(searchPurchaseList.getUserCode())) {
+    		PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
+        	List<Purchase> LPurchase = service.getPurchaseList(searchPurchaseList);
+        	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+            return pageData;
+		}else {
+			PageHelper.startPage(searchPurchaseList.getCurrent(),searchPurchaseList.getPageSize());
+	    	List<Purchase> LPurchase = service.getPurchaseListOfSupplier(searchPurchaseList);
+	    	PageInfo<Purchase> pageData = new PageInfo<Purchase>(LPurchase);
+	        return pageData;
+		}
     }
     
     

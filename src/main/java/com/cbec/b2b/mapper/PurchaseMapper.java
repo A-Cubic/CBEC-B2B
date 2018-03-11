@@ -38,6 +38,7 @@ public interface PurchaseMapper {
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfSupplier(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfSupplier(@Param("purchasesn") String purchasesn);
+	List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList);
 	
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfPurchasers(@Param("purchasesn") String purchasesn);

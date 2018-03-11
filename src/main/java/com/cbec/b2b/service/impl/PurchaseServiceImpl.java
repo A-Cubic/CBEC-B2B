@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,17 @@ import com.cbec.b2b.entity.purchase.SearchPurchaseList;
 import com.cbec.b2b.mapper.GoodsUploadMapper;
 import com.cbec.b2b.mapper.PublicMapper;
 import com.cbec.b2b.mapper.PurchaseMapper;
+import com.cbec.b2b.mapper.UserMapper;
 import com.cbec.b2b.service.IPurchaseService;
+import com.github.pagehelper.Page;
 
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
 
 	@Autowired
 	PurchaseMapper mapper;
+	@Autowired
+	UserMapper usermapper;
 	@Autowired
 	PublicMapper publicmapper;
 	@Autowired 
@@ -51,12 +56,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		response.setMsg(result);
 		return response;
 	}
-	
+
 	@Override
 	public List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList) {
 		return mapper.getPurchaseList(searchPurchaseList);
 	}
-	
 	@Override
 	public List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods) {
 		return mapper.getPurchaseGoods(searchPurchaseGoods);
@@ -145,7 +149,21 @@ public class PurchaseServiceImpl implements IPurchaseService {
 			return "无对应的报价信息！";
 		}
 	}
-	
+
+
+	@Override
+	public SearchPurchaseList getSearchPurchase(String userid, SearchPurchaseList searchPurchaseList) {
+		Map<String,Object> userMap = usermapper.getUserType(userid);
+		
+		String type  = (String)userMap.get("usertype");
+//		String type="1";
+		if("0".equals(type)) {
+			searchPurchaseList.setUserCode("");
+		}else {
+			searchPurchaseList.setUserCode(userid);
+		}
+		return searchPurchaseList;
+	}
 
 	/****************************************** 客服部分 ***************************************/
 	@Override
@@ -226,6 +244,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Purchase getPurchaseOfSupplier(String purchasesn) {
 		return mapper.getPurchaseBySnOfSupplier(purchasesn);
 	}
+
+	@Override
+	public List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList) {
+			return mapper.getPurchaseListOfSupplier(searchPurchaseList);
+	}
 	
 	/****************************************** 采购商部分 ***************************************/
 	@Override
@@ -237,6 +260,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Purchase getPurchaseOfPurchasers(String purchasesn) {
 		return mapper.getPurchaseBySnOfPurchasers(purchasesn);
 	}
+
 
 	
 }

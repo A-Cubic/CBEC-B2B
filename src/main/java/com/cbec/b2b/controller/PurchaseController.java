@@ -199,7 +199,7 @@ public class PurchaseController {
     
     /****************************************** 供应商部分 ***************************************/
     @RequestMapping(value = "/supplier/list")
-    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
+    public PageInfo<Purchase> PurchaseListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchPurchaseList searchPurchaseList,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
 		if(searchPurchaseList.getTimes() !=null && searchPurchaseList.getTimes().length>0) {
 			String[] times = searchPurchaseList.getTimes() ;
@@ -211,7 +211,7 @@ public class PurchaseController {
 				}
 			}
 		}
-        return api.PurchaseListOfSupplier(searchPurchaseList);
+        return api.PurchaseListOfSupplier(userid,searchPurchaseList);
     }
     
     

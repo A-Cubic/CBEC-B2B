@@ -26,6 +26,7 @@ public interface IPurchaseService {
 	String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String splitPurchase(SearchPurchaseGoods searchPurchaseGoods);
+	SearchPurchaseList getSearchPurchase(String userid,SearchPurchaseList searchPurchaseList);
 
 	/****************************************** 客服部分 ***************************************/
 	List<PurchaseGoods> goodsListOfOperate(String purchasesn);
@@ -37,6 +38,7 @@ public interface IPurchaseService {
 	
 	/****************************************** 供应商部分 ***************************************/
 	List<PurchaseGoods> goodsListOfSupplier(String purchasesn);
+	List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList);
 	Purchase getPurchaseOfSupplier(String purchasesn);
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> goodsListOfPurchasers(String purchasesn);
