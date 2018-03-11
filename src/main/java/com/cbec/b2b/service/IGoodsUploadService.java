@@ -20,7 +20,7 @@ public interface IGoodsUploadService {
 	List<Offer> getOfferInfo(SearchOffer searchOffer);
 	Offer getOfferById(String id);
 	int updateOffer(Offer offer);
-	int writeOffer(String userCode,List<Map<String,Object>> request);
+	int writeOffer(String userCode,List<Offer> offerList);
 	List<Goods> getGoodsList(SearchGoods searchGoods);
 	List<Goods> getB2BGoodsListToOffer(SearchGoods searchGoods);
 	List<Goods> getB2BGoodsList(SearchGoods searchGoods);

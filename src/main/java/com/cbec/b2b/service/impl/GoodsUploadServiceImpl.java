@@ -61,20 +61,15 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	}
 
 	@Override
-	public int writeOffer(String userCode,List<Map<String,Object>> request) {
+	public int writeOffer(String userCode,List<Offer> offerList) {
 		// TODO Auto-generated method stub
-		List<Offer> offerList = new ArrayList<Offer>();
-		for(Map<String,Object> map :request) {
-			Offer offer = new Offer();
+//		List<Offer> offerList = new ArrayList<Offer>();
+		int c=0;
+		for(Offer offer :offerList) {
 			offer.setUsercode(userCode);
-			offer.setBarcode((String)map.get("barcode"));
-			offer.setGoodsid((Integer)map.get("id"));
-			offer.setGoodsName((String)map.get("goodsname"));
-			offer.setSlt((String)map.get("slt"));
-			offer.setOffer(0);
-			offerList.add(offer);
+			c+=mapper.writeOfferFromGoods(offer);
 		}
-		return mapper.writeOfferFromGoodsList(offerList);
+		return c;
 	}
 
 	@Override

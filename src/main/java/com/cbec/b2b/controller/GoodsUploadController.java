@@ -103,10 +103,10 @@ public class GoodsUploadController {
     	return api.updateOfferFlag(offer);
     }
     @RequestMapping(value = "/supplier/offer")
-    public MsgResponse offer(@RequestHeader(value = "userid") String userid,@RequestBody List<Map<String,Object>> request,HttpServletResponse res ) {
+    public MsgResponse offer(@RequestHeader(value = "userid") String userid,@RequestBody List<Offer> offerList,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
 		MsgResponse response = new MsgResponse();
-    	response.setMsg(api.writeOffer(userid,request));
+    	response.setMsg(api.writeOffer(userid,offerList));
     	response.setType("1");
 		return response;
     }

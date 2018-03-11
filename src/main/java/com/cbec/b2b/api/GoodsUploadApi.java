@@ -117,8 +117,8 @@ public class GoodsUploadApi {
     	return String.valueOf(service.updateOffer(offer));
     }
     @RequestMapping(value = "/supplier/offer")
-    public String writeOffer(@RequestHeader(value = "userid") String userid,@RequestBody List<Map<String,Object>> request) {
-    	return String.valueOf(service.writeOffer(userid,request));
+    public String writeOffer(@RequestHeader(value = "userid") String userid,@RequestBody List<Offer> offerList) {
+    	return String.valueOf(service.writeOffer(userid,offerList));
     }
     @RequestMapping(value = "/sendtype")
     public List<SendType> sendType() {

@@ -17,5 +17,5 @@ public interface GoodsUploadMapper {
 	Offer getOfferById(String id);
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
-	int writeOfferFromGoodsList(List<Offer> offerList);
+	int writeOfferFromGoods(Offer offerList);
 }

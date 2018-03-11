@@ -71,14 +71,12 @@
         insert into t_goods_offer(usercode,goodsid,barcode,goodsName,slt,offer,remark) 
         values (#{usercode},#{goodsid},#{barcode},#{goodsName},#{slt},#{offer},#{remark})
 	</insert>
-	<insert id="writeOfferFromGoodsList"  parameterType="java.util.List">  
+	<insert id="writeOfferFromGoods"  parameterType="com.cbec.b2b.entity.GoodsUpload.Offer">  
+       
         INSERT INTO t_goods_offer (usercode, goodsid,goodsName, barcode,slt,offer)
-
-        <foreach collection="list" item="item" index="index" separator="," > 
-       		SELECT #{usercode}, #{id}, #{goodsName}, #{barcode},#{slt},,#{offer}
+       		SELECT #{usercode}, #{goodsid}, #{goodsName}, #{barcode},#{slt},0
 			FROM dual
 			WHERE not exists (select * from t_goods_offer
-												where t_goods_offer.usercode = #{usercode} and goodsid= #{id}); 
-        </foreach>
+												where t_goods_offer.usercode = #{usercode} and goodsid= #{goodsid}); 
 	</insert>
 </mapper>
