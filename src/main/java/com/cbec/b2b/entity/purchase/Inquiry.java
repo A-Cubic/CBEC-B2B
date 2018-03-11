@@ -17,5 +17,6 @@ public class Inquiry {
 	private String remark;//备注
 	private String createtime;//建立时间
 	private String company;
+	private String sum;
 
 }
