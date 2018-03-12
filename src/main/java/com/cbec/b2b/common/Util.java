@@ -233,6 +233,7 @@ public class Util {
    public static byte[] decryptBASE64(String strBase64) throws Exception {
 	   Base64 base64 = new Base64();  
 	   String newStr = strBase64.replaceAll("^(data:\\s*image\\/(\\w+);base64,)", "");
+//	   data:application/pdf;base64,
 	   byte[] debytes = base64.decode(newStr);  
 	   return debytes;  
 //       Decoder decoder = Base64.getDecoder();
