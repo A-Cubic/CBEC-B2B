@@ -161,7 +161,10 @@ public class PurchaseApi {
         return service.getInquiryOfSupplier(userid,purchasesn);
     }
     
-    
+    @RequestMapping(value = "/supplier/update/price")
+    public MsgResponse updatePriceOfSupplier(@RequestParam List<Inquiry> request) {
+        return service.updatePriceOfSupplier(request);
+    }
     /****************************************** 采购商部分 ***************************************/
     //获取采购单信息
     @RequestMapping(value = "/purchasers/list")
