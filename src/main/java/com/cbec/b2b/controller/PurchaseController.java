@@ -221,9 +221,9 @@ public class PurchaseController {
     }
     
     @RequestMapping(value = "/supplier/inquiry")
-    public PageInfo<Inquiry> getInquiryBySnOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
+    public List<Inquiry> getInquiryBySnOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.getInquiryBySnOfSupplier(userid,(String)request.get("purchasesn"),(Integer)request.get("current"),(Integer)request.get("pageSize"));
+        return api.getInquiryBySnOfSupplier(userid,(String)request.get("purchasesn"));
     }
     
     
