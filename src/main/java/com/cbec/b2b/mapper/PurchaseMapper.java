@@ -40,6 +40,7 @@ public interface PurchaseMapper {
 	Purchase getPurchaseBySnOfSupplier(@Param("purchasesn") String purchasesn);
 	List<Purchase> getPurchaseListOfSupplier(SearchPurchaseList searchPurchaseList);
 	List<Inquiry> getInquiryOfSupplier(@Param("usercode") String usercode,@Param("purchasesn") String purchasesn);
+	int updatePriceOfSupplier(Inquiry inquiry);
 	/****************************************** 采购商部分 ***************************************/
 	List<PurchaseGoods> listGoodsOfPurchasers(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfPurchasers(@Param("purchasesn") String purchasesn);

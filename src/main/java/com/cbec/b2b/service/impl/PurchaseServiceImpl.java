@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
@@ -251,8 +253,26 @@ public class PurchaseServiceImpl implements IPurchaseService {
 
 	@Override
 	public List<Inquiry> getInquiryOfSupplier(String userCode, String purchasesn) {
-		// TODO Auto-generated method stub
 		return mapper.getInquiryOfSupplier(userCode,purchasesn);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public MsgResponse updatePriceOfSupplier(List<Inquiry> request) {
+		MsgResponse response = new MsgResponse();
+		String result = "保存成功";
+		if(request == null || request.size()==0) {
+			result="没有变更的数据";
+		}
+		for(Inquiry bean : request) {
+			if(bean.getFlag() != null && !"".equals(bean.getFlag()) && !"0".equals(bean.getFlag()) && !"3".equals(bean.getFlag()) ) {
+				mapper.updatePriceOfSupplier(bean);
+			}
+		}
+	
+		response.setType("1");
+		response.setMsg(result);
+		return response;
 	}
 	
 	/****************************************** 采购商部分 ***************************************/
@@ -280,6 +300,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		response.setMsg(result);
 		return response;
 	}
+
+	
 
 	
 }

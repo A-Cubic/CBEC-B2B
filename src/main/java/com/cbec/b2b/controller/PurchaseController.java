@@ -226,6 +226,12 @@ public class PurchaseController {
         return api.getInquiryBySnOfSupplier(userid,(String)request.get("purchasesn"));
     }
     
+    @RequestMapping(value = "/supplier/update/price")
+    public MsgResponse updatePriceOfSupplier(@RequestBody List<Inquiry> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.updatePriceOfSupplier(request);
+    }
+    
     
     /****************************************** 采购商部分 ***************************************/
     @RequestMapping(value = "/purchasers/list")

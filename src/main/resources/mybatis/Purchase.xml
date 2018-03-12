@@ -348,4 +348,15 @@
 		WHERE
 			t.id=#{id}
 	</update>
+	
+	<update id="updatePriceOfSupplier" parameterType="com.cbec.b2b.entity.purchase.Inquiry">  
+        UPDATE 
+			t_purchase_inquiry t
+		SET 
+			t.price=#{price},t.total=#{total},t.flag='2'
+		WHERE
+			t.id=#{id}
+	</update>
+	
+	
 </mapper>
