@@ -98,7 +98,7 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	public SearchOffer getSearchOffer(String userCode, SearchOffer searchOffer) {
 		Map<String,Object> userMap = usermapper.getUserType(userCode);
 		String type  = (String)userMap.get("usertype");
-		if("0".equals(type)) {
+		if("0".equals(type)||"5".equals(type)) {
 			searchOffer.setUserCode("");
 		}else {
 			searchOffer.setUserCode(userCode);
