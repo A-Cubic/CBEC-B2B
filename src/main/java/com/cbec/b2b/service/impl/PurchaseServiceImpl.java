@@ -278,7 +278,6 @@ public class PurchaseServiceImpl implements IPurchaseService {
 				mapper.updatePriceOfSupplier(bean);
 			}
 		}
-	
 		response.setType("1");
 		response.setMsg(result);
 		return response;
