@@ -66,9 +66,14 @@ public class PurchaseController {
     	return response;
     }
     @RequestMapping(value = "/goods/add")
-    public List<PurchaseGoods> addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood,HttpServletResponse res) {
+    public MsgResponse addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
 		return api.addPurchaseGoods(purchaseAndGood);
+    }
+    @RequestMapping(value = "/goods/addnew")
+    public List<PurchaseGoods> addPurchaseGoodsNew(@RequestBody PurchaseAndGood purchaseAndGood,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		return api.addPurchaseGoodsNew(purchaseAndGood);
     }
     @RequestMapping(value = "/goods/update")
     public MsgResponse updatePurchaseGoods(@RequestBody PurchaseGoods purchaseGoods,HttpServletResponse res) {

@@ -88,14 +88,24 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		// TODO Auto-generated method stub
 		return String.valueOf(mapper.updatePurchase(purchase));
 	}
-	
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
-	public List<PurchaseGoods> addPurchaseGoods(String purchasesn, List<PurchaseGoods> purchaseGoodsList) {
+	public List<PurchaseGoods> addPurchaseGoodsNew(String purchasesn, List<PurchaseGoods> purchaseGoodsList) {
 		for(PurchaseGoods purchaseGoods:purchaseGoodsList) {
 			mapper.addPurchaseGoods(purchaseGoods);
 		}
 		return mapper.getPurchaseGoodsBySn(purchasesn);
+	}
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public String addPurchaseGoods(String purchasesn, List<PurchaseGoods> purchaseGoodsList) {
+		mapper.delPurchaseGoodsByPurchasesn(purchasesn);
+		int c = 0;
+		for(PurchaseGoods purchaseGoods:purchaseGoodsList) {
+			c+=mapper.addPurchaseGoods(purchaseGoods);
+		}
+		return String.valueOf(c);
 	}
 	
 	@Override

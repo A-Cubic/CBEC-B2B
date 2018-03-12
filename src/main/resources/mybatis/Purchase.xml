@@ -105,16 +105,16 @@
 		     <if test="currency !=null and currency !=''" >  
 		       		currency=#{currency},
 		     </if> 
-		     <if test="remark !=null and remark !=''" >  
+		     <if test="remark !=null " >  
 		       		remark=#{remark},
 		     </if> 
-		     <if test="waybillno !=null and waybillno !=''" >  
+		     <if test="waybillno !=null" >  
 		       		waybillno=#{waybillno},
 		     </if> 
-		     <if test="waybillremark !=null and waybillremark !=''" >  
+		     <if test="waybillremark !=null" >  
 		       		waybillremark=#{waybillremark},
 		     </if> 
-		     <if test="waybillfee !=null and waybillfee !=''" >  
+		     <if test="waybillfee !=null " >  
 		       		waybillfee=#{waybillfee},
 		     </if> 
 	   </set>  

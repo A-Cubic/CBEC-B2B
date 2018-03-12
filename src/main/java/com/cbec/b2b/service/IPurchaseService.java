@@ -22,7 +22,8 @@ public interface IPurchaseService {
 	List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
 	Purchase addPurchase(Purchase purchase);
 	String updatePurchase(Purchase purchase);
-	List<PurchaseGoods> addPurchaseGoods(String purchasesn,List<PurchaseGoods> purchaseGoodsList);
+	List<PurchaseGoods> addPurchaseGoodsNew(String purchasesn,List<PurchaseGoods> purchaseGoodsList);
+	String addPurchaseGoods(String purchasesn,List<PurchaseGoods> purchaseGoodsList);
 	String updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	String delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	String splitPurchase(SearchPurchaseGoods searchPurchaseGoods);

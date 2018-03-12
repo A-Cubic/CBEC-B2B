@@ -55,7 +55,39 @@ public class PurchaseApi {
     	return service.updatePurchase(purchases);
     }
     @RequestMapping(value = "/goods/add")
-    public List<PurchaseGoods> addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood) {
+    public MsgResponse addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood) {
+		String purchasesn=purchaseAndGood.getPurchasesn();
+		List<PurchaseGoods> purchaseGoodsList =purchaseAndGood.getList();
+		MsgResponse response = new MsgResponse();
+    	for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
+    		purchaseGoods.setPurchasesn(purchasesn);
+    		
+    		if(purchaseGoods.getPurchasesn()==null ||"".equals(purchaseGoods.getPurchasesn())){
+    			return null;
+        	}else if(purchaseGoods.getDeliverytype()==null ||"".equals(purchaseGoods.getDeliverytype())){
+    			return null;
+        	}else if(purchaseGoods.getGoodsid()==null ||"".equals(purchaseGoods.getGoodsid())){
+    			return null;
+        	}else if(purchaseGoods.getGoodsname()==null ||"".equals(purchaseGoods.getGoodsname())){
+    			return null;
+        	}else if(purchaseGoods.getPrice()==null ||"".equals(purchaseGoods.getPrice())){
+    			return null;
+        	}else if(purchaseGoods.getExpectprice()==null ||"".equals(purchaseGoods.getExpectprice())){
+    			return null;
+        	}else if(purchaseGoods.getTotal()==null ||"".equals(purchaseGoods.getTotal())){
+    			return null;
+        	}else if(purchaseGoods.getBarcode()==null ||"".equals(purchaseGoods.getBarcode())){
+    			return null;
+        	}
+    	}
+
+    	response.setMsg(service.addPurchaseGoods(purchasesn,purchaseGoodsList));
+    	response.setType("1");
+    	return response;
+    }
+
+    @RequestMapping(value = "/goods/addnew")
+    public List<PurchaseGoods> addPurchaseGoodsNew(@RequestBody PurchaseAndGood purchaseAndGood) {
 		String purchasesn=purchaseAndGood.getPurchasesn();
 		List<PurchaseGoods> purchaseGoodsList =purchaseAndGood.getList();
     	for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
@@ -79,7 +111,7 @@ public class PurchaseApi {
     			return null;
         	}
     	}
-		return service.addPurchaseGoods(purchasesn,purchaseGoodsList); 
+		return service.addPurchaseGoodsNew(purchasesn,purchaseGoodsList); 
     }
     @RequestMapping(value = "/goods/update")
     public String updatePurchaseGoods(@RequestBody PurchaseGoods purchaseGoods) {
