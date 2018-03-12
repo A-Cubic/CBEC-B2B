@@ -156,7 +156,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		
 		String type  = (String)userMap.get("usertype");
 //		String type="1";
-		if("0".equals(type)) {
+		if("0".equals(type)||"5".equals(type)) {
 			searchPurchaseList.setUserCode("");
 		}else {
 			searchPurchaseList.setUserCode(userid);
