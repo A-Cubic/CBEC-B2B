@@ -39,7 +39,7 @@ public class GoodsUploadApi {
     	String result="0";
     	if(c>0) result="1";
     	return result;
-    }
+    } 
     @RequestMapping(value = "/supplier/delupload")
     public String deleteUploadInfoOfSupplier(@RequestBody UploadInfo uploadInfo) {
     	int c = service.deleteUploadInfo(uploadInfo);
