@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
@@ -60,7 +62,8 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		return mapper.updateOffer(offer);
 	}
 
-	@Override
+	@Override	
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
 	public int writeOffer(String userCode,List<Offer> offerList) {
 		// TODO Auto-generated method stub
 //		List<Offer> offerList = new ArrayList<Offer>();

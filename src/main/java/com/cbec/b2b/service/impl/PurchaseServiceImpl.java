@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
@@ -88,18 +90,17 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	}
 	
 	@Override
-	public String addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
-		mapper.delPurchaseGoodsByPurchasesn(purchaseGoodsList.get(0).getPurchasesn());
-		return String.valueOf(mapper.addPurchaseGoods(purchaseGoodsList));
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public List<PurchaseGoods> addPurchaseGoods(String purchasesn, List<PurchaseGoods> purchaseGoodsList) {
+		for(PurchaseGoods purchaseGoods:purchaseGoodsList) {
+			mapper.addPurchaseGoods(purchaseGoods);
+		}
+		return mapper.getPurchaseGoodsBySn(purchasesn);
 	}
 	
 	@Override
-	public String updatePurchaseGoods(List<PurchaseGoods> purchaseGoodsList) {
-		int c = 0;
-		for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
-			c+= mapper.updatePurchaseGoods(purchaseGoods);
-		}
-		return String.valueOf(c);
+	public String updatePurchaseGoods(PurchaseGoods purchaseGoods) {
+		return String.valueOf(mapper.updatePurchaseGoods(purchaseGoods));
 	}
 	
 	@Override

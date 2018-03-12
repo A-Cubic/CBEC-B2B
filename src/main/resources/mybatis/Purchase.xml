@@ -65,6 +65,12 @@
 		 WHERE t1.purchasesn = t2.purchasesn and t1.userCode=#{userCode} and t1.purchasesn =#{purchasesn}  
 		 ORDER BY id desc
 	</select>
+	<select id="getPurchaseGoodsBySn"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="String">
+		SELECT *,id as 'key'
+		  FROM t_purchase_goods 
+		 WHERE purchasesn =#{purchasesn}  
+		 ORDER BY id asc
+	</select>
 	<select id="getPurchaseGoodsToInquiry"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods">
 		SELECT t2.*,t2.id as 'key'
 		  FROM t_purchase_list t1 ,t_purchase_goods t2
@@ -115,12 +121,12 @@
 		 WHERE purchasesn=#{purchasesn}
 	</update>
 	
-	<insert id="addPurchaseGoods"  parameterType="java.util.List">  
-        insert into t_purchase_goods(purchasesn,goodsid,goodsname,price,deliverytype,expectprice,total,barcode) 
-        values 
-        <foreach collection="list" item="item" index="index" separator="," > 
-       		(#{item.purchasesn},#{item.goodsid},#{item.goodsname},#{item.price},#{item.deliverytype},#{item.expectprice},#{item.total},#{item.barcode})
-        </foreach>
+	<insert id="addPurchaseGoods"  parameterType="com.cbec.b2b.entity.purchase.PurchaseGoods">  
+			insert into t_purchase_goods(purchasesn,goodsid,goodsname,price,deliverytype,expectprice,total,barcode) 
+       		SELECT #{purchasesn},#{goodsid},#{goodsname},#{price},#{deliverytype},#{expectprice},#{total},#{barcode} 
+			FROM dual
+			WHERE not exists (select * from t_purchase_goods
+												where purchasesn = #{purchasesn} and goodsid= #{goodsid}); 
 	</insert>
 	<update id="updatePurchaseGoods"  parameterType="com.cbec.b2b.entity.purchase.PurchaseGoods">  
 	        update t_purchase_goods

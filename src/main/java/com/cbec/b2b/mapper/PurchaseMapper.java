@@ -18,10 +18,11 @@ public interface PurchaseMapper {
 	
 	List<Purchase> getPurchaseList(SearchPurchaseList searchPurchaseList);
 	List<PurchaseGoods> getPurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
+	List<PurchaseGoods> getPurchaseGoodsBySn( @Param("purchasesn") String purchasesn);
 	List<PurchaseGoods> getPurchaseGoodsToInquiry(String purchasesn);
 	int addPurchase(Purchase purchase);
 	int updatePurchase(Purchase purchase);
-	int addPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
+	int addPurchaseGoods(PurchaseGoods purchaseGoods);
 	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);
 	int delPurchaseGoodsByPurchasesn(String purchasesn);

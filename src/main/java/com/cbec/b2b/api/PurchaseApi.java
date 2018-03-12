@@ -15,6 +15,7 @@ import com.cbec.b2b.entity.purchase.ChatRequest;
 import com.cbec.b2b.entity.purchase.ChatResponse;
 import com.cbec.b2b.entity.purchase.Inquiry;
 import com.cbec.b2b.entity.purchase.Purchase;
+import com.cbec.b2b.entity.purchase.PurchaseAndGood;
 import com.cbec.b2b.entity.purchase.PurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseGoods;
 import com.cbec.b2b.entity.purchase.SearchPurchaseList;
@@ -54,12 +55,35 @@ public class PurchaseApi {
     	return service.updatePurchase(purchases);
     }
     @RequestMapping(value = "/goods/add")
-    public String addPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
-		return service.addPurchaseGoods(purchaseGoodsList); 
+    public List<PurchaseGoods> addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood) {
+		String purchasesn=purchaseAndGood.getPurchasesn();
+		List<PurchaseGoods> purchaseGoodsList =purchaseAndGood.getList();
+    	for(PurchaseGoods purchaseGoods : purchaseGoodsList) {
+    		purchaseGoods.setPurchasesn(purchasesn);
+    		
+    		if(purchaseGoods.getPurchasesn()==null ||"".equals(purchaseGoods.getPurchasesn())){
+    			return null;
+        	}else if(purchaseGoods.getDeliverytype()==null ||"".equals(purchaseGoods.getDeliverytype())){
+    			return null;
+        	}else if(purchaseGoods.getGoodsid()==null ||"".equals(purchaseGoods.getGoodsid())){
+    			return null;
+        	}else if(purchaseGoods.getGoodsname()==null ||"".equals(purchaseGoods.getGoodsname())){
+    			return null;
+        	}else if(purchaseGoods.getPrice()==null ||"".equals(purchaseGoods.getPrice())){
+    			return null;
+        	}else if(purchaseGoods.getExpectprice()==null ||"".equals(purchaseGoods.getExpectprice())){
+    			return null;
+        	}else if(purchaseGoods.getTotal()==null ||"".equals(purchaseGoods.getTotal())){
+    			return null;
+        	}else if(purchaseGoods.getBarcode()==null ||"".equals(purchaseGoods.getBarcode())){
+    			return null;
+        	}
+    	}
+		return service.addPurchaseGoods(purchasesn,purchaseGoodsList); 
     }
     @RequestMapping(value = "/goods/update")
-    public String updatePurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
-    	return service.updatePurchaseGoods(purchaseGoodsList); 
+    public String updatePurchaseGoods(@RequestBody PurchaseGoods purchaseGoods) {
+    	return service.updatePurchaseGoods(purchaseGoods); 
     }
     @RequestMapping(value = "/goods/del")
     public String delPurchaseGoods(@RequestBody List<PurchaseGoods> purchaseGoodsList) {
