@@ -159,11 +159,8 @@ public class PurchaseApi {
     
     //获取采购单商品信息 从采购单号
     @RequestMapping(value = "/purchasers/goods")
-    public PageInfo<PurchaseGoods> goodsListOfPurchasers(@RequestParam String purchasesn,@RequestParam Integer current,@RequestParam Integer pageSize) {
-    	PageHelper.startPage(current,pageSize);
-    	List<PurchaseGoods> list = service.goodsListOfOperate(purchasesn);
-    	PageInfo<PurchaseGoods> pageData = new PageInfo<PurchaseGoods>(list);
-        return pageData;
+    public List<PurchaseGoods> goodsListOfPurchasers(@RequestParam String purchasesn) {
+        return service.goodsListOfOperate(purchasesn);
     }
     
     @RequestMapping(value = "/purchasers/update/price")
