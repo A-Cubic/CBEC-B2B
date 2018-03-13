@@ -65,6 +65,11 @@ public class PurchaseController {
     	response.setType("1");
     	return response;
     }
+    @RequestMapping(value = "/update/stage")
+    public MsgResponse updatePurchaseStage(@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+    	return api.updatePurchaseStage((String)request.get("purchasesn"),(String)request.get("stage"));
+    }
     @RequestMapping(value = "/goods/add")
     public MsgResponse addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood,HttpServletResponse res) {
 		Util.responseResultSuccess(res);

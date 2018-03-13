@@ -22,6 +22,7 @@ public interface IPurchaseService {
 	List<PurchaseGoods> PurchaseGoods(SearchPurchaseGoods searchPurchaseGoods);
 	Purchase addPurchase(Purchase purchase);
 	String updatePurchase(Purchase purchase);
+	MsgResponse updatePurchaseStage(String purchasesn,String stage);
 	List<PurchaseGoods> addPurchaseGoodsNew(String purchasesn,List<PurchaseGoods> purchaseGoodsList);
 	String addPurchaseGoods(String purchasesn,List<PurchaseGoods> purchaseGoodsList);
 	String updatePurchaseGoods(PurchaseGoods purchaseGoods);

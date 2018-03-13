@@ -68,7 +68,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	}
 	
 	@Override
-	public Purchase  addPurchase(Purchase purchase) {
+	public Purchase addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
 		purchase.setPurchasesn(id);
 		if(mapper.addPurchase(purchase)>0) {
@@ -85,9 +85,24 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	
 	@Override
 	public String updatePurchase(Purchase purchase) {
-		// TODO Auto-generated method stub
 		return String.valueOf(mapper.updatePurchase(purchase));
 	}
+	
+	@Override
+	public MsgResponse updatePurchaseStage(String purchasesn, String stage) {
+		int num = mapper.updatePurchaseStage(purchasesn,stage);
+		MsgResponse response = new MsgResponse();
+		String result = "";
+		if(num > 0) {
+			response.setType("1");
+			result="成功";
+		}else {
+			result="失败";
+		}
+		response.setMsg(result);
+		return response;
+	}
+
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
@@ -308,8 +323,6 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		response.setMsg(result);
 		return response;
 	}
-
-	
 
 	
 }

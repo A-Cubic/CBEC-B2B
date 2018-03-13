@@ -22,6 +22,7 @@ public interface PurchaseMapper {
 	List<PurchaseGoods> getPurchaseGoodsToInquiry(String purchasesn);
 	int addPurchase(Purchase purchase);
 	int updatePurchase(Purchase purchase);
+	int updatePurchaseStage( @Param("purchasesn") String purchasesn, @Param("purchasesn") String stage);
 	int addPurchaseGoods(PurchaseGoods purchaseGoods);
 	int updatePurchaseGoods(PurchaseGoods purchaseGoods);
 	int delPurchaseGoods(List<PurchaseGoods> purchaseGoodsList);

@@ -364,5 +364,12 @@
 			t.id=#{id}
 	</update>
 	
-	
+	<update id="updatePurchaseStage" parameterType="java.lang.String">  
+        UPDATE 
+			t_purchase_list t
+		SET 
+			t.stage=#{stage}
+		WHERE
+			t.purchasesn=#{purchasesn}
+	</update>
 </mapper>

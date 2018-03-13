@@ -54,6 +54,11 @@ public class PurchaseApi {
     public String updatePurchase(@RequestBody Purchase purchases) {
     	return service.updatePurchase(purchases);
     }
+    
+    @RequestMapping(value = "/purchase/update/stage")
+    public MsgResponse updatePurchaseStage(@RequestParam String purchasesn,@RequestParam String stage) {
+    	return service.updatePurchaseStage(purchasesn,stage);
+    }
     @RequestMapping(value = "/goods/add")
     public MsgResponse addPurchaseGoods(@RequestBody PurchaseAndGood purchaseAndGood) {
 		String purchasesn=purchaseAndGood.getPurchasesn();

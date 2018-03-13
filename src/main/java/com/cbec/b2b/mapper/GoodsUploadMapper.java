@@ -5,7 +5,6 @@ import java.util.List;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
-import com.cbec.b2b.entity.HomePage.Goods;
 
 public interface GoodsUploadMapper {
 	List<UploadInfo> getUploadInfo(String userCode);
