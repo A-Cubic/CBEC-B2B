@@ -2,8 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cbec.b2b.mapper.GoodsMapper">
 	
-	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods">
+	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		SELECT * ,id as 'key'
+		  FROM t_goods_list
+		  <where> 
+		    ifB2B='1' 
+            <if test="userCode !=null and userCode !=''">  
+                and supplierCode=#{userCode} 
+            </if> 
+            <if test="ifXG!=null and ifXG !=''">  
+                and ifXG= #{ifXG}  
+            </if>    
+            <if test="ifHW !=null and ifHW !=''">  
+                and ifHW= #{ifHW}  
+            </if>    
+            <if test="ifBS !=null and ifBS !=''">  
+                and ifBS= #{ifBS}  
+            </if>    
+            <if test="ifMY !=null and ifMY !=''">  
+                and ifMY= #{ifMY}  
+            </if>  
+            <if test="country!=null and country !=''">  
+                and country= #{country}  
+            </if>  
+            <if test="catelog3!=null and catelog3 !=''">  
+                and catelog3= #{catelog3}  
+            </if>  
+            <if test="brands!=null and brands !=''">  
+                and brand= #{brands}  
+            </if>  
+            <if test="search!=null and search !=''">  
+                and (goodsName like concat('%',#{search},'%')  
+                	 or goodsNameE like concat('%',#{search},'%')      
+                	 or brand like concat('%',#{search},'%')      
+                	 or brandE like concat('%',#{search},'%')      
+                	 or barcode like concat('%',#{search},'%')      
+                	 or supplierName like concat('%',#{search},'%')  )
+            </if>  
+        </where>  
+		 ORDER BY id asc
+	</select>
+	<select id="getGoodsListOfOperate" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    1=1 
@@ -33,17 +73,15 @@
             </if>  
             <if test="search!=null and search !=''">  
                 and (goodsName like concat('%',#{search},'%')  
-                	 or goodsName like concat('%',#{search},'%')   
                 	 or goodsNameE like concat('%',#{search},'%')      
                 	 or brand like concat('%',#{search},'%')      
                 	 or brandE like concat('%',#{search},'%')      
-                	 or barcode like concat('%',#{search},'%')      
-                	 or supplierName like concat('%',#{search},'%')  )
+                	 or barcode like concat('%',#{search},'%')       )
             </if>  
         </where>  
 		 ORDER BY id asc
 	</select>
-	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods">
+	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		SELECT *,id as 'key'
 		  FROM t_goods_list
 		  <where> 
@@ -74,7 +112,6 @@
             </if>  
             <if test="search!=null and search !=''">  
                 and (goodsName like concat('%',#{search},'%')  
-                	 or goodsName like concat('%',#{search},'%')   
                 	 or goodsNameE like concat('%',#{search},'%')      
                 	 or brand like concat('%',#{search},'%')      
                 	 or brandE like concat('%',#{search},'%')      
@@ -124,5 +161,37 @@
             </if>  
         </where>  
 		 ORDER BY id asc
+	</select>
+	<update id="updateGoodsOfOperate" parameterType="com.cbec.b2b.entity.HomePage.Goods">
+		UPDATE t_goods_list 
+		<set >  
+		     <if test="ifB2B !=null and ifB2B !=''" >  
+		       		ifB2B=#{ifB2B},
+		     </if>
+		     <if test="ifBBC !=null and ifBBC !=''" >  
+		       		ifBBC=#{ifBBC},
+		     </if> 
+		     <if test="goodsname !=null and goodsname !=''" >  
+		       		goodsname=#{goodsname},
+		     </if> 
+		     <if test="goodsNameE !=null and goodsNameE !=''" >  
+		       		goodsNameE=#{goodsNameE},
+		     </if> 
+		     <if test="brand !=null and brand !=''" >  
+		       		brand=#{brand},
+		     </if> 
+		     <if test="brandE !=null and brandE !=''" >  
+		       		brandE=#{brandE},
+		     </if> 
+		     <if test="barcode !=null and barcode !=''" >  
+		       		barcode=#{barcode},
+		     </if> 
+	   </set>  
+		 WHERE id=#{id}
+	</update>
+	<select id="getGoodsById"  resultType="com.cbec.b2b.entity.HomePage.Goods">
+		SELECT id,slt,barcode,goodsName,goodsNameE,brand,brandE 
+		  FROM t_goods_list
+		 where id = #{id}
 	</select>
 </mapper>

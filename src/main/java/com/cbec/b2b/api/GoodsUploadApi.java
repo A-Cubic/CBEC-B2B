@@ -1,6 +1,7 @@
 package com.cbec.b2b.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
+import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.service.IGoodsUploadService;
 import com.github.pagehelper.PageHelper;
@@ -53,24 +56,11 @@ public class GoodsUploadApi {
     	if(c>0) result="1";
     	return result;
     }
+    //////////////////////////////////////////商品相关 begin////////////////////////////////////////////////
     @RequestMapping(value = "/supplier/goodslist")
     public PageInfo<Goods> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<Goods> LGoods = service.getB2BGoodsListToOffer(searchGoods);
-    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
-        return pageData;
-    }
-    @RequestMapping(value = "/operate/goodslist")
-    public PageInfo<Goods> getGoodsListOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getGoodsList(searchGoods);
-    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
-        return pageData;
-    }
-    @RequestMapping(value = "/purchasers/goodslist")
-    public PageInfo<Goods> getGoodsListOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
@@ -81,6 +71,33 @@ public class GoodsUploadApi {
     	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
         return pageData;
     }
+    @RequestMapping(value = "/purchasers/goodslist")
+    public PageInfo<Goods> getGoodsListOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<Goods> LGoods = service.getGoodsList(searchGoods);
+    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+        return pageData;
+    }
+    @RequestMapping(value = "/operate/goodslist")
+    public PageInfo<GoodsList> getGoodsListOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
+    	List<GoodsList> LGoods = service.getGoodsListOfOperate(searchGoods);
+    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
+        return pageData;
+    }
+    @RequestMapping(value = "/operate/update")
+    public MsgResponse updateGoodsOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody Goods goods ) {
+		MsgResponse response = new MsgResponse();
+    	response.setMsg(service.updateGoodsOfOperate(userid,goods));
+    	response.setType("1");
+		return response;
+    }
+    @RequestMapping(value = "/operate/goodsbyid")
+    public Goods getGoodsById(@RequestBody Map<String,String> request) {
+		return service.getGoodsById((String)request.get("id"));
+    }
+    //////////////////////////////////////////商品相关 end////////////////////////////////////////////////
+    //////////////////////////////////////////报价单相关 begin////////////////////////////////////////////////
     @RequestMapping(value = "/supplier/offerinfo")
     public PageInfo<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer) {
     	searchOffer = service.getSearchOffer(userid, searchOffer);
@@ -119,6 +136,7 @@ public class GoodsUploadApi {
     public String writeOffer(@RequestHeader(value = "userid") String userid,@RequestBody List<Offer> offerList) {
     	return String.valueOf(service.writeOffer(userid,offerList));
     }
+    //////////////////////////////////////////报价单相关 end////////////////////////////////////////////////
     @RequestMapping(value = "/sendtype")
     public List<SendType> sendType() {
     	

@@ -20,6 +20,7 @@ import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 
 @RestController
@@ -53,26 +54,7 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
         return api.deleteUploadInfoOfOperate(uploadInfo);
     } 
-    @RequestMapping(value = "/supplier/list")
-    public PageInfo<Goods> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
-		Util.responseResultSuccess(res);
-    	return api.getGoodsListOfSupplier(userid,searchGoods);
-    } 
-    @RequestMapping(value = "/operate/list")
-    public PageInfo<Goods> goodslistOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
-		Util.responseResultSuccess(res);
-    	return api.getGoodsListOfOperate(userid,searchGoods);
-    } 
-    @RequestMapping(value = "/purchasers/list")
-    public PageInfo<Goods> goodslistOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
-		Util.responseResultSuccess(res);
-    	return api.getGoodsListOfPurchasers(userid,searchGoods);
-    } 
-    @RequestMapping(value = "/supplier/b2blist")
-    public PageInfo<Goods> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
-		Util.responseResultSuccess(res);
-    	return api.getB2BGoodsList(userid,searchGoods);
-    } 
+   
     @RequestMapping(value = "/supplier/offerinfo")
     public PageInfo<Offer> offerinfoOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchOffer searchOffer,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
@@ -115,7 +97,40 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
     	return api.sendType();
     }
-     
+
+    //////////////////////////////////////////商品相关 begin////////////////////////////////////////////////
+    @RequestMapping(value = "/supplier/list")
+    public PageInfo<Goods> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getGoodsListOfSupplier(userid,searchGoods);
+    } 
+    @RequestMapping(value = "/supplier/b2blist")
+    public PageInfo<Goods> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getB2BGoodsList(userid,searchGoods);
+    } 
+    @RequestMapping(value = "/purchasers/list")
+    public PageInfo<Goods> goodslistOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getGoodsListOfPurchasers(userid,searchGoods);
+    } 
+    @RequestMapping(value = "/operate/list")
+    public PageInfo<GoodsList> goodslistOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getGoodsListOfOperate(userid,searchGoods);
+    } 
+    @RequestMapping(value = "/operate/update")
+    public MsgResponse updateGoodsOfOperate(@RequestHeader(value = "userid") String userid,@RequestBody Goods goods,HttpServletResponse res ) {
+    	Util.responseResultSuccess(res);
+    	return api.updateGoodsOfOperate(userid,goods);
+    }
+
+    @RequestMapping(value = "/operate/goodsbyid")
+    public Goods getGoodsById(@RequestBody Map<String,String> request,HttpServletResponse res ) {
+    	Util.responseResultSuccess(res);
+    	return api.getGoodsById(request);
+    }
+    //////////////////////////////////////////商品相关 end////////////////////////////////////////////////
 }
 
 
