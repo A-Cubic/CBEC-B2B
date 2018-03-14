@@ -35,7 +35,7 @@ public class HomePageController {
         return api.getScreen();
     }
     @RequestMapping(value = "/GoodsList")
-    public PageInfo<GoodsList> goodslist(@RequestBody SearchGoods searchGoods ) {
+    public com.github.pagehelper.PageInfo<GoodsList> goodslist(@RequestBody SearchGoods searchGoods ) {
     	return api.getGoodsList(searchGoods);
     }
     @RequestMapping(value = "/B2BGoodsList")
