@@ -110,7 +110,7 @@ public class HomePageServiceImpl implements IHomePageService {
     	AdverType at = new AdverType();
     	at.setBanner(LBanner);
     	at.setBrands(LBrands);
-    	at.setGoodsList(LGoods);
+    	at.setGoods(LGoods);
     	
     	Adver a = new Adver();
     	a.setState(0);
