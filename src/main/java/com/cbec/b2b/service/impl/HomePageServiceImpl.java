@@ -13,10 +13,13 @@ import com.cbec.b2b.entity.Catelog.CateThree;
 import com.cbec.b2b.entity.Catelog.CateType;
 import com.cbec.b2b.entity.Catelog.CateType2;
 import com.cbec.b2b.entity.Catelog.Catelog;
+import com.cbec.b2b.entity.HomePage.Adver;
+import com.cbec.b2b.entity.HomePage.AdverType;
 import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 import com.cbec.b2b.mapper.GoodsMapper;
@@ -29,10 +32,6 @@ public class HomePageServiceImpl implements IHomePageService {
 
 	@Autowired
 	HomePageMapper mapper;
-	@Autowired
-	UserMapper usermapper;
-	@Autowired
-	GoodsMapper goodsmapper;
 
 	@Override
 	public List<Banner> getBanner() {
@@ -44,10 +43,10 @@ public class HomePageServiceImpl implements IHomePageService {
 		return mapper.getBrands();
 	}
 
-	@Override
-	public List<Goods> getGoods() {
-		return mapper.getGoods();
-	}
+//	@Override
+//	public List<Goods> getGoods() {
+//		return mapper.getGoods();
+//	}
 
 	@Override
 	public List<Country> getCountry() {
@@ -64,12 +63,12 @@ public class HomePageServiceImpl implements IHomePageService {
 	}
 
 	@Override
-	public List<Goods> getGoodsList(SearchGoods searchGoods) {
-		return goodsmapper.getGoodsList(searchGoods);
+	public List<GoodsList> getGoodsList(SearchGoods searchGoods) {
+		return mapper.getGoodsList(searchGoods);
 	}
 	@Override
-	public List<Goods> getB2BGoodsList(SearchGoods searchGoods) {
-		return goodsmapper.getB2BGoodsList(searchGoods);
+	public List<GoodsList> getB2BGoodsList(SearchGoods searchGoods) {
+		return mapper.getB2BGoodsList(searchGoods);
 	}
 
 	@Override
@@ -98,6 +97,26 @@ public class HomePageServiceImpl implements IHomePageService {
     	catelog.setResults(cateType);
     	
         return catelog;
+	}
+
+	@Override
+	public Adver getAdver() {
+		List<Banner> LBanner= mapper.getBanner();
+    	List<Brands> LBrands= mapper.getBrands();
+    	
+    	
+    	List<GoodsList> LGoods = mapper.getRecomGoods();
+    	
+    	AdverType at = new AdverType();
+    	at.setBanner(LBanner);
+    	at.setBrands(LBrands);
+    	at.setGoodsList(LGoods);
+    	
+    	Adver a = new Adver();
+    	a.setState(0);
+    	a.setResults(at);
+    	
+    	return a;
 	}
 	
 }

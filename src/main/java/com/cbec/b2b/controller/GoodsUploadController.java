@@ -19,9 +19,9 @@ import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
-import com.cbec.b2b.entity.HomePage.Goods;
-import com.cbec.b2b.entity.HomePage.GoodsList;
-import com.cbec.b2b.entity.HomePage.SearchGoods;
+import com.cbec.b2b.entity.GoodsUpload.Goods;
+import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 
 @RestController
 @RequestMapping(value = "/llback/goods")
@@ -100,17 +100,17 @@ public class GoodsUploadController {
 
     //////////////////////////////////////////商品相关 begin////////////////////////////////////////////////
     @RequestMapping(value = "/supplier/list")
-    public PageInfo<Goods> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<GoodsList> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.getGoodsListOfSupplier(userid,searchGoods);
     } 
     @RequestMapping(value = "/supplier/b2blist")
-    public PageInfo<Goods> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<GoodsList> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.getB2BGoodsList(userid,searchGoods);
     } 
     @RequestMapping(value = "/purchasers/list")
-    public PageInfo<Goods> goodslistOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
+    public PageInfo<GoodsList> goodslistOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.getGoodsListOfPurchasers(userid,searchGoods);
     } 

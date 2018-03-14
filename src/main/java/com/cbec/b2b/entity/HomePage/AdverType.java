@@ -9,5 +9,5 @@ import lombok.Data;
 public class AdverType {
 	private List<Banner> banner;
 	private List<Brands> brands;
-	private List<Goods> goods;
+	private List<GoodsList> goodsList;
 }

@@ -15,9 +15,9 @@ import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
-import com.cbec.b2b.entity.HomePage.Goods;
-import com.cbec.b2b.entity.HomePage.GoodsList;
-import com.cbec.b2b.entity.HomePage.SearchGoods;
+import com.cbec.b2b.entity.GoodsUpload.Goods;
+import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 import com.cbec.b2b.service.IGoodsUploadService;
 import com.github.pagehelper.PageHelper;
 
@@ -58,24 +58,24 @@ public class GoodsUploadApi {
     }
     //////////////////////////////////////////商品相关 begin////////////////////////////////////////////////
     @RequestMapping(value = "/supplier/goodslist")
-    public PageInfo<Goods> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<GoodsList> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getB2BGoodsListToOffer(searchGoods);
-    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+    	List<GoodsList> LGoods = service.getB2BGoodsListToOffer(searchGoods);
+    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/supplier/b2bgoodslist")
-    public PageInfo<Goods> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<GoodsList> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getB2BGoodsList(searchGoods);
-    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+    	List<GoodsList> LGoods = service.getB2BGoodsList(searchGoods);
+    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/purchasers/goodslist")
-    public PageInfo<Goods> getGoodsListOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    public PageInfo<GoodsList> getGoodsListOfPurchasers(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
-    	List<Goods> LGoods = service.getGoodsList(searchGoods);
-    	PageInfo<Goods> pageData = new PageInfo<Goods>(LGoods);
+    	List<GoodsList> LGoods = service.getGoodsList(searchGoods);
+    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/operate/goodslist")

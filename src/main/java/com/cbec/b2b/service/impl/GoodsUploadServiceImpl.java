@@ -12,9 +12,9 @@ import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
-import com.cbec.b2b.entity.HomePage.Goods;
-import com.cbec.b2b.entity.HomePage.GoodsList;
-import com.cbec.b2b.entity.HomePage.SearchGoods;
+import com.cbec.b2b.entity.GoodsUpload.Goods;
+import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 import com.cbec.b2b.mapper.GoodsMapper;
 import com.cbec.b2b.mapper.GoodsUploadMapper;
 import com.cbec.b2b.mapper.PublicMapper;
@@ -81,17 +81,17 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		return goodsmapper.getGoodsListOfOperate(searchGoods);
 	}
 	@Override
-	public List<Goods> getGoodsList(SearchGoods searchGoods) {
+	public List<GoodsList> getGoodsList(SearchGoods searchGoods) {
 		// TODO Auto-generated method stub
 		return goodsmapper.getGoodsList(searchGoods);
 	}
 	@Override
-	public List<Goods> getB2BGoodsListToOffer(SearchGoods searchGoods) {
+	public List<GoodsList> getB2BGoodsListToOffer(SearchGoods searchGoods) {
 		// TODO Auto-generated method stub
 		return goodsmapper.getB2BGoodsListToOffer(searchGoods);
 	}
 	@Override
-	public List<Goods> getB2BGoodsList(SearchGoods searchGoods) {
+	public List<GoodsList> getB2BGoodsList(SearchGoods searchGoods) {
 		// TODO Auto-generated method stub
 		return goodsmapper.getB2BGoodsList(searchGoods);
 	}

@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.Catelog.Catelog;
+import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.Banner;
 import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
+import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 
@@ -16,11 +18,12 @@ import com.cbec.b2b.entity.HomePage.SendType;
 public interface IHomePageService {
 	List<Banner> getBanner();
 	List<Brands> getBrands();
-	List<Goods> getGoods();
+//	List<Goods> getGoods();
 	List<Country> getCountry();
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
-	List<Goods> getGoodsList(SearchGoods searchGoods);
-	List<Goods> getB2BGoodsList(SearchGoods searchGoods);
+	List<GoodsList> getGoodsList(SearchGoods searchGoods);
+	List<GoodsList> getB2BGoodsList(SearchGoods searchGoods);
 	Catelog getCatalogAndBrands();
+	Adver getAdver();
 }

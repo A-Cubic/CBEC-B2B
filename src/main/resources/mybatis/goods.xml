@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cbec.b2b.mapper.GoodsMapper">
 	
-	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT * ,id as 'key'
+	<select id="getGoodsList" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsList" parameterType="com.cbec.b2b.entity.GoodsUpload.SearchGoods">
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    ifB2B='1' 
@@ -42,8 +42,8 @@
         </where>  
 		 ORDER BY id asc
 	</select>
-	<select id="getGoodsListOfOperate" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT id,goodsname,price,slt ,barcode,ifB2B,id as 'key'
+	<select id="getGoodsListOfOperate" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsList" parameterType="com.cbec.b2b.entity.GoodsUpload.SearchGoods">
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    1=1 
@@ -81,8 +81,8 @@
         </where>  
 		 ORDER BY id asc
 	</select>
-	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.HomePage.Goods" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT *,id as 'key'
+	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsList" parameterType="com.cbec.b2b.entity.GoodsUpload.SearchGoods">
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    ifB2B='1' and ifBBC ='0' 
@@ -121,8 +121,8 @@
         </where>  
 		 ORDER BY id asc
 	</select>
-	<select id="getB2BGoodsListToOffer" resultType="com.cbec.b2b.entity.HomePage.Goods">
-		SELECT *,id as 'key'
+	<select id="getB2BGoodsListToOffer" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsList">
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
 		  FROM t_goods_list
 		  <where> 
 		    ifB2B='1' and ifBBC ='0' 
@@ -162,7 +162,7 @@
         </where>  
 		 ORDER BY id asc
 	</select>
-	<update id="updateGoodsOfOperate" parameterType="com.cbec.b2b.entity.HomePage.Goods">
+	<update id="updateGoodsOfOperate" parameterType="com.cbec.b2b.entity.GoodsUpload.Goods">
 		UPDATE t_goods_list 
 		<set >  
 		     <if test="ifB2B !=null and ifB2B !=''" >  
@@ -189,7 +189,7 @@
 	   </set>  
 		 WHERE id=#{id}
 	</update>
-	<select id="getGoodsById"  resultType="com.cbec.b2b.entity.HomePage.Goods">
+	<select id="getGoodsById"  resultType="com.cbec.b2b.entity.GoodsUpload.Goods">
 		SELECT id,slt,barcode,goodsName,goodsNameE,brand,brandE 
 		  FROM t_goods_list
 		 where id = #{id}

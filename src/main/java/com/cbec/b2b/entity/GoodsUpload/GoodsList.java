@@ -1,4 +1,4 @@
-package com.cbec.b2b.entity.HomePage;
+package com.cbec.b2b.entity.GoodsUpload;
 
 import lombok.Data;
 
