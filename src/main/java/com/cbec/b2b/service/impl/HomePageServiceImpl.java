@@ -64,10 +64,52 @@ public class HomePageServiceImpl implements IHomePageService {
 
 	@Override
 	public List<GoodsList> getGoodsList(SearchGoods searchGoods) {
+		if("1".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("1");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("0");
+		}else if("2".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("1");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("0");
+		}else if("3".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("1");
+			searchGoods.setIfMY("0");
+		}else if("4".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("1");
+		}
 		return mapper.getGoodsList(searchGoods);
 	}
 	@Override
 	public List<GoodsList> getB2BGoodsList(SearchGoods searchGoods) {
+		if("1".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("1");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("0");
+		}else if("2".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("1");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("0");
+		}else if("3".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("1");
+			searchGoods.setIfMY("0");
+		}else if("4".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("0");
+			searchGoods.setIfHW("0");
+			searchGoods.setIfBS("0");
+			searchGoods.setIfMY("1");
+		}
 		return mapper.getB2BGoodsList(searchGoods);
 	}
 

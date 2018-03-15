@@ -9,6 +9,7 @@ public class SearchGoods {
 	String ifHW; //是否海外自提
 	String ifBS; //是否保税备货
 	String ifMY; //是否一般贸易
+	String sendType;//提货方式
 	String country;//原产国
 	String catelog1;//商品分类1
 	String catelog2;//商品分类2
