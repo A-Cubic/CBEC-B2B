@@ -70,7 +70,7 @@
 		FROM 
 			t_sys_menu t1
 	    WHERE 
-	    	t1.menuPid=0
+	    	t1.menuPid=0 and t1.flag='1'
 	   	ORDER BY 
 	   		t1.sort asc
 	</select>
@@ -92,7 +92,7 @@
 		FROM 
 			t_sys_menu t1
 		WHERE 
-			t1.menuPid=1 and t1.parent=#{id}
+			t1.menuPid=1 and t1.parent=#{id} and t1.flag='1'
    		ORDER BY 
    			t1.sort asc
 	</select>
