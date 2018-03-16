@@ -42,15 +42,15 @@ public class HomePageApi {
     	return service.getAdver();
     }
     @RequestMapping(value = "/goodslist")
-    public PageInfo<GoodsList> getGoodsList(@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getPageNum(),searchGoods.getPageSize());
+    public com.github.pagehelper.PageInfo<GoodsList> getGoodsList(@RequestBody SearchGoods searchGoods ) {
+    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
     	List<GoodsList> LGoods = service.getGoodsList(searchGoods);
-    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
+    	com.github.pagehelper.PageInfo<GoodsList> pageData = new com.github.pagehelper.PageInfo<GoodsList>(LGoods);
         return pageData;
     }
     @RequestMapping(value = "/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestBody SearchGoods searchGoods ) {
-    	PageHelper.startPage(searchGoods.getPageNum(),searchGoods.getPageSize());
+    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
     	List<GoodsList> LGoods = service.getB2BGoodsList(searchGoods);
     	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
         return pageData;
