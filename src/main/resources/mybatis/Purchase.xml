@@ -42,7 +42,7 @@
             </if> 
             <if test="timeEnd !=null and timeEnd !=''">  
 <!--                  and date_format(t1.createtime,'%Y%m%d') &lt; #{timeEnd} -->
-                  and t1.createtime <![CDATA[ <= ]]> #{timeEnd}
+                  and t1.createtime <![CDATA[ <= ]]> DATE_SUB(#{timeEnd},INTERVAL -1 DAY)
             </if> 
             <if test="stage !=null and stage !=''">  
                  and t1.stage = #{stage} 
@@ -56,7 +56,7 @@
 		  
         </where>
 		 ORDER BY  
-		 	CONCAT(t1.status,t1.createtime) DESC
+		 	t1.id DESC
 	</select>
 	
 	<select id="getPurchaseGoods"   resultType="com.cbec.b2b.entity.purchase.PurchaseGoods" parameterType="com.cbec.b2b.entity.purchase.SearchPurchaseGoods">
@@ -311,7 +311,7 @@
             </if> 
             <if test="timeEnd !=null and timeEnd !=''">  
 <!--                  and date_format(t1.createtime,'%Y%m%d') &lt; #{timeEnd} -->
-                  and t1.createtime <![CDATA[ <= ]]> #{timeEnd}
+                  and t1.createtime <![CDATA[ <= ]]> DATE_SUB(#{timeEnd},INTERVAL -1 DAY)
             </if> 
             <if test="stage !=null and stage !=''">  
                  and t1.stage = #{stage} 
@@ -325,7 +325,7 @@
 		  
         </where>
 		 ORDER BY  
-		 	CONCAT(t1.status,t1.createtime) DESC
+		 	t1.id DESC
 	</select>
 	
 	<select id="getInquiryOfSupplier" resultType="com.cbec.b2b.entity.purchase.Inquiry" parameterType="java.lang.String">		
