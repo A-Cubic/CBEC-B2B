@@ -71,6 +71,9 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Purchase addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
 		purchase.setPurchasesn(id);
+		if(purchase.getDeliverytime()!=null &&purchase.getDeliverytime().length()>8) {
+			purchase.setDeliverytime(purchase.getDeliverytime().substring(0,8));
+		}
 		if(mapper.addPurchase(purchase)>0) {
 			return purchase;
 		}else {
@@ -117,9 +120,17 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public String addPurchaseGoods(String purchasesn, List<PurchaseGoods> purchaseGoodsList) {
 		mapper.delPurchaseGoodsByPurchasesn(purchasesn);
 		int c = 0;
+		String goodsName="";
 		for(PurchaseGoods purchaseGoods:purchaseGoodsList) {
+			if(c<3) {
+				goodsName+=purchaseGoods.getGoodsname()+",";
+			}
 			c+=mapper.addPurchaseGoods(purchaseGoods);
 		}
+		Purchase purchase = new Purchase();
+		purchase.setPurchasesn(purchasesn);
+		purchase.setGoodsnames(goodsName.substring(0, 30)+"...");
+		mapper.updatePurchaseGoodsName(purchase);
 		return String.valueOf(c);
 	}
 	

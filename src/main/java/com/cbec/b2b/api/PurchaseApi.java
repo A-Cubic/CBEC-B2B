@@ -68,21 +68,29 @@ public class PurchaseApi {
     		purchaseGoods.setPurchasesn(purchasesn);
     		
     		if(purchaseGoods.getPurchasesn()==null ||"".equals(purchaseGoods.getPurchasesn())){
-    			return null;
+    	    	response.setMsg("缺少采购单号");
+    			return response;
         	}else if(purchaseGoods.getDeliverytype()==null ||"".equals(purchaseGoods.getDeliverytype())){
-    			return null;
+    	    	response.setMsg("缺少提货方式");
+    			return response;
         	}else if(purchaseGoods.getGoodsid()==null ||"".equals(purchaseGoods.getGoodsid())){
-    			return null;
+    	    	response.setMsg("缺少商品序号");
+    			return response;
         	}else if(purchaseGoods.getGoodsname()==null ||"".equals(purchaseGoods.getGoodsname())){
-    			return null;
+    	    	response.setMsg("缺少商品名");
+    			return response;
         	}else if(purchaseGoods.getPrice()==null ||"".equals(purchaseGoods.getPrice())){
-    			return null;
+    	    	response.setMsg("缺少单价");
+    			return response;
         	}else if(purchaseGoods.getExpectprice()==null ||"".equals(purchaseGoods.getExpectprice())){
-    			return null;
+    	    	response.setMsg("缺少期望单价");
+    			return response;
         	}else if(purchaseGoods.getTotal()==null ||"".equals(purchaseGoods.getTotal())){
-    			return null;
+    	    	response.setMsg("缺少商品数量");
+    			return response;
         	}else if(purchaseGoods.getBarcode()==null ||"".equals(purchaseGoods.getBarcode())){
-    			return null;
+    	    	response.setMsg("缺少条码");
+    			return response;
         	}
     	}
 
