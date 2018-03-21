@@ -71,8 +71,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	public Purchase addPurchase(Purchase purchase) {
 		String id = getDate()+publicmapper.getSeq("PURCHASE");
 		purchase.setPurchasesn(id);
-		if(purchase.getDeliverytime()!=null &&purchase.getDeliverytime().length()>8) {
-			purchase.setDeliverytime(purchase.getDeliverytime().substring(0,8));
+		if(purchase.getDeliverytime()!=null &&purchase.getDeliverytime().length()>10) {
+			purchase.setDeliverytime(purchase.getDeliverytime().substring(0,10));
 		}
 		if(mapper.addPurchase(purchase)>0) {
 			return purchase;
