@@ -59,6 +59,7 @@ public class GoodsUploadApi {
     //////////////////////////////////////////商品相关 begin////////////////////////////////////////////////
     @RequestMapping(value = "/supplier/goodslist")
     public PageInfo<GoodsList> getGoodsListOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {
+    	searchGoods.setUserCode(userid);
     	PageHelper.startPage(searchGoods.getCurrent(),searchGoods.getPageSize());
     	List<GoodsList> LGoods = service.getB2BGoodsListToOffer(searchGoods);
     	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);

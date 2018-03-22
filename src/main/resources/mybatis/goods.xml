@@ -125,31 +125,7 @@
 		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
 		  FROM t_goods_list
 		  <where> 
-		    ifB2B='1' and ifBBC ='0' 
-            <if test="userCode !=null and userCode !=''">  
-                and supplierCode=#{userCode} 
-            </if> 
-            <if test="ifXG!=null and ifXG !=''">  
-                and ifXG= #{ifXG}  
-            </if>    
-            <if test="ifHW !=null and ifHW !=''">  
-                and ifHW= #{ifHW}  
-            </if>    
-            <if test="ifBS !=null and ifBS !=''">  
-                and ifBS= #{ifBS}  
-            </if>    
-            <if test="ifMY !=null and ifMY !=''">  
-                and ifMY= #{ifMY}  
-            </if>  
-            <if test="country!=null and country !=''">  
-                and country= #{country}  
-            </if>  
-            <if test="catelog3!=null and catelog3 !=''">  
-                and catelog3= #{catelog3}  
-            </if>  
-            <if test="brands!=null and brands !=''">  
-                and brand= #{brands}  
-            </if>  
+		    ifB2B='1' and ifBBC ='0'  
             <if test="search!=null and search !=''">  
                 and (goodsName like concat('%',#{search},'%')  
                 	 or goodsName like concat('%',#{search},'%')   
@@ -158,6 +134,9 @@
                 	 or brandE like concat('%',#{search},'%')      
                 	 or barcode like concat('%',#{search},'%')      
                 	 or supplierName like concat('%',#{search},'%')  )
+            </if>  
+            <if test="userCode !=null and userCode !=''">  
+                and id not in (select goodsid from t_goods_offer where usercode =#{userCode} )
             </if>  
         </where>  
 		 ORDER BY id asc

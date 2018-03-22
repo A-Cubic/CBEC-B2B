@@ -156,6 +156,7 @@ public class PurchaseServiceImpl implements IPurchaseService {
 				for(Offer offer : offerList) {
 					Inquiry inquiry = new Inquiry();
 					inquiry.setPurchasesn(pGoods.getPurchasesn());
+					inquiry.setDemand(Double.valueOf(pGoods.getTotal()));
 					inquiry.setUsercode(offer.getUsercode());
 					inquiry.setGoodsid(offer.getGoodsid());
 					inquiry.setGoodsname(offer.getGoodsName());

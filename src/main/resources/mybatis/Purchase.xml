@@ -181,10 +181,10 @@
 	</delete>
 
 	<insert id="addInquiry"  parameterType="java.util.List">  
-        insert into t_purchase_inquiry(purchasesn,usercode,goodsid,goodsname,barcode,price,flag,createtime,remark) 
+        insert into t_purchase_inquiry(purchasesn,usercode,goodsid,goodsname,barcode,demand,price,flag,createtime,remark) 
         values 
         <foreach collection="list" item="item" index="index" separator="," > 
-       		(#{item.purchasesn},#{item.usercode},#{item.goodsid},#{item.goodsname},#{item.barcode},#{item.price},#{item.flag},now(),#{item.remark})
+       		(#{item.purchasesn},#{item.usercode},#{item.goodsid},#{item.goodsname},#{item.barcode},#{item.demand},#{item.price},#{item.flag},now(),#{item.remark})
         </foreach>
 	</insert>
 	

@@ -11,6 +11,7 @@ public class Inquiry {
 	private int goodsid;//商品ID
 	private String goodsname;//商品名称
 	private String barcode;//产品条码
+	private double demand;//采购商需求数量
 	private double price;//价格
 	private double total;//供货数量
 	private String flag;//状态
