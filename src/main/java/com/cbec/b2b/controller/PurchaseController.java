@@ -156,7 +156,7 @@ public class PurchaseController {
     @RequestMapping(value = "/operate/update/price")
     public MsgResponse updatePriceOfOperate(@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
-        return api.updatePriceOfOperate((String)request.get("id"),(String)request.get("realprice"));
+        return api.updatePriceOfOperate((String)request.get("id"),(String)request.get("realprice"),(String)request.get("total"));
     }
     
     @RequestMapping(value = "/operate/supply/list")

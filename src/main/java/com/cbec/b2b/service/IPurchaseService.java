@@ -34,7 +34,7 @@ public interface IPurchaseService {
 	List<PurchaseGoods> goodsListOfOperate(String purchasesn);
 	Purchase getPurchaseOfOperate(String purchasesn);
 	MsgResponse updateFeeOfOperate(String purchasesn,String fee);
-	MsgResponse updatePriceOfOperate(String id,String price);
+	MsgResponse updatePriceOfOperate(String id,String price,String total);
 	List<Inquiry> supplyListOfOperate(String purchasesn,String goodsid);
 	MsgResponse updateSupplyFlagOfOperate(String id,String flag);
 	

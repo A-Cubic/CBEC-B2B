@@ -34,7 +34,7 @@ public interface PurchaseMapper {
 	List<PurchaseGoods> listGoodsOfOperate(@Param("purchasesn") String purchasesn);
 	Purchase getPurchaseBySnOfOperate(@Param("purchasesn") String purchasesn);
 	int updateFeeOfOperate(@Param("purchasesn") String purchasesn,@Param("fee") String fee);
-	int updatePriceOfOperate(@Param("id") String id,@Param("price") String price);
+	int updatePriceOfOperate(@Param("id") String id,@Param("price") String price,@Param("total") String total);
 	List<Inquiry> supplyListOfOperate(@Param("purchasesn") String purchasesn,@Param("goodsid") String goodsid);
 	int updateSupplyFlagOfOperate(@Param("id") String id,@Param("flag") String flag);
 

@@ -196,7 +196,7 @@
 			t_purchase_goods t1
 		LEFT JOIN
 			( SELECT t.purchasesn,
-					SUM(t.realprice) sum
+					SUM(t.realprice*t.total) sum
 				FROM 
 					t_purchase_goods t
 				WHERE 
@@ -230,8 +230,14 @@
 	<update id="updatePriceOfOperate" parameterType="java.lang.String">  
         UPDATE 
 			t_purchase_goods t
-		SET 
-			t.realprice=#{price}
+			<set >  
+		     <if test="price !=null and price !=''" >  
+		       		t.realprice=#{price},
+		     </if>
+		     <if test="total !=null and total !=''" >  
+		       		t.total = #{total},
+		     </if> 
+	   </set> 
 		WHERE
 			t.id=#{id}
 	</update>

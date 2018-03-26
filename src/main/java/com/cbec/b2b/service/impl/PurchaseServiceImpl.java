@@ -229,8 +229,8 @@ public class PurchaseServiceImpl implements IPurchaseService {
 	}
 	
 	@Override
-	public MsgResponse updatePriceOfOperate(String id, String price) {
-		int num = mapper.updatePriceOfOperate(id,price);
+	public MsgResponse updatePriceOfOperate(String id, String price,String total) {
+		int num = mapper.updatePriceOfOperate(id,price,total);
 		MsgResponse response = new MsgResponse();
 		String result = "";
 		if(num > 0) {
