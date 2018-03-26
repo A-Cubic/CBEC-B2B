@@ -17,6 +17,7 @@ import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.OSSUtils;
 import com.cbec.b2b.common.ServiceException;
+import com.cbec.b2b.common.SmsUtils;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.menu.Menu;
@@ -37,9 +38,11 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	UserMapper mapper;
-	
+
 	@Autowired
 	EmailUtils emailUtils;
+	@Autowired
+	SmsUtils smsUtils;
 	
 	private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
@@ -176,9 +179,14 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public String registerCode(String mail) {
+	public String registerCode(String mail,String mailType) {
 		String code = Util.randomCode();
-		emailUtils.sendRegisterCode(mail,code);
+		if("email".equals(mailType)) {
+			emailUtils.sendRegisterCode(mail,code);
+		}else if("phone".equals(mailType)) {
+			smsUtils.sendRegisterCode(mail,code);
+		}
+		
 		return code;
 	}
 

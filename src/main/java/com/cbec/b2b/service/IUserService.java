@@ -26,7 +26,7 @@ public interface IUserService {
 	MessageCountEntity getMessageCount(String account);
 	String updateMessage(String account,String type);
 	MsgResponse registerSubmit(String mail,String password,String type);
-    String registerCode(String mail);
+    String registerCode(String mail,String mailType);
     String registerInfoUpload(RegisterStepTwo bean);
     UserStatus registerStatus(String account);
     String registerCheck(String userId,String usercode,String check,String usertype,String failmark);

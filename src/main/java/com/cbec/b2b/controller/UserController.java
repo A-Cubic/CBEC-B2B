@@ -116,11 +116,10 @@ public class UserController {
 			response.setMsg("非法请求，参数有误.");
 			return response;
 		}
-		if (!Util.checkEmail(mail)) {
+		if (!Util.checkEmail(mail)&&!Util.checkMobileNumber(mail)) {
 			response.setMsg("邮件格式不正确.");
 			return response;
 		}
-		
 		if(pwd.length()<6) {
 			response.setMsg("密码格式有误.");
 			return response;
@@ -151,20 +150,33 @@ public class UserController {
 		}
 		String mail = request.get("mail");
 		if (mail != null && !"".equals(mail)) {
-			if (!Util.checkEmail(mail)) {
+			if (Util.checkEmail(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = api.registerCode(mail,"email");
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else if (Util.checkMobileNumber(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = api.registerCode(mail,"phone");
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else {
 				response.setMsg("邮件格式不正确.");
 				return response;
 			}
-			String redis_temp_code = mail + "_code_temp";
-			if (redisUtil.isExistKey(redis_temp_code)) {
-				Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
-				response.setMsg(leaveTime+"");
-				response.setType("-1");
-				return response;
-			}
-			redisUtil.set(redis_temp_code, mail, 60l);
-			String code = api.registerCode(mail);
-			redisUtil.set(mail + "_code", code, 10800l);
+			
 		} else {
 			response.setMsg("非法的调用,账号为空.");
 			return response;

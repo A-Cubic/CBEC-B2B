@@ -62,8 +62,8 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/register/code")
-    public String registerCode(@RequestParam String mail) {
-        return service.registerCode(mail);
+    public String registerCode(@RequestParam String mail,@RequestParam String mailType) {
+        return service.registerCode(mail,mailType);
     }
     
     @RequestMapping(value = "/register/upload")

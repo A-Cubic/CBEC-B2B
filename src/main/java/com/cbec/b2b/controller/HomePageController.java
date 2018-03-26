@@ -63,8 +63,8 @@ public class HomePageController {
     	   BufferedReader br = null;
     	   try
     	   {
-    		 String code = URLEncoder.encode("#app#=流连物流&#code#=333242", "GBK").toLowerCase();  //输出%C4%E3%BA%C3
-    	     URL url = new URL("http://v.juhe.cn/sms/send?mobile=13644237400&tpl_id=65449&tpl_value="+code+"&key=7c21d791256af1ffdd85375c64846358");
+    		 String code = URLEncoder.encode("#code#=333242", "GBK").toLowerCase();  //输出%C4%E3%BA%C3
+    	     URL url = new URL("http://v.juhe.cn/sms/send?mobile=13644237400&tpl_id=68600&tpl_value="+code+"&key=7c21d791256af1ffdd85375c64846358");
     	     URLConnection urlConnection = url.openConnection();
     	     urlConnection.setAllowUserInteraction(false);
     	     isr = new InputStreamReader(url.openStream());
