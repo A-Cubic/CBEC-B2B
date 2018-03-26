@@ -129,7 +129,11 @@ public class PurchaseServiceImpl implements IPurchaseService {
 		}
 		Purchase purchase = new Purchase();
 		purchase.setPurchasesn(purchasesn);
-		purchase.setGoodsnames(goodsName.substring(0, 30)+"...");
+		String name = goodsName;
+		if(goodsName.length()>30) {
+			name =goodsName.substring(0, 30);
+		}
+		purchase.setGoodsnames(name+"...");
 		mapper.updatePurchaseGoodsName(purchase);
 		return String.valueOf(c);
 	}
