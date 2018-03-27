@@ -374,10 +374,15 @@ public class UserServiceImpl implements IUserService {
 			}
 			mapper.updatetUserRoleRegister(Integer.valueOf(id), role_id);
 			failmark="";
-			emailUtils.sendRegisterSuccess(usercode);
+			if (Util.checkEmail(usercode)) {
+				emailUtils.sendRegisterSuccess(usercode);
+			}
 		}else {
 			verifycode = "-1";
-			emailUtils.sendRegisterFail(usercode,failmark);
+			if (Util.checkEmail(usercode)) {
+				emailUtils.sendRegisterFail(usercode,failmark);
+			}
+			
 		}
 		mapper.updatetUserStatusById(verifycode, id, failmark);
 		
