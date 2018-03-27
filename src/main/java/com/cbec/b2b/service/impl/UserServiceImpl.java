@@ -193,12 +193,14 @@ public class UserServiceImpl implements IUserService {
 			return response;
 		}
 		
-		int c = mapper.updateUserPwd(mail,password);
+		int c = mapper.updateUserPwd(mail,Util.getMD5(password));
 		
 		if(c>0) {
+			response.setType("1");
 			response.setMsg("修改密码成功");
 			return response;
 		}else {
+			response.setType("0");
 			response.setMsg("修改密码失败");
 			return response;
 		}
