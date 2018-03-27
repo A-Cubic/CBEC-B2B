@@ -37,6 +37,6 @@ public interface UserMapper {
 	List<User> getUserList(User user);
 	User getUserByUserId(@Param("id") String id);
 	int updateUserStatusByUserId(@Param("id") String id,@Param("flag") String flag);
-	
+	int updateUserPwd(@Param("account") String account,@Param("password") String password);
 	int updateLoginLastTime(@Param("account") String account);
 }

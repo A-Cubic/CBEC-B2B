@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cbec.b2b.common.ContentErrorMsg;
 import com.cbec.b2b.common.EmailUtils;
 import com.cbec.b2b.common.OSSUtils;
+import com.cbec.b2b.common.RedisUtil;
 import com.cbec.b2b.common.ServiceException;
 import com.cbec.b2b.common.SmsUtils;
 import com.cbec.b2b.common.Util;
@@ -43,6 +44,8 @@ public class UserServiceImpl implements IUserService {
 	EmailUtils emailUtils;
 	@Autowired
 	SmsUtils smsUtils;
+	@Autowired
+	private RedisUtil redisUtil;
 	
 	private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
@@ -179,15 +182,112 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public String registerCode(String mail,String mailType) {
-		String code = Util.randomCode();
-		if("email".equals(mailType)) {
-			emailUtils.sendRegisterCode(mail,code);
-		}else if("phone".equals(mailType)) {
-			smsUtils.sendRegisterCode(mail,code);
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
+	public MsgResponse renameSubmit(String mail,String password) {
+		MsgResponse response = new MsgResponse();
+		
+		int userNum = mapper.isUser(mail);
+		
+		if(userNum==0) {
+			response.setMsg("账号不存在");
+			return response;
 		}
 		
-		return code;
+		int c = mapper.updateUserPwd(mail,password);
+		
+		if(c>0) {
+			response.setMsg("修改密码成功");
+			return response;
+		}else {
+			response.setMsg("修改密码失败");
+			return response;
+		}
+	}
+	@Override
+	public MsgResponse registerCode(String mail) {
+		MsgResponse response = new MsgResponse();
+		int userNum = mapper.isUser(mail);
+		
+		if(userNum>0) {
+			response.setMsg("账号已存在");
+			return response;
+		}else {
+			if (Util.checkEmail(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = Util.randomCode();
+				emailUtils.sendRegisterCode(mail,code);
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else if (Util.checkMobileNumber(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = Util.randomCode();
+				smsUtils.sendRegisterCode(mail,code);
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else {
+				response.setMsg("账号格式不正确.");
+				return response;
+			}
+			response.setMsg("验证码已发送");
+			response.setType("1");
+			return response;
+		}
+		
+	}
+	@Override
+	public MsgResponse renameCode(String mail) {
+		MsgResponse response = new MsgResponse();
+		int userNum = mapper.isUser(mail);
+		
+		if(userNum==0) {
+			response.setMsg("账号不存在");
+			return response;
+		}else {
+			if (Util.checkEmail(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = Util.randomCode();
+				emailUtils.sendRegisterCode(mail,code);
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else if (Util.checkMobileNumber(mail)) {
+				String redis_temp_code = mail + "_code_temp";
+				if (redisUtil.isExistKey(redis_temp_code)) {
+					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
+					response.setMsg(leaveTime+"");
+					response.setType("-1");
+					return response;
+				}
+				redisUtil.set(redis_temp_code, mail, 60l);
+				String code = Util.randomCode();
+				smsUtils.sendRegisterCode(mail,code);
+				redisUtil.set(mail + "_code", code, 10800l);
+			}else {
+				response.setMsg("账号格式不正确.");
+				return response;
+			}
+			response.setMsg("验证码已发送");
+			response.setType("1");
+			return response;
+		}
+		
 	}
 
 	@Override

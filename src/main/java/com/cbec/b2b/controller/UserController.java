@@ -139,7 +139,49 @@ public class UserController {
 
 		return api.registerSubmit(mail, pwd, type);
 	}
+	@RequestMapping(value = "/register/rename")
+	public MsgResponse renameSubmit(@RequestBody Map<String, String> request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
+		if (request == null || request.isEmpty()) {
+			response.setMsg("无效请求");
+			return response;
+		}
 
+		String mail = request.get("mail");
+		String code = request.get("captcha");
+		String pwd = request.get("password");
+		String type = request.get("type");
+		
+		if (mail == null || code == null || pwd == null ||  "".equals(mail) || "".equals(code)
+				|| "".equals(pwd) ) {
+			response.setMsg("非法请求，参数有误.");
+			return response;
+		}
+		if (!Util.checkEmail(mail)&&!Util.checkMobileNumber(mail)) {
+			response.setMsg("账号格式不正确.");
+			return response;
+		}
+		
+		if(pwd.length()<6) {
+			response.setMsg("密码格式有误.");
+			return response;
+		}
+		
+		String key = mail + "_code";
+
+		if (!redisUtil.isExistKey(key)) {
+			response.setMsg("无效的验证码.");
+			return response;
+		}
+		String redis_code = (String)redisUtil.get(key);
+		if(!redis_code.equals(code)) {
+			response.setMsg("验证码不正确.");
+			return response;
+		}
+
+		return api.renameSubmit(mail, pwd);
+	}
 	@RequestMapping(value = "/register/code")
 	public MsgResponse registerCode(@RequestBody Map<String, String> request, HttpServletResponse res) {
 		Util.responseResultSuccess(res);
@@ -150,40 +192,31 @@ public class UserController {
 		}
 		String mail = request.get("mail");
 		if (mail != null && !"".equals(mail)) {
-			if (Util.checkEmail(mail)) {
-				String redis_temp_code = mail + "_code_temp";
-				if (redisUtil.isExistKey(redis_temp_code)) {
-					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
-					response.setMsg(leaveTime+"");
-					response.setType("-1");
-					return response;
-				}
-				redisUtil.set(redis_temp_code, mail, 60l);
-				String code = api.registerCode(mail,"email");
-				redisUtil.set(mail + "_code", code, 10800l);
-			}else if (Util.checkMobileNumber(mail)) {
-				String redis_temp_code = mail + "_code_temp";
-				if (redisUtil.isExistKey(redis_temp_code)) {
-					Long leaveTime = (Long) redisUtil.getExpire(redis_temp_code);
-					response.setMsg(leaveTime+"");
-					response.setType("-1");
-					return response;
-				}
-				redisUtil.set(redis_temp_code, mail, 60l);
-				String code = api.registerCode(mail,"phone");
-				redisUtil.set(mail + "_code", code, 10800l);
-			}else {
-				response.setMsg("邮件格式不正确.");
-				return response;
-			}
+			return api.registerCode(mail);
 			
 		} else {
 			response.setMsg("非法的调用,账号为空.");
 			return response;
 		}
-		response.setMsg("邮件已发送");
-		response.setType("1");
-		return response;
+		
+	}
+	@RequestMapping(value = "/register/renamecode")
+	public MsgResponse renameCode(@RequestBody Map<String, String> request, HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+		MsgResponse response = new MsgResponse();
+		if (request == null || request.isEmpty()) {
+			response.setMsg("无效请求");
+			return response;
+		}
+		String mail = request.get("mail");
+		if (mail != null && !"".equals(mail)) {
+			return api.renameCode(mail);
+			
+		} else {
+			response.setMsg("非法的调用,账号为空.");
+			return response;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/register/upload")
