@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://mysql:13306/llwell?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://mysql:3306/llwell?useUnicode=true&characterEncoding=utf8
       username: root
       password: ENC(rbl6larX3FdtJm/uZiS1sdJk3N1ttINm)
       filters: stat,slf4j
