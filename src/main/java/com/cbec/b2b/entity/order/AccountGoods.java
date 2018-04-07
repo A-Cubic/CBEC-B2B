@@ -7,6 +7,7 @@ public class AccountGoods {
 	private int id;
 	private String merchantOrderId;
 	private String barCode;
+	private String skuBillName;
 	private double offer;
 	private int quantity;
 	private double sum;
