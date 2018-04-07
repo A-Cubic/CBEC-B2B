@@ -37,7 +37,7 @@ public class OrderServiceImpl implements IOrderService {
 		double sum=0;
 		try {
 			for(AccountGoods ag :listAG) {
-				sum+=ag.getSkuUnitPrice() *ag.getQuantity();
+				sum+=ag.getOffer() *ag.getQuantity();
 			}
 		}catch(Exception e) {
 			return null;

@@ -19,9 +19,9 @@
 		 ORDER BY id asc
 	</select>
 	<select id="getAccountGoods" resultType="com.cbec.b2b.entity.order.AccountGoods" parameterType="String">
-		SELECT g.merchantOrderId,g.barCode,g.skuUnitPrice,g.quantity
-		  FROM t_order_list t,t_order_goods g
-		 where t.merchantOrderId = g.merchantOrderId and t.apitype = #{userid}
+		SELECT g.merchantOrderId,g.barCode,o.offer,g.quantity
+		  FROM t_order_list t,t_order_goods g,t_ck_goods_offer o 
+		 where t.merchantOrderId = g.merchantOrderId and g.barCode = o.barcode and   t.apitype ='fengqu'
 		 ORDER BY g.merchantOrderId,g.id asc
 	</select>
 	
