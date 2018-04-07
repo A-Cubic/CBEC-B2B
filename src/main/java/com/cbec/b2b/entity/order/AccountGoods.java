@@ -9,4 +9,5 @@ public class AccountGoods {
 	private String barCode;
 	private double offer;
 	private int quantity;
+	private double sum;
 }
