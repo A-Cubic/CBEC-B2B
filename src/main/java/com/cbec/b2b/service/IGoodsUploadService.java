@@ -10,6 +10,7 @@ import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 
 @Service
@@ -29,4 +30,7 @@ public interface IGoodsUploadService {
 	List<SendType> getSendType();
 	SearchOffer getSearchOffer(String userCode, SearchOffer searchOffer);
 	Goods getGoodsById(String id);
+	List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search);
+	List<GoodsNumList> getGoodsNumList(String search);
+	String getUserType(String userCode);
 }

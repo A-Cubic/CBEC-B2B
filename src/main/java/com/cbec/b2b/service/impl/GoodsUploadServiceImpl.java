@@ -14,6 +14,7 @@ import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 import com.cbec.b2b.mapper.GoodsMapper;
 import com.cbec.b2b.mapper.GoodsUploadMapper;
@@ -124,10 +125,28 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		return searchOffer;
 	}
 
+	
 	@Override
 	public Offer getOfferById(String id) {
 		// TODO Auto-generated method stub
 		return mapper.getOfferById(id);
+	}
+
+	@Override
+	public List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search) {
+		
+		return mapper.getGoodsNumListOfSupplier(userCode, search);
+	}
+	@Override
+	public List<GoodsNumList> getGoodsNumList(String search) {
+		
+		return mapper.getGoodsNumList(search);
+	}
+
+	@Override
+	public String getUserType(String userCode) {
+		Map<String,Object> userMap = usermapper.getUserType(userCode);
+		return (String)userMap.get("usertype");
 	}
 
 

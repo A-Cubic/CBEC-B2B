@@ -17,6 +17,7 @@ import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 import com.cbec.b2b.service.IGoodsUploadService;
 import com.github.pagehelper.PageHelper;
@@ -64,6 +65,29 @@ public class GoodsUploadApi {
     	List<GoodsList> LGoods = service.getB2BGoodsListToOffer(searchGoods);
     	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
         return pageData;
+    }
+    @RequestMapping(value = "/goodsnum")
+    public PageInfo<GoodsNumList> getGoodsNum(@RequestHeader(value = "userid") String userid ,@RequestBody Map<String,String> request) {
+    	int current =1,pagesize=10;
+    	try {
+    		current = Integer.parseInt(request.get("current"));
+    		pagesize = Integer.parseInt(request.get("pageSize"));
+    	} catch (NumberFormatException e) {
+    	    
+    	}
+    	String type = service.getUserType(userid);
+    	if("0".equals(type)||"5".equals(type)) {
+    		PageHelper.startPage( current,pagesize);
+        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"));
+        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
+            return pageData;
+		}else {
+    		PageHelper.startPage( current,pagesize);
+        	List<GoodsNumList> LGoods = service.getGoodsNumListOfSupplier(userid,request.get("search"));
+        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
+	        return pageData;
+		}
+    	
     }
     @RequestMapping(value = "/supplier/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {

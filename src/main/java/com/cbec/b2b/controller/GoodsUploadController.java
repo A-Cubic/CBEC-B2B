@@ -21,6 +21,7 @@ import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
+import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
 
 @RestController
@@ -103,6 +104,11 @@ public class GoodsUploadController {
     public PageInfo<GoodsList> goodslistOfSupplier(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.getGoodsListOfSupplier(userid,searchGoods);
+    } 
+    @RequestMapping(value = "/goodsnum")
+    public PageInfo<GoodsNumList> goodsnum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getGoodsNum(userid,request);
     } 
     @RequestMapping(value = "/supplier/b2blist")
     public PageInfo<GoodsList> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
