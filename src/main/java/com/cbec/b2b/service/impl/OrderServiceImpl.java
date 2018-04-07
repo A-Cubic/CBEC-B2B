@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cbec.b2b.entity.order.Account;
+import com.cbec.b2b.entity.order.AccountGoods;
 import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
@@ -27,5 +29,22 @@ public class OrderServiceImpl implements IOrderService {
 	public List<OrderGoods> getOrderGoods(String userid, String orderId) {
 		// TODO Auto-generated method stub
 		return mapper.getOrderGoods(orderId);
+	}
+
+	@Override
+	public Account getAccount(String userid) {
+		List<AccountGoods> listAG = mapper.getAccountGoods(userid);
+		double sum=0;
+		try {
+			for(AccountGoods ag :listAG) {
+				sum+=ag.getSkuUnitPrice() *ag.getQuantity();
+			}
+		}catch(Exception e) {
+			return null;
+		}
+		Account account = new Account();
+		account.setTotal(sum);
+		account.setListAG(listAG);
+		return account;
 	}
 }

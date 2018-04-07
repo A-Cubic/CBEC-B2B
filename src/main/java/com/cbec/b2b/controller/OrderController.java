@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cbec.b2b.api.OrderApi;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
+import com.cbec.b2b.entity.order.Account;
 import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
@@ -33,6 +34,11 @@ public class OrderController {
     public List<OrderGoods> getOrderGoods(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.getOrderGoods(userid,(String)request.get("orderid"));
+    }
+    @RequestMapping(value = "/account")
+    public Account getAccount(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getAccount(userid,(String)request.get("orderid"));
     }
 }
 
