@@ -110,6 +110,11 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
     	return api.getGoodsNum(userid,request);
     } 
+    @RequestMapping(value = "/updategoodsnum")
+    public MsgResponse updateGoodsNum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.updateGoodsNum(userid,request);
+    } 
     @RequestMapping(value = "/supplier/b2blist")
     public PageInfo<GoodsList> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);

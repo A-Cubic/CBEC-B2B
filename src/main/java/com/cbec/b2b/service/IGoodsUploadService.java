@@ -30,7 +30,8 @@ public interface IGoodsUploadService {
 	List<SendType> getSendType();
 	SearchOffer getSearchOffer(String userCode, SearchOffer searchOffer);
 	Goods getGoodsById(String id);
-	List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search);
-	List<GoodsNumList> getGoodsNumList(String search);
+	List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search,String whid);
+	List<GoodsNumList> getGoodsNumList(String search,String whid);
 	String getUserType(String userCode);
+	String updateGoodsNum(String userCode,String barcode,int rb,int hg,int gj);
 }

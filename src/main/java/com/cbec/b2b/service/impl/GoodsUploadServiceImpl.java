@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
+import com.cbec.b2b.entity.GoodsUpload.UpdateGoodsNum;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
@@ -133,20 +134,52 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 	}
 
 	@Override
-	public List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search) {
+	public List<GoodsNumList> getGoodsNumListOfSupplier(String userCode,String search,String whid) {
 		
-		return mapper.getGoodsNumListOfSupplier(userCode, search);
+		return goodsmapper.getGoodsNumListOfSupplier(userCode, search,whid);
 	}
 	@Override
-	public List<GoodsNumList> getGoodsNumList(String search) {
+	public List<GoodsNumList> getGoodsNumList(String search,String whid) {
 		
-		return mapper.getGoodsNumList(search);
+		return goodsmapper.getGoodsNumList(search,whid);
 	}
 
 	@Override
 	public String getUserType(String userCode) {
 		Map<String,Object> userMap = usermapper.getUserType(userCode);
 		return (String)userMap.get("usertype");
+	}
+
+	@Override
+	public String updateGoodsNum(String userCode, String barcode, int rb, int hg, int gj) {
+		UpdateGoodsNum updateGoodsNum = new UpdateGoodsNum();
+		
+		updateGoodsNum.setBarcode(barcode);
+		updateGoodsNum.setGoodsnum(rb);
+		updateGoodsNum.setWarehouseid("15");
+		updateGoodsNum.setSuppliercode(userCode);
+		
+		int r = goodsmapper.updateGoodsNum(updateGoodsNum);
+		goodsmapper.insertGoodsNumLog(updateGoodsNum);
+		
+		updateGoodsNum.setGoodsnum(hg);
+		updateGoodsNum.setWarehouseid("16");
+		int h = goodsmapper.updateGoodsNum(updateGoodsNum);
+		goodsmapper.insertGoodsNumLog(updateGoodsNum);
+		
+		updateGoodsNum.setGoodsnum(gj);
+		updateGoodsNum.setWarehouseid("17");
+		int g = goodsmapper.updateGoodsNum(updateGoodsNum);
+		goodsmapper.insertGoodsNumLog(updateGoodsNum);
+		r=r++;
+		h=h++;
+		g=g++;
+//		if(r>0&&h>0&&g>0) {
+//			return "完成";
+//		}else {
+//			return "请刷新";
+//		}
+		return "调整完成";
 	}
 
 

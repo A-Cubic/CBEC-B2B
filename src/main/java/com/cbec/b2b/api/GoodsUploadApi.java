@@ -78,16 +78,33 @@ public class GoodsUploadApi {
     	String type = service.getUserType(userid);
     	if("0".equals(type)||"5".equals(type)) {
     		PageHelper.startPage( current,pagesize);
-        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"));
+        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"),request.get("warehouse"));
         	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
             return pageData;
 		}else {
     		PageHelper.startPage( current,pagesize);
-        	List<GoodsNumList> LGoods = service.getGoodsNumListOfSupplier(userid,request.get("search"));
+        	List<GoodsNumList> LGoods = service.getGoodsNumListOfSupplier(userid,request.get("search"),request.get("warehouse"));
         	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
 	        return pageData;
 		}
     	
+    }
+    @RequestMapping(value = "/updategoodsnum")
+    public MsgResponse updateGoodsNum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request ) {
+		MsgResponse response = new MsgResponse();
+//		try {
+			String barcode =request.get("barcode");
+			int rb = Integer.valueOf(request.get("rb"));
+			int hg = Integer.valueOf(request.get("hg"));
+			int gj = Integer.valueOf(request.get("gj"));
+			String s = service.updateGoodsNum(userid,barcode,rb,hg,gj);
+			response.setMsg(s);
+	    	response.setType("1");
+//		}catch(Exception e) {
+//			response.setMsg("接口参数错误！");
+//		}		
+    	
+		return response;
     }
     @RequestMapping(value = "/supplier/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {

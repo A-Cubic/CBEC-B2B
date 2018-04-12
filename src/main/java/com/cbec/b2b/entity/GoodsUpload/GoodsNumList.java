@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class GoodsNumList {
-	private int id;
+	private String barcode;
 	private String goodsname;
 	private String rb;
 	private String hg;

@@ -80,38 +80,4 @@
 												where t_goods_offer.usercode = #{usercode} and goodsid= #{goodsid}); 
 	</insert>
 	
-	<select id="getGoodsNumList"  resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
-		select t.goodsName,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 ),0) rb, 
-IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16 ),0) hg ,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 ),0)  gj 
-from t_ck_goods_list t 
-<where> 
-		    1=1  
-            <if test="search !=null and search !=''">  
-                and (t.goodsName like concat('%',#{search},'%')  
-                	 or t.goodsNameE like concat('%',#{search},'%')       
-                	 or t.barcode like concat('%',#{search},'%')) 
-            </if> 
-            
-		  
-        </where>
-	</select>
-	<select id="getGoodsNumListOfSupplier" parameterType="String" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
-		select t.goodsName,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 and w.suppliercode=#{userCode}),0) rb, 
-IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16 and w.suppliercode=#{userCode} ),0) hg ,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 and w.suppliercode=#{userCode} ),0)  gj 
-from t_ck_goods_list t 
-<where> 
-		    1=1  
-            <if test="search !=null and search !=''">  
-                and (t.goodsName like concat('%',#{search},'%')  
-                	 or t.goodsNameE like concat('%',#{search},'%')       
-                	 or t.barcode like concat('%',#{search},'%')) 
-            </if> 
-            
-		  
-        </where>
-	</select>
 </mapper>

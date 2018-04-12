@@ -20,6 +20,4 @@ public interface GoodsUploadMapper {
 	int updateOffer(Offer offer);
 	int writeOffer(Offer offer);
 	int writeOfferFromGoods(Offer offerList);
-	List<GoodsNumList> getGoodsNumListOfSupplier(@Param("userCode") String userCode,@Param("search") String search);
-	List<GoodsNumList> getGoodsNumList(@Param("search") String search);
 }

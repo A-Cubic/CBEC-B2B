@@ -65,7 +65,7 @@ public class EmailUtils {
 	 */
 	public void sendRegisterCode(String email, String code) {
 		StringBuffer sb = new StringBuffer();
-		sb.append("<h2>" + email + ",您好！欢迎加入流连优选，您正在验证账号，验证码：<b style='color:red'><u>" + code + "</u></b>，有效期为3小时。<h2>").append("<p>如果您没有进行此操作，请忽略该邮件。</p>");
+		sb.append("<h4>" + email + ",您好！欢迎加入流连优选，您正在验证账号，验证码：<b style='color:red'><u>" + code + "</u></b>，有效期为3小时。<h4>").append("<p>如果您没有进行此操作，请忽略该邮件。</p>");
 		sendNormalEmail("【验证码】", true, sb.toString(), true, email);
 	}
 
