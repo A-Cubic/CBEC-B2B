@@ -117,7 +117,7 @@ public class UserController {
 			return response;
 		}
 		if (!Util.checkEmail(mail)&&!Util.checkMobileNumber(mail)) {
-			response.setMsg("邮件格式不正确.");
+			response.setMsg("邮件或手机号格式不正确.");
 			return response;
 		}
 		if(pwd.length()<6) {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.HomePageApi;
 import com.cbec.b2b.common.PageInfo;
+import com.cbec.b2b.common.SmsUtils;
 import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.Goods;
@@ -29,6 +30,8 @@ import com.cbec.b2b.entity.HomePage.SearchGoods2;
 public class HomePageController {
     @Autowired
     HomePageApi api;
+    @Autowired
+    SmsUtils smsUtils;
 
     @RequestMapping(value = "/catalog")
     public Catelog catalog() {
@@ -58,33 +61,8 @@ public class HomePageController {
     @RequestMapping(value = "/Phone")
     public String Phone(@RequestBody Map<String,Object> request) {
     	
-    	StringBuffer sb = new StringBuffer();
-    	   InputStreamReader isr = null;
-    	   BufferedReader br = null;
-    	   try
-    	   {
-    		 String code = URLEncoder.encode("#code#=333242", "GBK").toLowerCase();  //输出%C4%E3%BA%C3
-    	     URL url = new URL("http://v.juhe.cn/sms/send?mobile=13644237400&tpl_id=68600&tpl_value="+code+"&key=7c21d791256af1ffdd85375c64846358");
-    	     URLConnection urlConnection = url.openConnection();
-    	     urlConnection.setAllowUserInteraction(false);
-    	     isr = new InputStreamReader(url.openStream());
-    	     br = new BufferedReader(isr);
-    	     String line;
-    	     while ((line = br.readLine()) != null)
-    	     {
-    	      sb.append(line);
-    	     }
-    	   }
-    	   catch (IOException e)
-    	   {
-    	     e.printStackTrace();
-    	   }
-    	   finally
-    	   {
-    	     
-    	   }
-    	   System.out.println(sb.toString());
-    	   return sb.toString();
+    	smsUtils.sendRegisterSuccess("13644237400");
+    	return "OK";
     }
     
 }

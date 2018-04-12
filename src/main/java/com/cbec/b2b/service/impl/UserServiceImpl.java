@@ -376,11 +376,15 @@ public class UserServiceImpl implements IUserService {
 			failmark="";
 			if (Util.checkEmail(usercode)) {
 				emailUtils.sendRegisterSuccess(usercode);
+			}else if (Util.checkMobileNumber(usercode)) {
+				smsUtils.sendRegisterSuccess(usercode);
 			}
 		}else {
 			verifycode = "-1";
 			if (Util.checkEmail(usercode)) {
 				emailUtils.sendRegisterFail(usercode,failmark);
+			}else if (Util.checkMobileNumber(usercode)) {
+				smsUtils.sendRegisterFail(usercode);
 			}
 			
 		}
