@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SearchSellNum;
+import com.cbec.b2b.entity.GoodsUpload.SellNum;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UpdateGoodsNum;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
@@ -180,6 +182,12 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 //			return "请刷新";
 //		}
 		return "调整完成";
+	}
+
+	@Override
+	public List<SellNum> getSellNumList(SearchSellNum searchSellNum) {
+		// TODO Auto-generated method stub
+		return goodsmapper.getSellNumList(searchSellNum);
 	}
 
 

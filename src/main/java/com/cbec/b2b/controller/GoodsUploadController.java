@@ -17,6 +17,8 @@ import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.MsgResponse;
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SearchSellNum;
+import com.cbec.b2b.entity.GoodsUpload.SellNum;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
@@ -114,7 +116,23 @@ public class GoodsUploadController {
     public MsgResponse updateGoodsNum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
     	return api.updateGoodsNum(userid,request);
-    } 
+    }
+    @RequestMapping(value = "/getsellnum")
+    public PageInfo<SellNum> getSellNumList(@RequestBody SearchSellNum searchSellNum,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+		if(searchSellNum.getTimes() !=null && searchSellNum.getTimes().length>0) {
+			String[] times = searchSellNum.getTimes() ;
+			for(int i=0;i<times.length;i++) {
+				if(i==0) {
+					searchSellNum.setTimeBegin(times[i].split("T")[0]);
+				}else {
+					searchSellNum.setTimeEnd(times[i].split("T")[0]);
+				}
+			}
+		}
+    	return api.getSellNumList(searchSellNum);
+    }
+    
     @RequestMapping(value = "/supplier/b2blist")
     public PageInfo<GoodsList> b2bgoodslist(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);

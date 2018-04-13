@@ -8,6 +8,8 @@ import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
 import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
+import com.cbec.b2b.entity.GoodsUpload.SearchSellNum;
+import com.cbec.b2b.entity.GoodsUpload.SellNum;
 import com.cbec.b2b.entity.GoodsUpload.UpdateGoodsNum;
 
 public interface GoodsMapper {
@@ -21,4 +23,5 @@ public interface GoodsMapper {
 	List<GoodsNumList> getGoodsNumList(@Param("search") String search,@Param("whid") String whid);
 	int updateGoodsNum(UpdateGoodsNum updateGoodsNum);
 	int insertGoodsNumLog(UpdateGoodsNum updateGoodsNum);
+	List<SellNum> getSellNumList(SearchSellNum searchSellNum);
 }

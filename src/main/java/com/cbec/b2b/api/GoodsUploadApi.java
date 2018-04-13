@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.MsgResponse;
-import com.cbec.b2b.entity.GoodsUpload.Offer;
-import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
-import com.cbec.b2b.entity.GoodsUpload.SendType;
-import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
 import com.cbec.b2b.entity.GoodsUpload.GoodsList;
 import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
+import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchGoods;
+import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SearchSellNum;
+import com.cbec.b2b.entity.GoodsUpload.SellNum;
+import com.cbec.b2b.entity.GoodsUpload.SendType;
+import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.service.IGoodsUploadService;
 import com.github.pagehelper.PageHelper;
 
@@ -105,6 +107,13 @@ public class GoodsUploadApi {
 //		}		
     	
 		return response;
+    }
+    @RequestMapping(value = "/getsellnum")
+    public PageInfo<SellNum> getSellNumList(@RequestBody SearchSellNum searchSellNum) {
+    	PageHelper.startPage(searchSellNum.getCurrent(),searchSellNum.getPageSize());
+    	List<SellNum> LGoods = service.getSellNumList(searchSellNum);
+    	PageInfo<SellNum> pageData = new PageInfo<SellNum>(LGoods);
+        return pageData;
     }
     @RequestMapping(value = "/supplier/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestHeader(value = "userid") String userid,@RequestBody SearchGoods searchGoods ) {

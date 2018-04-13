@@ -223,4 +223,27 @@ from t_ck_goods_list t
         insert into t_log_goodsnum(inputType,createtime,warehouseId,orderid,tm,goodsnum,state) 
         values ('USER',NOW(),#{warehouseid},#{suppliercode},#{barcode},#{goodsnum},'调整库存')
 	</insert>
+	<select id="getSellNumList"  parameterType="com.cbec.b2b.entity.GoodsUpload.SearchSellNum" resultType="com.cbec.b2b.entity.GoodsUpload.SellNum">
+		SELECT C.GOODSNAME,C.BARCODE,SUM(L.GOODSNUM) sellNum 
+          FROM T_LOG_GOODSNUM L,T_CK_GOODS_LIST C 
+		<where> 
+			   L.TM = C.BARCODE 
+		   AND L.INPUTTYPE = 'ORDER' 
+		   <if test="timeBegin !=null and timeBegin !=''">  
+                 and L.createtime <![CDATA[ >= ]]> #{timeBegin}
+            </if> 
+            <if test="timeEnd !=null and timeEnd !=''">  
+                  and L.createtime <![CDATA[ <= ]]> DATE_SUB(#{timeEnd},INTERVAL -1 DAY)
+            </if> 
+            <if test="search !=null and search !=''">  
+                and (C.goodsName like concat('%',#{search},'%')      
+                	 or C.barcode like concat('%',#{search},'%')) 
+            </if> 
+            <if test="whid !=null and whid !='' and whid!='all' ">  
+                and  L.warehouseId =#{whid}
+            </if> 
+        </where>
+		GROUP BY C.GOODSNAME,C.BARCODE
+        order by C.BARCODE
+	</select>
 </mapper>

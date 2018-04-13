@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.GoodsUpload.Offer;
 import com.cbec.b2b.entity.GoodsUpload.SearchOffer;
+import com.cbec.b2b.entity.GoodsUpload.SearchSellNum;
+import com.cbec.b2b.entity.GoodsUpload.SellNum;
 import com.cbec.b2b.entity.GoodsUpload.SendType;
 import com.cbec.b2b.entity.GoodsUpload.UploadInfo;
 import com.cbec.b2b.entity.GoodsUpload.Goods;
@@ -34,4 +36,5 @@ public interface IGoodsUploadService {
 	List<GoodsNumList> getGoodsNumList(String search,String whid);
 	String getUserType(String userCode);
 	String updateGoodsNum(String userCode,String barcode,int rb,int hg,int gj);
+	List<SellNum> getSellNumList(SearchSellNum searchSellNum);
 }
