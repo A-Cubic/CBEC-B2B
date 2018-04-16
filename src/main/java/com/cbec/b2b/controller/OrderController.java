@@ -30,6 +30,11 @@ public class OrderController {
 		Util.responseResultSuccess(res);
         return api.getOrderList(userid,searchOrderList);
     }
+    @RequestMapping(value = "/listofwarehouse")
+    public PageInfo<Order> getOrderListOfWareHouse(@RequestHeader(value = "userid") String userid,@RequestBody SearchOrderList searchOrderList,HttpServletResponse res) {
+		Util.responseResultSuccess(res);
+        return api.getOrderListOfWareHouse(userid,searchOrderList);
+    }
     @RequestMapping(value = "/goods")
     public List<OrderGoods> getOrderGoods(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,Object> request,HttpServletResponse res) {
 		Util.responseResultSuccess(res);

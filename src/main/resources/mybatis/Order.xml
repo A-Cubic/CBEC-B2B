@@ -12,6 +12,17 @@
         </where>  
 		 ORDER BY id desc
 	</select>
+	<select id="getOrderListOfWareHouse" resultType="com.cbec.b2b.entity.order.Order" parameterType="com.cbec.b2b.entity.order.SearchOrderList">
+		SELECT id,merchantOrderId,tradeTime,goodsTotalAmount,status,consigneeName,consigneeMobile,addrCountry,addrProvince,addrCity,addrDistrict,addrDetail,idNumber
+		  FROM t_order_list
+		  <where> 
+		    sendapi='CK' 
+            <if test="status !=null and status !='全部'">  
+                and status=#{status} 
+            </if> 
+        </where>  
+		 ORDER BY id desc
+	</select>
 	<select id="getOrderGoods" resultType="com.cbec.b2b.entity.order.OrderGoods" parameterType="String">
 		SELECT *
 		  FROM t_order_goods

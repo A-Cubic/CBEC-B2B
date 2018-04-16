@@ -24,6 +24,11 @@ public class OrderServiceImpl implements IOrderService {
 		// TODO Auto-generated method stub
 		return mapper.getOrderList(searchOrderList);
 	}
+	@Override
+	public List<Order> getOrderListOfWareHouse(SearchOrderList searchOrderList) {
+		// TODO Auto-generated method stub
+		return mapper.getOrderListOfWareHouse(searchOrderList);
+	}
 
 	@Override
 	public List<OrderGoods> getOrderGoods(String userid, String orderId) {

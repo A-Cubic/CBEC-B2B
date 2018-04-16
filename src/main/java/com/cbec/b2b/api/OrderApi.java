@@ -29,6 +29,13 @@ public class OrderApi {
     	PageInfo<Order> pageData = new PageInfo<Order>(LOrder);
         return pageData;
     }
+    @RequestMapping(value = "/listofwarehouse")
+    public PageInfo<Order> getOrderListOfWareHouse(@RequestHeader(value = "userid") String userid,@RequestBody SearchOrderList searchOrderList) {
+    	PageHelper.startPage(searchOrderList.getCurrent(),searchOrderList.getPageSize());
+    	List<Order> LOrder = service.getOrderListOfWareHouse(searchOrderList);
+    	PageInfo<Order> pageData = new PageInfo<Order>(LOrder);
+        return pageData;
+    }
     @RequestMapping(value = "/goods")
     public List<OrderGoods> getOrderGoods(@RequestHeader(value = "userid") String userid,@RequestBody String orderId) {
     	return service.getOrderGoods(userid, orderId);
