@@ -37,4 +37,5 @@ public interface IGoodsUploadService {
 	String getUserType(String userCode);
 	String updateGoodsNum(String userCode,String barcode,int rb,int hg,int gj);
 	List<SellNum> getSellNumList(SearchSellNum searchSellNum);
+	GoodsNumList getGoodsNumByBarcode(String barcode);
 }

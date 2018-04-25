@@ -11,4 +11,5 @@ public class SearchOrderList {
 	int current;//多少页
 	int pageSize;//页面显示多少个商品
 	private String status; //询价状态
+	private String userCode; //询价状态
 }

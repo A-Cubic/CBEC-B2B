@@ -145,6 +145,11 @@ public class GoodsUploadServiceImpl implements IGoodsUploadService {
 		
 		return goodsmapper.getGoodsNumList(search,whid);
 	}
+	@Override
+	public GoodsNumList getGoodsNumByBarcode(String barcode) {
+		
+		return goodsmapper.getGoodsNumByBarcode(barcode);
+	}
 
 	@Override
 	public String getUserType(String userCode) {

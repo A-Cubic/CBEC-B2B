@@ -24,4 +24,5 @@ public interface GoodsMapper {
 	int updateGoodsNum(UpdateGoodsNum updateGoodsNum);
 	int insertGoodsNumLog(UpdateGoodsNum updateGoodsNum);
 	List<SellNum> getSellNumList(SearchSellNum searchSellNum);
+	GoodsNumList getGoodsNumByBarcode(String barcode);
 }

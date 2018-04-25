@@ -15,6 +15,7 @@ import com.cbec.b2b.api.OrderApi;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.order.Account;
+import com.cbec.b2b.entity.order.AccountOfPurchasers;
 import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
@@ -26,7 +27,7 @@ public class OrderController {
     OrderApi api;
 
     @RequestMapping(value = "/list")
-    public PageInfo<Order> getOrderList(@RequestHeader(value = "userid") String userid,@RequestBody SearchOrderList searchOrderList,HttpServletResponse res) {
+    public AccountOfPurchasers getOrderList(@RequestHeader(value = "userid") String userid,@RequestBody SearchOrderList searchOrderList,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.getOrderList(userid,searchOrderList);
     }

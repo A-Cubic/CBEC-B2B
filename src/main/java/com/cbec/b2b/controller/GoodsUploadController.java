@@ -112,6 +112,11 @@ public class GoodsUploadController {
 		Util.responseResultSuccess(res);
     	return api.getGoodsNum(userid,request);
     } 
+    @RequestMapping(value = "/numbybarcode")
+    public GoodsNumList getGoodsNumByBarcode(@RequestBody Map<String,String> request,HttpServletResponse res ) {
+		Util.responseResultSuccess(res);
+    	return api.getGoodsNumByBarcode(request);
+    } 
     @RequestMapping(value = "/updategoodsnum")
     public MsgResponse updateGoodsNum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);

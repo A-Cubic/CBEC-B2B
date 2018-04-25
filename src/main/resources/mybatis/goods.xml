@@ -246,4 +246,15 @@ from t_ck_goods_list t
 		GROUP BY C.GOODSNAME,C.BARCODE
         order by C.BARCODE
 	</select>
+	
+	<select id="getGoodsNumByBarcode" parameterType="String" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
+		select t.barcode,t.goodsName,
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 ),0) rb, 
+IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16  ),0) hg ,
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 ),0)  gj 
+from t_ck_goods_list t 
+where
+		    t.barcode = #{barcode}
+ limit 1
+	</select>
 </mapper>

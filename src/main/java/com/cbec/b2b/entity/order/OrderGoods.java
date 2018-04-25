@@ -17,4 +17,5 @@ public class OrderGoods {
 	private String sendType;
 	private String status;
 	private String waybill;
+	private String yj;
 }

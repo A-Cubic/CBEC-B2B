@@ -91,6 +91,12 @@ public class GoodsUploadApi {
 		}
     	
     }
+    @RequestMapping(value = "/numbybarcode")
+    public GoodsNumList getGoodsNumByBarcode(@RequestBody Map<String,String> request) {
+    	GoodsNumList Goods = service.getGoodsNumByBarcode(request.get("id"));
+        return Goods;
+    	
+    }
     @RequestMapping(value = "/updategoodsnum")
     public MsgResponse updateGoodsNum(@RequestHeader(value = "userid") String userid,@RequestBody Map<String,String> request ) {
 		MsgResponse response = new MsgResponse();
