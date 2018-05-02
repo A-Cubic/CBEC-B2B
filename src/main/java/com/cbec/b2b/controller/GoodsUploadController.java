@@ -125,16 +125,26 @@ public class GoodsUploadController {
     @RequestMapping(value = "/getsellnum")
     public PageInfo<SellNum> getSellNumList(@RequestBody SearchSellNum searchSellNum,HttpServletResponse res ) {
 		Util.responseResultSuccess(res);
-		if(searchSellNum.getTimes() !=null && searchSellNum.getTimes().length>0) {
-			String[] times = searchSellNum.getTimes() ;
-			for(int i=0;i<times.length;i++) {
-				if(i==0) {
-					searchSellNum.setTimeBegin(times[i].split("T")[0]);
-				}else {
-					searchSellNum.setTimeEnd(times[i].split("T")[0]);
-				}
+		try {
+			if(searchSellNum.getTimes() !=null &&!"".equals(searchSellNum.getTimes())) {
+				String month = searchSellNum.getTimes().split("T")[0].substring(0, 7);
+				searchSellNum.setTimes(month);
 			}
+		}catch(Exception ex) {
+			searchSellNum.setTimes("");
 		}
+		
+		
+//		if(searchSellNum.getTimes() !=null && searchSellNum.getTimes().length>0) {
+//			String[] times = searchSellNum.getTimes() ;
+//			for(int i=0;i<times.length;i++) {
+//				if(i==0) {
+//					searchSellNum.setTimeBegin(times[i].split("T")[0]);
+//				}else {
+//					searchSellNum.setTimeEnd(times[i].split("T")[0]);
+//				}
+//			}
+//		}
     	return api.getSellNumList(searchSellNum);
     }
     

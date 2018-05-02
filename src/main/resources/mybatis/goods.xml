@@ -176,9 +176,9 @@
 	
 	<select id="getGoodsNumList"  resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
 		select t.barcode,t.goodsName,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 ),0) rb, 
-IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16 ),0) hg ,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 ),0)  gj 
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=15 ),0) rb, 
+IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=16 ),0) hg ,
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=17 ),0)  gj 
 from t_ck_goods_list t 
 <where> 
 		    1=1  
@@ -188,7 +188,7 @@ from t_ck_goods_list t
                 	 or t.barcode like concat('%',#{search},'%')) 
             </if> 
             <if test="whid !=null and whid !='' and whid!='all' ">  
-                and  t.id in (select wl.goodsid from t_ck_goods_warehouse wl where wl.warehouseid=#{whid})
+                and  t.id in (select wl.goodsid from t_ck_goods_warehouse wl where wl.wcode=#{whid})
             </if> 
         </where>
         group by t.barcode,t.goodsName
@@ -196,9 +196,9 @@ from t_ck_goods_list t
 	</select>
 	<select id="getGoodsNumListOfSupplier" parameterType="String" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
 		select t.barcode,t.goodsName,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 and w.suppliercode=#{userCode}),0) rb, 
-IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16 and w.suppliercode=#{userCode} ),0) hg ,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 and w.suppliercode=#{userCode} ),0)  gj 
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=15 and w.suppliercode=#{userCode}),0) rb, 
+IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=16 and w.suppliercode=#{userCode} ),0) hg ,
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=17 and w.suppliercode=#{userCode} ),0)  gj 
 from t_ck_goods_list t 
 <where> 
 		    1=1  
@@ -208,7 +208,7 @@ from t_ck_goods_list t
                 	 or t.barcode like concat('%',#{search},'%')) 
             </if> 
             <if test="whid !=null and whid !='' and whid!='all' ">  
-                and  t.id in (select wl.goodsid from t_ck_goods_warehouse wl where wl.warehouseid=#{whid})
+                and  t.id in (select wl.goodsid from t_ck_goods_warehouse wl where wl.wcode=#{whid})
             </if> 
             
 		  
@@ -217,7 +217,7 @@ from t_ck_goods_list t
         order by t.id
 	</select>
 	<update id="updateGoodsNum" parameterType="com.cbec.b2b.entity.GoodsUpload.UpdateGoodsNum">
-		update t_ck_goods_warehouse set goodsnum = #{goodsnum} where barcode=#{barcode} and warehouseid = #{warehouseid} 
+		update t_ck_goods_warehouse set goodsnum = #{goodsnum} where barcode=#{barcode} and wid = #{warehouseid} 
 	</update>
 	<insert id="insertGoodsNumLog"  parameterType="com.cbec.b2b.entity.GoodsUpload.UpdateGoodsNum">  
         insert into t_log_goodsnum(inputType,createtime,warehouseId,orderid,tm,goodsnum,state) 
@@ -229,18 +229,15 @@ from t_ck_goods_list t
 		<where> 
 			   L.TM = C.BARCODE 
 		   AND L.INPUTTYPE = 'ORDER' 
-		   <if test="timeBegin !=null and timeBegin !=''">  
-                 and L.createtime <![CDATA[ >= ]]> #{timeBegin}
-            </if> 
-            <if test="timeEnd !=null and timeEnd !=''">  
-                  and L.createtime <![CDATA[ <= ]]> DATE_SUB(#{timeEnd},INTERVAL -1 DAY)
+		   <if test="times !=null and times !=''">  
+                 and DATE_FORMAT( L.createtime, '%Y-%m' ) = #{times}
             </if> 
             <if test="search !=null and search !=''">  
                 and (C.goodsName like concat('%',#{search},'%')      
                 	 or C.barcode like concat('%',#{search},'%')) 
             </if> 
             <if test="whid !=null and whid !='' and whid!='all' ">  
-                and  L.warehouseId =#{whid}
+                and  L.wcode =#{whid}
             </if> 
         </where>
 		GROUP BY C.GOODSNAME,C.BARCODE
@@ -249,9 +246,9 @@ from t_ck_goods_list t
 	
 	<select id="getGoodsNumByBarcode" parameterType="String" resultType="com.cbec.b2b.entity.GoodsUpload.GoodsNumList">
 		select t.barcode,t.goodsName,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=15 ),0) rb, 
-IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=16  ),0) hg ,
- IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.warehouseid=17 ),0)  gj 
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=15 ),0) rb, 
+IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=16  ),0) hg ,
+ IFNULL((select w.goodsnum from t_ck_goods_warehouse w where w.goodsid= t.id and w.wid=17 ),0)  gj 
 from t_ck_goods_list t 
 where
 		    t.barcode = #{barcode}

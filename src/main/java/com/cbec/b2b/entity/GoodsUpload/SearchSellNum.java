@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SearchSellNum {
-	private String[] times;//建立时间
+	private String times;//建立时间
 	private String timeBegin;
 	private String timeEnd;
 	private String whid;

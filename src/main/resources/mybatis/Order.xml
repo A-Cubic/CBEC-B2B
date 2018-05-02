@@ -29,8 +29,11 @@
 		  FROM t_order_list
 		  <where> 
 		    sendapi='CK' 
-            <if test="status !=null and status !='全部'">  
+            <if test="status !=null and status !='全部' and status !='新订单'">  
                 and status=#{status} 
+            </if> 
+            <if test=" status ='新订单'">  
+                and (status='新订单' or status='准备出库' )
             </if> 
         </where>  
 		 ORDER BY id desc

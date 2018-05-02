@@ -78,18 +78,21 @@ public class GoodsUploadApi {
     	    
     	}
     	String type = service.getUserType(userid);
-    	if("0".equals(type)||"5".equals(type)) {
-    		PageHelper.startPage( current,pagesize);
-        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"),request.get("warehouse"));
-        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
-            return pageData;
-		}else {
-    		PageHelper.startPage( current,pagesize);
-        	List<GoodsNumList> LGoods = service.getGoodsNumListOfSupplier(userid,request.get("search"),request.get("warehouse"));
-        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
-	        return pageData;
-		}
-    	
+//    	if("0".equals(type)||"5".equals(type)) {
+//    		PageHelper.startPage( current,pagesize);
+//        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"),request.get("warehouse"));
+//        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
+//            return pageData;
+//		}else {
+//    		PageHelper.startPage( current,pagesize);
+//        	List<GoodsNumList> LGoods = service.getGoodsNumListOfSupplier(userid,request.get("search"),request.get("warehouse"));
+//        	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
+//	        return pageData;
+//		}
+    	PageHelper.startPage( current,pagesize);
+    	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"),request.get("warehouse"));
+    	PageInfo<GoodsNumList> pageData = new PageInfo<GoodsNumList>(LGoods);
+        return pageData;
     }
     @RequestMapping(value = "/numbybarcode")
     public GoodsNumList getGoodsNumByBarcode(@RequestBody Map<String,String> request) {

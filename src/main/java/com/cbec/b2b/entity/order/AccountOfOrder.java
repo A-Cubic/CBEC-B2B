@@ -7,7 +7,7 @@ import com.cbec.b2b.common.PageInfo;
 import lombok.Data;
 
 @Data
-public class AccountOfPurchasers {
+public class AccountOfOrder {
 	private double total;
 	private double totalyj;
 	private PageInfo<Order> listOrder;

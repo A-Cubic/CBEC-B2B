@@ -1,7 +1,6 @@
 package com.cbec.b2b.service.impl;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.order.Account;
 import com.cbec.b2b.entity.order.AccountGoods;
-import com.cbec.b2b.entity.order.AccountOfPurchasers;
+import com.cbec.b2b.entity.order.AccountOfOrder;
 import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
@@ -25,9 +24,9 @@ public class OrderServiceImpl implements IOrderService {
 	OrderMapper mapper;
 
 	@Override
-	public AccountOfPurchasers getOrderList(SearchOrderList searchOrderList) {
+	public AccountOfOrder getOrderList(SearchOrderList searchOrderList) {
 		// TODO Auto-generated method stub
-		AccountOfPurchasers a = new AccountOfPurchasers();
+		AccountOfOrder a = new AccountOfOrder();
 		PageHelper.startPage(searchOrderList.getCurrent(),searchOrderList.getPageSize());
     	List<Order> LOrder = mapper.getOrderList(searchOrderList);
     	PageInfo<Order> pageData = new PageInfo<Order>(LOrder);
@@ -46,9 +45,9 @@ public class OrderServiceImpl implements IOrderService {
 		return a;
 	}
 	@Override
-	public AccountOfPurchasers getOrderListOfPurchasers(SearchOrderList searchOrderList){
+	public AccountOfOrder getOrderListOfPurchasers(SearchOrderList searchOrderList){
 		// TODO Auto-generated method stub
-		AccountOfPurchasers a = new AccountOfPurchasers();
+		AccountOfOrder a = new AccountOfOrder();
 		PageHelper.startPage(searchOrderList.getCurrent(),searchOrderList.getPageSize());
     	List<Order> LOrder = mapper.getOrderListOfPurchasers(searchOrderList);
     	PageInfo<Order> pageData = new PageInfo<Order>(LOrder);
@@ -71,9 +70,29 @@ public class OrderServiceImpl implements IOrderService {
 		return a;
 	}
 	@Override
-	public List<Order> getOrderListOfWareHouse(SearchOrderList searchOrderList) {
+	public AccountOfOrder getOrderListOfWareHouse(SearchOrderList searchOrderList) {
 		// TODO Auto-generated method stub
-		return mapper.getOrderListOfWareHouse(searchOrderList);
+		AccountOfOrder a = new AccountOfOrder();
+		PageHelper.startPage(searchOrderList.getCurrent(),searchOrderList.getPageSize());
+    	List<Order> LOrder = mapper.getOrderListOfWareHouse(searchOrderList);
+    	PageInfo<Order> pageData = new PageInfo<Order>(LOrder);
+		a.setListOrder(pageData);
+		double sum=0,sumyj=0;
+		try {
+			for(Order o :LOrder) {
+				sum+=Double.parseDouble(o.getTradeAmount());
+				//sumyj+=Double.parseDouble(o.getYjsum());
+			}
+		}catch(Exception e) {
+			return null;
+		}
+		BigDecimal bg = new BigDecimal(sum);
+		sum=bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		bg = new BigDecimal(sumyj);
+		sumyj=bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		a.setTotal(sum);
+		a.setTotalyj(sumyj);
+		return a;
 	}
 
 	@Override
