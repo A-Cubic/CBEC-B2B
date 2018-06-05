@@ -22,9 +22,7 @@ import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
-import com.cbec.b2b.mapper.GoodsMapper;
 import com.cbec.b2b.mapper.HomePageMapper;
-import com.cbec.b2b.mapper.UserMapper;
 import com.cbec.b2b.service.IHomePageService;
 
 @Service

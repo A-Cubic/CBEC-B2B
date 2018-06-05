@@ -1,11 +1,5 @@
 package com.cbec.b2b.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +12,6 @@ import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.SmsUtils;
 import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
-import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsInfo;
 import com.cbec.b2b.entity.HomePage.GoodsList;
 import com.cbec.b2b.entity.HomePage.Screen;

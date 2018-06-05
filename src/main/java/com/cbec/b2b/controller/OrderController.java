@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cbec.b2b.api.OrderApi;
-import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.common.Util;
 import com.cbec.b2b.entity.order.Account;
 import com.cbec.b2b.entity.order.AccountOfOrder;
-import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
 

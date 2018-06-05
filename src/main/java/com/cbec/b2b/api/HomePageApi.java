@@ -1,6 +1,5 @@
 package com.cbec.b2b.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cbec.b2b.common.PageInfo;
 import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
-import com.cbec.b2b.entity.HomePage.AdverType;
-import com.cbec.b2b.entity.HomePage.Banner;
-import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsInfo;

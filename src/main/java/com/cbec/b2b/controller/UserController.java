@@ -151,7 +151,7 @@ public class UserController {
 		String mail = request.get("mail");
 		String code = request.get("captcha");
 		String pwd = request.get("password");
-		String type = request.get("type");
+//		String type = request.get("type");
 		
 		if (mail == null || code == null || pwd == null ||  "".equals(mail) || "".equals(code)
 				|| "".equals(pwd) ) {

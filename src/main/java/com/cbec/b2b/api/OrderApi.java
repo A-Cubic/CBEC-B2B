@@ -8,16 +8,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cbec.b2b.common.PageInfo;
-import com.cbec.b2b.entity.GoodsUpload.GoodsNumList;
 import com.cbec.b2b.entity.order.Account;
 import com.cbec.b2b.entity.order.AccountOfOrder;
-import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
 import com.cbec.b2b.service.IGoodsUploadService;
 import com.cbec.b2b.service.IOrderService;
-import com.github.pagehelper.PageHelper;
 
 @RestController
 @RequestMapping(value = "/api/order")

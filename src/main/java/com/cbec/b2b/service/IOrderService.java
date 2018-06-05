@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.cbec.b2b.entity.order.Account;
 import com.cbec.b2b.entity.order.AccountOfOrder;
-import com.cbec.b2b.entity.order.Order;
 import com.cbec.b2b.entity.order.OrderGoods;
 import com.cbec.b2b.entity.order.SearchOrderList;
 

@@ -3,13 +3,16 @@ package com.cbec.b2b.common;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.cbec.b2b.service.IUserService;
 
 public class WebInterceptor implements HandlerInterceptor{
@@ -81,7 +84,6 @@ public class WebInterceptor implements HandlerInterceptor{
         	Util.responseResult(response,"1",ContentErrorMsg.ERROR_1);
         	return false;
         }
-        
         //2. 权限校验
         if(!service.isAuth(userId, uri)) {
         	Util.responseResult(response,"2",ContentErrorMsg.ERROR_2);

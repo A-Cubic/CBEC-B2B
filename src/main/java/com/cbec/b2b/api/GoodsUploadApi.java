@@ -77,7 +77,7 @@ public class GoodsUploadApi {
     	} catch (NumberFormatException e) {
     	    
     	}
-    	String type = service.getUserType(userid);
+//    	String type = service.getUserType(userid);
 //    	if("0".equals(type)||"5".equals(type)) {
 //    		PageHelper.startPage( current,pagesize);
 //        	List<GoodsNumList> LGoods = service.getGoodsNumList(request.get("search"),request.get("warehouse"));

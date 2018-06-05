@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cbec.b2b.mapper.DaigouMapper">
+	
+	
+	<select id="getTicketList" resultType="com.cbec.b2b.entity.Daigou.Ticket"  parameterType="String">
+		SELECT *
+		  FROM t_daigou_ticket t
+		  WHERE 1=1 
+            <if test="search !=null and search !='' ">  
+                and t.openId like "%"#{search}"%" or t.ticketCode  like "%"#{search}"%" or shopName like "%"#{search}"%"
+            </if> 
+		 
+		 ORDER BY status asc, id desc
+	</select>
+	<select id="getTicketByTicketCode" resultType="com.cbec.b2b.entity.Daigou.Ticket" parameterType="String">
+		SELECT t.*
+		  FROM t_daigou_ticket t
+		 WHERE t.ticketCode=#{ticketCode}
+		 order by t.id asc
+	</select>
+	<select id="getTicketBrandByTicketCode" resultType="com.cbec.b2b.entity.Daigou.TicketBrand" parameterType="String">
+		SELECT t.*
+		  FROM t_daigou_brand t
+		 WHERE t.ticketCode=#{ticketCode}
+		 order by t.id asc
+	</select>
+	<update id="updateStatus" parameterType="String">
+		UPDATE t_daigou_ticket
+		<set >  
+		     <if test="remark !=null and remark !=''" >  
+		       		remark=#{remark},
+		     </if>
+		     <if test="status !=null and status !=''" >  
+		       		status=#{status},
+		     </if> 
+	   </set>
+		 WHERE ticketCode=#{ticketCode}
+	</update>
+</mapper>
