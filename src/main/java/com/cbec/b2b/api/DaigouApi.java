@@ -27,7 +27,6 @@ public class DaigouApi {
     public Ticket getTicketByTicketCode(SearchTicket searchTicket) {
         return service.getTicketByTicketCode(searchTicket.getTicketCode());
     }
-
     @RequestMapping(value = "/updateStatus")
     public MsgResponse updateStatus(@RequestBody Map<String,Object> request) {
 	    return service.updateStatus(request);
