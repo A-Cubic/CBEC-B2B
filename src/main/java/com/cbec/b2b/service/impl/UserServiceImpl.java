@@ -369,8 +369,14 @@ public class UserServiceImpl implements IUserService {
 		String verifycode = "4";
 		
 		if("1".equals(check)) {
-			if("2".equals(usertype) || "3".equals(usertype) || "4".equals(usertype)) {
+			if("2".equals(usertype) ) {
 				role_id = 3;
+			}
+			if( "3".equals(usertype)) {
+				role_id = 8;
+			}
+			if( "4".equals(usertype)) {
+				role_id = 9;
 			}
 			mapper.updatetUserRoleRegister(Integer.valueOf(id), role_id);
 			failmark="";

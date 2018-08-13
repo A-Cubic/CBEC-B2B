@@ -18,12 +18,12 @@ import com.cbec.b2b.entity.Daigou.SearchTicket;
 import com.cbec.b2b.entity.Daigou.Ticket;
 
 @RestController
-@RequestMapping(value = "/llback/daigou")
+@RequestMapping(value = "/llback/Ticket")
 public class DaigouController {
     @Autowired
     DaigouApi api;
 
-    @RequestMapping(value = "/ticketlist")
+    @RequestMapping(value = "/TicketList")
     public PageInfo<Ticket> getTicketList(@RequestHeader(value = "userid") String userid,@RequestBody SearchTicket searchTicket,HttpServletResponse res) {
 		Util.responseResultSuccess(res);
         return api.getTicketList(searchTicket);
