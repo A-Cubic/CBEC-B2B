@@ -39,6 +39,12 @@ public class HomePageApi {
     }
     @RequestMapping(value = "/goodslist")
     public PageInfo<GoodsList> getGoodsList(@RequestBody SearchGoods searchGoods ) {
+    	if(searchGoods.getPageNumber()==0) {
+    		searchGoods.setPageNumber(1);
+    	}
+    	if(searchGoods.getPageSize()==0) {
+    		searchGoods.setPageSize(20);
+    	}
     	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
     	List<GoodsList> LGoods = service.getGoodsList(searchGoods);
     	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
@@ -46,6 +52,12 @@ public class HomePageApi {
     }
     @RequestMapping(value = "/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestBody SearchGoods searchGoods ) {
+    	if(searchGoods.getPageNumber()==0) {
+    		searchGoods.setPageNumber(1);
+    	}
+    	if(searchGoods.getPageSize()==0) {
+    		searchGoods.setPageSize(20);
+    	}
     	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
     	List<GoodsList> LGoods = service.getB2BGoodsList(searchGoods);
     	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
