@@ -70,7 +70,9 @@ public class HomePageServiceImpl implements IHomePageService {
 			searchGoods.setIfMY("");
 		}else if("2".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
-			searchGoods.setIfHW("1");
+//			searchGoods.setIfHW("1");
+			searchGoods.setIfHG("1");
+			searchGoods.setIfRB("1");
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("");
 		}else if("3".equals(searchGoods.getSendType())) {
@@ -114,10 +116,18 @@ public class HomePageServiceImpl implements IHomePageService {
 		}
 		goodsListOld.setPageNumber(searchGoods.getPageNumber());
 		goodsListOld.setSize(page);
-		
-		
 		goodsListOld.setTotal(total);
-		goodsListOld.setPages(page);
+		int p=(searchGoods.getPageNumber()-1)/10;
+		int p1=p*10+1;
+		int p2 =(p+1)*10;
+		if(p2>page) {
+			p2=page;
+		}
+		int[] pages = new int[p2-p1+1];
+		for(int i = 0; i<p2-p1+1;i++) {
+			pages[i]=p1+i;
+		}
+		goodsListOld.setPages(pages);
 		return goodsListOld;
 	}
 	@Override

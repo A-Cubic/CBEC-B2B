@@ -16,6 +16,7 @@ public class GoodsListOld {
 	private int startRow;
 	private int endRow;
 	private int total;
-	private int pages;
+//	private int pages;
+	private int[] pages;
 	private List<GoodsList> list;
 }
