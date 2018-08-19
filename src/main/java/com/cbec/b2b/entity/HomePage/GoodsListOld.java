@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class GoodsListOld {
 	private int pageNum;
+	private int pageNumber;
 	private int pageSize;
 	private Boolean hasNextPage;
 	private Boolean hasPreviousPage;

@@ -112,7 +112,7 @@ public class HomePageServiceImpl implements IHomePageService {
 		}else {
 			goodsListOld.setHasNextPage(false);
 		}
-		
+		goodsListOld.setPageNumber(searchGoods.getPageNumber());
 		goodsListOld.setSize(page);
 		
 		
