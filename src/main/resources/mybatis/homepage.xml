@@ -98,8 +98,7 @@
                 	 or goodsNameE like concat('%',#{search},'%')      
                 	 or brand like concat('%',#{search},'%')      
                 	 or brandE like concat('%',#{search},'%')      
-                	 or barcode like concat('%',#{search},'%')      
-                	 or supplierName like concat('%',#{search},'%')  )
+                	 or barcode like concat('%',#{search},'%')       )
             </if>  
         </where>  
 		 ORDER BY id asc
@@ -116,6 +115,12 @@
             </if> 
             <if test="ifXG!=null and ifXG !=''">  
                 and ifXG= #{ifXG}  
+            </if>  
+            <if test="ifRB!=null and ifRB !=''">  
+                and ifRB= #{ifRB}  
+            </if>  
+            <if test="ifHG!=null and ifHG !=''">  
+                and ifHG= #{ifHG}  
             </if>    
             <if test="ifHW !=null and ifHW !=''">  
                 and ifHW= #{ifHW}  
@@ -140,8 +145,7 @@
                 	 or goodsNameE like concat('%',#{search},'%')      
                 	 or brand like concat('%',#{search},'%')      
                 	 or brandE like concat('%',#{search},'%')      
-                	 or barcode like concat('%',#{search},'%')      
-                	 or supplierName like concat('%',#{search},'%')  )
+                	 or barcode like concat('%',#{search},'%')      )
             </if>  
         </where>  
 		 ORDER BY id asc
@@ -157,6 +161,12 @@
             <if test="ifXG!=null and ifXG !=''">  
                 and ifXG= #{ifXG}  
             </if>    
+            <if test="ifRB!=null and ifRB !=''">  
+                and ifRB= #{ifRB}  
+            </if>  
+            <if test="ifHG!=null and ifHG !=''">  
+                and ifHG= #{ifHG}  
+            </if>  
             <if test="ifHW !=null and ifHW !=''">  
                 and ifHW= #{ifHW}  
             </if>    

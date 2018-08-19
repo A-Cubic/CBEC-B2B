@@ -128,7 +128,11 @@ public class HomePageServiceImpl implements IHomePageService {
 //			pages[i]=p1+i;
 //		}
 //		goodsListOld.setPages(pages);
-		goodsListOld.setPages(10);
+		if(page>=10) {
+			goodsListOld.setPages(10);
+		}else {
+			goodsListOld.setPages(page);
+		}
 		return goodsListOld;
 	}
 	@Override
