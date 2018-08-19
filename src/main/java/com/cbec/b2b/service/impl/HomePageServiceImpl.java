@@ -84,6 +84,16 @@ public class HomePageServiceImpl implements IHomePageService {
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("1");
 		}
+		if("1".equals(searchGoods.getCountry())) {
+			searchGoods.setCountry("中国");
+		}else if("2".equals(searchGoods.getCountry())) {
+			searchGoods.setCountry("日本");
+		}else if("3".equals(searchGoods.getCountry())) {
+			searchGoods.setCountry("韩国");
+		}else if("4".equals(searchGoods.getCountry())) {
+			searchGoods.setCountry("乌克兰");
+		}
+		
 		searchGoods.setStartPage((searchGoods.getPageNumber()-1)*searchGoods.getPageSize());
 		GoodsListOld goodsListOld =new GoodsListOld();
 		goodsListOld.setList(mapper.getGoodsList(searchGoods));
