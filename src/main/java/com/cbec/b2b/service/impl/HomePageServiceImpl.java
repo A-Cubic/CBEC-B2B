@@ -109,8 +109,8 @@ public class HomePageServiceImpl implements IHomePageService {
 			end = searchGoods.getPageNumber()+1;
 		}
 		goodsListOld.setSize(page);
-		goodsListOld.setStartRow(start);
-		goodsListOld.setEndRow(end);
+		goodsListOld.setStartRow(1);
+		goodsListOld.setEndRow(10);
 		goodsListOld.setTotal(total);
 		goodsListOld.setOrderBy("");
 		goodsListOld.setPages(page);
