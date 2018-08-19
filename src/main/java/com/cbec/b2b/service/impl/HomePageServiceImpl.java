@@ -64,25 +64,45 @@ public class HomePageServiceImpl implements IHomePageService {
 	@Override
 	public GoodsListOld getGoodsList(SearchGoods searchGoods) {
 		if("1".equals(searchGoods.getSendType())) {
-			searchGoods.setIfXG("1");
+			searchGoods.setIfXG("");
 			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("1");
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("");
 		}else if("2".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
-//			searchGoods.setIfHW("1");
+			searchGoods.setIfHW("");
 			searchGoods.setIfHG("1");
-			searchGoods.setIfRB("1");
+			searchGoods.setIfRB("");
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("");
 		}else if("3".equals(searchGoods.getSendType())) {
-			searchGoods.setIfXG("");
+			searchGoods.setIfXG("1");
 			searchGoods.setIfHW("");
-			searchGoods.setIfBS("1");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
 			searchGoods.setIfMY("");
 		}else if("4".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
 			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("1");
+			searchGoods.setIfMY("");
+		}else if("5".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("1");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("");
+		}else if("6".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("1");
 		}
