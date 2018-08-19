@@ -14,6 +14,7 @@ import com.cbec.b2b.entity.Catelog.Catelog;
 import com.cbec.b2b.entity.HomePage.Adver;
 import com.cbec.b2b.entity.HomePage.GoodsInfo;
 import com.cbec.b2b.entity.HomePage.GoodsList;
+import com.cbec.b2b.entity.HomePage.GoodsListOld;
 import com.cbec.b2b.entity.HomePage.Screen;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SearchGoods2;
@@ -38,8 +39,12 @@ public class HomePageController {
     public Screen screen() {
         return api.getScreen();
     }
+//    @RequestMapping(value = "/GoodsList")
+//    public PageInfo<GoodsList> goodslist(@RequestBody SearchGoods searchGoods ) {
+//    	return api.getGoodsList(searchGoods);
+//    }
     @RequestMapping(value = "/GoodsList")
-    public PageInfo<GoodsList> goodslist(@RequestBody SearchGoods searchGoods ) {
+    public GoodsListOld goodslist(@RequestBody SearchGoods searchGoods ) {
     	return api.getGoodsList(searchGoods);
     }
     @RequestMapping(value = "/B2BGoodsList")

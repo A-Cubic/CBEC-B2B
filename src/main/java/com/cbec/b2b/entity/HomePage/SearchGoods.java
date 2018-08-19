@@ -18,6 +18,7 @@ public class SearchGoods {
 	String search;//搜索内容
 	String sort;//排序方式
 	int pageNumber;//多少页
+	int startPage;//多少页
 	int pageSize;//页面显示多少个商品
 }
 

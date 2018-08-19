@@ -14,6 +14,7 @@ import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsInfo;
 import com.cbec.b2b.entity.HomePage.GoodsList;
+import com.cbec.b2b.entity.HomePage.GoodsListOld;
 import com.cbec.b2b.entity.HomePage.GoodsType;
 import com.cbec.b2b.entity.HomePage.Screen;
 import com.cbec.b2b.entity.HomePage.ScreenType;
@@ -33,23 +34,34 @@ public class HomePageApi {
     public Catelog getCatalogAndBrands() {
     	return service.getCatalogAndBrands();
     }
+    
     @RequestMapping(value = "/adver")
     public Adver getAdver() {
     	return service.getAdver();
     }
     @RequestMapping(value = "/goodslist")
-    public PageInfo<GoodsList> getGoodsList(@RequestBody SearchGoods searchGoods ) {
+    public GoodsListOld getGoodsList(@RequestBody SearchGoods searchGoods ) {
     	if(searchGoods.getPageNumber()==0) {
     		searchGoods.setPageNumber(1);
     	}
     	if(searchGoods.getPageSize()==0) {
     		searchGoods.setPageSize(20);
     	}
-    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
-    	List<GoodsList> LGoods = service.getGoodsList(searchGoods);
-    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
-        return pageData;
+        return service.getGoodsList(searchGoods);
     }
+//    @RequestMapping(value = "/goodslist")
+//    public PageInfo<GoodsList> getGoodsList(@RequestBody SearchGoods searchGoods ) {
+//    	if(searchGoods.getPageNumber()==0) {
+//    		searchGoods.setPageNumber(1);
+//    	}
+//    	if(searchGoods.getPageSize()==0) {
+//    		searchGoods.setPageSize(20);
+//    	}
+//    	PageHelper.startPage(searchGoods.getPageNumber(),searchGoods.getPageSize());
+//    	List<GoodsList> LGoods = service.getGoodsList(searchGoods);
+//    	PageInfo<GoodsList> pageData = new PageInfo<GoodsList>(LGoods);
+//        return pageData;
+//    }
     @RequestMapping(value = "/b2bgoodslist")
     public PageInfo<GoodsList> getB2BGoodsList(@RequestBody SearchGoods searchGoods ) {
     	if(searchGoods.getPageNumber()==0) {

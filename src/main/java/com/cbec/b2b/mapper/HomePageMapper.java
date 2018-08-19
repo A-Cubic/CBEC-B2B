@@ -28,4 +28,5 @@ public interface HomePageMapper {
 	List<CateThree>  getCateThreeByCateOneID(int cateOneID);
 	List<GoodsList> getGoodsList(SearchGoods searchGoods);
 	List<GoodsList> getB2BGoodsList(SearchGoods searchGoods);
+	int getGoodsListTotal(SearchGoods searchGoods);
 }

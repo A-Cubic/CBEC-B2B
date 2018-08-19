@@ -20,6 +20,7 @@ import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsList;
+import com.cbec.b2b.entity.HomePage.GoodsListOld;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 import com.cbec.b2b.mapper.HomePageMapper;
@@ -61,7 +62,7 @@ public class HomePageServiceImpl implements IHomePageService {
 	}
 
 	@Override
-	public List<GoodsList> getGoodsList(SearchGoods searchGoods) {
+	public GoodsListOld getGoodsList(SearchGoods searchGoods) {
 		if("1".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("1");
 			searchGoods.setIfHW("");
@@ -83,7 +84,27 @@ public class HomePageServiceImpl implements IHomePageService {
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("1");
 		}
-		return mapper.getGoodsList(searchGoods);
+		searchGoods.setStartPage((searchGoods.getPageNumber()-1)*searchGoods.getPageSize());
+		GoodsListOld goodsListOld =new GoodsListOld();
+		goodsListOld.setList(mapper.getGoodsList(searchGoods));
+		goodsListOld.setPageNum(searchGoods.getPageNumber());
+		goodsListOld.setPageSize(searchGoods.getPageSize());
+		int total = mapper.getGoodsListTotal(searchGoods);
+		int page=total/searchGoods.getPageSize() +1;
+		int start=1,end=1;
+		if(searchGoods.getPageNumber()>1) {
+			start=searchGoods.getPageNumber()-1;
+		}
+		if(searchGoods.getPageNumber() <page) {
+			end = searchGoods.getPageNumber()+1;
+		}
+		goodsListOld.setSize(searchGoods.getPageSize());
+		goodsListOld.setStartRow(start);
+		goodsListOld.setEndRow(end);
+		goodsListOld.setTotal(total);
+		goodsListOld.setOrderBy("");
+		goodsListOld.setPages(page);
+		return goodsListOld;
 	}
 	@Override
 	public List<GoodsList> getB2BGoodsList(SearchGoods searchGoods) {

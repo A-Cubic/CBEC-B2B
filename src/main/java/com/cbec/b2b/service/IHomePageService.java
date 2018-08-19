@@ -11,6 +11,7 @@ import com.cbec.b2b.entity.HomePage.Brands;
 import com.cbec.b2b.entity.HomePage.Country;
 import com.cbec.b2b.entity.HomePage.Goods;
 import com.cbec.b2b.entity.HomePage.GoodsList;
+import com.cbec.b2b.entity.HomePage.GoodsListOld;
 import com.cbec.b2b.entity.HomePage.SearchGoods;
 import com.cbec.b2b.entity.HomePage.SendType;
 
@@ -22,7 +23,7 @@ public interface IHomePageService {
 	List<Country> getCountry();
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
-	List<GoodsList> getGoodsList(SearchGoods searchGoods);
+	GoodsListOld getGoodsList(SearchGoods searchGoods);
 	List<GoodsList> getB2BGoodsList(SearchGoods searchGoods);
 	Catelog getCatalogAndBrands();
 	Adver getAdver();
