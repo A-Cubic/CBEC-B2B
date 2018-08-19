@@ -100,20 +100,20 @@ public class HomePageServiceImpl implements IHomePageService {
 		goodsListOld.setPageNum(searchGoods.getPageNumber());
 		goodsListOld.setPageSize(searchGoods.getPageSize());
 		int total = mapper.getGoodsListTotal(searchGoods);
-		int size=total/searchGoods.getPageSize() +1;
+		int page=total/searchGoods.getPageSize() +1;
 		int start=1,end=1;
 		if(searchGoods.getPageNumber()>1) {
 			start=searchGoods.getPageNumber()-1;
 		}
-		if(searchGoods.getPageNumber() <size) {
+		if(searchGoods.getPageNumber() <page) {
 			end = searchGoods.getPageNumber()+1;
 		}
-		goodsListOld.setSize(searchGoods.getPageSize());
+		goodsListOld.setSize(page);
 		goodsListOld.setStartRow(start);
 		goodsListOld.setEndRow(end);
 		goodsListOld.setTotal(total);
 		goodsListOld.setOrderBy("");
-		goodsListOld.setPages(10);
+		goodsListOld.setPages(page);
 		return goodsListOld;
 	}
 	@Override
