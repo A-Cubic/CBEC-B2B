@@ -70,7 +70,9 @@ public class HomePageServiceImpl implements IHomePageService {
 			searchGoods.setIfMY("");
 		}else if("2".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
-			searchGoods.setIfHW("1");
+			//searchGoods.setIfHW("1");
+			searchGoods.setIfHG("1");
+			searchGoods.setIfRB("1");
 			searchGoods.setIfBS("");
 			searchGoods.setIfMY("");
 		}else if("3".equals(searchGoods.getSendType())) {
@@ -101,19 +103,21 @@ public class HomePageServiceImpl implements IHomePageService {
 		goodsListOld.setPageSize(searchGoods.getPageSize());
 		int total = mapper.getGoodsListTotal(searchGoods);
 		int page=total/searchGoods.getPageSize() +1;
-		int start=1,end=1;
-		if(searchGoods.getPageNumber()>1) {
-			start=searchGoods.getPageNumber()-1;
+		int start=1,end=10;
+		if(searchGoods.getPageNumber()>5) {
+			start=searchGoods.getPageNumber()-5;
+			end=searchGoods.getPageNumber()+5;
+			if(end >page) {
+				end = page;
+			}
 		}
-		if(searchGoods.getPageNumber() <page) {
-			end = searchGoods.getPageNumber()+1;
-		}
+		
 		goodsListOld.setSize(page);
-		goodsListOld.setStartRow(1);
-		goodsListOld.setEndRow(10);
+		goodsListOld.setStartRow(start);
+		goodsListOld.setEndRow(end);
 		goodsListOld.setTotal(total);
 		goodsListOld.setOrderBy("");
-		goodsListOld.setPages(page);
+		goodsListOld.setPages(end-start+1);
 		return goodsListOld;
 	}
 	@Override

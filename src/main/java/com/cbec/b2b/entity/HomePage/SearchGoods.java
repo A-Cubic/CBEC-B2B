@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class SearchGoods {
 	String userCode; //供货商账号
+	String ifHG; //是否海外自提
+	String ifRB; //是否海外自提
 	String ifXG; //是否香港自提
 	String ifHW; //是否海外自提
 	String ifBS; //是否保税备货
