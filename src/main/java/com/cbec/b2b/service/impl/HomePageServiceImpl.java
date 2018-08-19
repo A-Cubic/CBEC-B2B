@@ -117,17 +117,18 @@ public class HomePageServiceImpl implements IHomePageService {
 		goodsListOld.setPageNumber(searchGoods.getPageNumber());
 		goodsListOld.setSize(page);
 		goodsListOld.setTotal(total);
-		int p=(searchGoods.getPageNumber()-1)/10;
-		int p1=p*10+1;
-		int p2 =(p+1)*10;
-		if(p2>page) {
-			p2=page;
-		}
-		int[] pages = new int[p2-p1+1];
-		for(int i = 0; i<p2-p1+1;i++) {
-			pages[i]=p1+i;
-		}
-		goodsListOld.setPages(pages);
+//		int p=(searchGoods.getPageNumber()-1)/10;
+//		int p1=p*10+1;
+//		int p2 =(p+1)*10;
+//		if(p2>page) {
+//			p2=page;
+//		}
+//		int[] pages = new int[p2-p1+1];
+//		for(int i = 0; i<p2-p1+1;i++) {
+//			pages[i]=p1+i;
+//		}
+//		goodsListOld.setPages(pages);
+		goodsListOld.setPages(10);
 		return goodsListOld;
 	}
 	@Override
