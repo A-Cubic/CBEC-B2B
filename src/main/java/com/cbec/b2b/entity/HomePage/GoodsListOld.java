@@ -8,6 +8,8 @@ import lombok.Data;
 public class GoodsListOld {
 	private int pageNum;
 	private int pageSize;
+	private int hasNextPage;
+	private int hasPreviousPage;
 	private int size;
 	private String orderBy;
 	private int startRow;
