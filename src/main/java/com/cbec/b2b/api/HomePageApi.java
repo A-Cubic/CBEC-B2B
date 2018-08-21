@@ -94,9 +94,9 @@ public class HomePageApi {
     public GoodsInfo getGoods(@RequestBody String GoodsId ) {
     	List<Goods> LGoods= service.getGoodsByGoodsId(GoodsId);
     	for(Goods goods :LGoods) {
-    		if(!"".equals(goods.getContent()))
+    		if(goods.getContent()!=null &&!"".equals(goods.getContent()))
     			goods.setContents(goods.getContent().split(","));
-    		if(!"".equals(goods.getThumb()))
+    		if(goods.getThumb()!=null&&!"".equals(goods.getThumb()))
     			goods.setThumbs(goods.getThumb().split(","));
     	}
         GoodsType gt = new GoodsType();
