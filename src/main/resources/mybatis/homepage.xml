@@ -47,7 +47,7 @@
 		select 0 as id,brand as value
 		from t_goods_list 
 		where catelog1 = #{cateOneID} 
-		GROUP BY brand
+		GROUP BY brand 
 	</select>
 	<select id="getCateTWOByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateTWO">
 		select c.id,c.name as value
