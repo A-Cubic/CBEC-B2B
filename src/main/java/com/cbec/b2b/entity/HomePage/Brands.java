@@ -6,4 +6,5 @@ import lombok.Data;
 public class Brands {
 	String advname;
 	String advurl;
+	String imgurl;
 }

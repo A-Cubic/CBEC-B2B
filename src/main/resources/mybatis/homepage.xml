@@ -8,7 +8,7 @@
 		 ORDER BY sort asc
 	</select>
 	<select id="getBrands" resultType="com.cbec.b2b.entity.HomePage.Brands">
-		SELECT advname,advurl
+		SELECT advname,advurl,imgurl
 		  FROM t_base_adv
 		 WHERE flag='1' and advtype='brands' 
 		 ORDER BY sort asc
@@ -46,7 +46,7 @@
 	<select id="getBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand">
 		select 0 as id,brand as value
 		from t_goods_list 
-		where catelog1 = #{cateOneID} and 1=2 
+		where catelog1 = #{cateOneID} 
 		GROUP BY brand
 	</select>
 	<select id="getCateTWOByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateTWO">

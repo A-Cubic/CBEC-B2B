@@ -9,4 +9,5 @@ import lombok.Data;
 public class ScreenType {
 	private List<Country> country;
 	private List<SendType> sendtype;
+	private List<Brands> brands;
 }
