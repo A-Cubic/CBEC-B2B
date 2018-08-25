@@ -36,6 +36,10 @@ public class HomePageApi {
     public Catelog getCatalogAndBrands() {
     	return service.getCatalogAndBrands();
     }
+    @RequestMapping(value = "/catalogNew")
+    public Catelog getCatalogAndBrandsNew() {
+    	return service.getCatalogAndBrandsNew();
+    }
     
     @RequestMapping(value = "/adver")
     public Adver getAdver() {

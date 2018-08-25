@@ -31,6 +31,10 @@ public class HomePageController {
     public Catelog catalog() {
         return api.getCatalogAndBrands();
     }
+    @RequestMapping(value = "/catalogNew")
+    public Catelog catalogNew() {
+        return api.getCatalogAndBrandsNew();
+    }
     @RequestMapping(value = "/adver")
     public Adver adver() {
         return api.getAdver();
