@@ -63,6 +63,9 @@ public class HomePageServiceImpl implements IHomePageService {
 
 	@Override
 	public GoodsListOld getGoodsList(SearchGoods searchGoods) {
+		if("0".equals(searchGoods.getCatelog1())) {
+			searchGoods.setCatelog1(null);
+		}
 		if("1".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
 			searchGoods.setIfHW("");
@@ -157,6 +160,9 @@ public class HomePageServiceImpl implements IHomePageService {
 	}
 	@Override
 	public List<GoodsList> getB2BGoodsList(SearchGoods searchGoods) {
+		if("0".equals(searchGoods.getCatelog1())) {
+			searchGoods.setCatelog1(null);
+		}
 		if("1".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("1");
 			searchGoods.setIfHW("");
