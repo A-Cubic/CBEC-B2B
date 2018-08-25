@@ -199,6 +199,25 @@ public class HomePageServiceImpl implements IHomePageService {
     		lct2.add(ct2);
     		co.setLevel2(lct2);
     	}
+
+    	CateOne c= new CateOne();
+    	c.setId(0);
+    	c.setValue("请选择");
+    	List<CateType2> lct2 = new ArrayList<CateType2>();
+		
+		CateType2 ct2 = new CateType2();
+		List<CateTWO> lc2 = new ArrayList<CateTWO>();
+		CateTWO cateTWO =new CateTWO();
+		cateTWO.setId(0);
+		cateTWO.setValue("请选择");
+		lc2.add(cateTWO);
+		ct2.setCatelog(lc2);
+		List<Brand> lb= mapper.getAdvBrandByCateOneID();
+		ct2.setBrands(lb);
+		lct2.add(ct2);
+		c.setLevel2(lct2);
+    	lco.add(0, c);
+    	
     	CateType cateType =new CateType();
     	cateType.setLevel1(lco);
     	

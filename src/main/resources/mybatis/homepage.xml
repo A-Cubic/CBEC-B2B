@@ -49,6 +49,12 @@
 		where catelog1 = #{cateOneID} 
 		GROUP BY brand 
 	</select>
+	<select id="getAdvBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand">
+		SELECT advname as value,0 as id
+		  FROM t_base_adv
+		 WHERE flag='1' and advtype='brands' 
+		 ORDER BY sort asc
+	</select>
 	<select id="getCateTWOByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateTWO">
 		select c.id,c.name as value
 		from t_goods_list g ,t_goods_category c 
@@ -92,6 +98,12 @@
             </if>  
             <if test="country!=null and country !=''">  
                 and country= #{country}  
+            </if>  
+            <if test="catelog1!=null and catelog1 !='' and catelog1 !='0'">  
+                and catelog1= #{catelog1}  
+            </if>  
+            <if test="catelog2!=null and catelog2 !='' and catelog2 !='0'">  
+                and catelog2= #{catelog2}  
             </if>  
             <if test="catelog3!=null and catelog3 !=''">  
                 and catelog3= #{catelog3}  
@@ -139,6 +151,12 @@
             </if>  
             <if test="country!=null and country !=''">  
                 and country= #{country}  
+            </if>  
+            <if test="catelog1!=null and catelog1 !='' and catelog1 !='0'">  
+                and catelog1= #{catelog1}  
+            </if>  
+            <if test="catelog2!=null and catelog2 !='' and catelog2 !='0'">  
+                and catelog2= #{catelog2}  
             </if>  
             <if test="catelog3!=null and catelog3 !=''">  
                 and catelog3= #{catelog3}  
