@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -137,7 +138,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor={RuntimeException.class, Exception.class})
-	public MsgResponse registerSubmit(String mail,String password,String type) {
+	public MsgResponse registerSubmit(String mail,String password,String type,String ofAgent) {
 		RegisterStepOne registerStepOne = new RegisterStepOne();
 		registerStepOne.setMail(mail);
 		registerStepOne.setPassword(Util.getMD5(password));
@@ -155,6 +156,24 @@ public class UserServiceImpl implements IUserService {
 			response.setMsg("账号已存在");
 			return response;
 		}
+		//20180826新增：如果是分销商，则判断是否带所归属的代理，如果没有就获取默认代理
+		if("4".equals(type)) {
+			if(ofAgent==null||"".equals(ofAgent)) {
+				List<String> defaultAgentList =mapper.getDefaultAgent();
+				if(defaultAgentList!=null) {
+					registerStepOne.setOfAgent(defaultAgentList.get(0));
+				}
+			}else {
+				Map<String,Object> map = mapper.getUserType(ofAgent);
+				if(map!=null) {
+					String t =(String)map.get("usertype");
+					if("3".equals(t)) {
+						registerStepOne.setOfAgent(ofAgent);
+					}
+				}
+			}
+		}
+		
 		
 		int insertUserNum = mapper.insertUser(registerStepOne);
 		

@@ -110,6 +110,7 @@ public class UserController {
 		String code = request.get("captcha");
 		String pwd = request.get("password");
 		String type = request.get("type");
+		String ofAgent = request.get("ofAgent");
 		
 		if (mail == null || code == null || pwd == null || type == null || "".equals(mail) || "".equals(code)
 				|| "".equals(pwd) || "".equals(type) || (!"1".equals(type) && !"2".equals(type) && !"3".equals(type) && !"4".equals(type)) ) {
@@ -127,17 +128,17 @@ public class UserController {
 		
 		String key = mail + "_code";
 
-		if (!redisUtil.isExistKey(key)) {
-			response.setMsg("无效的验证码.");
-			return response;
-		}
-		String redis_code = (String)redisUtil.get(key);
-		if(!redis_code.equals(code)) {
-			response.setMsg("验证码不正确.");
-			return response;
-		}
+//		if (!redisUtil.isExistKey(key)) {
+//			response.setMsg("无效的验证码.");
+//			return response;
+//		}
+//		String redis_code = (String)redisUtil.get(key);
+//		if(!redis_code.equals(code)) {
+//			response.setMsg("验证码不正确.");
+//			return response;
+//		}
 
-		return api.registerSubmit(mail, pwd, type);
+		return api.registerSubmit(mail, pwd, type,ofAgent);
 	}
 	@RequestMapping(value = "/register/rename")
 	public MsgResponse renameSubmit(@RequestBody Map<String, String> request, HttpServletResponse res) {

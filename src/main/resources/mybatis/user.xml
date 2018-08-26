@@ -142,8 +142,8 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="com.cbec.b2b.entity.register.RegisterStepOne" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO t_user_list(usercode,pwd,usertype,verifycode,flag,avatar) 
-		VALUES (#{mail}, #{password}, #{type}, #{verifycode}, #{flag}, #{avatar})
+		INSERT INTO t_user_list(usercode,pwd,usertype,ofAgent,verifycode,flag,avatar) 
+		VALUES (#{mail}, #{password}, #{type}, #{ofAgent}, #{verifycode}, #{flag}, #{avatar})
 	</insert>
 	
 	<insert id="insertUserRole" parameterType="java.lang.Integer">
@@ -155,7 +155,7 @@
         UPDATE 
 			t_user_list t
 		SET 
-			t.company=#{companyName},t.contact=#{linkman},t.tel=#{linkmanphone},t.username=#{companyName},
+			t.website=#{website},t.company=#{companyName},t.contact=#{linkman},t.tel=#{linkmanphone},t.username=#{companyName},
 			t.email=#{email},t.img1=#{img1},t.img2=#{img2},t.img3=#{img3},t.three=#{img4},t.verifycode=#{verifycode}
 		WHERE
 			t.usercode=#{userName}
@@ -172,7 +172,7 @@
 	
 	<select id="getUserStatus" resultType="com.cbec.b2b.entity.register.UserStatus">
 		SELECT 
-			t.usertype,t.company,t.contact,t.email,t.tel,
+			t.usertype,t.company,t.contact,t.email,t.tel,t.website,
 			t.img1,t.img2,t.img3,t.three,t.verifycode
 		FROM 
 			t_user_list t
@@ -268,4 +268,13 @@
 		WHERE
 			t.usercode=#{account}
 	</update>
+	
+	<select id="getDefaultAgent" resultType="java.lang.String">
+		SELECT 
+			usercode
+		FROM 
+			t_user_list
+		WHERE 
+			defaultAgent ='1'
+	</select>
 </mapper>

@@ -39,4 +39,5 @@ public interface UserMapper {
 	int updateUserStatusByUserId(@Param("id") String id,@Param("flag") String flag);
 	int updateUserPwd(@Param("account") String account,@Param("password") String password);
 	int updateLoginLastTime(@Param("account") String account);
+	List<String> getDefaultAgent();
 }

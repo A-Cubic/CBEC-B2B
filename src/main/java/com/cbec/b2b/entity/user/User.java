@@ -11,6 +11,7 @@ public class User {
 	private String avatar;
 	private String company;
 	private String contact;
+	private String website;
 	private String tel;
 	private String email;
 	private String three;

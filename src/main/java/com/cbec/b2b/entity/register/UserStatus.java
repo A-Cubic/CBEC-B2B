@@ -8,6 +8,7 @@ public class UserStatus {
 	private String company;
 	private String contact;
 	private String email;
+	private String website;
 	private String tel;
 	private String img1;
 	private String img2;

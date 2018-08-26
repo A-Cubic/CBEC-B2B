@@ -25,7 +25,7 @@ public interface IUserService {
 	List<MessageEntity> getMessage(String account);
 	MessageCountEntity getMessageCount(String account);
 	String updateMessage(String account,String type);
-	MsgResponse registerSubmit(String mail,String password,String type);
+	MsgResponse registerSubmit(String mail,String password,String type,String ofAgent);
 	MsgResponse renameSubmit(String mail,String password);
 	MsgResponse registerCode(String mail);
 	MsgResponse renameCode(String mail);

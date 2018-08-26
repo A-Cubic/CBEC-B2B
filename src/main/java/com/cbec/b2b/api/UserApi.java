@@ -57,8 +57,8 @@ public class UserApi {
     }
     
     @RequestMapping(value = "/register/submit")
-    public MsgResponse registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String type) {
-        return service.registerSubmit(mail,password,type);
+    public MsgResponse registerSubmit(@RequestParam String mail,@RequestParam String password,@RequestParam String type,@RequestParam String ofAgent) {
+        return service.registerSubmit(mail,password,type,ofAgent);
     }
     
     @RequestMapping(value = "/register/rename")

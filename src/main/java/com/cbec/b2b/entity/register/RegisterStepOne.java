@@ -9,6 +9,7 @@ public class RegisterStepOne {
 	private String avatar;
 	private String password;
 	private String type;
+	private String ofAgent;
 	private String verifycode="2";
 	private String flag="1";
 }
