@@ -71,63 +71,63 @@
 	</select>
 		
 	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
-		  FROM t_goods_list
+		SELECT g.id,g.goodsname,g.price,g.slt ,g.barcode,g.ifB2B,g.ifBBC,g.id as 'key'
+		  FROM t_goods_list g,t_base_origin o
 		  <where> 
-		    ifB2B='1' 
+		   g.country = o.originname and   g.ifB2B='1' 
             <if test="userCode !=null and userCode !=''">  
-                and supplierCode=#{userCode} 
+                and g.supplierCode=#{userCode} 
             </if> 
             <if test="ifXG!=null and ifXG !=''">  
-                and ifXG= #{ifXG}  
+                and g.ifXG= #{ifXG}  
             </if>    
             <if test="ifHW !=null and ifHW !=''">  
-                and ifHW= #{ifHW}  
+                and g.ifHW= #{ifHW}  
             </if>  
             <if test="ifRB!=null and ifRB !=''">  
-                and ifRB= #{ifRB}  
+                and g.ifRB= #{ifRB}  
             </if>  
             <if test="ifHG!=null and ifHG !=''">  
-                and ifHG= #{ifHG}  
+                and g.ifHG= #{ifHG}  
             </if>      
             <if test="ifBS !=null and ifBS !=''">  
-                and ifBS= #{ifBS}  
+                and g.ifBS= #{ifBS}  
             </if>    
             <if test="ifMY !=null and ifMY !=''">  
-                and ifMY= #{ifMY}  
+                and g.ifMY= #{ifMY}  
             </if>  
             <if test="country!=null and country !=''">  
-                and country= #{country}  
+                and o.id= #{country}  
             </if>  
             <if test="catelog1!=null and catelog1 !='' and catelog1 !='0'">  
-                and catelog1= #{catelog1}  
+                and g.catelog1= #{catelog1}  
             </if>  
             <if test="catelog2!=null and catelog2 !='' and catelog2 !='0'">  
-                and catelog2= #{catelog2}  
+                and g.catelog2= #{catelog2}  
             </if>  
             <if test="catelog3!=null and catelog3 !=''">  
-                and catelog3= #{catelog3}  
+                and g.catelog3= #{catelog3}  
             </if>  
             <if test="brands!=null and brands !=''">  
-                and brand= #{brands}  
+                and g.brand= #{brands}  
             </if>  
             <if test="search!=null and search !=''">  
-                and (goodsName like concat('%',#{search},'%')  
-                	 or goodsNameE like concat('%',#{search},'%')      
-                	 or brand like concat('%',#{search},'%')      
-                	 or brandE like concat('%',#{search},'%')      
-                	 or barcode like concat('%',#{search},'%')       )
+                and (g.goodsName like concat('%',#{search},'%')  
+                	 or g.goodsNameE like concat('%',#{search},'%')      
+                	 or g.brand like concat('%',#{search},'%')      
+                	 or g.brandE like concat('%',#{search},'%')      
+                	 or g.barcode like concat('%',#{search},'%')       )
             </if>  
         </where>  
-		 ORDER BY id asc
+		 ORDER BY g.id asc
 		 LIMIT #{startPage} ,#{pageSize}
 	</select>
 		
 	<select id="getGoodsListTotal" resultType="java.lang.Integer" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		SELECT count(*)
-		  FROM t_goods_list
+		 FROM t_goods_list g,t_base_origin o
 		  <where> 
-		    ifB2B='1' 
+		   g.country = o.originname and   g.ifB2B='1' 
             <if test="userCode !=null and userCode !=''">  
                 and supplierCode=#{userCode} 
             </if> 
@@ -150,7 +150,7 @@
                 and ifMY= #{ifMY}  
             </if>  
             <if test="country!=null and country !=''">  
-                and country= #{country}  
+                and o.id= #{country}  
             </if>  
             <if test="catelog1!=null and catelog1 !='' and catelog1 !='0'">  
                 and catelog1= #{catelog1}  
@@ -172,7 +172,7 @@
                 	 or barcode like concat('%',#{search},'%')      )
             </if>  
         </where>  
-		 ORDER BY id asc
+		 ORDER BY g.id asc
 	</select>
 	<select id="getB2BGoodsList" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
