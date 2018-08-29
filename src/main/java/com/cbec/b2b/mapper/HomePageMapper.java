@@ -24,7 +24,7 @@ public interface HomePageMapper {
 	List<Goods> getGoodsByGoodsId(String goodsId);
 	List<CateOne> getCateOneList();
 	List<Brand> getAdvBrandByCateOneID();
-	List<Brand> getBrandByCateOneID(int cateOneID);
+	List<Brand> getBrandByCateOneID(SearchGoods searchGoods);
 	List<CateTWO>  getCateTWOByCateOneID(int cateOneID);
 	List<CateThree>  getCateThreeByCateOneID(int cateOneID);
 	List<GoodsList> getGoodsList(SearchGoods searchGoods);

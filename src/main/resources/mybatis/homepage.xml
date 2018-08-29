@@ -43,17 +43,79 @@
 		GROUP BY c.id,c.name
 		ORDER BY id asc
 	</select>
-	<select id="getBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand">
+	<select id="getBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		select 0 as id,brand as value
-		from t_goods_list 
-		where catelog1 = #{cateOneID} 
-		GROUP BY brand 
+		from t_goods_list g ,t_base_origin o
+		 <where> 
+		  catelog1 = #{catelog1} and g.country = o.originname and   g.ifB2B='1' 
+		 <if test="ifXG!=null and ifXG !=''">  
+                and g.ifXG= #{ifXG}  
+            </if>    
+            <if test="ifHW !=null and ifHW !=''">  
+                and g.ifHW= #{ifHW}  
+            </if>  
+            <if test="ifRB!=null and ifRB !=''">  
+                and g.ifRB= #{ifRB}  
+            </if>  
+            <if test="ifHG!=null and ifHG !=''">  
+                and g.ifHG= #{ifHG}  
+            </if>      
+            <if test="ifBS !=null and ifBS !=''">  
+                and g.ifBS= #{ifBS}  
+            </if>    
+            <if test="ifMY !=null and ifMY !=''">  
+                and g.ifMY= #{ifMY}  
+            </if>  
+            <if test="country!=null and country !=''">  
+                and o.id= #{country}  
+            </if>  
+		
+            <if test="search!=null and search !=''">  
+                and (g.goodsName like concat('%',#{search},'%')  
+                	 or g.goodsNameE like concat('%',#{search},'%')      
+                	 or g.brand like concat('%',#{search},'%')      
+                	 or g.brandE like concat('%',#{search},'%')      
+                	 or g.barcode like concat('%',#{search},'%')       )
+            </if>  
+        </where>  
+		GROUP BY brand order by count(*) desc 
 	</select>
-	<select id="getAdvBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand">
-		SELECT advname as value,0 as id
-		  FROM t_base_adv
-		 WHERE flag='1' and advtype='brands' 
-		 ORDER BY sort asc
+	<select id="getAdvBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
+		select 0 as id,brand as value
+		from t_goods_list g ,t_base_origin o
+		 <where> 
+		 g.country = o.originname and   g.ifB2B='1' 
+		 <if test="ifXG!=null and ifXG !=''">  
+                and g.ifXG= #{ifXG}  
+            </if>    
+            <if test="ifHW !=null and ifHW !=''">  
+                and g.ifHW= #{ifHW}  
+            </if>  
+            <if test="ifRB!=null and ifRB !=''">  
+                and g.ifRB= #{ifRB}  
+            </if>  
+            <if test="ifHG!=null and ifHG !=''">  
+                and g.ifHG= #{ifHG}  
+            </if>      
+            <if test="ifBS !=null and ifBS !=''">  
+                and g.ifBS= #{ifBS}  
+            </if>    
+            <if test="ifMY !=null and ifMY !=''">  
+                and g.ifMY= #{ifMY}  
+            </if>  
+            <if test="country!=null and country !=''">  
+                and o.id= #{country}  
+            </if>  
+		
+            <if test="search!=null and search !=''">  
+                and (g.goodsName like concat('%',#{search},'%')  
+                	 or g.goodsNameE like concat('%',#{search},'%')      
+                	 or g.brand like concat('%',#{search},'%')      
+                	 or g.brandE like concat('%',#{search},'%')      
+                	 or g.barcode like concat('%',#{search},'%')       )
+            </if>  
+        </where>  
+		GROUP BY brand order by count(*) desc  LIMIT 0,20
 	</select>
 	<select id="getCateTWOByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateTWO">
 		select c.id,c.name as value

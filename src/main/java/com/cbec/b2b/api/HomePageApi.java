@@ -33,8 +33,8 @@ public class HomePageApi {
     
 
     @RequestMapping(value = "/catalog")
-    public Catelog getCatalogAndBrands() {
-    	return service.getCatalogAndBrands();
+    public Catelog getCatalogAndBrands(SearchGoods searchGoods) {
+    	return service.getCatalogAndBrands(searchGoods);
     }
     @RequestMapping(value = "/catalogNew")
     public Catelog getCatalogAndBrandsNew() {

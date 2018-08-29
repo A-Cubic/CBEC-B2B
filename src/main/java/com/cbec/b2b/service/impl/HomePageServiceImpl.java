@@ -192,13 +192,57 @@ public class HomePageServiceImpl implements IHomePageService {
 	}
 
 	@Override
-	public Catelog getCatalogAndBrands() {
+	public Catelog getCatalogAndBrands(SearchGoods searchGoods) {
+		if("1".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("1");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("");
+		}else if("2".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("1");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("");
+		}else if("3".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("1");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("");
+		}else if("4".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("1");
+			searchGoods.setIfMY("");
+		}else if("5".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("1");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("");
+		}else if("6".equals(searchGoods.getSendType())) {
+			searchGoods.setIfXG("");
+			searchGoods.setIfHW("");
+			searchGoods.setIfHG("");
+			searchGoods.setIfRB("");
+			searchGoods.setIfBS("");
+			searchGoods.setIfMY("1");
+		}
     	List<CateOne> lco = mapper.getCateOneList();
     	for(CateOne co : lco) {
     		List<CateType2> lct2 = new ArrayList<CateType2>();
     		
     		CateType2 ct2 = new CateType2();
-    		List<Brand> lb= mapper.getBrandByCateOneID(co.getId());
+    		searchGoods.setCatelog1(String.valueOf(co.getId()) );
+    		List<Brand> lb= mapper.getBrandByCateOneID(searchGoods);
     		ct2.setBrands(lb);
     		List<CateTWO> lc2 = mapper.getCateTWOByCateOneID(co.getId());
     		for(CateTWO c2 : lc2) {
@@ -245,8 +289,8 @@ public class HomePageServiceImpl implements IHomePageService {
     		List<CateType2> lct2 = new ArrayList<CateType2>();
     		
     		CateType2 ct2 = new CateType2();
-    		List<Brand> lb= mapper.getBrandByCateOneID(co.getId());
-    		ct2.setBrands(lb);
+//    		List<Brand> lb= mapper.getBrandByCateOneID(co.getId());
+//    		ct2.setBrands(lb);
     		List<CateTWO> lc2 = mapper.getCateTWOByCateOneID(co.getId());
     		for(CateTWO c2 : lc2) {
     			List<CateThree> lc3= mapper.getCateThreeByCateOneID(co.getId());

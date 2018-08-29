@@ -26,6 +26,6 @@ public interface IHomePageService {
 	GoodsListOld getGoodsList(SearchGoods searchGoods);
 	List<GoodsList> getB2BGoodsList(SearchGoods searchGoods);
 	Catelog getCatalogAndBrandsNew();
-	Catelog getCatalogAndBrands();
+	Catelog getCatalogAndBrands(SearchGoods searchGoods);
 	Adver getAdver();
 }

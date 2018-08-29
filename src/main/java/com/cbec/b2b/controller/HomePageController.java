@@ -28,8 +28,8 @@ public class HomePageController {
     SmsUtils smsUtils;
 
     @RequestMapping(value = "/catalog")
-    public Catelog catalog() {
-        return api.getCatalogAndBrands();
+    public Catelog catalog(@RequestBody SearchGoods searchGoods ) {
+        return api.getCatalogAndBrands(searchGoods);
     }
     @RequestMapping(value = "/catalogNew")
     public Catelog catalogNew() {
