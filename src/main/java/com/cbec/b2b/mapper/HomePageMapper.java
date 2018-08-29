@@ -23,7 +23,7 @@ public interface HomePageMapper {
 	List<SendType> getSendType();
 	List<Goods> getGoodsByGoodsId(String goodsId);
 	List<CateOne> getCateOneList();
-	List<Brand> getAdvBrandByCateOneID();
+	List<Brand> getAdvBrandByCateOneID(SearchGoods searchGoods);
 	List<Brand> getBrandByCateOneID(SearchGoods searchGoods);
 	List<CateTWO>  getCateTWOByCateOneID(int cateOneID);
 	List<CateThree>  getCateThreeByCateOneID(int cateOneID);

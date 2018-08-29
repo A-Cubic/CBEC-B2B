@@ -266,7 +266,7 @@ public class HomePageServiceImpl implements IHomePageService {
 		cateTWO.setValue("请选择");
 		lc2.add(cateTWO);
 		ct2.setCatelog(lc2);
-		List<Brand> lb= mapper.getAdvBrandByCateOneID();
+		List<Brand> lb= mapper.getAdvBrandByCateOneID(searchGoods);
 		ct2.setBrands(lb);
 		lct2.add(ct2);
 		c.setLevel2(lct2);
