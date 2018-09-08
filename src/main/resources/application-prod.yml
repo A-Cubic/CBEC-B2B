@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://mysql:3306/llwell?useUnicode=true&characterEncoding=utf8
-      username: root
+      url: jdbc:mysql://DB-Pro:3306/llwell?useUnicode=true&characterEncoding=utf8
+      username: forb2bjava
       password: ENC(rbl6larX3FdtJm/uZiS1sdJk3N1ttINm)
       filters: stat,slf4j
       initialSize: 10
