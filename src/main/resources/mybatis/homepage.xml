@@ -41,7 +41,7 @@
 		from t_goods_list g ,t_goods_category c 
 		where g.catelog1 = c.id
 		GROUP BY c.id,c.name
-		ORDER BY id asc
+		ORDER BY c.displayorder asc
 	</select>
 	<select id="getBrandByCateOneID" resultType="com.cbec.b2b.entity.Catelog.Brand" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
 		select 0 as id,brand as value
@@ -122,14 +122,14 @@
 		from t_goods_list g ,t_goods_category c 
 		where g.catelog2 = c.id and g.catelog1 = #{cateOneID}
 		GROUP BY c.id,c.name
-		ORDER BY id asc
+		ORDER BY c.displayorder asc
 	</select>
 	<select id="getCateThreeByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateThree">
 		select c.id,c.name as value
 		from t_goods_list g ,t_goods_category c 
 		where g.catelog3 = c.id and g.catelog1 = #{cateOneID}
 		GROUP BY c.id,c.name
-		ORDER BY id asc
+		ORDER BY c.displayorder asc
 	</select>
 		
 	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
