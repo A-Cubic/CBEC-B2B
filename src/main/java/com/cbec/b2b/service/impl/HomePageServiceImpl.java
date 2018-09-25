@@ -245,6 +245,11 @@ public class HomePageServiceImpl implements IHomePageService {
     		List<Brand> lb= mapper.getBrandByCateOneID(searchGoods);
     		ct2.setBrands(lb);
     		List<CateTWO> lc2 = mapper.getCateTWOByCateOneID(co.getId());
+
+    		CateTWO cateTWO =new CateTWO();
+    		cateTWO.setId(0);
+    		cateTWO.setValue("请选择");
+    		lc2.add(0,cateTWO);
 //    		for(CateTWO c2 : lc2) {
 //    			List<CateThree> lc3= mapper.getCateThreeByCateOneID(co.getId());
 //    			c2.setChildCate(lc3);

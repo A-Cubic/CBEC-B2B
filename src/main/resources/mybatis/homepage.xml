@@ -39,7 +39,7 @@
 	<select id="getCateOneList" resultType="com.cbec.b2b.entity.Catelog.CateOne">
 		select c.id,c.name as value
 		from t_goods_list g ,t_goods_category c 
-		where g.catelog1 = c.id
+		where g.catelog1 = c.id and c.flag = '1' 
 		GROUP BY c.id,c.name
 		ORDER BY c.displayorder asc
 	</select>
