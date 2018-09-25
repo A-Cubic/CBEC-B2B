@@ -66,6 +66,9 @@ public class HomePageServiceImpl implements IHomePageService {
 		if("0".equals(searchGoods.getCatelog1())) {
 			searchGoods.setCatelog1(null);
 		}
+		if("0".equals(searchGoods.getCatelog2())) {
+			searchGoods.setCatelog2(null);
+		}
 		if("1".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
 			searchGoods.setIfHW("");
