@@ -48,6 +48,9 @@
 		from t_goods_list g ,t_base_origin o
 		 <where> 
 		  catelog1 = #{catelog1} and g.country = o.originname and   g.ifB2B='1' 
+            <if test="catelog2!=null and catelog2 !='' and catelog2 !='0'">  
+                and catelog2= #{catelog2}  
+            </if>  
 		 <if test="ifXG!=null and ifXG !=''">  
                 and g.ifXG= #{ifXG}  
             </if>    
@@ -133,7 +136,7 @@
 	</select>
 		
 	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT g.id,g.goodsname,g.price,g.slt ,g.barcode,g.ifB2B,g.ifBBC,g.id as 'key'
+		SELECT g.id,g.goodsname,g.price,g.slt ,g.barcode,g.ifB2B,g.ifBBC,g.id as 'key',g.endPrice,g.beginPrice ,g.country 
 		  FROM t_goods_list g,t_base_origin o
 		  <where> 
 		   g.country = o.originname and   g.ifB2B='1' 

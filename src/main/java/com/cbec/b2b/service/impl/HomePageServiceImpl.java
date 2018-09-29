@@ -128,7 +128,30 @@ public class HomePageServiceImpl implements IHomePageService {
 		
 		searchGoods.setStartPage((searchGoods.getPageNumber()-1)*searchGoods.getPageSize());
 		GoodsListOld goodsListOld =new GoodsListOld();
-		goodsListOld.setList(mapper.getGoodsList(searchGoods));
+		List<GoodsList> lg = mapper.getGoodsList(searchGoods);
+		for(int i=0;i<lg.size();i++) {
+			GoodsList gl = lg.get(i);
+			String coin ="¥";
+			if("韩国".equals(gl.getCountry())) {
+				coin ="₩";
+			}else if("中国".equals(gl.getCountry())){
+				coin ="¥";
+			}else {
+				coin ="$";
+			}
+			
+			if("0.00".equals(gl.getPrice())) {
+				if("0.00".equals(gl.getBeginPrice())&&"0.00".equals(gl.getEndPrice())) {
+					gl.setPrice(coin+" 0.00");
+				}else {
+					gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+				}
+			}else {
+				gl.setPrice(coin+" "+gl.getPrice());
+			}
+			lg.set(0, gl);
+		}
+		goodsListOld.setList(lg);
 		goodsListOld.setPageNum(searchGoods.getPageNumber());
 		goodsListOld.setPageSize(searchGoods.getPageSize());
 		int total = mapper.getGoodsListTotal(searchGoods);
