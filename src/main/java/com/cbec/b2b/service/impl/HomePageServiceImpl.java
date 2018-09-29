@@ -219,6 +219,10 @@ public class HomePageServiceImpl implements IHomePageService {
 
 	@Override
 	public Catelog getCatalogAndBrands(SearchGoods searchGoods) {
+
+		if("0".equals(searchGoods.getCatelog2())) {
+			searchGoods.setCatelog2(null);
+		}
 		if("1".equals(searchGoods.getSendType())) {
 			searchGoods.setIfXG("");
 			searchGoods.setIfHW("");
