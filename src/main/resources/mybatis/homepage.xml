@@ -14,7 +14,7 @@
 		 ORDER BY sort asc
 	</select>
 	<select id="getRecomGoods" resultType="com.cbec.b2b.entity.HomePage.GoodsList">
-		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key'
+		SELECT id,goodsname,price,slt ,barcode,ifB2B,ifBBC,id as 'key',endPrice,beginPrice ,country 
 		  FROM t_goods_list
 		 WHERE recom='1'
 		 order by id

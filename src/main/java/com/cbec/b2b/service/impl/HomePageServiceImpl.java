@@ -370,12 +370,33 @@ public class HomePageServiceImpl implements IHomePageService {
     	List<Brands> LBrands= mapper.getBrands();
     	
     	
-    	List<GoodsList> LGoods = mapper.getRecomGoods();
-    	
+    	List<GoodsList> lg = mapper.getRecomGoods();
+    	for(int i=0;i<lg.size();i++) {
+			GoodsList gl = lg.get(i);
+			String coin ="¥";
+			if("韩国".equals(gl.getCountry())) {
+				coin ="₩";
+			}else if("中国".equals(gl.getCountry())){
+				coin ="¥";
+			}else {
+				coin ="$";
+			}
+			
+			if("0.00".equals(gl.getPrice())) {
+				if("0.00".equals(gl.getBeginPrice())&&"0.00".equals(gl.getEndPrice())) {
+					gl.setPrice(coin+" 0.00");
+				}else {
+					gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+				}
+			}else {
+				gl.setPrice(coin+" "+gl.getPrice());
+			}
+			lg.set(0, gl);
+		}
     	AdverType at = new AdverType();
     	at.setBanner(LBanner);
     	at.setBrands(LBrands);
-    	at.setGoods(LGoods);
+    	at.setGoods(lg);
     	
     	Adver a = new Adver();
     	a.setState(0);
