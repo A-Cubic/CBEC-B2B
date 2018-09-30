@@ -123,7 +123,7 @@
 	<select id="getCateTWOByCateOneID" resultType="com.cbec.b2b.entity.Catelog.CateTWO">
 		select c.id,c.name as value
 		from t_goods_list g ,t_goods_category c 
-		where g.catelog2 = c.id and g.catelog1 = #{cateOneID}
+		where g.catelog2 = c.id and g.catelog1 = #{cateOneID} and g.ifb2b='1'
 		GROUP BY c.id,c.name
 		ORDER BY c.displayorder asc
 	</select>
