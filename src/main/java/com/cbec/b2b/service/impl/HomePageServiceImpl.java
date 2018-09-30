@@ -149,7 +149,7 @@ public class HomePageServiceImpl implements IHomePageService {
 			}else {
 				gl.setPrice(coin+" "+gl.getPrice());
 			}
-			lg.set(0, gl);
+			lg.set(i, gl);
 		}
 		goodsListOld.setList(lg);
 		goodsListOld.setPageNum(searchGoods.getPageNumber());
@@ -391,7 +391,7 @@ public class HomePageServiceImpl implements IHomePageService {
 			}else {
 				gl.setPrice(coin+" "+gl.getPrice());
 			}
-			lg.set(0, gl);
+			lg.set(i, gl);
 		}
     	AdverType at = new AdverType();
     	at.setBanner(LBanner);
