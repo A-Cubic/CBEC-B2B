@@ -136,7 +136,7 @@
 	</select>
 		
 	<select id="getGoodsList" resultType="com.cbec.b2b.entity.HomePage.GoodsList" parameterType="com.cbec.b2b.entity.HomePage.SearchGoods">
-		SELECT g.id,g.goodsname,g.price,g.slt ,g.barcode,g.ifB2B,g.ifBBC,g.id as 'key',g.endPrice,g.beginPrice ,g.country 
+		SELECT g.id,g.goodsname,g.price,g.slt ,g.barcode,g.ifB2B,g.ifBBC,g.id as 'key',g.endPrice,g.beginPrice ,g.country,g.coin  
 		  FROM t_goods_list g,t_base_origin o
 		  <where> 
 		   g.country = o.originname and   g.ifB2B='1' 

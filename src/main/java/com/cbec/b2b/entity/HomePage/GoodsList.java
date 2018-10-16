@@ -15,4 +15,5 @@ public class GoodsList {
 	private String barcode;
 	private String ifB2B;
 	private String ifBBC;
+	private String coin;
 }
