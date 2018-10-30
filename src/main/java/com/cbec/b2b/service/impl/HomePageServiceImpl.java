@@ -392,7 +392,12 @@ public class HomePageServiceImpl implements IHomePageService {
 				if("0.00".equals(gl.getBeginPrice())&&"0.00".equals(gl.getEndPrice())) {
 					gl.setPrice(coin+" 0.00");
 				}else {
-					gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+					if(gl.getBeginPrice().equals(gl.getEndPrice())) {
+						gl.setPrice(coin+" "+gl.getBeginPrice());
+					}else {
+						gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+					}
+					
 				}
 			}else {
 				gl.setPrice(coin+" "+gl.getPrice());
