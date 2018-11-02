@@ -132,22 +132,28 @@ public class HomePageServiceImpl implements IHomePageService {
 		for(int i=0;i<lg.size();i++) {
 			GoodsList gl = lg.get(i);
 			
-			String coin =gl.getCoin();
-			if("".equals(coin)||coin==null) 
-			{
-				if("韩国".equals(gl.getCountry())) {
-					coin ="₩";
-				}else if("中国".equals(gl.getCountry())){
-					coin ="¥";
-				}else {
-					coin ="$";
-				}
-			}
+//			String coin =gl.getCoin();
+//			if("".equals(coin)||coin==null) 
+//			{
+//				if("韩国".equals(gl.getCountry())) {
+//					coin ="₩";
+//				}else if("中国".equals(gl.getCountry())){
+//					coin ="¥";
+//				}else {
+//					coin ="$";
+//				}
+//			}
+
+			String coin="¥";
 			if("0.00".equals(gl.getPrice())) {
 				if("0.00".equals(gl.getBeginPrice())&&"0.00".equals(gl.getEndPrice())) {
 					gl.setPrice(coin+" 0.00");
 				}else {
-					gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+					if(gl.getBeginPrice().equals(gl.getEndPrice())) {
+						gl.setPrice(coin+" "+gl.getBeginPrice());
+					}else {
+						gl.setPrice(coin+" "+gl.getBeginPrice()+"-"+gl.getEndPrice());
+					}
 				}
 			}else {
 				gl.setPrice(coin+" "+gl.getPrice());
