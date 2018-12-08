@@ -126,8 +126,8 @@ public class UserController {
 			return response;
 		}
 		
-		String key = mail + "_code";
-
+//		String key = mail + "_code";
+//
 //		if (!redisUtil.isExistKey(key)) {
 //			response.setMsg("无效的验证码.");
 //			return response;
@@ -171,15 +171,15 @@ public class UserController {
 		
 		String key = mail + "_code";
 
-		if (!redisUtil.isExistKey(key)) {
-			response.setMsg("无效的验证码.");
-			return response;
-		}
-		String redis_code = (String)redisUtil.get(key);
-		if(!redis_code.equals(code)) {
-			response.setMsg("验证码不正确.");
-			return response;
-		}
+//		if (!redisUtil.isExistKey(key)) {
+//			response.setMsg("无效的验证码.");
+//			return response;
+//		}
+//		String redis_code = (String)redisUtil.get(key);
+//		if(!redis_code.equals(code)) {
+//			response.setMsg("验证码不正确.");
+//			return response;
+//		}
 
 		return api.renameSubmit(mail, pwd);
 	}
